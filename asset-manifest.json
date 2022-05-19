@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/wand/static/js/main.c013f6ad.js",
+    "index.html": "/wand/index.html",
+    "main.c013f6ad.js.map": "/wand/static/js/main.c013f6ad.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.c013f6ad.js"
+  ]
+}
