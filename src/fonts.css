@@ -1,0 +1,49 @@
+/* fonts */
+@font-face {
+  font-family: "Azo Sans";
+  src: local("Azo Sans"),
+    url(./assets/fonts/AzoSans-Regular.otf) format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Azo Sans";
+  src: local("Azo Sans"),
+    url(./assets/fonts/AzoSans-RegularItalic.otf) format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Azo Sans";
+  src: local("Azo Sans"),
+    url(./assets/fonts/AzoSans-Medium.otf) format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Azo Sans";
+  src: local("Azo Sans"),
+    url(./assets/fonts/AzoSans-MediumItalic.otf) format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Azo Sans";
+  src: local("Azo Sans"),
+    url(./assets/fonts/AzoSans-Bold.otf) format("opentype");
+  font-style: bold;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Azo Sans";
+  src: local("Azo Sans"),
+    url(./assets/fonts/AzoSans-BoldItalic.otf) format("opentype");
+  font-style: bold;
+  font-style: italic;
+  font-weight: 700;
+}

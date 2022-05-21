@@ -1,0 +1,228 @@
+@import "../../index.scss";
+
+.walletdiv {
+  border: 0;
+  cursor: pointer;
+}
+
+@media (min-width: 35em) {
+  // desktop view. > 560px
+  .walletdiv {
+    position: absolute;
+    width: 146px;
+    height: 41px;
+    left: auto;
+    top: 44px;
+    right: 36px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    background: none;
+
+    @if $testing {
+      @include border;
+    }
+  }
+
+  .walletconnect{
+    position: absolute;
+    width: 101px;
+    height: 17px;
+    right: 10px;
+    top: 13px;
+
+    font-family: $ffamily;
+    font-size: 14px;
+    line-height: 17px;
+    font-style: normal;
+    font-weight: $fwtm500;
+
+    text-align: right;
+
+    color: #ffffff;
+
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    text-shadow: 0px 4px 31px #ba1358;
+  }
+
+  .wallet-icon-disconnected {
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    left: 6.4px;
+    top: 8.4px;
+    bottom: 23.5px;
+  }
+
+  .wallet-icon-connected {
+    position: absolute;
+    width: 0.8rem;
+    height: 17px;
+    left: 6.4px;
+    top: 6.5px;
+  }
+
+  .walletaddress {
+    position: absolute;
+    width: 103px;
+    height: 17px;
+
+    right: 15px;
+    top: 7px;
+    font-style: normal;
+
+    font-family: $ffamily;
+    font-weight: $fwtr400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    text-align: right;
+
+    color: #eaeef0;
+
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    text-shadow: 0px 4px 31px #ba1358;
+  }
+
+  .walletstatus {
+    position: absolute;
+    width: 63px;
+    height: 14px;
+
+    right: 15px;
+    top: 27px;
+
+    font-family: $ffamily;
+    font-weight: $fwtr400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+
+    color: #eb5252;
+
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    text-shadow: 0px 4px 31px #ba1358;
+  }
+}
+
+@media (max-width: 35em) {
+  // mobile view. < 560px
+  .walletdiv {
+    position: absolute;
+    width: 137px;
+    height: 31px;
+    left: auto;
+    top: 15px;
+    right: 61px;
+
+    /* BG Blue */
+
+    background: #0a2230;
+    box-shadow: -2px -4px 20px rgba(42, 224, 191, 0.2),
+      0px 4px 20px rgba(234, 58, 246, 0.25);
+    border-radius: 2px;
+  }
+
+  .walletdiv:hover {
+    @if $testing {
+      @include border;
+    }
+  }
+
+  .wallet-icon-connected {
+    // Need different for mobile and desktop size. wait for micheal.
+    position: absolute;
+
+    position: absolute;
+    left: 11.02%;
+    top: 5px;
+    bottom: 33.87%;
+
+    background: #ffffff;
+
+    height: 10.11px;
+    width: 10.79px;
+
+    background: url("./images/generic-wallet.svg");
+  }
+
+  .wallet-icon-notconnected {
+    // Need different for mobile and desktop size. wait for micheal.
+    position: absolute;
+
+    position: absolute;
+    left: 11.02%;
+    top: 33.87%;
+    bottom: 33.87%;
+
+    background: #ffffff;
+
+    height: 10.11px;
+    width: 10.79px;
+
+    background: url("./images/generic-wallet.svg");
+  }
+
+  .walletconnect {
+    position: absolute;
+    left: 32px;
+    right: 9px;
+    top: 10px;
+    bottom: auto;
+
+    margin: 0;
+
+    font-family: $ffamily;
+    font-style: normal;
+    font-weight: $fwtr400;
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .walletaddress {
+    position: absolute;
+    left: 32px;
+    right: 20px;
+    top: 5px;
+    bottom: auto;
+
+    margin: 0;
+
+    font-family: $ffamily;
+    font-style: normal;
+    font-weight: $fwtr400;
+    font-size: 11px;
+
+    color: $cwhite;
+
+    text-align: right;
+  }
+
+  .walletstatus {
+    position: absolute;
+    left: 32px;
+    right: 20px;
+    top: auto;
+    bottom: 2px;
+
+    margin: 0;
+
+    font-family: $ffamily;
+    font-style: normal;
+    font-weight: $fwtr400;
+    font-size: 11px;
+
+    text-align: right;
+
+    color: $cwhite;
+  }
+}

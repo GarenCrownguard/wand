@@ -1,0 +1,11 @@
+@import "./index.scss";
+
+.main_container {
+  height: "100%";
+  min-height: 100vh;
+  
+  @if $testing {
+    @include border;
+  }
+}
+

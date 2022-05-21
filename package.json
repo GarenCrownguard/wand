@@ -6,7 +6,12 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0"
+    "react-jss": "^10.9.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "5.0.0",
+    "routes": "^2.1.0",
+    "sass": "^1.51.0",
+    "simple-flexbox": "^2.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
