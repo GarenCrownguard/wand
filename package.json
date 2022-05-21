@@ -4,14 +4,16 @@
   "private": true,
   "homepage": "https://GarenCrownguard.github.io/wand",
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-jss": "^10.9.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "5.0.0",
-    "routes": "^2.1.0",
-    "sass": "^1.51.0",
-    "simple-flexbox": "^2.3.3"
+    "react-jss": "^10.4.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-burger-menu": "^2.6.13",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.4.3",
+    "react-svg-line-chart": "^2.0.1",
+    "simple-flexbox": "^2.3.1",
+    "react-collapsible-content": "^1.0.0",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -2,14 +2,16 @@
 export default {
     /* side-bar route */
     dashboard: '/dashboard',
-    account:'',
-    swap:'',
-    bridge:'',
-    lending:'',
-    governance:'',
-    vote:'',
-    docs:'',
+    account:'/account',
+    swap:'/swap',
+    bridge:'/bridge',
+    lending:'/lending',
+    treasuries:'/treasuries',
+    governance:'/governance',
+    vote:'/vote',
+    docs:'/docs',
 
+    // original
     overview: '/overview',
     tickets: '/tickets',
     ideas: '/ideas',
@@ -18,11 +20,14 @@ export default {
     articles: '/articles',
     settings: '/settings',
     subscription: '/subscription',
-
+    // auth
+    login: '/login',
+    signup: '/signup',
+    forgotPassword: '/forgot_password',
 
 
     /* wand-investments */
-    homepage: '',
+    homepage: '/404',
 
     /* Footer */
     terms_conditions:'',
@@ -31,7 +36,7 @@ export default {
     /** Security **/
     kyc:'',
     audits:'',
-    docs:'',
+    /*** docs use the above link ***/
 
     /** About **/
     scepter_token:'',

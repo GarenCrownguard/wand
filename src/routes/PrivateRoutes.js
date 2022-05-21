@@ -1,30 +1,30 @@
 import React, { Suspense, lazy } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import SLUGS from '../resources/slugs';
-import LoadingComponent from '../components/Loading';
-
+import links from 'resources/links';
+import LoadingComponent from 'components/loading';
 
 const DashboardComponent = lazy(() => import('./dashboard'));
 const TicketComponent = lazy(() => import('./tickets'));
+
 
 function PrivateRoutes() {
     return (
         <Suspense fallback={<LoadingComponent loading />}>
             <Switch>
-                <Route exact path={SLUGS.dashboard} component={DashboardComponent} />
-                <Route exact path={SLUGS.overviewTwo} component={TicketComponent} />
-                <Route exact path={SLUGS.overviewThree} render={() => <div>overviewThree</div>} />
-                <Route exact path={SLUGS.overview} render={() => <div>overview</div>} />
-                <Route exact path={SLUGS.tickets} component={TicketComponent} />
-                <Route exact path={SLUGS.ideasTwo} render={() => <div>ideasTwo</div>} />
-                <Route exact path={SLUGS.ideasThree} render={() => <div>ideasThree</div>} />
-                <Route exact path={SLUGS.ideas} render={() => <div>ideas</div>} />
-                <Route exact path={SLUGS.contacts} render={() => <div>contacts</div>} />
-                <Route exact path={SLUGS.agents} render={() => <div>agents</div>} />
-                <Route exact path={SLUGS.articles} render={() => <div>articles</div>} />
-                <Route exact path={SLUGS.settings} render={() => <div>settings</div>} />
-                <Route exact path={SLUGS.subscription} render={() => <div>subscription</div>} />
-                <Redirect to={SLUGS.dashboard} />
+                <Route exact path={links.dashboard} component={DashboardComponent} />
+                <Route exact path={links.account} render={() => <div>Account</div>} />
+                <Route exact path={links.swap} render={() => <div>Swap</div>} />
+                <Route exact path={links.bridge} render={() => <div>Bridge</div>} />
+                <Route exact path={links.lending} component={TicketComponent} />
+                <Route exact path={links.treasuries} render={() => <div>Treasuries</div>} />
+                <Route exact path={links.governance} render={() => <div>Governance</div>} />
+                <Route exact path={links.vote} render={() => <div>Vote</div>} />
+                <Route exact path={links.docs} render={() => <div>Docs</div>} />
+                {/* <Route exact path={links.agents} render={() => <div>agents</div>} />
+                <Route exact path={links.articles} render={() => <div>articles</div>} />
+                <Route exact path={links.settings} render={() => <div>settings</div>} />
+                <Route exact path={links.subscription} render={() => <div>subscription</div>} /> */}
+                <Redirect to={links.homepage} />
             </Switch>
         </Suspense>
     );
