@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { string } from "prop-types";
-import { Row } from "simple-flexbox";
+import { Column, Row } from "simple-flexbox";
 import { createUseStyles, useTheme } from "react-jss";
 import { SidebarContext } from "hooks/useSidebar";
 import links from "resources/links";
@@ -9,16 +9,7 @@ import { IconWallet } from "assets/icons";
 
 const useStyles = createUseStyles((theme) => ({
   container: {
-    height: 40,
-  },
-  name: {
-    ...theme.typography.itemTitle,
-    textAlign: "right",
-    color: "white",
-    "@media (max-width: 768px)": {
-      // display: "none",
-      fontSize: 12,
-    },
+    height: 95,
   },
   title: {
     ...theme.typography.title,
@@ -36,15 +27,7 @@ const useStyles = createUseStyles((theme) => ({
       marginLeft: 12,
     },
   },
-  walletDisconnectButton: {
-    alignItems: "center",
-    background: "transparent",
-    border: "none",
-    cursor: "pointer",
-    display: "flex",
-    padding: 0,
-    outline: "none",
-  },
+
   walletConnectButton: {
     alignItems: "center",
     background: "transparent",
@@ -53,10 +36,55 @@ const useStyles = createUseStyles((theme) => ({
     display: "flex",
     padding: 0,
     outline: "none",
+
+    width: 131,
+    height: 27,
   },
-  walletIconConnected: {
-    height: 10.11,
-    width: 10.79,
+  connectwalletspan: {
+    ...theme.typography.itemTitle,
+    textAlign: "right",
+    color: "white",
+    fontSize: 14,
+    "@media (max-width: 768px)": {
+      // display: "none",
+      fontSize: 10,
+    },
+    paddingLeft: 12,
+  },
+  walletDisconnectButton: {
+    alignItems: "top",
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    display: "flex",
+    padding: 0,
+    outline: "none",
+
+    paddingTop: 5,
+    height: 41,
+  },
+  walletaddressspan: {
+    fontSize: 14,
+    "@media (max-width: 768px)": {
+      fontSize: 10,
+    },
+    textAlign: "right",
+    color: "white",
+    marginLeft: "auto",
+    paddingLeft: 14,
+  },
+  walletdisconnectstatusspan: {
+    fontSize: 14,
+    "@media (max-width: 768px)": {
+      fontSize: 10,
+    },
+
+    color: "#EB5252",
+    textAlign: "right",
+  },
+  spansdiv: {
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 
@@ -98,11 +126,23 @@ function HeaderComponent() {
       title = "";
   }
 
-  function disconnectWallet() {}
-  function connectWallet() {}
+  const [walletaddr, setwalletaddr] = useState("");
+  const [iswalletconnected, setiswalletconnected] = useState(false);
 
-  let iswalletconnected = true;
-  let walletaddress = "0x32423...42c8";
+  if (walletaddr.length === 0) {
+    setwalletaddr("0x9326C9c0214FFC973dA3bd13fF95c297bd0A03fB");
+  }
+
+  function disconnectWallet() {
+    console.log("Disconnecting!");
+    setiswalletconnected(!iswalletconnected);
+  }
+  function connectWallet() {
+    console.log("Disconnecting!");
+    setiswalletconnected(!iswalletconnected);
+    console.log(walletaddr);
+  }
+  let localwalletaddr = walletaddr.slice(0, 7) + '...' + walletaddr.slice(walletaddr.length-4,walletaddr.length);
 
   return (
     <Row
@@ -110,8 +150,10 @@ function HeaderComponent() {
       vertical="center"
       horizontal="space-between"
     >
-      <span className={classes.title}>{title}</span>
-      <Row vertical="center">
+      <Column>
+        <span className={classes.title}>{title}</span>
+      </Column>
+      <Column vertical="center">
         {/* When wallet is connected */}
         {iswalletconnected && (
           <>
@@ -120,12 +162,15 @@ function HeaderComponent() {
               onClick={disconnectWallet}
             >
               <>
-                <div className={classes.walletIconConnected}>
-                  <IconWallet />
+                <IconWallet />
+                <div className={classes.spansdiv}>
+                  <span className={classes.walletaddressspan}>
+                    {localwalletaddr}
+                  </span>
+                  <span className={classes.walletdisconnectstatusspan}>
+                    Disconnect
+                  </span>
                 </div>
-
-                <span className={classes.name}>{walletaddress}</span>
-                <span className={classes.name}>Disconnect</span>
               </>
             </button>
 
@@ -144,7 +189,9 @@ function HeaderComponent() {
             >
               <>
                 <IconWallet />
-                <span className={classes.name}>Connect Wallet</span>
+                <span className={classes.connectwalletspan}>
+                  Connect Wallet
+                </span>
               </>
             </button>
 
@@ -152,7 +199,7 @@ function HeaderComponent() {
             <p className="walletconnect">Connect Wallet</p> */}
           </>
         )}
-      </Row>
+      </Column>
     </Row>
   );
 }
