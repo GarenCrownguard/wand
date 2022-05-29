@@ -77,11 +77,11 @@ function MenuItemComponent({
       >
         <Icon fill={iconColor} opacity={!isActive && "0.4"} />
         <span className={classes.title}>{title}</span>
-        <something className={classes.sooniconcontainer}>
+        <div className={classes.sooniconcontainer}>
           {SoonIcon && (
             <SoonIcon fill={iconColor} opacity={!isActive && "0.4"} />
           )}
-        </something>
+        </div>
       </Row>
       {isCollapsible && (
         <CollapsibleContent expanded={isExpanded}>

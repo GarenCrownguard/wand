@@ -30,9 +30,9 @@ export default () => (
         width="83.4667"
         height="61.4667"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -65,8 +65,8 @@ export default () => (
         y2="51.7895"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF409A" />
-        <stop offset="1" stop-color="#C438EF" />
+        <stop stopColor="#FF409A" />
+        <stop offset="1" stopColor="#C438EF" />
       </linearGradient>
     </defs>
   </svg>  

@@ -14,7 +14,7 @@ export default (props) => (
       x2="22.5"
       y2="0.5"
       stroke="#F5F4F0"
-      stroke-linecap="round"
+      strokeLinecap="round"
     />
     <line
       x1="0.5"
@@ -22,7 +22,7 @@ export default (props) => (
       x2="22.5"
       y2="8.5"
       stroke="#F5F4F0"
-      stroke-linecap="round"
+      strokeLinecap="round"
     />
     <line
       x1="0.5"
@@ -30,7 +30,7 @@ export default (props) => (
       x2="22.5"
       y2="16.5"
       stroke="#F5F4F0"
-      stroke-linecap="round"
+      strokeLinecap="round"
     />
   </svg>
 );
