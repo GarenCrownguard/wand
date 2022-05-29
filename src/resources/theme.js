@@ -58,11 +58,28 @@ const typography = {
   //     letterSpacing: 0.2,
   //   },
   title: {
-    fontWeight: "bold",
-    fontSize: 24,
-    lineHeight: "30px",
-    letterSpacing: 0.3,
+    fontFamily: "Azo Sans",
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: 26,
+    letterSpacing: "0.02em",
+    marginTop: 60,
+    marginBottom: 30
   },
+  smallgreytitle:{
+    color: "#B1AFCD",
+    marginBottom: 6,
+    fontSize: 12,
+    textAlign: "center",
+  },
+  boldamountvalue:{
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
+  }
 };
 
 export default {

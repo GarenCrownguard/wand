@@ -19,6 +19,7 @@ const useStyles = createUseStyles((theme) => ({
     "@media (max-width: 468px)": {
       fontSize: 20,
     },
+    display: 'none'
   },
   iconStyles: {
     cursor: "pointer",

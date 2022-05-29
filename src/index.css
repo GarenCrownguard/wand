@@ -82,7 +82,7 @@ select {
 body {
   background-color: black;
   background-image: url("./assets/images/background.png");
-
+  background-repeat: no-repeat;
   font-family: "Azo Sans", Fallback, Sofia;
   font-style: normal;
   font-weight: normal;

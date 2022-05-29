@@ -94,12 +94,14 @@ function SidebarComponent() {
                 title='Governance'
                 icon={IconArticles}
                 onClick={() => onClick(links.governance)}
+                soonIcon={IconSoon}
             />
             <MenuItem
                 id={links.vote}
                 title='Vote'
                 icon={IconSubscription}
                 onClick={() => onClick(links.vote)}
+                soonIcon={IconSoon}
             />
             <MenuItem
                 id={links.docs}

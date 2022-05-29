@@ -9,3 +9,13 @@ export function convertSlugToUrl(slug, parameters) {
 export function prettifyamounts(amount) {
   return "$" + amount.toLocaleString();
 }
+
+export function prettifyGrowthPercentage(direction, value) {
+  if (direction === "positive") {
+    return "+" + value + "%";
+  } else if (direction === "negative") {
+    return "-" + value + "%";
+  } else {
+    return "Nan";
+  }
+}

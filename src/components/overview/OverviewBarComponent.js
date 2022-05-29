@@ -19,9 +19,9 @@ const useStyles = createUseStyles({
   },
   miniCardContainer: {
     flexGrow: 1,
-    "@media (max-width: 768px)": {
-      //   marginTop: 30,
+    "@media (max-width: 1080px)": {
       maxWidth: "none",
+      minWidth: 200,
     },
   },
 });
@@ -38,44 +38,52 @@ function OverviewBarComponent() {
   var batonTreasuryValue = 250000;
 
   return (
-    <>
-      <Column wrap horizontal="space-between" className={classes.overviewBar}>
-        <Row wrap flexGrow={1} horizontal="space-between">
-          <StatsCardComponent
-            className={classes.miniCardContainer}
-            title="Circulating Supply (total $SCEPTER)"
-            value={circulatingScepterSupply}
-          />
-          <StatsCardComponent
-            className={classes.miniCardContainer}
-            title="$SCEPTER Price"
-            value={prettifyamounts(currentScepterPrice)}
-          />
-          <StatsCardComponent
-            className={classes.miniCardContainer}
-            title="Aidrops distributed (last 3 months)"
-            value={prettifyamounts(airdropsDistributed3months)}
-          />
-        </Row>
-        <Row wrap flexGrow={1} horizontal="space-between">
-          <StatsCardComponent
-            className={classes.miniCardContainer}
-            title="$SCEPTER Treasury value "
-            value={prettifyamounts(scepterTreasuryValue)}
-          />
-          <StatsCardComponent
-            className={classes.miniCardContainer}
-            title="Risk Treasury value "
-            value={prettifyamounts(riskTreasuryValue)}
-          />
-          <StatsCardComponent
-            className={classes.miniCardContainer}
-            title="Baton treasury value"
-            value={prettifyamounts(batonTreasuryValue)}
-          />
-        </Row>
-      </Column>
-    </>
+    <Column wrap horizontal="space-between" className={classes.overviewBar}>
+      <Row
+        wrap
+        flexGrow={1}
+        horizontal="space-between"
+        breakpoints={{ 675: "column" }}
+      >
+        <StatsCardComponent
+          className={classes.miniCardContainer}
+          title="Circulating Supply (total $SCEPTER)"
+          value={circulatingScepterSupply}
+        />
+        <StatsCardComponent
+          className={classes.miniCardContainer}
+          title="$SCEPTER Price"
+          value={prettifyamounts(currentScepterPrice)}
+        />
+        <StatsCardComponent
+          className={classes.miniCardContainer}
+          title="Aidrops distributed (last 3 months)"
+          value={prettifyamounts(airdropsDistributed3months)}
+        />
+      </Row>
+      <Row
+        wrap
+        flexGrow={1}
+        horizontal="space-between"
+        breakpoints={{ 675: "column" }}
+      >
+        <StatsCardComponent
+          className={classes.miniCardContainer}
+          title="$SCEPTER Treasury value "
+          value={prettifyamounts(scepterTreasuryValue)}
+        />
+        <StatsCardComponent
+          className={classes.miniCardContainer}
+          title="Risk Treasury value "
+          value={prettifyamounts(riskTreasuryValue)}
+        />
+        <StatsCardComponent
+          className={classes.miniCardContainer}
+          title="Baton treasury value"
+          value={prettifyamounts(batonTreasuryValue)}
+        />
+      </Row>
+    </Column>
   );
 }
 

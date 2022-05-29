@@ -27,12 +27,13 @@ const useStyles = createUseStyles({
     letterSpacing: "0.2px",
     color: ({ theme, isActive }) =>
       isActive ? theme.color.paleBlue : theme.color.grayishBlue,
-    marginLeft: 24,
+    marginLeft: 10,
+    // marginRight:15,
   },
   sooniconcontainer: {
     marginRight: 0,
     marginLeft: "auto",
-    marginTop:10,
+    marginTop: 14,
   },
 });
 

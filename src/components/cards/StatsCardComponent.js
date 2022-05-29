@@ -5,21 +5,17 @@ import { createUseStyles, useTheme } from "react-jss";
 const useStyles = createUseStyles((theme) => ({
   container: {
     maxWidth: 350,
+    // "@media (max-width: 425px)": {
+    //   alignItems: 'flex-start',
+    // },
+
     // padding: "20px 32px 6px 32px",
   },
   title: {
-    color: "#B1AFCD",
-    marginBottom: 6,
-    fontSize: 12,
-    textAlign: "center",
+    ...theme.typography.smallgreytitle,
   },
   value: {
-    color: "#FFFFFF",
-    fontWeight: "700",
-    fontSize: 24,
-    letterSpacing: "0.02em",
-    lineHeight: "29px",
-    textAlign: "center",
+    ...theme.typography.boldamountvalue,
   },
 }));
 
