@@ -5,11 +5,11 @@ FrontEnd for Wand Investments project.
 # Database
 
 ### Transaction List
-cluster: wand-investments-cluster
-database: wand-database
-collection: investment-list
+cluster: wand-investments-cluster  
+database: wand-database  
+collection: investment-list  
 
-Structure:
+Structure:  
 
 | Field            | Type   | Description                               | Example                                                                                   |
 |------------------|--------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
