@@ -12,7 +12,7 @@ collection: investment-list
 Structure:
 
 | Field            | Type   | Description                               | Example                                                                                   |
-|------------------|--------|-------------------------------------------|-------------------------------------------------------------------------------------------|
+|------------------|--------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | date             | String | Date of investment                        | 31/05/2022                                                                                |
 | protocol_name    | String | Name of protocol/ project                 | Anchor/ Tarot                                                                             |
 | chain            | String | The blockchain of the investment protocol | BSC/ AVAX/ FTM                                                                            |
