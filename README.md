@@ -11,15 +11,15 @@ collection: investment-list
 
 Structure:
 
-| Field            	| Type   	| Description                               	| Example                                                                                   	|
-|------------------	|--------	|-------------------------------------------	|-------------------------------------------------------------------------------------------	|
-| date             	| String 	| Date of investment                        	| 31/05/2022                                                                                	|
-| protocol_name    	| String 	| Name of protocol/ project                 	| Anchor/ Tarot                                                                             	|
-| chain            	| String 	| The blockchain of the investment protocol 	| BSC/ AVAX/ FTM                                                                            	|
-| protocol_url     	| String 	| The website of the investment protocol    	| https://app.beefy.finance/#/                                                              	|
-| invested_amount  	| String 	| The dollar amount invested                	| 500000/ 1000000                                                                           	|
-| expected_apy     	| String 	| The expected APY from the investment      	| 20/ 0.5                                                                                   	|
-| transaction_link 	| String 	| The transaction hash of the investment    	| https://bscscan.com/tx/0x919fafa94a776356d7be9116e0d18f8777209cc3be7d1d2a7eaed897f7160e4f 	|
+| Field            | Type   | Description                               | Example                                                                                   |
+|------------------|--------|-------------------------------------------|-------------------------------------------------------------------------------------------|
+| date             | String | Date of investment                        | 31/05/2022                                                                                |
+| protocol_name    | String | Name of protocol/ project                 | Anchor/ Tarot                                                                             |
+| chain            | String | The blockchain of the investment protocol | BSC/ AVAX/ FTM                                                                            |
+| protocol_url     | String | The website of the investment protocol    | https://app.beefy.finance/#/                                                              |
+| invested_amount  | String | The dollar amount invested                | 500000/ 1000000                                                                           |
+| expected_apy     | String | The expected APY from the investment      | 20/ 0.5                                                                                   |
+| transaction_link | String | The transaction hash of the investment    | https://bscscan.com/tx/0x919fafa94a776356d7be9116e0d18f8777209cc3be7d1d2a7eaed897f7160e4f |
 
 
 
