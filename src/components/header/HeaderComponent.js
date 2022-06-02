@@ -6,6 +6,7 @@ import { SidebarContext } from "hooks/useSidebar";
 import links from "resources/links";
 
 import { IconWallet } from "assets/icons";
+import { connect } from "react-redux";
 
 const useStyles = createUseStyles((theme) => ({
   container: {
@@ -209,4 +210,4 @@ HeaderComponent.propTypes = {
   title: string,
 };
 
-export default HeaderComponent;
+export default connect()(HeaderComponent);;

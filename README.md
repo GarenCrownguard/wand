@@ -15,11 +15,11 @@ Example:
 ```json
 {
   "date": "31/05/2022",
-  "protocol_name": "Anchor",
-  "protocol_url": "https://app.anchorprotocol.com/",
-  "invested_amount": 1000000,
-  "expected_apy": 20,
-  "transaction_link": "https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3",
+  "protocolName": "Anchor",
+  "protocolUrl": "https://app.anchorprotocol.com/",
+  "investedAmount": 1000000,
+  "expectedAPY": 20,
+  "transactionLink": "https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3",
   "chain": "terra"
 }
 ```
@@ -126,3 +126,9 @@ left: "0px",
 const Footer = () => {
 const theme = useTheme();
 const classes = useStyles({ theme });
+
+
+# Future work
+
+1. prop types
+2. support for other wallets.

@@ -5,6 +5,9 @@ import { SidebarComponent, SidebarContext } from "components/sidebar";
 import HeaderComponent from "components/header/HeaderComponent";
 import PrivateRoutes from "./PrivateRoutes";
 
+// Redux
+import { connect } from 'react-redux';
+
 const useStyles = createUseStyles({
   container: {
     height: "100%",
@@ -42,4 +45,14 @@ function PrivateSection() {
   );
 }
 
-export default PrivateSection;
+// https://stackoverflow.com/a/38678454
+// https://stackoverflow.com/a/38205160
+/*
+Your component is only going to re-render if its state or props are changed. You are not relying on this.state or this.props, but rather fetching the state of the store directly within your render function.
+
+The connect function generates a wrapper component that subscribes to the store. When an action is dispatched, the wrapper component's callback is notified and hence rerenders.
+*/
+
+// We can also use subscribe to checkout the change in store. But we are using connect so no need.
+
+export default connect()(PrivateSection);
