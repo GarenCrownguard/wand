@@ -21,12 +21,6 @@ const color = {
 };
 
 const typography = {
-  fontFamily: 'Azo Sans", Fallback, Sofia',
-  fwtr400: 400,
-  fwtm500: 500,
-  fwtb700: 700,
-  fsize: 16,
-
   //   cardTitle: {
   //     fontWeight: "bold",
   //     fontSize: 19,
@@ -58,12 +52,12 @@ const typography = {
   //     letterSpacing: 0.2,
   //   },
   title: {
-    fontFamily: "Azo Sans",
+    fontFamily: '"Azo Sans", Fallback, Sofia',
     fontStyle: "normal",
     fontWeight: 700,
     fontSize: 26,
     letterSpacing: "0.02em",
-    marginTop: 60,
+    marginTop: 30,
     marginBottom: 30
   },
   smallgreytitle:{
@@ -79,6 +73,16 @@ const typography = {
     letterSpacing: "0.02em",
     lineHeight: "29px",
     textAlign: "center",
+  },
+  cardBackground:{
+    background:
+      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+    borderRadius: 5,
+    borderStyle: "solid",
+    borderColor: "rgba(165, 239, 255, 0.2)",
+    padding: 5,
+    marginRight:0,
+    marginBottom: 17
   }
 };
 

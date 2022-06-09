@@ -14,10 +14,8 @@ const useStyles = createUseStyles((theme) => ({
   },
   title: {
     ...theme.typography.title,
-    "@media (max-width: 1080px)": {
+    "@media (max-width: 450px)": {
       marginLeft: 50,
-    },
-    "@media (max-width: 468px)": {
       fontSize: 20,
     },
     display: 'none'
@@ -25,7 +23,7 @@ const useStyles = createUseStyles((theme) => ({
   iconStyles: {
     cursor: "pointer",
     marginLeft: 25,
-    "@media (max-width: 768px)": {
+    "@media (max-width: 450px)": {
       marginLeft: 12,
     },
   },

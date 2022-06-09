@@ -3,39 +3,31 @@ import React from "react";
 import { Column, Row } from "simple-flexbox";
 import StatsCardComponent from "../cards/StatsCardComponent";
 
-import { prettifyamounts } from "resources/utilities";
+import { prettifyamounts, prettifytolocalstring } from "resources/utilities";
 
 import { createUseStyles, useTheme } from "react-jss";
+import { connect } from "react-redux";
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme) => ({
   overviewBar: {
+    ...theme.typography.cardBackground,
     minHeight: 172,
-    background:
-      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
-    borderRadius: 5,
-    borderStyle: "solid",
-    borderColor: "rgba(165, 239, 255, 0.2)",
-    padding: 5,
+    marginBottom: 0
   },
   miniCardContainer: {
     flexGrow: 1,
-    "@media (max-width: 1080px)": {
+    "@media (max-width: 450px)": {
       maxWidth: "none",
       minWidth: 200,
     },
   },
-});
+}));
 
-function OverviewBarComponent() {
+const OverviewBarComponent = (props) => {
   const theme = useTheme();
   const classes = useStyles({ theme });
 
-  var circulatingScepterSupply = 250000;
-  var currentScepterPrice = 24;
-  var airdropsDistributed3months = 500000000;
-  var scepterTreasuryValue = 500450000;
-  var riskTreasuryValue = 250000;
-  var batonTreasuryValue = 250000;
+  const { stats, investmentList } = props;
 
   return (
     <Column wrap horizontal="space-between" className={classes.overviewBar}>
@@ -48,17 +40,17 @@ function OverviewBarComponent() {
         <StatsCardComponent
           className={classes.miniCardContainer}
           title="Circulating Supply (total $SCEPTER)"
-          value={circulatingScepterSupply}
+          value={prettifytolocalstring(stats.scepterCirculatingSupply)}
         />
         <StatsCardComponent
           className={classes.miniCardContainer}
           title="$SCEPTER Price"
-          value={prettifyamounts(currentScepterPrice)}
+          value={prettifyamounts(stats.scepterBackingPrice)}
         />
         <StatsCardComponent
           className={classes.miniCardContainer}
           title="Aidrops distributed (last 3 months)"
-          value={prettifyamounts(airdropsDistributed3months)}
+          value={prettifyamounts(stats.airdrops3Months)}
         />
       </Row>
       <Row
@@ -70,21 +62,27 @@ function OverviewBarComponent() {
         <StatsCardComponent
           className={classes.miniCardContainer}
           title="$SCEPTER Treasury value "
-          value={prettifyamounts(scepterTreasuryValue)}
+          value={prettifyamounts(stats.scepterTreasuryValue)}
         />
         <StatsCardComponent
           className={classes.miniCardContainer}
           title="Risk Treasury value "
-          value={prettifyamounts(riskTreasuryValue)}
+          value={prettifyamounts(stats.riskTreasuryValue)}
         />
         <StatsCardComponent
           className={classes.miniCardContainer}
           title="Baton treasury value"
-          value={prettifyamounts(batonTreasuryValue)}
+          value={prettifyamounts(stats.batonTreasuryValue)}
         />
       </Row>
     </Column>
   );
 }
 
-export default OverviewBarComponent;
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats[0],
+    investmentList: state.investmentList[0],
+  };
+};
+export default connect(mapStateToProps)(OverviewBarComponent);

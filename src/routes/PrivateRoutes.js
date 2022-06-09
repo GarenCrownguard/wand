@@ -6,6 +6,7 @@ import LoadingComponent from 'components/loading';
 const DashboardComponent = lazy(() => import('./dashboard'));
 const TicketComponent = lazy(() => import('./tickets'));
 const AccountComponent = lazy(() => import('./account'));
+const SwapComponent = lazy(() => import('./swap'));
 
 
 function PrivateRoutes() {
@@ -14,7 +15,7 @@ function PrivateRoutes() {
             <Switch>
                 <Route exact path={links.dashboard} component={DashboardComponent} />
                 <Route exact path={links.account} component={AccountComponent} />
-                <Route exact path={links.swap} render={() => <div>Swap</div>} />
+                <Route exact path={links.swap} component={SwapComponent} />
                 <Route exact path={links.bridge} render={() => <div>Bridge</div>} />
                 <Route exact path={links.lending} component={TicketComponent} />
                 <Route exact path={links.treasuries} render={() => <div>Treasuries</div>} />

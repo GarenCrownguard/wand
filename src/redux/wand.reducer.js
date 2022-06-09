@@ -8,12 +8,12 @@ import * as actions from '../redux/action.types';
 const initialState = {
   stats: [
     {
-      scepterCirculatingSupply: 12,
+      scepterCirculatingSupply: 10000000,
       scepterBackingPrice: 34,
-      airdrops3Months: 56,
-      scepterTreasuryValue: 78,
-      batonTreasuryValue: 90,
-      riskTreasuryValue: 10,
+      airdrops3Months: 500000000,
+      scepterTreasuryValue: 500450000,
+      batonTreasuryValue: 250001,
+      riskTreasuryValue: 250000,
       addmore: [],
     },
   ],
