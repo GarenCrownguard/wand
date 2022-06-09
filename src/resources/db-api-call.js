@@ -10,12 +10,12 @@ import * as actions from '../redux/action.types';
 export const GET_FE_STATS = async (props) => {
   const { API_URL } = props;
 
-  store.dispatch({
-    type: actions.GET_FE_STATS,
-    payload: {
-      allposts: res.data,
-    },
-  });
+  // store.dispatch({
+  //   type: actions.GET_FE_STATS,
+  //   payload: {
+  //     allposts: res.data,
+  //   },
+  // });
 };
 
 export const GET_TRANSACTION_LIST = async (props) => {

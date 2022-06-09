@@ -43,8 +43,7 @@ const postReducer = (currentState = initialState, action) => {
 	case actions.UPDATE_AIRDROP_AMOUNT:
 			return {
 				stats: [
-					...currentState.stats,
-					airdrops3Months: payload
+					...currentState.stats
 				],
 				investmentList: [...currentState.investmentList]
 			}
