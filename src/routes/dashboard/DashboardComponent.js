@@ -14,6 +14,9 @@ import { prettifyamounts } from "resources/utilities";
 
 import { createUseStyles, useTheme } from "react-jss";
 
+// Redux
+import { connect } from 'react-redux';
+
 const useStyles = createUseStyles((theme) => ({
   mainContainer: {
     height: "100%",
@@ -24,24 +27,18 @@ const useStyles = createUseStyles((theme) => ({
     ...theme.typography.title,
   },
   graphcontainer: {
-    "@media (max-width: 1080px)": {
-      maxHeight: 726,
+    "@media (max-width: 450px)": {
+      maxHeight: 750,
     },
-    "@media (min-width: 1080px)": {
-      maxHeight: 363,
+    "@media (min-width: 450px)": {
+      maxHeight: 365,
     },
   },
   InfoContainer: {
-    marginTop: 23,
+    // marginTop: 23,
   },
   miniInfoCardContainer: {
     flexGrow: 1,
-
-    // marginRight: 30,
-    // "@media (max-width: 768px)": {
-    //   marginTop: 30,
-    //   maxWidth: "none",
-    // },
   },
 }));
 
@@ -53,6 +50,9 @@ const DashboardComponent = (props) => {
   var airdropsToBaton = 2345000;
   var riskTreasuryGrowth = 23845000;
 
+  const {stats ,investmentList} = props;
+
+  // console.log(stats[0].airdrops3Months);
   return (
     <Column wrap className={classes.mainContainer}>
       <OverviewBarComponent />
@@ -87,7 +87,8 @@ const DashboardComponent = (props) => {
         <MiniInfoCardComponent
           className={classes.miniInfoCardContainer}
           title="Airdrops to BATON holders (since day 1 (USD)"
-          value={prettifyamounts(airdropsToBaton)}
+          // value={prettifyamounts(airdropsToBaton)}
+          value={prettifyamounts(stats.airdrops3Months)}
           growthDirection="negative"
           growthValue="9.37"
         />
@@ -99,9 +100,16 @@ const DashboardComponent = (props) => {
           growthValue="1.44"
         />
       </Row>
-      <FooterComponent />
+      {/* <FooterComponent /> */}
     </Column>
   );
 };
 
-export default DashboardComponent;
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats[0],
+    investmentList: state.investmentList[0],
+  };
+};
+
+export default connect(mapStateToProps)(DashboardComponent);

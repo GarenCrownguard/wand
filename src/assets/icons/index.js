@@ -17,12 +17,16 @@ import IconTickets from "./icon-tickets";
 import IconLogo from "./icon-logo";
 import IconSoon from "./icon-soon";
 import IconWallet from "./icon-wallet";
+import IconSwap from "./icon-swap";
+import IconVerticalseperator from "./icon-verticalseperator";
 
 export {
   IconWallet,
   IconLogo,
   IconSoon,
-
+  IconSwap,
+  IconVerticalseperator,
+  
   IconCheckboxOff,
   IconCheckboxOn,
   IconAgents,

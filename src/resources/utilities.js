@@ -6,8 +6,12 @@ export function convertSlugToUrl(slug, parameters) {
   return url;
 }
 
+export function prettifytolocalstring(amount) {
+  return amount.toLocaleString();
+}
+
 export function prettifyamounts(amount) {
-  return "$" + amount.toLocaleString();
+  return "$" + prettifytolocalstring(amount);
 }
 
 export function prettifyGrowthPercentage(direction, value) {

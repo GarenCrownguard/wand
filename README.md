@@ -2,6 +2,21 @@
 
 FrontEnd for Wand Investments project.
 
+Wand inestments responsive design: 
+< 450 width -> mobile
+> 450 width -> tablet/ desktop
+
+Common Responsive Breakpoints
+Mobile: 360 x 640.
+Mobile: 375 x 667.
+Mobile: 360 x 720.
+iPhone X: 375 x 812.
+iPhone 12 Pro: 390 x 844.
+Pixel 2: 411 x 731.
+Tablet: 768 x 1024.
+Laptop: 1366 x 768.
+High-res laptop or desktop: 1920 x 1080.
+
 # Database
 
 ### <|> Transaction List
@@ -15,11 +30,11 @@ Example:
 ```json
 {
   "date": "31/05/2022",
-  "protocol_name": "Anchor",
-  "protocol_url": "https://app.anchorprotocol.com/",
-  "invested_amount": 1000000,
-  "expected_apy": 20,
-  "transaction_link": "https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3",
+  "protocolName": "Anchor",
+  "protocolUrl": "https://app.anchorprotocol.com/",
+  "investedAmount": 1000000,
+  "expectedAPY": 20,
+  "transactionLink": "https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3",
   "chain": "terra"
 }
 ```
@@ -126,3 +141,9 @@ left: "0px",
 const Footer = () => {
 const theme = useTheme();
 const classes = useStyles({ theme });
+
+
+# Future work
+
+1. prop types
+2. support for other wallets.
