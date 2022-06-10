@@ -15,28 +15,15 @@ for (let x = 1; x <= 24; x++) {
 const useStyles = createUseStyles((theme) => ({
   container: {
     ...theme.typography.cardBackground,
-    minHeight: 363,
-    marginRight: 13,
+    // minHeight: 300,
+    minWidth: 355,
+    marginLeft: 15,
     "@media (max-width: 450px)": {
-      marginRight: 0,
-      marginTop: 20,
+      // mobile
+      marginLeft: 0,
+      maxWidth: "none",
+      marginTop: 6.5,
     },
-  },
-  graphContainer: {
-    marginTop: 18,
-    height: 190.5,
-    width: "100%",
-  },
-  graphSection: {
-    width: "100%",
-    minHeight: 363,
-    padding: 33,
-  },
-  graphSubtitle: {
-    ...theme.typography.boldamountvalue,
-  },
-  graphTitle: {
-    ...theme.typography.smallgreytitle,
   },
 }));
 

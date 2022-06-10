@@ -16,18 +16,18 @@ import { prettifyGrowthPercentage } from "resources/utilities";
 const useStyles = createUseStyles((theme) => ({
   container: {
     ...theme.typography.cardBackground,
-    maxHeight: 106,
-    maxWidth: 350,
+    maxHeight: 111,
     padding: 28,
 
     "@media (min-width: 450px)": {
       // desktop
       marginBottom: 20,
+      minWidth: 225,
       "&:nth-child(n+2)": {
         // 2nd and 3rd
-        backgroundColor: "red",
+        // backgroundColor: "red",
         marginRight: 0,
-        marginLeft: "auto",
+        marginLeft: 15,
       },
     },
     "@media (max-width: 450px)": {
@@ -40,7 +40,7 @@ const useStyles = createUseStyles((theme) => ({
 
       "&:nth-child(n+2)": {
         // 2nd and 3rd
-        backgroundColor: "blue",
+        // backgroundColor: "blue",
       },
     },
   },
@@ -50,22 +50,18 @@ const useStyles = createUseStyles((theme) => ({
   },
   value: {
     ...theme.typography.boldamountvalue,
-  }
+  },
 }));
 
-function MiniCardComponent({
-  className = "",
-  title,
-  value,
-}) {
+function MiniCardComponent({ className = "", title, value }) {
   const theme = useTheme();
   const classes = useStyles({ theme });
   const composedClassName = [classes.container, className].join(" ");
   return (
     <Column flexGrow={1} className={composedClassName} vertical="center">
-      <span className={classes.title}>{title}</span>
-      <Row flexGrow={1} justifyContent='center'>
-        <span className={classes.value}>{value}</span>
+      {title && <span className={classes.title}>{title}</span>}
+      <Row flexGrow={1} justifyContent="center">
+        {value && <span className={classes.value}>{value}</span>}
       </Row>
     </Column>
   );

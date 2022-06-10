@@ -29,7 +29,7 @@ const useStyles = createUseStyles((theme) => ({
         // 2nd and 3rd
         // backgroundColor: "red",
         marginRight: 0,
-        marginLeft: "auto",
+        marginLeft: 15,
       },
     },
     "@media (max-width: 450px)": {

@@ -14,20 +14,19 @@ import IconSettings from "./icon-settings";
 import IconSubscription from "./icon-subscription";
 import IconTickets from "./icon-tickets";
 
-
 import IconLogo from "./icon-logo";
 import IconSoon from "./icon-soon";
 import IconWallet from "./icon-wallet";
-import IconScepterBuySell from "./icon-scepterBuySell";
 import IconSwap from "./icon-swap";
+import IconVerticalseperator from "./icon-verticalseperator";
 
 export {
   IconWallet,
   IconLogo,
   IconSoon,
-  IconScepterBuySell,
   IconSwap,
-
+  IconVerticalseperator,
+  
   IconCheckboxOff,
   IconCheckboxOn,
   IconAgents,

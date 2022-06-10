@@ -4,7 +4,8 @@ import { createUseStyles, useTheme } from "react-jss";
 // Redux
 import { connect } from "react-redux";
 
-import { IconScepterBuySell, IconSwap } from "assets/icons";
+import { IconVerticalseperator, IconSwap } from "assets/icons";
+import iconScepterBuySell from "../../assets/images/iconScepterBuySell.png";
 
 import OverviewBarComponent from "components/overview";
 import SwapCardComponent from "components/cards/SwapCardComponent";
@@ -19,7 +20,7 @@ const useStyles = createUseStyles((theme) => ({
     // flexDirection: "column",
   },
   title: {
-    ...theme.typography.title,
+    ...theme.typography.smallgreytitle,
   },
   InfoContainer: {
     marginTop: 23,
@@ -29,7 +30,14 @@ const useStyles = createUseStyles((theme) => ({
   },
   card: {
     ...theme.typography.cardBackground,
-    marginRight:13,
+    maxHeight: 111,
+    minWidth: 225,
+    padding: 28,
+    "@media (max-width: 450px)": {
+      // mobile
+      marginTop: 6.5,
+      marginBottom: 6.5,
+    },
   },
 }));
 
@@ -48,36 +56,59 @@ const SwapComponent = (props) => {
     >
       <Row wrap>
         <Column>
-          <Row wrap>
+          <Row wrap flexGrow={1}>
             {/* get the number of token from the wallet */}
             <MiniCardComponent
               className={classes.miniInfoCardContainer}
               title="Your SCEPTER Balance"
-              value={prettifytolocalstring(stats.scepterCirculatingSupply)}
+              value={prettifytolocalstring(stats.currentWalletScepterAmount)}
             />
             <MiniCardComponent
               className={classes.miniInfoCardContainer}
               title="Your SCEPTER Balance (Value)"
               // value={prettifyamounts(number of tokens * backing price)}
-              value={prettifyamounts(stats.scepterBackingPrice)}
+              value={prettifyamounts(
+                stats.currentWalletScepterAmount * stats.scepterBackingPrice
+              )}
             />
           </Row>
-          <Row flexGrow={1} className={classes.card}>
-            Buy/ Sell price
+          <Row flexGrow={1}>
+            <MiniCardComponent
+              className={classes.miniInfoCardContainer}
+              value={
+                <img
+                  src={iconScepterBuySell}
+                  alt="Buy Sell Icon"
+                  height="65px"
+                ></img>
+              }
+            />
           </Row>
-          <Row>
-            <Column flexGrow={1} className={classes.card}>
-              ttt
-            </Column>
-            <Column flexGrow={1} className={classes.card}>
-              yyy
-            </Column>
+          <Row wrap>
+            <Row
+              flexGrow={1}
+              className={classes.card}
+              justifyContent="space-between"
+              vertical="center"
+            >
+              <Column>
+                <span className={classes.title}>Growth Factor</span>
+              </Column>
+              <IconVerticalseperator />
+
+              <Column>
+                <span className={classes.title}>Sell Factor</span>
+              </Column>
+            </Row>
+
+            <MiniCardComponent
+              className={classes.miniInfoCardContainer}
+              title="BATON Redeeming Price"
+              value={prettifyamounts(stats.batonRedeemingPrice)}
+            />
           </Row>
         </Column>
         <SwapCardComponent />
-
-        {/* <Column flexGrow={1} className={classes.card}>
-        </Column> */}
       </Row>
       <Row>Outstanding Warning</Row>
       <Row flexGrow={1} className={classes.card}>
