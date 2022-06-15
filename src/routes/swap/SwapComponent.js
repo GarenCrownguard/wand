@@ -55,7 +55,7 @@ const SwapComponent = (props) => {
       breakpoints={{ 450: "column" }}
     >
       <Row wrap>
-        <Column>
+        <Column wrap flexGrow={1}>
           <Row wrap flexGrow={1}>
             {/* get the number of token from the wallet */}
             <MiniCardComponent

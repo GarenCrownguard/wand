@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 const useStyles = createUseStyles({
   container: {
-    height: "100%",
+    height: "100vh",
     minHeight: 850,
   },
   mainBlock: {

@@ -15,9 +15,14 @@ for (let x = 1; x <= 24; x++) {
 const useStyles = createUseStyles((theme) => ({
   container: {
     ...theme.typography.cardBackground,
-    // minHeight: 300,
-    minWidth: 355,
+    minHeight: 375,
     marginLeft: 15,
+    marginRight:0,
+    padding: 35,
+    "@media (min-width: 450px)": {
+      // desktop
+      maxWidth: 450,
+    },
     "@media (max-width: 450px)": {
       // mobile
       marginLeft: 0,
@@ -35,10 +40,12 @@ function SwapCardComponent() {
     <Column
       flexGrow={1}
       className={classes.container}
-      horizontal="center"
       breakpoints={{ 1024: "column" }}
     >
-      {/* <Row wrap flexGrow={7} className={classes.graphSection}>
+      <span>Swap</span>
+      <span>Choose a token to swap</span>
+
+      <Row wrap flexGrow={1}>
         <Row wrap horizontal="space-between">
           <Column>
             <span className={classes.graphTitle}>Your SCEPTER holdings</span>
@@ -54,7 +61,7 @@ function SwapCardComponent() {
             areaVisible={true}
           />
         </div>
-      </Row> */}
+      </Row>
     </Column>
   );
 }

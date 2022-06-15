@@ -81,8 +81,9 @@ select {
 
 body {
   background-color: black;
-  background-image: url("./assets/images/background.png");
-  background-repeat: no-repeat;
+  background-image: url("./assets/images/background.png") no-repeat center center fixed; 
+  background-size: cover;
+
   font-family: "Azo Sans", Fallback, Sofia;
   font-style: normal;
   font-weight: normal;
