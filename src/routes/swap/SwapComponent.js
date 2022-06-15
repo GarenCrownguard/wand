@@ -8,7 +8,7 @@ import { IconVerticalseperator, IconSwap } from "assets/icons";
 import iconScepterBuySell from "../../assets/images/iconScepterBuySell.png";
 
 import OverviewBarComponent from "components/overview";
-import SwapCardComponent from "components/cards/SwapCardComponent";
+import SwapCardComponent from "routes/swap/swapCardComponent/SwapCardComponent";
 import MiniCardComponent from "components/cards/MiniCardComponent";
 
 import { prettifyamounts, prettifytolocalstring } from "resources/utilities";
@@ -38,6 +38,17 @@ const useStyles = createUseStyles((theme) => ({
       marginTop: 6.5,
       marginBottom: 6.5,
     },
+  },
+  value: {
+    ...theme.typography.boldamountvalue,
+  },
+  buyfactorsubtitle: {
+    ...theme.typography.boldamountvalue,
+    color: theme.color.turquoise,
+  },
+  sellfactorsubtitle: {
+    ...theme.typography.boldamountvalue,
+    color: theme.color.englishred,
   },
 }));
 
@@ -72,18 +83,34 @@ const SwapComponent = (props) => {
               )}
             />
           </Row>
-          <Row flexGrow={1}>
-            <MiniCardComponent
-              className={classes.miniInfoCardContainer}
-              value={
-                <img
-                  src={iconScepterBuySell}
-                  alt="Buy Sell Icon"
-                  height="65px"
-                ></img>
-              }
-            />
+
+          <Row
+            flexGrow={1}
+            className={classes.card}
+            justifyContent="space-around"
+            vertical="center"
+          >
+            <Column horizontal="center">
+              <span className={classes.title}>SCEPTER Buy price</span>
+              <span className={classes.value}>
+                {`${prettifyamounts(stats.scepterBuyPrice)}`}
+              </span>
+            </Column>
+            <img
+              src={iconScepterBuySell}
+              alt="Buy Sell Icon"
+              height="65px"
+            ></img>
+
+            <Column horizontal="center">
+              <span className={classes.title}>SCEPTER Sell price</span>
+              <span className={classes.value}>
+                {`${prettifyamounts(stats.scepterSellPrice)}`}
+              </span>
+            </Column>
           </Row>
+
+
           <Row wrap>
             <Row
               flexGrow={1}
@@ -91,13 +118,19 @@ const SwapComponent = (props) => {
               justifyContent="space-between"
               vertical="center"
             >
-              <Column>
+              <Column horizontal="center">
                 <span className={classes.title}>Growth Factor</span>
+                <span className={classes.buyfactorsubtitle}>
+                  {stats.growthFactor}
+                </span>
               </Column>
               <IconVerticalseperator />
 
-              <Column>
+              <Column horizontal="center">
                 <span className={classes.title}>Sell Factor</span>
+                <span className={classes.sellfactorsubtitle}>
+                  {stats.sellFactor}
+                </span>
               </Column>
             </Row>
 

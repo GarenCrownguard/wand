@@ -88,10 +88,12 @@ const useStyles = createUseStyles((theme) => ({
   },
 }));
 
-function HeaderComponent() {
+function HeaderComponent(props) {
   const { currentItem } = useContext(SidebarContext);
   const theme = useTheme();
   const classes = useStyles({ theme });
+
+  const { stats, investmentList, localwalletstats } = props;
 
   let title;
   switch (true) {
@@ -130,7 +132,7 @@ function HeaderComponent() {
   const [iswalletconnected, setiswalletconnected] = useState(false);
 
   if (walletaddr.length === 0) {
-    setwalletaddr("0x9326C9c0214FFC973dA3bd13fF95c297bd0A03fB");
+    setwalletaddr(localwalletstats.walletAddress);
   }
 
   function disconnectWallet() {
@@ -208,4 +210,12 @@ HeaderComponent.propTypes = {
   title: string,
 };
 
-export default connect()(HeaderComponent);;
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats[0],
+    investmentList: state.investmentList[0],
+    localwalletstats: state.localwalletstats[0]
+  };
+};
+
+export default connect(mapStateToProps)(HeaderComponent);

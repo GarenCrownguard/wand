@@ -17,6 +17,19 @@ Tablet: 768 x 1024.
 Laptop: 1366 x 768.
 High-res laptop or desktop: 1920 x 1080.
 
+# Decisions:
+1. growth/ sell factor is absolute number, no %.
+2. The buy/ sell have a tooltip showing the formula.
+3. 'Your SCEPTER holdings' and 'Your SCEPTER value' -> no graph.
+4. remove the 'minimum received' field from the swap pages
+
+
+# Updates
+New contract: https://testnet.snowtrace.io/address/0x17d7d6e0bd141d1e92d2f3dd9f3f4edc33104bbc#readContract
+Function: scepterData
+CONNECTION_STRING = "mongodb+srv://reader:dbReader$2022@cluster0.leenlb7.mongodb.net/?retryWrites=true&w=majority"
+Database: Wand_Data
+Collection: mainContractData and Investments
 # Database
 
 ### <|> Transaction List
@@ -147,3 +160,5 @@ const classes = useStyles({ theme });
 
 1. prop types
 2. support for other wallets.
+3. state for isMobile classname.
+4. emmet/ eslint

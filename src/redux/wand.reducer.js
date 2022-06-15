@@ -14,13 +14,32 @@ const initialState = {
       scepterTreasuryValue: 500450000.8475,
       batonTreasuryValue: 250001.2093,
       riskTreasuryValue: 250000.4857,
-      growthFactor: 10.9856,
-      sellFactor: 20.3849,
+      growthFactor: 0.287,
+      scepterBuyPrice: 12.43,
+      scepterSellPrice: 11.20,
+      sellFactor: 0.3,
       batonRedeemingPrice: 5.4234,
       currentWalletScepterAmount: 100.00,
       addmore: [],
     },
   ],
+  localwalletstats: [{
+    walletAddress: "0x9326C9c0214FFC973dA3bd13fF95c297bd0A1234",
+    tokenlist: ["sceptertoken","BATON","USDC"],
+    sceptertoken:{
+      name: "SCEPTER",
+      balance: 2000000
+    },
+    batontoken:{
+      name: "BATON",
+      balance: 3400000
+    },
+    usdctoken:{
+      name: "USDC",
+      balance: 2000000
+    },
+    
+  }],
   investmentList: [
     {
       date: "31/05/2022",

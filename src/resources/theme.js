@@ -4,7 +4,9 @@ const color = {
   cgrayish: "#b1afcd",
   cbeije: "#f5f4f0",
   cpinkish: "#ff409a",
-  cmainblue: "#2ae0bf",
+  turquoise: "#2ae0bf",
+  englishred: "#AE3C51",
+  darkjunglegreen: "#0B1A28",
 
   brightBlue: "#3498db",
   darkGrayishBlue: "#8b8d94",

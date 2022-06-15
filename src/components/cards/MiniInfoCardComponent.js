@@ -61,7 +61,7 @@ const useStyles = createUseStyles((theme) => ({
     marginLeft: 6,
     letterSpacing: "0.02em",
 
-    color: "#2AE0BF",
+    color: theme.color.turquoise,
   },
   growthNegative: {
     fontWeight: 500,
@@ -69,7 +69,7 @@ const useStyles = createUseStyles((theme) => ({
     marginLeft: 6,
 
     letterSpacing: "0.02em",
-    color: "#AE3C51",
+    color: theme.color.englishred,
   },
 }));
 
