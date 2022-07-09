@@ -2,6 +2,18 @@
 
 FrontEnd for Wand Investments project.
 
+# REPO REFERENCE
+[1] Dynamic screen size: https://github.com/kingflamez/use-screen-size
+[2] Burger menu: https://github.com/negomi/react-burger-menu
+
+# ERROR
+
+[***] The engine "node" is incompatible with this module.
+[===] This is because yarn check for inter dependencies.
+[SOLUTION] yarn config set ignore-engines true
+
+
+
 Wand inestments responsive design: 
 < 450 width -> mobile
 > 450 width -> tablet/ desktop

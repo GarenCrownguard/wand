@@ -2,7 +2,7 @@
   "name": "wand-investments",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://GarenCrownguard.github.io/wand",
+  "homepage": "https://GarenCrownguard.github.io/",
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
