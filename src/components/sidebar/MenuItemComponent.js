@@ -39,13 +39,13 @@ const useStyles = createUseStyles({
 
 function MenuItemComponent({
   children,
-  icon: icon,
+  Icon: Icon,
   id,
   items = [],
   level = 1,
   onClick,
   title,
-  soonicon: Soonicon,
+  SoonIcon: SoonIcon,
 }) {
   
   const isCollapsible = children && children.length > 0;
@@ -76,11 +76,11 @@ function MenuItemComponent({
         onClick={onItemClicked}
         className={classNameContainer}
       >
-        <icon fill={iconColor} opacity={!isActive && "0.4"} />
+        <Icon fill={iconColor} opacity={!isActive && "0.4"} />
         <span className={classes.title}>{title}</span>
         <div className={classes.sooniconcontainer}>
-          {Soonicon && (
-            <Soonicon fill={iconColor} opacity={!isActive && "0.4"} />
+          {SoonIcon && (
+            <SoonIcon fill={iconColor} opacity={!isActive && "0.4"} />
           )}
         </div>
       </Row>
