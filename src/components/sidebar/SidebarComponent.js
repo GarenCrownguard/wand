@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 // import links from 'resources/links';
 import links from "resources/links";
 import {
-  iconSoon,
+  IconSoon,
   iconAccount,
   iconBridge,
   iconDashboard,
@@ -73,14 +73,14 @@ function SidebarComponent() {
         title="Bridge"
         icon={iconBridge}
         onClick={() => onClick(links.bridge)}
-        soonicon={iconSoon}
+        soonicon={IconSoon}
       />
       <MenuItem
         id={links.lending}
         title="Lending"
         icon={iconLending}
         onClick={() => onClick(links.lending)}
-        soonicon={iconSoon}
+        soonicon={IconSoon}
       />
       <div className={classes.separator}></div>
       <MenuItem
@@ -88,14 +88,14 @@ function SidebarComponent() {
         title="Governance"
         icon={iconGovernance}
         onClick={() => onClick(links.governance)}
-        soonicon={iconSoon}
+        soonicon={IconSoon}
       />
       <MenuItem
         id={links.vote}
         title="Vote"
         icon={iconVote}
         onClick={() => onClick(links.vote)}
-        soonicon={iconSoon}
+        soonicon={IconSoon}
       />
       <MenuItem
         id={links.docs}

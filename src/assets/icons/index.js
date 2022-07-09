@@ -1,7 +1,7 @@
 import iconBurger from "./Icon-burger";
 
 import IconLogo from "./Icon-logo";
-import iconSoon from "./Icon-soon";
+import IconSoon from "./Icon-soon";
 import IconWallet from "./Icon-wallet";
 import IconSwap from "./Icon-swap";
 import IconVerticalseperator from "./Icon-verticalseperator";
@@ -17,10 +17,10 @@ import iconVote from "./Icon-vote";
 
 export {
   iconBurger,
-
-  IconWallet,
+  
   IconLogo,
-  iconSoon,
+  IconSoon,
+  IconWallet,
   IconSwap,
   IconVerticalseperator,
 
