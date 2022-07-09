@@ -1,45 +1,35 @@
-import IconCheckboxOff from "./checkbox-off";
-import IconCheckboxOn from "./checkbox-on";
-import IconAgents from "./icon-agents";
-import IconArrowUp from "./icon-arrow-up";
-import IconArticles from "./icon-articles";
-import IconBell from "./icon-bell-new";
-import IconBurger from "./icon-burger";
-import IconContacts from "./icon-contacts";
-import IconIdeas from "./icon-ideas";
-import IconLogout from "./icon-logout";
-import IconOverview from "./icon-overview";
-import IconSearch from "./icon-search";
-import IconSettings from "./icon-settings";
-import IconSubscription from "./icon-subscription";
-import IconTickets from "./icon-tickets";
+import iconBurger from "./Icon-burger";
 
-import IconLogo from "./icon-logo";
-import IconSoon from "./icon-soon";
-import IconWallet from "./icon-wallet";
-import IconSwap from "./icon-swap";
-import IconVerticalseperator from "./icon-verticalseperator";
+import IconLogo from "./Icon-logo";
+import iconSoon from "./Icon-soon";
+import IconWallet from "./Icon-wallet";
+import IconSwap from "./Icon-swap";
+import IconVerticalseperator from "./Icon-verticalseperator";
+
+import iconAccount from "./Icon-account";
+import iconBridge from "./Icon-bridge";
+import iconDashboard from "./Icon-dashboard";
+import iconDocs from "./Icon-docs";
+import iconGovernance from "./Icon-governance";
+import iconLending from "./Icon-lending";
+import iconSwapSidebar from "./Icon-swap-sidebar";
+import iconVote from "./Icon-vote";
 
 export {
+  iconBurger,
+
   IconWallet,
   IconLogo,
-  IconSoon,
+  iconSoon,
   IconSwap,
   IconVerticalseperator,
-  
-  IconCheckboxOff,
-  IconCheckboxOn,
-  IconAgents,
-  IconArrowUp,
-  IconArticles,
-  IconBell,
-  IconBurger,
-  IconContacts,
-  IconIdeas,
-  IconLogout,
-  IconOverview,
-  IconSearch,
-  IconSettings,
-  IconSubscription,
-  IconTickets,
+
+  iconAccount,
+  iconBridge,
+  iconDashboard,
+  iconDocs,
+  iconGovernance,
+  iconLending,
+  iconSwapSidebar,
+  iconVote
 };

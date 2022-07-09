@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Column } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
-import { prettifytolocalstring } from "resources/utilities";
+import { createUseStyles } from "react-jss";
+// import { prettifytolocalstring } from "resources/utilities";
 
 import iconBaton from "../../../assets/images/iconBaton.png";
 import iconScepter from "../../../assets/images/iconScepter.png";
@@ -9,12 +9,16 @@ import iconScepter from "../../../assets/images/iconScepter.png";
 const useStyles = createUseStyles((theme) => ({
   container: {
     minHeight: 59.58,
-    padding: 15,
-    background: theme.color.veryDarkGrayishBlue,
-    borderRadius: 7.73771,
     marginTop: 13.17,
 
-    // ...theme.typography.cardBackground,
+    background:
+      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+    borderRadius: 5,
+    borderStyle: "solid",
+    borderColor: "rgba(165, 239, 255, 0.2)",
+    padding: 5,
+    marginRight:0,
+    marginBottom: 17,
     // maxHeight: 111,
     // padding: 28,
 
@@ -44,27 +48,43 @@ const useStyles = createUseStyles((theme) => ({
     // },
   },
   title: {
-    ...theme.typography.smallgreytitle,
+    color: "#B1AFCD",
+    marginBottom: 6,
+    fontSize: 12,
+    textAlign: "center",
     minWidth: 102,
   },
   value: {
-    ...theme.typography.boldamountvalue,
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
   },
   tokenname: {
     fontSize: 10,
-    color: theme.color.turquoise,
+    color: "#2ae0bf",
     letterSpacing: 1,
     fontWeight: 700,
   },
   balance: {
-    ...theme.typography.smallgreytitle,
-    fontSize: 8,
+    color: "#B1AFCD",
+    marginBottom: 6,
+    fontSize: 12,
+    textAlign: "center",
+    // fontSize: 8,
     letterSpacing: 1,
   },
   input: {
-    ...theme.typography.boldamountvalue,
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
     background: "none",
-    textAlign: "left",
+    // textAlign: "left",
     border: "none",
     maxWidth: 160,
     marginRight: "auto",
@@ -79,8 +99,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function SwapInputComponent({ tokenName, balance, title, value }) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   return (
     <Column flexGrow={1} className={classes.container} vertical="center">
@@ -97,17 +117,17 @@ function SwapInputComponent({ tokenName, balance, title, value }) {
         {tokenName === "SCEPTER" && (
           <img
             src={iconScepter}
-            alt="Baton Icon"
+            alt="Baton icon"
             className={classes.token}
           ></img>
         )}
         {tokenName === "BATON" && (
-          <img src={iconBaton} alt="Baton Icon" className={classes.token}></img>
+          <img src={iconBaton} alt="Baton icon" className={classes.token}></img>
         )}
         {tokenName === "USDC" && (
           <img
             src={iconScepter}
-            alt="Baton Icon"
+            alt="Baton icon"
             className={classes.token}
           ></img>
         )}

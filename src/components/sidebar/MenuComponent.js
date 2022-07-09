@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useTheme } from "react-jss";
 import { slide as Menu } from "react-burger-menu";
 
-import { IconBurger } from "assets/icons";
-
-const getMenuStyles = ({ theme }) => ({
+const getMenuStyles = () => ({
   bmBurgerButton: {
     position: "absolute",
     width: 26,
@@ -23,7 +20,7 @@ const getMenuStyles = ({ theme }) => ({
     display: "none",
   },
   bmCross: {
-    background: theme.color.grayishBlue3,
+    background: '#A4A6B3',
   },
   bmMenuWrap: {
     position: "fixed",
@@ -45,7 +42,7 @@ const getMenuStyles = ({ theme }) => ({
     },
   },
   bmMorphShape: {
-    fill: theme.color.veryDarkGrayishBlue,
+    fill: '#A4A6B3',
   },
   bmOverlay: {
     background: "rgba(10, 34, 48, 0.98)",
@@ -55,8 +52,8 @@ const getMenuStyles = ({ theme }) => ({
 });
 
 function MenuComponent({ children, isMobile }) {
-  const theme = useTheme();
-  const menuStyles = getMenuStyles({ theme });
+  
+  const menuStyles = getMenuStyles();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -66,7 +63,7 @@ function MenuComponent({ children, isMobile }) {
       disableCloseOnEsc
       styles={menuStyles}
       onStateChange={(state) => setIsOpen(state.isOpen)}
-      customBurgerIcon={<IconBurger />}
+      customBurgericon={<iconBurger />}
     >
       {children}
     </Menu>

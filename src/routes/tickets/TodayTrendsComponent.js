@@ -1,6 +1,6 @@
 import React from 'react';
 import { Column, Row } from 'simple-flexbox';
-import { createUseStyles, useTheme } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 import LineChart from 'react-svg-line-chart';
 
 const data = [];
@@ -14,7 +14,7 @@ for (let x = 1; x <= 24; x++) {
 const useStyles = createUseStyles((theme) => ({
     container: {
         backgroundColor: '#FFFFFF',
-        border: `1px solid ${theme.color.lightGrayishBlue2}`,
+        border: `1px solid '#A4A6B3'}`,
         borderRadius: 4,
         cursor: 'pointer'
     },
@@ -28,28 +28,28 @@ const useStyles = createUseStyles((theme) => ({
         padding: 24
     },
     graphSubtitle: {
-        ...theme.typography.smallSubtitle,
-        color: theme.color.grayishBlue2,
+
+        color: '#A4A6B3',
         marginTop: 4,
         marginRight: 8
     },
     graphTitle: {
-        ...theme.typography.cardTitle,
-        color: theme.color.veryDarkGrayishBlue
+
+        color: '#A4A6B3'
     },
     legendTitle: {
-        ...theme.typography.smallSubtitle,
+
         fontWeight: '600',
-        color: theme.color.grayishBlue2,
+        color: '#A4A6B3',
         marginLeft: 8
     },
     separator: {
-        backgroundColor: theme.color.lightGrayishBlue2,
+        backgroundColor: '#A4A6B3',
         width: 1,
         minWidth: 1
     },
     statContainer: {
-        borderBottom: `1px solid ${theme.color.lightGrayishBlue2}`,
+        borderBottom: `1px solid '#A4A6B3'}`,
         padding: '24px 32px 24px 32px',
         height: 'calc(114px - 48px)',
         '&:last-child': {
@@ -57,7 +57,7 @@ const useStyles = createUseStyles((theme) => ({
         }
     },
     stats: {
-        borderTop: `1px solid ${theme.color.lightGrayishBlue2}`,
+        borderTop: `1px solid '#A4A6B3'`,
         width: '100%'
     },
     statTitle: {
@@ -66,20 +66,26 @@ const useStyles = createUseStyles((theme) => ({
         lineHeight: '22px',
         letterSpacing: '0.3px',
         textAlign: 'center',
-        color: theme.color.grayishBlue2,
+        color: '#A4A6B3',
         whiteSpace: 'nowrap',
         marginBottom: 6
     },
     statValue: {
-        ...theme.typography.title,
+        fontFamily: '"Azo Sans", Fallback, Sofia',
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: 26,
+    letterSpacing: "0.02em",
+    marginTop: 30,
+    marginBottom: 30,
         textAlign: 'center',
-        color: theme.color.veryDarkGrayishBlue
+        color: '#A4A6B3'
     }
 }));
 
 function TodayTrendsComponent() {
-    const theme = useTheme();
-    const classes = useStyles({ theme });
+    
+    const classes = useStyles();
 
     function renderLegend(color, title) {
         return (
@@ -123,14 +129,14 @@ function TodayTrendsComponent() {
                         <span className={classes.graphTitle}>Today’s trends</span>
                         <span className={classes.graphSubtitle}>as of 25 May 2019, 09:41 PM</span>
                     </Column>
-                    {renderLegend(theme.color.lightBlue, 'Today')}
+                    {renderLegend("#3751FF", 'Today')}
                 </Row>
                 <div className={classes.graphContainer}>
                     <LineChart
                         data={data}
                         viewBoxWidth={500}
-                        pointsStrokeColor={theme.color.lightBlue}
-                        areaColor={theme.color.lightBlue}
+                        pointsStrokeColor={"#3751FF"}
+                        areaColor={"#3751FF"}
                         areaVisible={true}
                     />
                 </div>

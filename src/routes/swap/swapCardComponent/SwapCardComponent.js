@@ -1,12 +1,12 @@
 import React from "react";
 import { Column, Row } from "simple-flexbox";
-import LineChart from "react-svg-line-chart";
+// import LineChart from "react-svg-line-chart";
 import { connect } from "react-redux";
 
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 import SwapInputComponent from "./SwapInputComponent";
-import IconSwap from "assets/icons/icon-swap";
+import { IconSwap } from "assets/icons";
 import { prettifytolocalstring } from "resources/utilities";
 
 const data = [];
@@ -19,11 +19,18 @@ for (let x = 1; x <= 24; x++) {
 
 const useStyles = createUseStyles((theme) => ({
   container: {
-    ...theme.typography.cardBackground,
+    background:
+      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+    borderRadius: 5,
+    borderStyle: "solid",
+    borderColor: "rgba(165, 239, 255, 0.2)",
+    padding: 5,
+    marginRight: 0,
+    marginBottom: 17,
     minHeight: 375,
     marginLeft: 15,
-    marginRight: 0,
-    padding: 35,
+    // marginRight: 0,
+    // padding: 35,
     "@media (min-width: 450px)": {
       // desktop
       maxWidth: 450,
@@ -36,12 +43,15 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   title: {
-    color: theme.color.turquoise,
+    color: "#2ae0bf",
     fontWeight: 700,
   },
   subtitle: {
-    ...theme.typography.smallgreytitle,
-    textAlign: "left",
+    color: "#B1AFCD",
+    marginBottom: 6,
+    fontSize: 12,
+    textAlign: "center",
+    // textAlign: "left",
   },
   icon: {
     padding: 10,
@@ -50,18 +60,23 @@ const useStyles = createUseStyles((theme) => ({
     marginTop: 20,
     minWidth: 284,
     height: 49.86,
-    background: theme.color.veryDarkGrayishBlue,
+    background: "#A4A6B3",
     borderRadius: 5,
-    border: 'none',
-    ...theme.typography.boldamountvalue,
+    border: "none",
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
   },
 }));
 
 function SwapCardComponent(props) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  const classes = useStyles();
 
-  const { stats, investmentList, localwalletstats } = props;
+  const { localwalletstats } = props;
+  // const { stats, investmentList, localwalletstats } = props;
 
   return (
     <Column

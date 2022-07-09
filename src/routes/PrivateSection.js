@@ -1,5 +1,5 @@
 import React from "react";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { Column, Row } from "simple-flexbox";
 import { SidebarComponent, SidebarContext } from "components/sidebar";
 import HeaderComponent from "components/header/HeaderComponent";
@@ -27,8 +27,8 @@ const useStyles = createUseStyles({
 });
 
 function PrivateSection() {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   return (
     <SidebarContext>

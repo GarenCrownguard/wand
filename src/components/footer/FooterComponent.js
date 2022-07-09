@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Column, Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { Row } from "simple-flexbox";
+import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles((theme) => ({
   footContainer: {
@@ -20,8 +20,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function FooterComponent() {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   return (
     <div className={classes.footContainer}>

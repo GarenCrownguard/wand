@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { string } from "prop-types";
 import { Column, Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { SidebarContext } from "hooks/useSidebar";
 import links from "resources/links";
 
@@ -13,7 +13,13 @@ const useStyles = createUseStyles((theme) => ({
     height: 95,
   },
   title: {
-    ...theme.typography.title,
+    fontFamily: '"Azo Sans", Fallback, Sofia',
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: 26,
+    letterSpacing: "0.02em",
+    marginTop: 30,
+    marginBottom: 30,
     "@media (max-width: 450px)": {
       marginLeft: 50,
       fontSize: 20,
@@ -41,7 +47,6 @@ const useStyles = createUseStyles((theme) => ({
     height: 27,
   },
   connectwalletspan: {
-    ...theme.typography.itemTitle,
     textAlign: "right",
     color: "white",
     fontSize: 14,
@@ -90,10 +95,11 @@ const useStyles = createUseStyles((theme) => ({
 
 function HeaderComponent(props) {
   const { currentItem } = useContext(SidebarContext);
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
-  const { stats, investmentList, localwalletstats } = props;
+  const { localwalletstats } = props;
+  // const { stats, investmentList, localwalletstats } = props;
 
   let title;
   switch (true) {

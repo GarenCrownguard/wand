@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { arrayOf, element, func, number, oneOfType, shape, string } from 'prop-types';
 import { Column } from 'simple-flexbox';
-import { createUseStyles, useTheme } from 'react-jss';
-import { IconArrowUp } from 'assets/icons';
+import { createUseStyles } from 'react-jss';
+import { iconArrowUp } from 'assets/icons';
 
 const useStyles = createUseStyles((theme) => ({
     arrowContainer: {
@@ -24,7 +24,7 @@ const useStyles = createUseStyles((theme) => ({
     },
     dropdownItemsContainer: {
         background: 'white',
-        border: `1px solid ${theme.color.lightGrayishBlue2}`,
+        border: `1px solid light'#A4A6B3'2}`,
         borderRadius: 5,
         minWidth: 170,
         padding: 0,
@@ -35,7 +35,7 @@ const useStyles = createUseStyles((theme) => ({
         bottom: ({ position }) => position.bottom,
         left: ({ position }) => position.left,
         '& button:first-of-type:hover div > svg > path': {
-            fill: theme.color.paleBlue
+            fill: '#DDE2FF'
         }
     },
     dropdownItem: {
@@ -46,7 +46,7 @@ const useStyles = createUseStyles((theme) => ({
         outline: 'none',
         padding: '10px 10px',
         '&:hover': {
-            background: theme.color.paleBlue
+            background: '#DDE2FF'
         },
         '&:after': {
             content: '" "',
@@ -55,7 +55,7 @@ const useStyles = createUseStyles((theme) => ({
             bottom: -10,
             width: '100%',
             height: 1,
-            background: theme.color.paleBlue
+            background: '#DDE2FF'
         },
         '&:last-child:after': {
             content: '',
@@ -66,7 +66,7 @@ const useStyles = createUseStyles((theme) => ({
 
 function DropdownComponent({ label, options, position }) {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const theme = useTheme();
+    
     const classes = useStyles({ theme, position });
 
     function onDropdownClick() {
@@ -94,7 +94,7 @@ function DropdownComponent({ label, options, position }) {
                             {option.label}
                             {index === 0 && (
                                 <div className={classes.arrowContainer}>
-                                    <IconArrowUp />
+                                    <iconArrowUp />
                                 </div>
                             )}
                         </button>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { IconLogo } from "assets/icons";
 
 const useStyles = createUseStyles((theme) => ({
@@ -15,16 +15,15 @@ const useStyles = createUseStyles((theme) => ({
     marginRight: 87,
   },
   title: {
-    ...theme.typography.cardTitle,
-    color: theme.color.grayishBlue,
+    color: '#A4A6B3',
     opacity: 0.7,
     marginLeft: 12,
   },
 }));
 
 function LogoComponent() {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
   return (
     <Row className={classes.container} horizontal="center" vertical="center">
       <IconLogo />
