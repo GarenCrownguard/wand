@@ -1,21 +1,21 @@
 import React from 'react';
 import { Row } from 'simple-flexbox';
-import { createUseStyles, useTheme } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 import CardComponent from 'components/cards/CardComponent';
 
 const useStyles = createUseStyles((theme) => ({
     itemTitle: {
         ...theme.typography.itemTitle,
-        color: theme.color.veryDarkGrayishBlue
+        color: '#A4A6B3'
     },
     itemValue: {
-        color: theme.color.grayishBlue2
+        color: '#A4A6B3'
     }
 }));
 
 function UnresolvedTicketsComponent({ containerStyles }) {
-    const theme = useTheme();
-    const classes = useStyles({ theme });
+    
+    const classes = useStyles();
 
     function renderStat(title, value) {
         return (

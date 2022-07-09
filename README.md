@@ -152,7 +152,7 @@ Reference @
 4. https://dev.to/llorentegerman/building-a-ui-from-scratch-responsive-content-6b9
 
 import { Column, Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
 footer: {
@@ -164,8 +164,8 @@ left: "0px",
 });
 
 const Footer = () => {
-const theme = useTheme();
-const classes = useStyles({ theme });
+
+const classes = useStyles();
 
 
 # Future work

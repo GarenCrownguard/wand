@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { string } from "prop-types";
 import { Column, Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { SidebarContext } from "hooks/useSidebar";
 import links from "resources/links";
 
@@ -90,8 +90,8 @@ const useStyles = createUseStyles((theme) => ({
 
 function HeaderComponent(props) {
   const { currentItem } = useContext(SidebarContext);
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   const { stats, investmentList, localwalletstats } = props;
 

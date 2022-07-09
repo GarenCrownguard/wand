@@ -1,6 +1,6 @@
 import React from "react";
 import { Column } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles((theme) => ({
   container: {
@@ -20,8 +20,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function StatsCardComponent({ className = "", title, value }) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
   const composedClassName = [classes.container, className].join(" ");
   return (
     <Column

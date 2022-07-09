@@ -2,7 +2,7 @@ import React from "react";
 import { Column, Row } from "simple-flexbox";
 import LineChart from "react-svg-line-chart";
 
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 const data = [];
 
@@ -36,7 +36,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   graphSubtitle: {
     ...theme.typography.smallSubtitle,
-    color: theme.color.grayishBlue2,
+    color: '#A4A6B3',
     marginTop: 4,
     marginRight: 8,
   },
@@ -46,8 +46,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function TreasuryAllocationComponent() {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   return (
     <Column
@@ -77,8 +77,8 @@ function TreasuryAllocationComponent() {
           <LineChart
             data={data}
             viewBoxWidth={500}
-            pointsStrokeColor={theme.color.lightBlue}
-            areaColor={theme.color.lightBlue}
+            pointsStrokeColor={lightBlue}
+            areaColor={lightBlue}
             areaVisible={true}
           />
         </div>

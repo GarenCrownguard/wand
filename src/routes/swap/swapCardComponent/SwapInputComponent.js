@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Column } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { prettifytolocalstring } from "resources/utilities";
 
 import iconBaton from "../../../assets/images/iconBaton.png";
@@ -10,7 +10,7 @@ const useStyles = createUseStyles((theme) => ({
   container: {
     minHeight: 59.58,
     padding: 15,
-    background: theme.color.veryDarkGrayishBlue,
+    background: '#A4A6B3',
     borderRadius: 7.73771,
     marginTop: 13.17,
 
@@ -52,7 +52,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   tokenname: {
     fontSize: 10,
-    color: theme.color.turquoise,
+    color: "#2ae0bf",
     letterSpacing: 1,
     fontWeight: 700,
   },
@@ -79,8 +79,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function SwapInputComponent({ tokenName, balance, title, value }) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   return (
     <Column flexGrow={1} className={classes.container} vertical="center">
@@ -97,17 +97,17 @@ function SwapInputComponent({ tokenName, balance, title, value }) {
         {tokenName === "SCEPTER" && (
           <img
             src={iconScepter}
-            alt="Baton Icon"
+            alt="Baton icon"
             className={classes.token}
           ></img>
         )}
         {tokenName === "BATON" && (
-          <img src={iconBaton} alt="Baton Icon" className={classes.token}></img>
+          <img src={iconBaton} alt="Baton icon" className={classes.token}></img>
         )}
         {tokenName === "USDC" && (
           <img
             src={iconScepter}
-            alt="Baton Icon"
+            alt="Baton icon"
             className={classes.token}
           ></img>
         )}

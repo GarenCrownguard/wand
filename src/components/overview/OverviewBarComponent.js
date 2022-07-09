@@ -5,7 +5,7 @@ import StatsCardComponent from "../cards/StatsCardComponent";
 
 import { prettifyamounts, prettifytolocalstring } from "resources/utilities";
 
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { connect } from "react-redux";
 
 const useStyles = createUseStyles((theme) => ({
@@ -24,8 +24,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 const OverviewBarComponent = (props) => {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   const { stats, investmentList } = props;
 

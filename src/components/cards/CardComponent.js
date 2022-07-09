@@ -1,11 +1,11 @@
 import React from 'react';
 import { Column, Row } from 'simple-flexbox';
-import { createUseStyles, useTheme } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
         backgroundColor: '#FFFFFF',
-        border: `1px solid ${theme.color.lightGrayishBlue2}`,
+        border: `1px solid light'#A4A6B3'2}`,
         borderRadius: 4,
         padding: '24px 32px 0px 32px',
         height: '100%'
@@ -20,7 +20,7 @@ const useStyles = createUseStyles((theme) => ({
         paddingRight: 32,
         paddingBottom: 18,
         paddingTop: 18,
-        borderBottom: `1px solid ${theme.color.lightGrayishBlue2}`,
+        borderBottom: `1px solid light'#A4A6B3'2}`,
         '&:last-child': {
             borderBottom: 'none'
         }
@@ -36,21 +36,21 @@ const useStyles = createUseStyles((theme) => ({
     },
     subtitle: {
         ...theme.typography.smallSubtitle,
-        color: theme.color.grayishBlue2
+        color: '#A4A6B3'
     },
     subtitle2: {
-        color: theme.color.veryDarkGrayishBlue,
+        color: '#A4A6B3',
         marginLeft: 2
     },
     title: {
         ...theme.typography.cardTitle,
-        color: theme.color.veryDarkGrayishBlue
+        color: '#A4A6B3'
     }
 }));
 
 function CardComponent(props) {
-    const theme = useTheme();
-    const classes = useStyles({ theme });
+    
+    const classes = useStyles();
     const { title, link, subtitle, subtitleTwo, items, containerStyles } = props;
     function renderItem(item, index) {
         return (

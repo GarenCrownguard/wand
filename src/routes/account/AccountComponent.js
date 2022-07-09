@@ -3,7 +3,7 @@ import React from "react";
 import { UserScepterHoldingsComponent } from "components/useraccount";
 
 import { Column, Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles((theme) => ({
     maincontainer: {
@@ -18,8 +18,8 @@ const useStyles = createUseStyles((theme) => ({
 
 function AccountComponent() {
 
-    const theme = useTheme();
-  const classes = useStyles({ theme });
+    
+  const classes = useStyles();
 
   return (
     <Column>

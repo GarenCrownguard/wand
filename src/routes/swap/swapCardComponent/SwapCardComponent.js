@@ -3,10 +3,10 @@ import { Column, Row } from "simple-flexbox";
 import LineChart from "react-svg-line-chart";
 import { connect } from "react-redux";
 
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 import SwapInputComponent from "./SwapInputComponent";
-import IconSwap from "assets/icons/icon-swap";
+import iconSwap from "assets/icons";
 import { prettifytolocalstring } from "resources/utilities";
 
 const data = [];
@@ -36,7 +36,7 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   title: {
-    color: theme.color.turquoise,
+    color: '#2ae0bf',
     fontWeight: 700,
   },
   subtitle: {
@@ -50,7 +50,7 @@ const useStyles = createUseStyles((theme) => ({
     marginTop: 20,
     minWidth: 284,
     height: 49.86,
-    background: theme.color.veryDarkGrayishBlue,
+    background: '#A4A6B3',
     borderRadius: 5,
     border: 'none',
     ...theme.typography.boldamountvalue,
@@ -58,8 +58,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function SwapCardComponent(props) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   const { stats, investmentList, localwalletstats } = props;
 
@@ -78,7 +78,7 @@ function SwapCardComponent(props) {
       />
 
       <Row justifyContent="space-around" className={classes.icon}>
-        <IconSwap />
+        <iconSwap />
       </Row>
 
       <SwapInputComponent

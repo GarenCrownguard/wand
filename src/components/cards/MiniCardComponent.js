@@ -9,7 +9,7 @@ this card has following:
 
 import React from "react";
 import { Row, Column } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 import { prettifyGrowthPercentage } from "resources/utilities";
 
@@ -54,8 +54,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function MiniCardComponent({ className = "", title, value }) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
   const composedClassName = [classes.container, className].join(" ");
   return (
     <Column flexGrow={1} className={composedClassName} vertical="center">

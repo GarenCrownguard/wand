@@ -12,7 +12,7 @@ import { Column, Row } from "simple-flexbox";
 
 import { prettifyamounts } from "resources/utilities";
 
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 // Redux
 import { connect } from 'react-redux';
@@ -43,8 +43,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 const DashboardComponent = (props) => {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   var scepterPriceGrowth = 278;
   var airdropsToBaton = 2345000;

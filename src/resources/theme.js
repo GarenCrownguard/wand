@@ -9,17 +9,17 @@ const color = {
   darkjunglegreen: "#0B1A28",
 
   brightBlue: "#3498db",
-  darkGrayishBlue: "#8b8d94",
+  darka: "#8b8d94",
   darkRed: "#a90000",
-  grayishBlue: "#A4A6B3",
-  grayishBlue2: "#9fa2b4",
-  grayishBlue3: "#bdc3c7",
+ b: "'#A4A6B3'",
+  2: "#9fa2b4",
+  3: "#bdc3c7",
   lightBlue: "#3751FF",
-  lightGrayishBlue: "#F7F8FC", // background color
-  lightGrayishBlue2: "#DFE0EB",
-  paleBlue: "#DDE2FF",
-  paleBlueTransparent: "rgba(221, 226, 255, 0.08)",
-  veryDarkGrayishBlue: "#373a47",
+  light: "#F7F8FC", // background color
+  light2: "#DFE0EB",
+  DDE2FF: "#DDE2FF",
+  DDE2FFTransparent: "rgba(221, 226, 255, 0.08)",
+  o: "#373a47"
 };
 
 const typography = {
@@ -44,7 +44,7 @@ const typography = {
   //     cursor: "pointer",
   //     textDecoration: "underline",
   //     "&:hover": {
-  //       color: color.grayishBlue,
+  //       color: color.'#A4A6B3',
   //     },
   //   },
   //   itemTitle: {

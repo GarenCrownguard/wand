@@ -1,10 +1,10 @@
 import React from "react";
 import { Column, Row } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 // Redux
 import { connect } from "react-redux";
 
-import { IconVerticalseperator, IconSwap } from "assets/icons";
+import { iconVerticalseperator, iconSwap } from "assets/icons";
 import iconScepterBuySell from "../../assets/images/iconScepterBuySell.png";
 
 import OverviewBarComponent from "components/overview";
@@ -44,17 +44,17 @@ const useStyles = createUseStyles((theme) => ({
   },
   buyfactorsubtitle: {
     ...theme.typography.boldamountvalue,
-    color: theme.color.turquoise,
+    color: "#2ae0bf",
   },
   sellfactorsubtitle: {
     ...theme.typography.boldamountvalue,
-    color: theme.color.englishred,
+    color: "#AE3C51",
   },
 }));
 
 const SwapComponent = (props) => {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   const { stats, investmentList } = props;
 
@@ -98,7 +98,7 @@ const SwapComponent = (props) => {
             </Column>
             <img
               src={iconScepterBuySell}
-              alt="Buy Sell Icon"
+              alt="Buy Sell icon"
               height="65px"
             ></img>
 
@@ -124,7 +124,7 @@ const SwapComponent = (props) => {
                   {stats.growthFactor}
                 </span>
               </Column>
-              <IconVerticalseperator />
+              <iconVerticalseperator />
 
               <Column horizontal="center">
                 <span className={classes.title}>Sell Factor</span>

@@ -10,7 +10,7 @@ this card has following:
 
 import React from "react";
 import { Row, Column } from "simple-flexbox";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 import { prettifyGrowthPercentage } from "resources/utilities";
 
@@ -61,7 +61,7 @@ const useStyles = createUseStyles((theme) => ({
     marginLeft: 6,
     letterSpacing: "0.02em",
 
-    color: theme.color.turquoise,
+    color: "#2ae0bf",
   },
   growthNegative: {
     fontWeight: 500,
@@ -69,7 +69,7 @@ const useStyles = createUseStyles((theme) => ({
     marginLeft: 6,
 
     letterSpacing: "0.02em",
-    color: theme.color.englishred,
+    color: "#AE3C51",
   },
 }));
 
@@ -80,8 +80,8 @@ function MiniInfoCardComponent({
   growthDirection,
   growthValue,
 }) {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
   const composedClassName = [classes.container, className].join(" ");
   return (
     <Column flexGrow={1} className={composedClassName} vertical="center">

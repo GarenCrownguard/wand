@@ -1,5 +1,5 @@
 import React from "react";
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 import { Column } from "simple-flexbox";
 
 const useStyles = createUseStyles({
@@ -13,8 +13,8 @@ const useStyles = createUseStyles({
         return noTransparency ? backgroundColor : `${backgroundColor}A0`;
       }
       return noTransparency
-        ? theme.color.veryDarkGrayishBlue
-        : `${theme.color.veryDarkGrayishBlue}A0`;
+        ? '#373a47'
+        : '#373a47'
     },
     height: "100%",
     minHeight: ({ fullScreen }) => (fullScreen ? "100vh" : "100%"),
@@ -25,9 +25,9 @@ const useStyles = createUseStyles({
     zIndex: ({ zIndex }) => zIndex,
   },
   loading: {
-    border: ({ theme }) => `16px solid ${theme.color.lightGrayishBlue}`,
+    border: () => `16px solid #F7F8FC`,
     borderRadius: "50%",
-    borderTop: ({ theme }) => `16px solid ${theme.color.brightBlue}`,
+    borderTop: () => `16px solid #3498db`,
     width: 120,
     height: 120,
     animationName: "$loadingSpin",
@@ -53,9 +53,8 @@ function LoadingComponent({
   width,
   zIndex,
 }) {
-  const theme = useTheme();
+  
   const classes = useStyles({
-    theme,
     fullScreen,
     noTransparency,
     backgroundColor,

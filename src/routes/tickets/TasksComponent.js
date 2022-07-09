@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { Row } from 'simple-flexbox';
-import { createUseStyles, useTheme } from 'react-jss';
-import { IconCheckboxOn, IconCheckboxOff } from 'assets/icons';
+import { createUseStyles } from 'react-jss';
+import { IconWallet } from 'assets/icons';
 import CardComponent from 'components/cards/CardComponent';
 
 const useStyles = createUseStyles((theme) => ({
     addButton: {
-        backgroundColor: theme.color.lightGrayishBlue,
-        color: theme.color.grayishBlue2,
+        backgroundColor: '#A4A6B3',
+        color: '#A4A6B3',
         fontSize: '20px !important',
         padding: '7px !important'
     },
     itemTitle: {
         ...theme.typography.itemTitle,
-        color: theme.color.veryDarkGrayishBlue
+        color: '#A4A6B3'
     },
     itemValue: {
-        color: theme.color.grayishBlue2
+        color: '#A4A6B3'
     },
     greyTitle: {
-        color: theme.color.grayishBlue3
+        color: '#A4A6B3'
     },
     tagStyles: {
         borderRadius: 5,
@@ -43,8 +43,8 @@ const TAGS = {
 };
 
 function TasksComponent(props) {
-    const theme = useTheme();
-    const classes = useStyles({ theme });
+    
+    const classes = useStyles();
     const [items, setItems] = useState([
         { title: 'Finish ticket update', checked: false, tag: TAGS.URGENT },
         {
@@ -134,7 +134,7 @@ function TaskComponent({ classes, index, item = {}, onCheckboxClick, onTagClick 
         <Row horizontal='space-between' vertical='center'>
             <Row>
                 <div className={classes.checkboxWrapper} onClick={() => onCheckboxClick(index)}>
-                    {item.checked ? <IconCheckboxOn /> : <IconCheckboxOff />}
+                    {item.checked ? <IconWallet /> : <IconWallet />}
                 </div>
                 <span className={classes.itemTitle}>{item.title}</span>
             </Row>

@@ -2,7 +2,7 @@ import React from "react";
 import { Column, Row } from "simple-flexbox";
 import LineChart from "react-svg-line-chart";
 
-import { createUseStyles, useTheme } from "react-jss";
+import { createUseStyles } from "react-jss";
 
 const data = [];
 
@@ -40,8 +40,8 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function UserScepterHoldingsComponent() {
-  const theme = useTheme();
-  const classes = useStyles({ theme });
+  
+  const classes = useStyles();
 
   return (
     <Column
@@ -61,8 +61,8 @@ function UserScepterHoldingsComponent() {
           <LineChart
             data={data}
             // viewBoxWidth={500}
-            pointsStrokeColor={theme.color.lightBlue}
-            areaColor={theme.color.lightBlue}
+            pointsStrokeColor={lightBlue}
+            areaColor={lightBlue}
             areaVisible={true}
           />
         </div>
