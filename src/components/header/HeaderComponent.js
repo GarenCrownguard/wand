@@ -13,7 +13,13 @@ const useStyles = createUseStyles((theme) => ({
     height: 95,
   },
   title: {
-    ...theme.typography.title,
+    fontFamily: '"Azo Sans", Fallback, Sofia',
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: 26,
+    letterSpacing: "0.02em",
+    marginTop: 30,
+    marginBottom: 30,
     "@media (max-width: 450px)": {
       marginLeft: 50,
       fontSize: 20,
@@ -41,7 +47,6 @@ const useStyles = createUseStyles((theme) => ({
     height: 27,
   },
   connectwalletspan: {
-    ...theme.typography.itemTitle,
     textAlign: "right",
     color: "white",
     fontSize: 14,
@@ -93,7 +98,8 @@ function HeaderComponent(props) {
   
   const classes = useStyles();
 
-  const { stats, investmentList, localwalletstats } = props;
+  const { localwalletstats } = props;
+  // const { stats, investmentList, localwalletstats } = props;
 
   let title;
   switch (true) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles((theme) => ({
+const useStyles = createUseStyles({
     container: {
         backgroundColor: '#FFFFFF',
         border: `1px solid light'#A4A6B3'2}`,
@@ -31,22 +31,7 @@ const useStyles = createUseStyles((theme) => ({
         paddingLeft: 16,
         paddingRight: 16
     },
-    link: {
-        ...theme.typography.link
-    },
-    subtitle: {
-        ...theme.typography.smallSubtitle,
-        color: '#A4A6B3'
-    },
-    subtitle2: {
-        color: '#A4A6B3',
-        marginLeft: 2
-    },
-    title: {
-        ...theme.typography.cardTitle,
-        color: '#A4A6B3'
-    }
-}));
+});
 
 function CardComponent(props) {
     

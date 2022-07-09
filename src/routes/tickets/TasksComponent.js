@@ -12,7 +12,7 @@ const useStyles = createUseStyles((theme) => ({
         padding: '7px !important'
     },
     itemTitle: {
-        ...theme.typography.itemTitle,
+
         color: '#A4A6B3'
     },
     itemValue: {

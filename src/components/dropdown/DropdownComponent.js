@@ -35,7 +35,7 @@ const useStyles = createUseStyles((theme) => ({
         bottom: ({ position }) => position.bottom,
         left: ({ position }) => position.left,
         '& button:first-of-type:hover div > svg > path': {
-            fill: #DDE2FF
+            fill: '#DDE2FF'
         }
     },
     dropdownItem: {
@@ -46,7 +46,7 @@ const useStyles = createUseStyles((theme) => ({
         outline: 'none',
         padding: '10px 10px',
         '&:hover': {
-            background: #DDE2FF
+            background: '#DDE2FF'
         },
         '&:after': {
             content: '" "',
@@ -55,7 +55,7 @@ const useStyles = createUseStyles((theme) => ({
             bottom: -10,
             width: '100%',
             height: 1,
-            background: #DDE2FF
+            background: '#DDE2FF'
         },
         '&:last-child:after': {
             content: '',

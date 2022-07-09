@@ -6,7 +6,7 @@ import { TotalValueDepositComponent } from "components/graphs";
 import { EvolutionOfTreasuryComponent } from "components/treasury";
 import { TreasuryAllocationComponent } from "components/treasury";
 import MiniInfoCardComponent from "components/cards/MiniInfoCardComponent";
-import { FooterComponent } from "components/footer";
+// import { FooterComponent } from "components/footer";
 
 import { Column, Row } from "simple-flexbox";
 
@@ -24,7 +24,13 @@ const useStyles = createUseStyles((theme) => ({
     flexDirection: "column",
   },
   title: {
-    ...theme.typography.title,
+    fontFamily: '"Azo Sans", Fallback, Sofia',
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: 26,
+    letterSpacing: "0.02em",
+    marginTop: 30,
+    marginBottom: 30,
   },
   graphcontainer: {
     "@media (max-width: 450px)": {
@@ -47,10 +53,11 @@ const DashboardComponent = (props) => {
   const classes = useStyles();
 
   var scepterPriceGrowth = 278;
-  var airdropsToBaton = 2345000;
+  // var airdropsToBaton = 2345000;
   var riskTreasuryGrowth = 23845000;
 
-  const {stats ,investmentList} = props;
+  const {stats} = props;
+  // const {stats ,investmentList} = props;
 
   // console.log(stats[0].airdrops3Months);
   return (

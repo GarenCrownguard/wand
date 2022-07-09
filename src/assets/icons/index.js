@@ -3,8 +3,8 @@ import iconBurger from "./Icon-burger";
 import IconLogo from "./Icon-logo";
 import iconSoon from "./Icon-soon";
 import IconWallet from "./Icon-wallet";
-import iconSwap from "./Icon-swap";
-import iconVerticalseperator from "./Icon-verticalseperator";
+import IconSwap from "./Icon-swap";
+import IconVerticalseperator from "./Icon-verticalseperator";
 
 import iconAccount from "./Icon-account";
 import iconBridge from "./Icon-bridge";
@@ -21,8 +21,8 @@ export {
   IconWallet,
   IconLogo,
   iconSoon,
-  iconSwap,
-  iconVerticalseperator,
+  IconSwap,
+  IconVerticalseperator,
 
   iconAccount,
   iconBridge,

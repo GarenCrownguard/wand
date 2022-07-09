@@ -15,7 +15,6 @@ const useStyles = createUseStyles((theme) => ({
     marginRight: 87,
   },
   title: {
-    ...theme.typography.cardTitle,
     color: '#A4A6B3',
     opacity: 0.7,
     marginLeft: 12,

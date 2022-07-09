@@ -7,14 +7,14 @@ import { useSidebar } from "hooks/useSidebar";
 
 const useStyles = createUseStyles({
   activeContainer: {
-    backgroundColor: () => "rgba(221, 226, 255, 0.08)",
+    backgroundColor: "rgba(221, 226, 255, 0.08)",
   },
   container: {
     display: "flex",
     height: 27,
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: () => "rgba(221, 226, 255, 0.08)",
+      backgroundColor: "rgba(221, 226, 255, 0.08)",
     },
     paddingLeft: 55,
     transition: "all 0.2s ease-in-out",
@@ -25,8 +25,7 @@ const useStyles = createUseStyles({
     fontSize: 16,
     lineHeight: "20px",
     letterSpacing: "0.2px",
-    color: ({ theme, isActive }) =>
-      isActive ? '#DDE2FF' : '#A4A6B3',
+    color: ({ isActive }) => (isActive ? "#DDE2FF" : "#A4A6B3"),
     marginLeft: 10,
     // marginRight:15,
   },
@@ -39,15 +38,14 @@ const useStyles = createUseStyles({
 
 function MenuItemComponent({
   children,
-  Icon: Icon,
+  icon: Icon,
   id,
   items = [],
   level = 1,
   onClick,
   title,
-  SoonIcon: SoonIcon,
+  soonicon: SoonIcon,
 }) {
-  
   const isCollapsible = children && children.length > 0;
   const { isExpanded, isActive, onItemClick } = useSidebar({
     isCollapsible,
@@ -60,7 +58,7 @@ function MenuItemComponent({
     classes.container,
     isActive && classes.activeContainer,
   ].join(" ");
-  const iconColor = isActive ? '#DDE2FF' : '#9fa2b4';
+  const iconColor = isActive ? "#DDE2FF" : "#9fa2b4";
 
   function onItemClicked(e) {
     if (onClick) {

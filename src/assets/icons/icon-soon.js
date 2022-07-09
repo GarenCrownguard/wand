@@ -8,14 +8,14 @@ export default () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g opacity="0.8" filter="url(#filter0_d_1154_1019)">
+    <g opacity="0.8" filter="url(#filter0_d_328_577)">
       <rect
         x="23"
         y="20"
         width="38"
         height="16"
         rx="2"
-        fill="url(#paint0_linear_1154_1019)"
+        fill="url(#paint0_linear_328_577)"
       />
     </g>
     <path
@@ -24,7 +24,7 @@ export default () => (
     />
     <defs>
       <filter
-        id="filter0_d_1154_1019"
+        id="filter0_d_328_577"
         x="0.266665"
         y="0.199998"
         width="83.4667"
@@ -48,17 +48,17 @@ export default () => (
         <feBlend
           mode="normal"
           in2="BackgroundImageFix"
-          result="effect1_dropShadow_1154_1019"
+          result="effect1_dropShadow_328_577"
         />
         <feBlend
           mode="normal"
           in="SourceGraphic"
-          in2="effect1_dropShadow_1154_1019"
+          in2="effect1_dropShadow_328_577"
           result="shape"
         />
       </filter>
       <linearGradient
-        id="paint0_linear_1154_1019"
+        id="paint0_linear_328_577"
         x1="8.26878"
         y1="28.4449"
         x2="17.5416"
@@ -69,5 +69,5 @@ export default () => (
         <stop offset="1" stopColor="#C438EF" />
       </linearGradient>
     </defs>
-  </svg>  
+  </svg>
 );

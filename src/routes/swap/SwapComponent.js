@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 // Redux
 import { connect } from "react-redux";
 
-import { iconVerticalseperator, iconSwap } from "assets/icons";
+import { IconVerticalseperator } from "assets/icons";
 import iconScepterBuySell from "../../assets/images/iconScepterBuySell.png";
 
 import OverviewBarComponent from "components/overview";
@@ -20,7 +20,10 @@ const useStyles = createUseStyles((theme) => ({
     // flexDirection: "column",
   },
   title: {
-    ...theme.typography.smallgreytitle,
+    color: "#B1AFCD",
+    marginBottom: 6,
+    fontSize: 12,
+    textAlign: "center",
   },
   InfoContainer: {
     marginTop: 23,
@@ -29,10 +32,17 @@ const useStyles = createUseStyles((theme) => ({
     flexGrow: 1,
   },
   card: {
-    ...theme.typography.cardBackground,
+    background:
+      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+    borderRadius: 5,
+    borderStyle: "solid",
+    borderColor: "rgba(165, 239, 255, 0.2)",
+    padding: 5,
+    marginRight:0,
+    marginBottom: 17,
     maxHeight: 111,
     minWidth: 225,
-    padding: 28,
+    // padding: 28,
     "@media (max-width: 450px)": {
       // mobile
       marginTop: 6.5,
@@ -40,15 +50,30 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   value: {
-    ...theme.typography.boldamountvalue,
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
   },
   buyfactorsubtitle: {
-    ...theme.typography.boldamountvalue,
-    color: "#2ae0bf",
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
+    // color: "#2ae0bf",
   },
   sellfactorsubtitle: {
-    ...theme.typography.boldamountvalue,
-    color: "#AE3C51",
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
+    // color: "#AE3C51",
   },
 }));
 
@@ -56,7 +81,8 @@ const SwapComponent = (props) => {
   
   const classes = useStyles();
 
-  const { stats, investmentList } = props;
+  const { stats } = props;
+  // const { stats, investmentList } = props;
 
   // console.log(stats[0].airdrops3Months);
   return (
@@ -124,7 +150,7 @@ const SwapComponent = (props) => {
                   {stats.growthFactor}
                 </span>
               </Column>
-              <iconVerticalseperator />
+              <IconVerticalseperator />
 
               <Column horizontal="center">
                 <span className={classes.title}>Sell Factor</span>

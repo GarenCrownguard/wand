@@ -12,10 +12,18 @@ const useStyles = createUseStyles((theme) => ({
     // padding: "20px 32px 6px 32px",
   },
   title: {
-    ...theme.typography.smallgreytitle,
+    color: "#B1AFCD",
+    marginBottom: 6,
+    fontSize: 12,
+    textAlign: "center",
   },
   value: {
-    ...theme.typography.boldamountvalue,
+    color: "#FFFFFF",
+    fontWeight: "700",
+    fontSize: 24,
+    letterSpacing: "0.02em",
+    lineHeight: "29px",
+    textAlign: "center",
   },
 }));
 

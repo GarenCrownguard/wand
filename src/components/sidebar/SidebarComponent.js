@@ -4,12 +4,7 @@ import { useHistory } from "react-router-dom";
 // import links from 'resources/links';
 import links from "resources/links";
 import {
-  iconBurger,
-  IconWallet,
-  iconLogo,
   iconSoon,
-  iconSwap,
-  iconVerticalseperator,
   iconAccount,
   iconBridge,
   iconDashboard,
@@ -26,11 +21,12 @@ import MenuItem from "./MenuItemComponent";
 
 const useStyles = createUseStyles({
   separator: {
-    borderTop: () => `1px solid light'#A4A6B3'}`,
-    // width: 110,
+    borderTop: () => '1px solid #6f6c99',
+    width: 135,
     marginTop: 16,
     marginBottom: 16,
-    opacity: 0.06,
+    marginRight: 'auto',
+    marginLeft: 'auto'
   },
 });
 
@@ -40,9 +36,9 @@ function SidebarComponent() {
   const classes = useStyles();
   const isMobile = window.innerWidth <= 1080;
 
-  async function logout() {
-    push(links.login);
-  }
+  // async function logout() {
+  //   push(links.login);
+  // }
 
   function onClick(slug, parameters = {}) {
     push(convertSlugToUrl(slug, parameters));
@@ -88,12 +84,6 @@ function SidebarComponent() {
       />
       <div className={classes.separator}></div>
       <MenuItem
-        id={links.treasuries}
-        title="Treasuries"
-        icon={IconWallet}
-        onClick={() => onClick(links.treasuries)}
-      />
-      <MenuItem
         id={links.governance}
         title="Governance"
         icon={iconGovernance}
@@ -112,13 +102,6 @@ function SidebarComponent() {
         title="Docs"
         icon={iconDocs}
         onClick={() => onClick(links.docs)}
-      />
-
-      <MenuItem
-        id="logout"
-        title="Socials"
-        icon={iconSwap}
-        onClick={logout}
       />
     </Menu>
   );

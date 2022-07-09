@@ -28,17 +28,17 @@ const useStyles = createUseStyles((theme) => ({
         padding: 24
     },
     graphSubtitle: {
-        ...theme.typography.smallSubtitle,
+
         color: '#A4A6B3',
         marginTop: 4,
         marginRight: 8
     },
     graphTitle: {
-        ...theme.typography.cardTitle,
+
         color: '#A4A6B3'
     },
     legendTitle: {
-        ...theme.typography.smallSubtitle,
+
         fontWeight: '600',
         color: '#A4A6B3',
         marginLeft: 8
@@ -71,7 +71,13 @@ const useStyles = createUseStyles((theme) => ({
         marginBottom: 6
     },
     statValue: {
-        ...theme.typography.title,
+        fontFamily: '"Azo Sans", Fallback, Sofia',
+    fontStyle: "normal",
+    fontWeight: 700,
+    fontSize: 26,
+    letterSpacing: "0.02em",
+    marginTop: 30,
+    marginBottom: 30,
         textAlign: 'center',
         color: '#A4A6B3'
     }

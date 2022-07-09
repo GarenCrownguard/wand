@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "react-jss";
-import Theme from "resources/theme";
 import PrivateSection from './routes/PrivateSection'
 import "./fonts.css";
 import "./index.css";
@@ -15,11 +13,9 @@ import store from "./redux/store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={Theme}>
       <Router>
         <PrivateSection />
       </Router>
-    </ThemeProvider>
   </Provider>,
   document.getElementById("root")
 );

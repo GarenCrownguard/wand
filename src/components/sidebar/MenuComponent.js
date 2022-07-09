@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { useTheme } from "react-jss";
 import { slide as Menu } from "react-burger-menu";
-
-import { iconBurger } from "assets/icons";
 
 const getMenuStyles = () => ({
   bmBurgerButton: {

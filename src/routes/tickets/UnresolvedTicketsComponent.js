@@ -5,7 +5,7 @@ import CardComponent from 'components/cards/CardComponent';
 
 const useStyles = createUseStyles((theme) => ({
     itemTitle: {
-        ...theme.typography.itemTitle,
+
         color: '#A4A6B3'
     },
     itemValue: {
