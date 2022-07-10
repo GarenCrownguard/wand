@@ -2,6 +2,11 @@
 
 FrontEnd for Wand Investments project.
 
+# Metamask
+
+1. https://github.com/MetaMask/test-dapp Test: https://metamask.github.io/test-dapp/
+
+
 # REPO REFERENCE
 [1] Dynamic screen size: https://github.com/kingflamez/use-screen-size
 
