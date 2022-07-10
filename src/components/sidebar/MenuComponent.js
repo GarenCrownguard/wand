@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { slide as Menu } from "react-burger-menu";
+import Menu from 'react-burger-menu/lib/menus/slide'
+
+import { IconBurger } from "assets/icons";
 
 const getMenuStyles = () => ({
   bmBurgerButton: {
@@ -9,18 +11,8 @@ const getMenuStyles = () => ({
     left: 19,
     top: 40,
     zIndex: 19,
-  },
-  bmBurgerBars: {
-    // background: "green",
-  },
-  bmBurgerBarsHover: {
-    // background: "yellow",
-  },
-  bmCrossButton: {
-    display: "none",
-  },
-  bmCross: {
-    background: '#A4A6B3',
+    outline: '1px solid red',
+    background: 'black'
   },
   bmMenuWrap: {
     position: "fixed",
@@ -60,10 +52,9 @@ function MenuComponent({ children, isMobile }) {
     <Menu
       isOpen={!isMobile || isOpen}
       noOverlay={!isMobile}
-      disableCloseOnEsc
       styles={menuStyles}
       onStateChange={(state) => setIsOpen(state.isOpen)}
-      customBurgericon={<iconBurger />}
+      customBurgericon={<IconBurger />}
     >
       {children}
     </Menu>

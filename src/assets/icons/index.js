@@ -1,4 +1,4 @@
-import iconBurger from "./icon-burger";
+import IconBurger from "./icon-burger";
 
 import IconLogo from "./icon-logo";
 import IconSoon from "./icon-soon";
@@ -16,7 +16,7 @@ import iconSwapSidebar from "./icon-swap-sidebar";
 import iconVote from "./icon-vote";
 
 export {
-  iconBurger,
+  IconBurger,
   
   IconLogo,
   IconSoon,
