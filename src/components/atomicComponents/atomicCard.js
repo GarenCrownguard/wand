@@ -8,11 +8,11 @@ const useStyles = createUseStyles((props) => ({
   },
 }));
 
-const atomicText = (props) => {
+const atomicCard = (props) => {
   const { text, size } = props;
   const classes = useStyles(props);
 
   return <p className={classes.p}>{text}</p>;
 };
 
-export default atomicText;
+export default atomicCard;
