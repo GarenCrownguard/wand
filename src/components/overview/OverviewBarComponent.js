@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 const useStyles = createUseStyles((theme) => ({
   overviewBar: {
     background:
-      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+      "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)",
     borderRadius: 5,
     borderStyle: "solid",
     borderColor: "rgba(165, 239, 255, 0.2)",

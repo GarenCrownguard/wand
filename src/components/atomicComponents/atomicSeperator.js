@@ -1,18 +1,36 @@
 import React from "react";
+import { createUseStyles, useTheme } from "react-jss";
 
-import { createUseStyles } from "react-jss";
+import { IconVerticalseperator } from "assets/icons";
 
 const useStyles = createUseStyles((props) => ({
-  p: {
-    fontSize: props.size,
-  },
+  vertical: (props) => ({
+    borderRight: "1px solid #6f6c99",
+    alignSelf: 'center',
+    width: 1,
+    height: props.props.length ? parseFloat(props.props.length) : 135,
+    // margin top right bottom left
+    margin: props.props.margin ? parseFloat(props.props.margin) : "0 0 0 0",
+  }),
+  horizontal: (props) => ({
+    borderTop: "1px solid #6f6c99",
+    height: 1,
+    width: props.props.length ? parseFloat(props.props.length) : 135,
+    // margin top right bottom left
+    margin: props.props.margin ? parseFloat(props.props.margin) : "0 0 0 0",
+  }),
 }));
 
-const atomicSeperator = (props) => {
-  const { text, size } = props;
-  const classes = useStyles(props);
-  
-  return <p className={classes.p}>{text}</p>;
+const AtomicSeperator = (props) => {
+  const theme = useTheme();
+  const classes = useStyles({ props, theme });
+
+  return (
+    <>
+      {props.vertical && <div className={classes.vertical} />}
+      {props.horizontal && <div className={classes.horizontal} />}
+    </>
+  );
 };
 
-export default atomicSeperator;
+export default AtomicSeperator;

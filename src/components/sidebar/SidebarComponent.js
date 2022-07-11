@@ -34,7 +34,7 @@ function SidebarComponent() {
   const { push } = useHistory();
 
   const classes = useStyles();
-  const isMobile = window.innerWidth <= 1080;
+  const isMobile = window.innerWidth <= 450;
 
   // async function logout() {
   //   push(links.login);

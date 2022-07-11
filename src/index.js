@@ -5,6 +5,9 @@ import PrivateSection from './routes/PrivateSection'
 import "./fonts.css";
 import "./index.css";
 
+import { ThemeProvider } from 'react-jss';
+import Theme from 'resources/theme';
+
 // Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -12,10 +15,12 @@ import store from "./redux/store";
 // console.log(store.getState());
 
 ReactDOM.render(
+  <ThemeProvider theme={Theme}>
   <Provider store={store}>
       <Router>
         <PrivateSection />
       </Router>
-  </Provider>,
+  </Provider>
+  </ThemeProvider>,
   document.getElementById("root")
 );

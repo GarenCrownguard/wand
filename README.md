@@ -35,6 +35,31 @@ FrontEnd for Wand Investments project.
 11. yarn
 12. start git-bash
 
+#### React Jss Boiler Plate
+```js
+import React from "react";
+import { createUseStyles, useTheme } from "react-jss";
+
+const useStyles = createUseStyles((props) => ({
+  container: (props) => ({
+    ...props.theme.typography.atomicCard,
+    padding: props.props.padding
+      ? parseFloat(props.props.padding)
+      : props.theme.typography.atomicCard.padding,
+    minHeight: parseFloat(props.props.minHeight),
+  }),
+}));
+
+const atomicSeperator = (props) => {
+  const theme = useTheme();
+  const classes = useStyles({ props, theme });
+  
+  return <p className={classes.p}>{text}</p>;
+};
+
+export default atomicSeperator;
+```
+
 #### Wand inestments responsive design: 
 < 450 width -> mobile
 > 450 width -> tablet/ desktop

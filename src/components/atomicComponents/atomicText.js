@@ -1,18 +1,18 @@
 import React from "react";
+import { createUseStyles, useTheme } from "react-jss";
 
-import { createUseStyles } from "react-jss";
+const useStyles = createUseStyles({
+  span: (props) => ({
+    ...props.theme.typography.atomicText,
+    color: props.props.color,
+    fontSize: parseFloat(props.props.size),
+  }),
+});
 
-const useStyles = createUseStyles((props) => ({
-  p: {
-    fontSize: props.size,
-  },
-}));
-
-const atomicText = (props) => {
-  const { text, size } = props;
-  const classes = useStyles(props);
-
-  return <p className={classes.p}>{text}</p>;
+const AtomicText = (props) => {
+  const theme = useTheme();
+  const classes = useStyles({ props, theme });
+  return <span className={classes.span}>{props.text}</span>;
 };
 
-export default atomicText;
+export default AtomicText;
