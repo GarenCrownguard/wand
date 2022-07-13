@@ -41,7 +41,7 @@ function AccountComponent() {
 
   return (
     <Column>
-      aaa
+      Test Text
       <AtomicText text="bbbbb" size="29" color={theme.color.grey} />
       <AtomicText text="bbbbb" />
       <AtomicText
