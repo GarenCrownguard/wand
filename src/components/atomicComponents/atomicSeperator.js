@@ -1,8 +1,6 @@
 import React from "react";
 import { createUseStyles, useTheme } from "react-jss";
 
-import { IconVerticalseperator } from "assets/icons";
-
 const useStyles = createUseStyles((props) => ({
   vertical: (props) => ({
     borderRight: "1px solid #6f6c99",
@@ -14,6 +12,7 @@ const useStyles = createUseStyles((props) => ({
   }),
   horizontal: (props) => ({
     borderTop: "1px solid #6f6c99",
+    alignSelf: 'center',
     height: 1,
     width: props.props.length ? parseFloat(props.props.length) : 135,
     // margin top right bottom left

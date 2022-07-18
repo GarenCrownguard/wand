@@ -28,7 +28,7 @@ const typography = {
   atomicText: {
     fontFamily: "Azo Sans",
     fontStyle: "normal",
-    fontWeight: 500,
+    fontWeight: constants.fwtm500,
     fontSize: 19,
     letterSpacing: "0.02em",
     color: color.white,

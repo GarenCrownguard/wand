@@ -3,17 +3,16 @@ import { createUseStyles, useTheme } from 'react-jss';
 
 const buttonStyle = createUseStyles({
     button: (props) => ({
-        color: props.props.bkgColor,
-        background: props.theme.color.red,
+        background: props.props.bkgColor,
         padding: '5px 15px',
         fontWeight: 'bold',
     }),
     label: (props) => ({
-        color: props.color,
+        color: props.props.color,
     }),
 });
 
-const Button = (props) => {
+const AtomicButton = (props) => {
     const { label, value, bkgColor, color, isOp } = props;
 
     const theme = useTheme();
@@ -31,4 +30,4 @@ const Button = (props) => {
     );
 };
 
-export default Button;
+export default AtomicButton;

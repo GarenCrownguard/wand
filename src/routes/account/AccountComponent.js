@@ -5,8 +5,8 @@ import { UserScepterHoldingsComponent } from "components/useraccount";
 import { Column, Row } from "simple-flexbox";
 import { createUseStyles } from "react-jss";
 
-import AtomicText from "components/atomicComponents/atomicText";
-import Button from "components/atomicComponents/atomicButton";
+import StatsCardComponent from "components/cards/StatsCardComponent";
+
 import theme from "resources/theme";
 import {
   prettifyGrowthPercentage,
@@ -14,8 +14,9 @@ import {
   prettifytolocalstring,
 } from "resources/utilities";
 
+import AtomicText from "components/atomicComponents/atomicText";
+import AtomicButton from "components/atomicComponents/atomicButton";
 import AtomicCard from "components/atomicComponents/atomicCard";
-import StatsCardComponent from "components/cards/StatsCardComponent";
 import AtomicSeperator from "components/atomicComponents/atomicSeperator";
 
 const useStyles = createUseStyles(() => ({
@@ -84,10 +85,10 @@ function AccountComponent() {
           value={prettifyamounts(900000000)}
         />
       </AtomicCard>
-      <Button
+      <AtomicButton
         label={"7qqqq"}
         value={"7aaa"}
-        bkgColor={"#000000"}
+        bkgColor={"#FFFFFF"}
         color="#fff"
         isOp={false}
       />
