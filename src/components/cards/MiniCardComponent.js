@@ -21,11 +21,11 @@ const useStyles = createUseStyles((theme) => ({
     borderStyle: "solid",
     borderColor: "rgba(165, 239, 255, 0.2)",
     padding: 5,
-    marginRight:0,
+    marginRight: 0,
     marginBottom: 17,
     maxHeight: 111,
     // padding: 28,
-
+    // .flex-grid-item:nth-child(11) {background-color: #85144b; color: white;}
     "@media (min-width: 450px)": {
       // desktop
       marginBottom: 20,
@@ -69,7 +69,6 @@ const useStyles = createUseStyles((theme) => ({
 }));
 
 function MiniCardComponent({ className = "", title, value }) {
-  
   const classes = useStyles();
   const composedClassName = [classes.container, className].join(" ");
   return (

@@ -13,7 +13,7 @@ import iconDocs from "./icon-docs";
 import iconGovernance from "./icon-governance";
 import iconLending from "./icon-lending";
 import iconSwapSidebar from "./icon-swap-sidebar";
-import iconVote from "./icon-vote";
+import iconVote from "./Icon-vote";
 
 export {
   IconBurger,
