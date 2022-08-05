@@ -1,8 +1,8 @@
 import React from "react";
 
-export default () => (
+const IconBurger = () => (
   <svg
-    width="23"
+    width="20"
     height="17"
     viewBox="0 0 23 17"
     fill="none"
@@ -34,3 +34,5 @@ export default () => (
     />
   </svg>
 );
+
+export default IconBurger;

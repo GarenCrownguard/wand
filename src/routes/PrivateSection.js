@@ -44,15 +44,12 @@ function PrivateSection() {
         variant={variantSideBar.variant}
         onClose={toggleSidebar}
       />
-      <Box w="100%" h="100vh" top={0} p="40px">
-        <Flex
-          h="96px"
-          top="20px"
-          flexDirection="column"
-          alignItems="flex-end"
-        >
-          <Header />
-        </Flex>
+      <Box w="100%" h="100vh" top={0} p="35px">
+        <Header
+          isMobile={variantSideBar.burgerButton}
+          onBurgerButtonClick={toggleSidebar}
+        />
+
         {variantSideBar.burgerButton && (
           <>
             <Button onClick={toggleSidebar} />

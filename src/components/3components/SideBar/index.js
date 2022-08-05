@@ -9,6 +9,7 @@ import {
   DrawerBody,
   DrawerContent,
   DrawerFooter,
+  Flex,
 } from "@chakra-ui/react";
 
 import SideBar1Logo from "components/2modular/SideBar1Logo";
@@ -30,7 +31,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
       boxShadow="20px 0px 250px 10px rgba(234, 58, 246, 0.4)"
       zIndex={10}
     >
-      <Box pt="87px" pb="112px" ml="25px">
+      <Box pt="67px" pb="112px" ml="35px">
         <SideBar1Logo />
       </Box>
       <SideBar2Menu onClick={onClose} />
@@ -39,16 +40,16 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
       </Box>
     </Box>
   ) : (
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose} zIndex={10}>
+    <Drawer isOpen={isOpen} placement="left" onClose={onClose} zIndex={10}>
       <DrawerOverlay bg="tranparent" backdropFilter="auto" backdropBlur="20px">
         <DrawerContent
           bg="tranparent"
           backdropFilter="auto"
           backdropBlur="20px"
         >
-          <DrawerCloseButton />
-          <DrawerHeader>
+          <DrawerHeader pt="65px" pb="100px" ml="15px">
             <SideBar1Logo />
+            <DrawerCloseButton size="lg" mt="55px" />
           </DrawerHeader>
           <DrawerBody>
             <SideBar2Menu onClick={onClose} />

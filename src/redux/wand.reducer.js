@@ -24,7 +24,7 @@ const initialState = {
     },
   ],
   localwalletstats: [{
-    walletAddress: "0x9326C9c0214FFC973dA3bd13fF95c297bd0A1234",
+    walletAddress: null,
     tokenlist: ["sceptertoken","BATON","USDC"],
     sceptertoken:{
       name: "SCEPTER",
@@ -58,6 +58,12 @@ const postReducer = (currentState = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case actions.UPDATE_ADDRESS:
+      return {
+        stats: [...currentState.stats],
+        localwalletstats: [{ walletAddress: payload.address, ...currentState.localwalletstats[0] }],
+        investmentList: [...currentState.investmentList],
+      };
     case actions.GET_FE_STATS:
       // This is the new State after the action is performed.
       return {

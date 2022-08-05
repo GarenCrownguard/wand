@@ -1,6 +1,6 @@
 // https://stackoverflow.com/a/61578718
 
-import axios from "axios";
+// import axios from "axios";
 
 // Redux
 import store from "redux/store";
@@ -26,6 +26,17 @@ export const GET_TRANSACTION_LIST = async (props) => {
     type: actions.GET_TRANSACTION_LIST,
     payload: {
       userId: userId,
+    },
+  });
+};
+
+export const UPDATE_ADDRESS = async (props) => {
+  const { walletAddress } = props;
+  console.log(walletAddress);
+  store.dispatch({
+    type: actions.UPDATE_ADDRESS,
+    payload: {
+      address: walletAddress,
     },
   });
 };
