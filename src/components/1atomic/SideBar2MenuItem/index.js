@@ -10,12 +10,11 @@ const buttonstyle = {
   size: "lg",
   fontSize: "lg",
   fontWeight: 400,
-  borderRadius: "0px",
-//   w: "100%",
+  w: "100%",
   pl: "25px",
+  pt: "10px",
+  pb: "15px",
   _hover: {
-    borderColor: "white",
-    bg: "rgba(221, 226, 255, 0.08)",
     color: "white",
   },
 };
@@ -26,19 +25,28 @@ const SideBar2MenuItem = ({ icon: Icon, onClick, title, soon }) => {
       sx={buttonstyle}
       onClick={onClick}
       leftIcon={<Icon fill="currentColor" />}
-      rightIcon={<IconSoon />}
-      isDisabled
+      variant="link"
+      display="flex"
+      justifyContent="flex-start"
+      iconSpacing="15px"
     >
       {title}
+      <Box mr="30px" ml="auto">
+        <IconSoon />
+      </Box>
     </Button>
   ) : (
-    <Button
-      sx={buttonstyle}
-      onClick={onClick}
-      leftIcon={<Icon fill="currentColor" />}
-    >
-      {title}
-    </Button>
+    <Box>
+      <Button
+        sx={buttonstyle}
+        onClick={onClick}
+        leftIcon={<Icon fill="currentColor" />}
+        variant="link"
+        iconSpacing="15px"
+      >
+        {title}
+      </Button>
+    </Box>
   );
 };
 

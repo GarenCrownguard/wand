@@ -33,6 +33,9 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
         <SideBar1Logo />
       </Box>
       <SideBar2Menu onClick={onClose} />
+      <Box ml="25px" position="fixed" bottom={0} left={0}>
+        <SideBar3Footer />
+      </Box>
     </Box>
   ) : (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -49,7 +52,9 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
           <DrawerBody>
             <SideBar2Menu onClick={onClose} />
           </DrawerBody>
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter>
+            <SideBar3Footer />
+          </DrawerFooter>
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>

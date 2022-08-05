@@ -1,7 +1,7 @@
 import React from "react";
 
-export default (props) => (
-  <svg
+const icon1dashboard = (props) => (
+    <svg
     width="14"
     height="14"
     viewBox="0 0 14 14"
@@ -14,7 +14,7 @@ export default (props) => (
       width="4"
       height="4"
       rx="1.4"
-      fill="#F5F4F0"
+      fill={props.fill}
     />
     <rect
       x="0.105225"
@@ -22,7 +22,7 @@ export default (props) => (
       width="4"
       height="4"
       rx="1.4"
-      fill="#F5F4F0"
+      fill={props.fill}
     />
     <rect
       x="6.10522"
@@ -30,7 +30,7 @@ export default (props) => (
       width="4"
       height="4"
       rx="1.4"
-      fill="#F5F4F0"
+      fill={props.fill}
     />
     <rect
       x="6.10522"
@@ -38,7 +38,9 @@ export default (props) => (
       width="7"
       height="7"
       rx="1.4"
-      fill="#F5F4F0"
+      fill={props.fill}
     />
   </svg>
 );
+
+export default icon1dashboard;

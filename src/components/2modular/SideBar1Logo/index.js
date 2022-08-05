@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconLogo } from "assets/icons";
+import IconLogo from "./icon-logo";
 
 const SideBar1Logo = () => {
     return (

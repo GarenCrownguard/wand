@@ -19,24 +19,6 @@ import SideBar from "components/3components/SideBar";
 // Redux
 import { connect } from "react-redux";
 
-// const useStyles = createUseStyles({
-//   container: {
-//     height: "100vh",
-//     minHeight: 850,
-//   },
-//   mainBlock: {
-//     marginLeft: 255,
-//     padding: 30,
-//     "@media (max-width: 450px)": {
-//       marginLeft: 0,
-//     },
-//   },
-//   contentBlock: {
-//     marginTop: 54,
-//     height: 'auto',
-//   },
-// });
-
 function PrivateSection() {
   // const classes = useStyles();
 
