@@ -1,47 +1,96 @@
-import React from "react";
-import { createUseStyles } from "react-jss";
-import { Column, Row } from "simple-flexbox";
-import { SidebarComponent, SidebarContext } from "components/sidebar";
-import HeaderComponent from "components/header/HeaderComponent";
-import PrivateRoutes from "./PrivateRoutes";
+import React, { useState } from "react";
+// import { createUseStyles } from "react-jss";
+
+import {
+  useDisclosure,
+  Flex,
+  useBreakpointValue,
+  Button,
+  Box,
+} from "@chakra-ui/react";
+
+import SideBar from "components/3components/SideBar";
+
+// import { Column, Row } from "simple-flexbox";
+// import { SidebarComponent, SidebarContext } from "components/sidebar";
+// import HeaderComponent from "components/header/HeaderComponent";
+// import PrivateRoutes from "./PrivateRoutes";
 
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-const useStyles = createUseStyles({
-  container: {
-    height: "100vh",
-    minHeight: 850,
-  },
-  mainBlock: {
-    marginLeft: 255,
-    padding: 30,
-    "@media (max-width: 450px)": {
-      marginLeft: 0,
-    },
-  },
-  contentBlock: {
-    marginTop: 54,
-    height: 'auto',
-  },
-});
+// const useStyles = createUseStyles({
+//   container: {
+//     height: "100vh",
+//     minHeight: 850,
+//   },
+//   mainBlock: {
+//     marginLeft: 255,
+//     padding: 30,
+//     "@media (max-width: 450px)": {
+//       marginLeft: 0,
+//     },
+//   },
+//   contentBlock: {
+//     marginTop: 54,
+//     height: 'auto',
+//   },
+// });
 
 function PrivateSection() {
-  
-  const classes = useStyles();
+  // const classes = useStyles();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const variantSideBar = useBreakpointValue({
+    base: { size: "base", variant: "drawer", burgerButton: true },
+    md: { size: "md", variant: "sidebar", burgerButton: false },
+  });
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
+  console.log(
+    `[PrivateSection]: Size of the screen is: ${variantSideBar.size}`
+  );
 
   return (
-    <SidebarContext>
-      <Row className={classes.container}>
-        <SidebarComponent />
-        <Column flexGrow={1} className={classes.mainBlock}>
-          <HeaderComponent />
-          <div className={classes.contentBlock}>
-            <PrivateRoutes />
-          </div>
-        </Column>
-      </Row>
-    </SidebarContext>
+    <>
+      <SideBar
+        isOpen={isSidebarOpen}
+        variant={variantSideBar.variant}
+        onClose={toggleSidebar}
+      />
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        h="100vh"
+        bg="#091F2C"
+      >
+        {variantSideBar.burgerButton && (
+          <>
+            <Button onClick={toggleSidebar} />
+          </>
+        )}
+
+        {/* sx={{ filter: "blur(8px)" }} */}
+
+        {/* <ConnectButton handleOpenModal={onOpen} />
+        <AccountModal isOpen={isOpen} onClose={onClose} /> */}
+      </Flex>
+    </>
+    // <SidebarContext>
+    //   <Row className={classes.container}>
+    //     <SidebarComponent />
+    //     <Column flexGrow={1} className={classes.mainBlock}>
+    //       <HeaderComponent />
+    //       <div className={classes.contentBlock}>
+    //         <PrivateRoutes />
+    //       </div>
+    //     </Column>
+    //   </Row>
+    // </SidebarContext>
   );
 }
 
