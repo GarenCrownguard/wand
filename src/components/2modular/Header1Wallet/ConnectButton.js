@@ -30,7 +30,7 @@ export default function ConnectButton({ handleOpenModal }) {
       toast({
         title: "No wallet detected!",
         status: "warning",
-        duration: 2000,
+        duration: 1000,
         position: "bottom-right",
         containerStyle: {
           width: "50px",
@@ -58,7 +58,7 @@ export default function ConnectButton({ handleOpenModal }) {
       py="0"
     >
       <Box px="3">
-        <Text color="white" fontSize="md">
+        <Text color="white" fontSize="md" fontWeight="light">
           {SPTRbalance && parseFloat(SPTRbalance).toFixed(3)} SPTR
         </Text>
       </Box>
@@ -77,7 +77,7 @@ export default function ConnectButton({ handleOpenModal }) {
         px={3}
         height="38px"
       >
-        <Text color="white" fontSize="md" fontWeight="medium" mr="2">
+        <Text color="white" fontSize="md" fontWeight="light" mr="2">
           {account &&
             `${account.slice(0, 6)}...${account.slice(
               account.length - 4,
@@ -98,9 +98,9 @@ export default function ConnectButton({ handleOpenModal }) {
         onClick={handleConnectWallet}
         bg="transparent"
         color="white"
-        size="sm"
+        size="md"
         fontSize="md"
-        fontWeight="medium"
+        fontWeight="light"
         leftIcon={<IconWallet fill="currentColor" />}
         borderRadius="xl"
         border="1px solid transparent"

@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import SideBar from "components/3components/SideBar";
+import Header from "components/3components/Header";
 
 // import { Column, Row } from "simple-flexbox";
 // import { SidebarComponent, SidebarContext } from "components/sidebar";
@@ -43,7 +44,22 @@ function PrivateSection() {
         variant={variantSideBar.variant}
         onClose={toggleSidebar}
       />
-      <Flex
+      <Box w="100%" h="100vh" top={0} p="40px">
+        <Flex
+          h="96px"
+          top="20px"
+          flexDirection="column"
+          alignItems="flex-end"
+        >
+          <Header />
+        </Flex>
+        {variantSideBar.burgerButton && (
+          <>
+            <Button onClick={toggleSidebar} />
+          </>
+        )}
+      </Box>
+      {/* <Flex
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
@@ -55,12 +71,7 @@ function PrivateSection() {
             <Button onClick={toggleSidebar} />
           </>
         )}
-
-        {/* sx={{ filter: "blur(8px)" }} */}
-
-        {/* <ConnectButton handleOpenModal={onOpen} />
-        <AccountModal isOpen={isOpen} onClose={onClose} /> */}
-      </Flex>
+      </Flex> */}
     </>
     // <SidebarContext>
     //   <Row className={classes.container}>

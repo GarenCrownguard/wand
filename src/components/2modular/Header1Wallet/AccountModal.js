@@ -28,7 +28,7 @@ export default function AccountModal({ isOpen, onClose }) {
         toast({
           title: "No wallet detected!",
           status: "warning",
-          duration: 2000,
+          duration: 1000,
           position: "bottom-right",
           containerStyle: {
             width: "50px",

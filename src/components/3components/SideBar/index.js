@@ -28,6 +28,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
       bg="#06141D"
       opacity={0.98}
       boxShadow="20px 0px 250px 10px rgba(234, 58, 246, 0.4)"
+      zIndex={10}
     >
       <Box pt="87px" pb="112px" ml="25px">
         <SideBar1Logo />
@@ -38,7 +39,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
       </Box>
     </Box>
   ) : (
-    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} zIndex={10}>
       <DrawerOverlay bg="tranparent" backdropFilter="auto" backdropBlur="20px">
         <DrawerContent
           bg="tranparent"
