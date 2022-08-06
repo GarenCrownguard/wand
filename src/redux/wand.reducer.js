@@ -36,7 +36,7 @@ const initialState = {
     },
     usdctoken:{
       name: "USDC",
-      balance: 2000000
+      balance: 20000000
     },
     
   }],
