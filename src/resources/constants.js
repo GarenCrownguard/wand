@@ -1,6 +1,6 @@
 /* Typography */
 
-export const fontFamily = 11;
+export const fontFamily = 110;
 export const fontSize = 24;
 
 
