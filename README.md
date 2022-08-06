@@ -2,6 +2,8 @@
 
 FrontEnd for Wand Investments project.
 
+git config --global user.name "Garen Crowngaurd"
+git config --global user.email 0xgaren@protonmail.com
 # Metamask
 
 1. https://github.com/MetaMask/test-dapp Test: https://metamask.github.io/test-dapp/
