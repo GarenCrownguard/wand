@@ -8,7 +8,7 @@ const typography = {
   wt700: 700,
   fsizesmall: 16,
   fsizemedium: 19,
-  fsizebig: 26
+  fsizebig: 26,
 };
 
 const color = {
@@ -21,7 +21,7 @@ const color = {
   grey: "#b1afcd",
 };
 
-export default extendTheme({
+const theme = extendTheme({
   breakpoints: {
     sm: "320px",
     md: "768px",
@@ -42,6 +42,45 @@ export default extendTheme({
         color: color.white,
       },
     }),
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: "bold", // Normally, it is "semibold"
+      },
+      sizes: {
+        xl: {
+          h: "56px",
+          fontSize: "lg",
+          px: "32px",
+        },
+      },
+      // 3. We can add a new visual variant
+      variants: {
+        "with-shadow": {
+          bg: "red.400",
+          boxShadow: "0 0 2px 2px #efdfde",
+        },
+        sm: {
+          bg: "teal.500",
+          fontSize: "md",
+        },
+      },
+      defaultProps: {
+        size: "lg", // default is md
+        variant: "sm", // default is solid
+        colorScheme: "green", // default is gray
+      },
+    },
+    Text: {
+      variants: {
+        "investment-heading-text": {
+          color: "white",
+          fontWeight: 700,
+          fontSize: "17px"
+        },
+      },
+    },
   },
   // typography: {
   //   atomicText: {
@@ -92,3 +131,5 @@ export default extendTheme({
   //   },
   // },
 });
+
+export default theme;

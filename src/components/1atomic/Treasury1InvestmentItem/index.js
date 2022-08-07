@@ -15,7 +15,7 @@ const Treasury1InvestmentItem = (props) => {
         transactionLink: 'https://snowtrace.io/transaction/0x2984795872635885'   
     */
   const {
-    chain,
+    // chain,
     protocolName,
     protocolUrl,
     investmentAmount,
@@ -26,7 +26,7 @@ const Treasury1InvestmentItem = (props) => {
 
   return (
     <Tr>
-      <Td>{chain}</Td>
+      {/* <Td>{chain}</Td> */}
       <Td>
         <Link color="teal.500" href={protocolUrl} isExternal>
           {protocolName}

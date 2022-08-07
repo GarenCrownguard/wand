@@ -61,7 +61,7 @@ function PrivateSection() {
           onBurgerButtonClick={toggleSidebar}
         />
         <MainDisplayBlock isMobile={variantScreenSize.isMobile}>
-          {/* <PrivateRoutes /> */}
+          <PrivateRoutes />
         </MainDisplayBlock>
 
         {/* {variantSideBar.burgerButton && (
