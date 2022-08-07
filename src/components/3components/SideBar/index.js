@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
       boxShadow="20px 0px 250px 10px rgba(234, 58, 246, 0.4)"
       zIndex={10}
     >
-      <Box pt="67px" pb="112px" ml="35px">
+      <Box pt="67px" pb="30px" ml="35px">
         <SideBar1Logo />
       </Box>
       <SideBar2Menu onClick={onClose} />
@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
           backdropFilter="auto"
           backdropBlur="20px"
         >
-          <DrawerHeader pt="65px" pb="100px" ml="15px">
+          <DrawerHeader pt="65px" pb="20px" ml="15px">
             <SideBar1Logo />
             <DrawerCloseButton size="lg" mt="55px" />
           </DrawerHeader>

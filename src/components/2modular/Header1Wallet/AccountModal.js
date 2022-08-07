@@ -58,7 +58,7 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size="sm">
       <ModalOverlay />
       <ModalContent
         background="gray.900"
@@ -67,7 +67,7 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
         borderColor="gray.700"
         borderRadius="3xl"
       >
-        <ModalHeader color="white" px={4} fontSize="lg" fontWeight="medium">
+        <ModalHeader color="white" px={4} fontSize="md" fontWeight="medium">
           Account
         </ModalHeader>
         <ModalCloseButton
@@ -120,7 +120,7 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
               </Icon>
               <Text
                 color="white"
-                fontSize="xl"
+                fontSize="lg"
                 fontWeight="semibold"
                 ml="2"
                 lineHeight="1.1"

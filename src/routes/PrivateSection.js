@@ -11,11 +11,12 @@ import {
 
 import SideBar from "components/3components/SideBar";
 import Header from "components/3components/Header";
+import MainDisplayBlock from "components/3components/MainDisplayBlock";
 
 // import { Column, Row } from "simple-flexbox";
 // import { SidebarComponent, SidebarContext } from "components/sidebar";
 // import HeaderComponent from "components/header/HeaderComponent";
-// import PrivateRoutes from "./PrivateRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 // Redux
 import { connect } from "react-redux";
@@ -27,34 +28,47 @@ function PrivateSection() {
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const variantSideBar = useBreakpointValue({
-    base: { size: "base", variant: "drawer", burgerButton: true },
-    md: { size: "md", variant: "sidebar", burgerButton: false },
+  const variantScreenSize = useBreakpointValue({
+    base: {
+      size: "base",
+      variant: "drawer",
+      burgerButton: true,
+      isMobile: true,
+    },
+    md: {
+      size: "md",
+      variant: "sidebar",
+      burgerButton: false,
+      isMobile: false,
+    },
   });
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
   console.log(
-    `[PrivateSection]: Size of the screen is: ${variantSideBar.size}`
+    `[PrivateSection]: Size of the screen is: ${variantScreenSize.size}`
   );
 
   return (
     <>
       <SideBar
         isOpen={isSidebarOpen}
-        variant={variantSideBar.variant}
+        variant={variantScreenSize.variant}
         onClose={toggleSidebar}
       />
-      <Box w="100%" h="100vh" top={0} p="35px">
+      <Box w="100%" h="100vh" top={0} p={variantScreenSize.isMobile ? "20px" : "35px"}>
         <Header
-          isMobile={variantSideBar.burgerButton}
+          isMobile={variantScreenSize.isMobile}
           onBurgerButtonClick={toggleSidebar}
         />
+        <MainDisplayBlock isMobile={variantScreenSize.isMobile}>
+          {/* <PrivateRoutes /> */}
+        </MainDisplayBlock>
 
-        {variantSideBar.burgerButton && (
+        {/* {variantSideBar.burgerButton && (
           <>
             <Button onClick={toggleSidebar} />
           </>
-        )}
+        )} */}
       </Box>
       {/* <Flex
         flexDirection="column"

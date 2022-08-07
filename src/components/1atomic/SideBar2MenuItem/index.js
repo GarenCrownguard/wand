@@ -13,9 +13,17 @@ const buttonstyle = {
   w: "100%",
   pl: "25px",
   pt: "10px",
-  pb: "15px",
+  pb: "10px",
   _hover: {
     color: "white",
+  },
+  _active: {
+    color: "white",
+    borderColor: "white",
+  },
+  _visited: {
+    color: "white",
+    borderColor: "white",
   },
 };
 

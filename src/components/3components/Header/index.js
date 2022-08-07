@@ -13,8 +13,7 @@ const Header = ({ isMobile, onBurgerButtonClick }) => {
   // console.log(isSidebarOpen);
   return (
     <Flex
-      h="96px"
-      top="20px"
+      h={isMobile ? "30px" : "96px"}
       flexDirection="row"
       alignContent="flex-start"
       alignItems="center"
