@@ -1,8 +1,5 @@
 # wand
 
-
-  // "homepage": "https://GarenCrownguard.github.io/",
-
 FrontEnd for Wand Investments project.
 
 git config --global user.name "Garen Crowngaurd"

@@ -2,7 +2,7 @@
   "name": "wand-investments",
   "version": "1.0.0",
   "private": true,
-  "homepage": "/",
+  "homepage": "https://GarenCrownguard.github.io/",
   "dependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
