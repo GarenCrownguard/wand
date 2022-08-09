@@ -6,13 +6,13 @@ import IconWallet from "./icon-wallet";
 import IconSwap from "./icon-swap";
 import IconVerticalseperator from "./icon-verticalseperator";
 
-import iconAccount from "./icon-account";
-import iconBridge from "./icon-bridge";
-import iconDashboard from "./icon-dashboard";
-import iconDocs from "./icon-docs";
-import iconGovernance from "./icon-governance";
-import iconLending from "./icon-lending";
-import iconSwapSidebar from "./icon-swap-sidebar";
+import iconAccount from "./Icon-account";
+import iconBridge from "./Icon-bridge";
+import iconDashboard from "./Icon-dashboard";
+import iconDocs from "./Icon-docs";
+import iconGovernance from "./Icon-governance";
+import iconLending from "./Icon-lending";
+import iconSwapSidebar from "./Icon-swap-sidebar";
 import iconVote from "./Icon-vote";
 
 export {
