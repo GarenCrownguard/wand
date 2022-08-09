@@ -3,7 +3,7 @@
 // import axios from "axios";
 
 // Redux
-import store from "redux/store";
+import store from "../redux/store";
 
 import * as actions from '../redux/action.types';
 

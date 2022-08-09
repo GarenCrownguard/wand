@@ -12,9 +12,9 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-import SideBar1Logo from "components/2modular/SideBar1Logo";
-import SideBar2Menu from "components/2modular/SideBar2Menu";
-import SideBar3Footer from "components/2modular/SideBar3Footer";
+import SideBar1Logo from "../../2modular/SideBar1Logo";
+import SideBar2Menu from "../../2modular/SideBar2Menu";
+import SideBar3Footer from "../../2modular/SideBar3Footer";
 
 const Sidebar = ({ isOpen, variant, onClose }) => {
   return variant === "sidebar" ? (

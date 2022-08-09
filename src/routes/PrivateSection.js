@@ -9,9 +9,9 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import SideBar from "components/3components/SideBar";
-import Header from "components/3components/Header";
-import MainDisplayBlock from "components/3components/MainDisplayBlock";
+import SideBar from "../components/3components/SideBar";
+import Header from "../components/3components/Header";
+import MainDisplayBlock from "../components/3components/MainDisplayBlock";
 
 // import { Column, Row } from "simple-flexbox";
 // import { SidebarComponent, SidebarContext } from "components/sidebar";
@@ -63,26 +63,8 @@ function PrivateSection() {
         <MainDisplayBlock isMobile={variantScreenSize.isMobile}>
           <PrivateRoutes />
         </MainDisplayBlock>
-
-        {/* {variantSideBar.burgerButton && (
-          <>
-            <Button onClick={toggleSidebar} />
-          </>
-        )} */}
       </Box>
-      {/* <Flex
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        h="100vh"
-        bg="#091F2C"
-      >
-        {variantSideBar.burgerButton && (
-          <>
-            <Button onClick={toggleSidebar} />
-          </>
-        )}
-      </Flex> */}
+
     </>
     // <SidebarContext>
     //   <Row className={classes.container}>

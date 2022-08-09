@@ -1,24 +1,24 @@
 import React, { Suspense, lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import links from "resources/links";
-import LoadingComponent from "components/loading";
+import links from "../resources/links";
+import LoadingComponent from "../components/loading";
 
-const DashboardComponent = lazy(() => import("./dashboard"));
-const TicketComponent = lazy(() => import("./tickets"));
-const AccountComponent = lazy(() => import("./account"));
-const SwapComponent = lazy(() => import("./swap"));
+// const DashboardComponent = lazy(() => import("./dashboard"));
+// const TicketComponent = lazy(() => import("./tickets"));
+// const AccountComponent = lazy(() => import("./account"));
+// const SwapComponent = lazy(() => import("./swap"));
 
-const TreasuriesPage = lazy(() => import("components/4pages/TreasuriesPage"));
+const TreasuriesPage = lazy(() => import("../components/4pages/TreasuriesPage"));
 
 function PrivateRoutes() {
   return (
     <Suspense fallback={<LoadingComponent loading />}>
       <Switch>
-        <Route exact path={links.dashboard} component={DashboardComponent} />
+        {/* <Route exact path={links.dashboard} component={DashboardComponent} />
         <Route exact path={links.account} component={AccountComponent} />
         <Route exact path={links.swap} component={SwapComponent} />
         <Route exact path={links.bridge} render={() => <div>Bridge</div>} />
-        <Route exact path={links.lending} component={TicketComponent} />
+        <Route exact path={links.lending} component={TicketComponent} /> */}
         <Route exact path={links.treasuries} component={TreasuriesPage} />
         <Route
           exact

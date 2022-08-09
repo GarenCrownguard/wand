@@ -2,10 +2,10 @@ import React from "react";
 
 import { VStack, Box, Divider } from "@chakra-ui/react";
 
-import SideBar2MenuItem from "components/1atomic/SideBar2MenuItem";
+import SideBar2MenuItem from "../../1atomic/SideBar2MenuItem";
 import { useHistory } from "react-router-dom";
-import links from "resources/links";
-import { convertSlugToUrl } from "resources/utilities";
+import links from "../../../resources/links";
+import { convertSlugToUrl } from "../../../resources/utilities";
 
 import {
   Icon1dashboard,

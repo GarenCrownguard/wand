@@ -5,8 +5,6 @@ import PrivateSection from './routes/PrivateSection'
 import "./fonts.css";
 import "./index.css";
 
-import { ThemeProvider } from 'react-jss';
-import Theme from 'resources/theme';
 import { ChakraProvider } from "@chakra-ui/react";
 import ChakraTheme from "./styles"
 // Redux

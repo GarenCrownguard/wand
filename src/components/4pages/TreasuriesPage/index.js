@@ -1,6 +1,6 @@
 import React from "react";
 
-import Treasury1InvestmentTable from "components/2modular/Treasury1InvestmentTable";
+import Treasury1InvestmentTable from "../../2modular/Treasury1InvestmentTable";
 
 const TreasuriesPage = () => {
   return (
