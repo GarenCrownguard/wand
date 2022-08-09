@@ -26,7 +26,7 @@ const links = {
 
 
     /* wand-investments */
-    homepage: '/',
+    homepage: '/dashboard',
 
     /* Footer */
     terms_conditions:'',

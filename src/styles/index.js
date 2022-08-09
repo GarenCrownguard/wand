@@ -23,8 +23,7 @@ const color = {
 
 const theme = extendTheme({
   breakpoints: {
-    sm: "320px",
-    md: "768px",
+    md: "770px",
     lg: "1024px",
     xl: "1440px",
     "2xl": "1536px",
@@ -44,92 +43,53 @@ const theme = extendTheme({
     }),
   },
   components: {
-    Button: {
-      baseStyle: {
-        fontWeight: "bold", // Normally, it is "semibold"
-      },
-      sizes: {
-        xl: {
-          h: "56px",
-          fontSize: "lg",
-          px: "32px",
-        },
-      },
-      // 3. We can add a new visual variant
-      variants: {
-        "with-shadow": {
-          bg: "red.400",
-          boxShadow: "0 0 2px 2px #efdfde",
-        },
-        sm: {
-          bg: "teal.500",
-          fontSize: "md",
-        },
-      },
-      defaultProps: {
-        size: "lg", // default is md
-        variant: "sm", // default is solid
-        colorScheme: "green", // default is gray
-      },
-    },
     Text: {
+      baseStyle: {
+        letterSpacing: "0.02em",
+        fontFamily: typography.fontFamily,
+        fontStyle: "normal",
+        fontSize: 19,
+        color: color.white,
+      },
       variants: {
         "investment-heading-text": {
           color: "white",
           fontWeight: 700,
-          fontSize: "17px"
+          fontSize: "17px",
+        },
+        title: {
+          color: "#B1AFCD",
+          mb: "6px",
+          fontSize: 12,
+          textAlign: "center",
+        },
+        value: {
+          color: "#FFFFFF",
+          fontWeight: "700",
+          fontSize: 24,
+          lineHeight: "29px",
+          textAlign: "center",
+        },
+        positiveGrowth: {
+          fontWeight: 500,
+          fontSize: 12,
+          marginLeft: "px",
+          color: "#2ae0bf",
+        },
+        negativeGrowth: {
+          fontWeight: 500,
+          fontSize: 12,
+          marginLeft: "px",
+          color: "#AE3C51",
         },
       },
     },
+    Divider: {
+      baseStyle: {
+        borderColor: "#6f6c99",
+      },
+    },
   },
-  // typography: {
-  //   atomicText: {
-  //     fontStyle: typography.fontStyle,
-  //     fontWeight: typography.wt500,
-  //     fontSize: typography.fsizemedium,
-  //     letterSpacing: "0.02em",
-  //     color: color.white,
-  //   },
-  //   atomicCard: {
-  //     // background: "rgb(165,239,255)",
-  //     // background:
-  //     //   "-moz-radial-gradient(circle, rgba(165,239,255,0.2024160005799195) 0%, rgba(110,191,244,0.2) 82%, rgba(70,144,212,0.2) 100%)",
-  //     // background:
-  //     //   "-webkit-radial-gradient(circle, rgba(165,239,255,0.2024160005799195) 0%, rgba(110,191,244,0.2) 82%, rgba(70,144,212,0.2) 100%)",
-  //     // background:
-  //     //   "radial-gradient(circle, rgba(165,239,255,0.2024160005799195) 0%, rgba(110,191,244,0.2) 82%, rgba(70,144,212,0.2) 100%)",
-  //     // filter:
-  //     //   'progid:DXImageTransform.Microsoft.gradient(startColorstr="#a5efff",endColorstr="#4690d4",GradientType=1)',
-  //     background:
-  //       "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)",
-  //     borderRadius: 5,
-  //     padding: 31,
-  //     border: "2px solid rgba(165, 239, 255, 0.2)",
-  //   },
-  //   title: {
-  //     fontStyle: "normal",
-  //     fontWeight: 700,
-  //     fontSize: 26,
-  //     letterSpacing: "0.02em",
-  //     marginTop: 60,
-  //     marginBottom: 30,
-  //     // letterSpacing: 0.2,
-  //   },
-  //   smallgreytitle: {
-  //     color: "#B1AFCD",
-  //     marginBottom: 6,
-  //     fontSize: 12,
-  //     textAlign: "center",
-  //   },
-  //   boldamountvalue: {
-  //     color: "#FFFFFF",
-  //     fontWeight: "700",
-  //     fontSize: 24,
-  //     letterSpacing: "0.02em",
-  //     lineHeight: "29px",
-  //     textAlign: "center",
-  //   },
-  // },
 });
 
 export default theme;
