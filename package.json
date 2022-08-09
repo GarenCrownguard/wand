@@ -2,10 +2,10 @@
   "name": "wand-investments",
   "version": "1.0.0",
   "private": true,
+  "author": "Garen Crowngaurd",
   "homepage": "https://GarenCrownguard.github.io/",
+  "description": "Dapp for Wand Investments",
   "dependencies": {
-    "@babel/core": "^7.18.10",
-    "@babel/preset-env": "^7.18.10",
     "@chakra-ui/icons": "^2.0.4",
     "@chakra-ui/react": "^2.2.4",
     "@emotion/react": "^11.10.0",
@@ -28,10 +28,7 @@
     "react-svg-line-chart": "^2.0.1",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
-    "simple-flexbox": "^2.3.1",
-    "webpack": "4.44.2",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "3.11.1"
+    "simple-flexbox": "^2.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
