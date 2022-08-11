@@ -20,12 +20,11 @@ import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 import IconBottomRightArrow from "./icon";
 
 const MainBlock2OutstandingStats = (props) => {
-  const { stats, investmentList, localwalletstats } = props;
+  const { localwalletstats } = props;
 
   const {
     isOpen: isAlertVisible,
     onClose,
-    onOpen,
   } = useDisclosure({
     defaultIsOpen: true,
   });
@@ -39,7 +38,7 @@ const MainBlock2OutstandingStats = (props) => {
           opacity={0.9}
           boxShadow="0px 1.92982px 14.9561px #BA1358;"
           h="42px"
-          maxWidth={["90%", "90%", "330px"]}
+          maxWidth={["90%", "330px", "330px"]}
           borderRadius="5px"
           m="7px"
           mb="13px"
@@ -90,9 +89,7 @@ const MainBlock2OutstandingStats = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
-    investmentList: state.investmentList[0],
-    localwalletstats: state.localwalletstats[0],
+    localwalletstats: state.localwalletstats[0]
   };
 };
 export default connect(mapStateToProps)(MainBlock2OutstandingStats);

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default (props) => (
+const icon3swap = (props) => (
   <svg
     width="16"
     height="15"
@@ -16,3 +16,5 @@ export default (props) => (
     />
   </svg>
 );
+
+export default icon3swap;

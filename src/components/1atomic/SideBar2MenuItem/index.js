@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button, Box } from "@chakra-ui/react";
 
-import { IconSoon } from "./icons";
+import IconSoon from "./icon-soon";
 
 const buttonstyle = {
   bg: "tranparent",

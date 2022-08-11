@@ -15,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/react";
-import { connect } from "react-redux";
 
 
 export default function AccountModal({ isOpen, onClose, isMobile }) {
@@ -50,7 +49,7 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
     }
 
     accountdata();
-  }, []);
+  });
 
   function handleDeactivateAccount() {
     setAccount(null);

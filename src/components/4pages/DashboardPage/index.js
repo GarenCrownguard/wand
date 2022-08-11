@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import MainBlock1Card from "../../1atomic/MainBlock1Card";
+import MainBlock1Card from "components/1atomic/MainBlock1Card";
 
-import StatsCardComponent from "components/cards/StatsCardComponent";
 import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
 
 import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
@@ -10,19 +9,8 @@ import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
 import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 
 import {
-  Center,
-  Divider,
-  Flex,
-  Text,
-  useBreakpointValue,
+  Flex
 } from "@chakra-ui/react";
-
-const cardCommonBackground = {
-  background:
-    "radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)",
-  borderRadius: "5px",
-  border: "1px solid rgba(165, 239, 255, 0.2)",
-};
 
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props;
@@ -114,7 +102,7 @@ const DashboardPage = (props) => {
         justifyContent="space-between"
         flexDirection={["column", "column", "row"]}
       >
-        <MainBlock1Card p="30px" flexGrow={1}>
+        <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
             title="SCEPTER Price Growth since day 1 (USD)"
             value={prettifyamounts(localwalletstats.sceptertoken)}
@@ -123,7 +111,7 @@ const DashboardPage = (props) => {
             percentageValue="10.2"
           />
         </MainBlock1Card>
-        <MainBlock1Card p="30px" flexGrow={1}>
+        <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
             title="Airdrops to BATON holders (since day 1 (USD)"
             value={prettifyamounts(localwalletstats.sceptertoken)}
@@ -132,7 +120,7 @@ const DashboardPage = (props) => {
             percentageValue="10.2"
           />
         </MainBlock1Card>
-        <MainBlock1Card p="30px" flexGrow={1}>
+        <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
             title="RISK Treasury Growth since day 1"
             value={prettifyamounts(localwalletstats.sceptertoken)}

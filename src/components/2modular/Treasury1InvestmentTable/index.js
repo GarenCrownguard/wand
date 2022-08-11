@@ -5,14 +5,13 @@ import {
   Tbody,
   Tr,
   Th,
-  Td,
   Text,
   TableContainer,
 } from "@chakra-ui/react";
 
-import Treasury1InvestmentItem from "../../1atomic/Treasury1InvestmentItem";
+import Treasury1InvestmentItem from "components/1atomic/Treasury1InvestmentItem";
 
-import * as myConstants from "../../../resources/constants";
+import * as myConstants from "resources/constants";
 import axios from "axios";
 
 const Treasury1InvestmentTable = () => {

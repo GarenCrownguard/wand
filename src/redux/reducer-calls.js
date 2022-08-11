@@ -2,10 +2,9 @@
 
 // import axios from "axios";
 
-// Redux
-import store from "../redux/store";
+import store from "./store";
 
-import * as actions from '../redux/action.types';
+import * as actions from './action.types';
 
 export const GET_FE_STATS = async (props) => {
   const { API_URL } = props;

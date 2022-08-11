@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Flex, Tooltip, Box } from "@chakra-ui/react";
+import { Flex, Tooltip } from "@chakra-ui/react";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import MainBlock1Card from "components/1atomic/MainBlock1Card";
 import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
@@ -12,7 +12,7 @@ import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
 import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
 
 const AccountPage = (props) => {
-  const { stats, investmentList, localwalletstats } = props;
+  const { stats, localwalletstats } = props;
   return (
     <>
       <Flex

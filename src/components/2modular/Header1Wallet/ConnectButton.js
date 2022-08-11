@@ -4,14 +4,14 @@ import { useToast } from "@chakra-ui/react";
 import IconWallet from "./icon-wallet";
 import { connect } from "react-redux";
 
-import { UPDATE_ADDRESS } from "../../../resources/reducer-calls";
+import { UPDATE_ADDRESS } from "redux/reducer-calls";
 
 function ConnectButton(props) {
 
-  const { handleOpenModal, isMobile, stats, investmentList, localwalletstats} = props;
+  const { handleOpenModal, isMobile, localwalletstats} = props;
 
   const [account, setAccount] = useState(null);
-  const [SPTRbalance, setSPTRbalance] = useState("2.3568");
+  // const [SPTRbalance, setSPTRbalance] = useState("2.3568");
   const toast = useToast();
 
   // console.log(isMobile);

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default (props) => (
+const icon2account = (props) => (
   <svg
     width="16"
     height="18"
@@ -16,3 +16,5 @@ export default (props) => (
     />
   </svg>
 );
+
+export default icon2account;

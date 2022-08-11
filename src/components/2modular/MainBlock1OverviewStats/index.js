@@ -7,7 +7,7 @@ import { Flex } from '@chakra-ui/react';
 import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 
 const MainBlock1OverviewStats = (props) => {
-  const { stats, localwalletstats } = props;
+  const { stats } = props;
 
     return (
       <MainBlock1Card minHeight="172px" p="15px" flexDirection="column">
@@ -45,9 +45,7 @@ const MainBlock1OverviewStats = (props) => {
  
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
-    investmentList: state.investmentList[0],
-    localwalletstats: state.localwalletstats[0],
+    stats: state.stats[0]
   };
 };
 export default connect(mapStateToProps)(MainBlock1OverviewStats);

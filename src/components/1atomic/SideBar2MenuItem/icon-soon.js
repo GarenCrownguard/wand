@@ -1,6 +1,6 @@
 import React from "react";
 
-const IconSoon = (props) => (
+const IconSoon = () => (
   <svg
     width="38"
     height="16"

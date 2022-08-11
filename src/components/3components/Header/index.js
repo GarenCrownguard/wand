@@ -2,8 +2,8 @@ import React from "react";
 
 import { useDisclosure, Flex, Box, IconButton } from "@chakra-ui/react";
 
-import ConnectButton from "../../2modular/Header1Wallet/ConnectButton";
-import AccountModal from "../../2modular/Header1Wallet/AccountModal";
+import ConnectButton from "components/2modular/Header1Wallet/ConnectButton";
+import AccountModal from "components/2modular/Header1Wallet/AccountModal";
 
 import IconLogo from "./icon/icon-logo";
 import IconBurger from "./icon/icon-burger";
