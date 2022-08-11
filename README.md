@@ -2,6 +2,8 @@
 
 FrontEnd for Wand Investments project.
 
+git config --global user.name "Garen Crowngaurd"
+git config --global user.email 0xgaren@protonmail.com
 # Metamask
 
 1. https://github.com/MetaMask/test-dapp Test: https://metamask.github.io/test-dapp/
@@ -35,30 +37,6 @@ FrontEnd for Wand Investments project.
 11. yarn
 12. start git-bash
 
-#### React Jss Boiler Plate
-```js
-import React from "react";
-import { createUseStyles, useTheme } from "react-jss";
-
-const useStyles = createUseStyles((props) => ({
-  container: (props) => ({
-    ...props.theme.typography.atomicCard,
-    padding: props.props.padding
-      ? parseFloat(props.props.padding)
-      : props.theme.typography.atomicCard.padding,
-    minHeight: parseFloat(props.props.minHeight),
-  }),
-}));
-
-const atomicSeperator = (props) => {
-  const theme = useTheme();
-  const classes = useStyles({ props, theme });
-  
-  return <p className={classes.p}>{text}</p>;
-};
-
-export default atomicSeperator;
-```
 
 #### Wand inestments responsive design: 
 < 450 width -> mobile
@@ -188,35 +166,35 @@ Structure:
 
 https://betterprogramming.pub/how-to-host-your-react-app-on-github-pages-for-free-919ad201a4cb#:~:text=When%20you've%20successfully%20deployed,is%20hosted%20on%20GitHub%20Pages.
 
-# Garen Fork: https://github.com/llorentegerman/react-admin-dashboard
-
-Reference @
-
-1. https://dev.to/llorentegerman/building-a-ui-from-scratch-responsive-sidebar-and-header-443g
-2. https://dev.to/llorentegerman/building-a-ui-from-scratch-based-on-a-design-with-reactjs-3l1e
-3. https://dev.to/llorentegerman/building-a-ui-from-scratch-responsive-sidebar-and-header-443g
-4. https://dev.to/llorentegerman/building-a-ui-from-scratch-responsive-content-6b9
-
-import { Column, Row } from "simple-flexbox";
-import { createUseStyles } from "react-jss";
-
-const useStyles = createUseStyles({
-footer: {
-position: "absolute",
-// width: "98vw",
-height: "484px",
-left: "0px",
-},
-});
-
-const Footer = () => {
-
-const classes = useStyles();
-
-
 # Future work
 
 1. prop types
 2. support for other wallets.
 3. state for isMobile classname.
 4. emmet/ eslint
+5. MainBlock1Card refactoring
+
+# Template
+```js
+import React from "react";
+import { connect } from "react-redux";
+
+const MainBlock2OutstandingStats = (props) => {
+  const { stats, investmentList, localwalletstats } = props;
+
+  return (
+    <>
+      mehul<>mehul</>
+    </>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats[0],
+    investmentList: state.investmentList[0],
+    localwalletstats: state.localwalletstats[0],
+  };
+};
+export default connect(mapStateToProps)(MainBlock2OutstandingStats);
+```

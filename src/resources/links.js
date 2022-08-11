@@ -1,4 +1,4 @@
-export default {
+const links = {
     /* side-bar route */
     dashboard: '/dashboard',
     account:'/account',
@@ -26,7 +26,7 @@ export default {
 
 
     /* wand-investments */
-    homepage: '/404',
+    homepage: '/dashboard',
 
     /* Footer */
     terms_conditions:'',
@@ -56,3 +56,5 @@ export default {
     telegram:'',
 
 };
+
+export default links;

@@ -1,10 +1,5 @@
-import * as actions from "../redux/action.types";
+import * as actions from "./action.types";
 
-// job of reducer is to perform 'action' on the 'currentState' and return the newState
-// Reducer is pure function. This code should never change. Make all the API calls and everything outside and only pass the data here.
-
-// We are mutating the currentState everywhere. Need to create new state everytime by using library like immutability.js
-// for array use concat / push/ pop
 const initialState = {
   stats: [
     {
@@ -16,30 +11,25 @@ const initialState = {
       riskTreasuryValue: 250000.4857,
       growthFactor: 0.287,
       scepterBuyPrice: 12.43,
-      scepterSellPrice: 11.20,
+      scepterSellPrice: 11.2,
       sellFactor: 0.3,
       batonRedeemingPrice: 5.4234,
-      currentWalletScepterAmount: 100.00,
+      currentWalletScepterAmount: 100.0,
       addmore: [],
     },
   ],
-  localwalletstats: [{
-    walletAddress: "0x9326C9c0214FFC973dA3bd13fF95c297bd0A1234",
-    tokenlist: ["sceptertoken","BATON","USDC"],
-    sceptertoken:{
-      name: "SCEPTER",
-      balance: 2000000
+  localwalletstats: [
+    {
+      walletAddress: null,
+      tokenlist: ["sceptertoken", "BATON", "USDC"],
+      sceptertoken: 2000,
+      batontoken: 34000,
+      usdctoken: 2000000,
+      remainingSwapTime: 1660207700,
+      amountOfSptrSwapped: 10000,
+      SptrSellPrice: 12.46,
     },
-    batontoken:{
-      name: "BATON",
-      balance: 3400000
-    },
-    usdctoken:{
-      name: "USDC",
-      balance: 2000000
-    },
-    
-  }],
+  ],
   investmentList: [
     {
       date: "31/05/2022",
@@ -58,6 +48,17 @@ const postReducer = (currentState = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case actions.UPDATE_ADDRESS:
+      return {
+        stats: [...currentState.stats],
+        localwalletstats: [
+          {
+            walletAddress: payload.address,
+            ...currentState.localwalletstats[0],
+          },
+        ],
+        investmentList: [...currentState.investmentList],
+      };
     case actions.GET_FE_STATS:
       // This is the new State after the action is performed.
       return {

@@ -80,14 +80,6 @@ select {
 }
 
 body {
-  background-color: black;
-  background-image: url("./assets/images/background.png") no-repeat center center fixed; 
-  background-size: cover;
-
-  font-family: "Azo Sans", Fallback, Sofia;
   font-style: normal;
   font-weight: normal;
-  /* font-size: 20px; */
-  /* line-height: 26px; */
-  color: white;
 }

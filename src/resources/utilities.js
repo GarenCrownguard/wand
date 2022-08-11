@@ -7,11 +7,11 @@ export function convertSlugToUrl(slug, parameters) {
 }
 
 export function prettifytolocalstring(amount) {
-  return amount.toLocaleString();
+  return amount ? amount.toLocaleString(): 'NULL';
 }
 
 export function prettifyamounts(amount) {
-  return "$" + prettifytolocalstring(amount);
+  return amount ? "$" + prettifytolocalstring(amount) : "NULL";
 }
 
 export function prettifyGrowthPercentage(direction, value) {
