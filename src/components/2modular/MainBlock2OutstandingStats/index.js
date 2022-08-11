@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import MainBlock1Card from "components/1atomic/MainBlock1Card";
 import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
-import { Flex } from "@chakra-ui/react";
+import MainBlock4CountdownTimer from "components/1atomic/MainBlock4CountdownTimer";
 
 import { prettifytolocalstring } from "resources/utilities";
 
@@ -13,9 +13,8 @@ const MainBlock2OutstandingStats = (props) => {
   return (
     <>
       <MainBlock1Card p="30px">
-        <MainBlock2StatsText
-          title="Remaining days left for swap conclusion"
-          value={prettifytolocalstring(stats.remainingSwapTime)}
+        <MainBlock4CountdownTimer
+          timeUNIX={localwalletstats.remainingSwapTime}
         />
         <MainBlock2StatsText
           title="Amount of SCEPTER Swapped"
