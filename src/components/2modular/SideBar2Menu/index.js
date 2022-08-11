@@ -19,7 +19,7 @@ import {
   Icon9docs,
 } from "./icons";
 
-const SideBar2Menu = ({ onClick }) => {
+const SideBar2Menu = () => {
   const { push } = useHistory();
   function onClick(slug, parameters = {}) {
     push(convertSlugToUrl(slug, parameters));
@@ -87,6 +87,7 @@ const SideBar2Menu = ({ onClick }) => {
           title="Docs"
           icon={Icon9docs}
           onClick={() => onClick(links.docs)}
+          soon
         />
       </VStack>
     </Box>

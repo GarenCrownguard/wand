@@ -25,7 +25,7 @@ const initialState = {
       sceptertoken: 2000,
       batontoken: 34000,
       usdctoken: 2000000,
-      remainingSwapTime: 1660207700,
+      remainingSwapTime: 1660507700,
       amountOfSptrSwapped: 10000,
       SptrSellPrice: 12.46,
     },

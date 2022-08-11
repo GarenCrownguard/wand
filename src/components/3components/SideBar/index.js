@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
             <DrawerCloseButton size="lg" mt="55px" />
           </DrawerHeader>
           <DrawerBody>
-            <SideBar2Menu onClick={onClose} />
+            <SideBar2Menu />
           </DrawerBody>
           <DrawerFooter>
             <SideBar3Footer />

@@ -8,9 +8,7 @@ import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
 import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
 import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 
-import {
-  Flex
-} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props;
