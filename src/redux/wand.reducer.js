@@ -25,6 +25,9 @@ const initialState = {
       sceptertoken: 2000000,
       batontoken: 3400000,
       usdctoken: 2000000,
+      remainingSwapTime: 200000,
+      amountOfSptrSwapped: 10000,
+      SptrSellPrice: 12.46
     },
   ],
   investmentList: [

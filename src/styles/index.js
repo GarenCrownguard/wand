@@ -73,13 +73,13 @@ const theme = extendTheme({
         positiveGrowth: {
           fontWeight: 500,
           fontSize: 12,
-          marginLeft: "px",
+          marginLeft: "6px",
           color: "#2ae0bf",
         },
         negativeGrowth: {
           fontWeight: 500,
           fontSize: 12,
-          marginLeft: "px",
+          marginLeft: "6px",
           color: "#AE3C51",
         },
       },

@@ -222,3 +222,29 @@ const classes = useStyles();
 2. support for other wallets.
 3. state for isMobile classname.
 4. emmet/ eslint
+5. MainBlock1Card refactoring
+
+# Template
+```js
+import React from "react";
+import { connect } from "react-redux";
+
+const MainBlock2OutstandingStats = (props) => {
+  const { stats, investmentList, localwalletstats } = props;
+
+  return (
+    <>
+      mehul<>mehul</>
+    </>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats[0],
+    investmentList: state.investmentList[0],
+    localwalletstats: state.localwalletstats[0],
+  };
+};
+export default connect(mapStateToProps)(MainBlock2OutstandingStats);
+```
