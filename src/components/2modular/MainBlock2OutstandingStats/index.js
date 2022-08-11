@@ -16,7 +16,7 @@ import MainBlock1Card from "components/1atomic/MainBlock1Card";
 import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
 import MainBlock4CountdownTimer from "components/1atomic/MainBlock4CountdownTimer";
 
-import { prettifytolocalstring } from "resources/utilities";
+import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 import IconBottomRightArrow from "./icon";
 
 const MainBlock2OutstandingStats = (props) => {
@@ -80,7 +80,7 @@ const MainBlock2OutstandingStats = (props) => {
         />
         <MainBlock2StatsText
           title="SCEPTER Sell Price at swap (USD)"
-          value={prettifytolocalstring(localwalletstats.SptrSellPrice)}
+          value={prettifyamounts(localwalletstats.SptrSellPrice)}
         />
       </MainBlock1Card>
       <Box h="30px" /* Only for spacing*/ />

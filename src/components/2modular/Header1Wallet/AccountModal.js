@@ -95,16 +95,16 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
               <Button
                 variant="outline"
                 size="sm"
-                borderColor="blue.800"
+                borderColor="wandRed"
                 borderRadius="3xl"
-                color="blue.500"
+                color="wandRed"
                 fontSize="13px"
                 fontWeight="normal"
                 px={2}
                 height="26px"
                 _hover={{
                   background: "none",
-                  borderColor: "blue.300",
+                  borderColor: "transparent",
                 }}
                 onClick={handleDeactivateAccount}
               >
@@ -112,7 +112,7 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
               </Button>
             </Flex>
             <Flex alignItems="center" mt={2} mb={4} lineHeight={1}>
-              <Icon viewBox="0 0 200 200" color="red.500">
+              <Icon viewBox="0 0 200 200" color="wandRed">
                 <path
                   fill="currentColor"
                   d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"

@@ -7,7 +7,7 @@ import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
 
 import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
 import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
-import { prettifytolocalstring } from "resources/utilities";
+import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 
 import {
   Center,
@@ -46,28 +46,28 @@ const DashboardPage = (props) => {
             <MainBlock2Divider />
             <MainBlock2StatsText
               title="$SCEPTER Price"
-              value={prettifytolocalstring(stats.scepterBackingPrice)}
+              value={prettifyamounts(stats.scepterBackingPrice)}
             />
           </MainBlock1Card>
           <MainBlock1Card minHeight="222px" flexDirection="column">
             <Flex flexDirection={["column", "column", "row"]}>
               <MainBlock2StatsText
                 title="$SCEPTER Treasury Value"
-                value={prettifytolocalstring(stats.scepterTreasuryValue)}
+                value={prettifyamounts(stats.scepterTreasuryValue)}
               />
               <MainBlock2StatsText
                 title="Risk Treasury Value"
-                value={prettifytolocalstring(stats.riskTreasuryValue)}
+                value={prettifyamounts(stats.riskTreasuryValue)}
               />
             </Flex>
             <Flex flexDirection={["column", "column", "row"]}>
               <MainBlock2StatsText
                 title="Airdrops distributed (last 3 months)"
-                value={prettifytolocalstring(stats.airdrops3Months)}
+                value={prettifyamounts(stats.airdrops3Months)}
               />
               <MainBlock2StatsText
                 title="Baton treasury value"
-                value={prettifytolocalstring(stats.batonTreasuryValue)}
+                value={prettifyamounts(stats.batonTreasuryValue)}
               />
             </Flex>
           </MainBlock1Card>
@@ -88,7 +88,7 @@ const DashboardPage = (props) => {
         <MainBlock2Divider />
         <MainBlock2StatsText
           title="Your SCEPTER Balance (Value)"
-          value={prettifytolocalstring(
+          value={prettifyamounts(
             localwalletstats.sceptertoken * stats.scepterBackingPrice
           )}
         />
@@ -116,8 +116,8 @@ const DashboardPage = (props) => {
       >
         <MainBlock1Card p="30px" flexGrow={1}>
           <MainBlock2StatsText
-            title="Your SCEPTER Balance (Tokens)"
-            value={prettifytolocalstring(localwalletstats.sceptertoken)}
+            title="SCEPTER Price Growth since day 1 (USD)"
+            value={prettifyamounts(localwalletstats.sceptertoken)}
             align="left"
             growthDirection="positive"
             percentageValue="10.2"
@@ -125,8 +125,8 @@ const DashboardPage = (props) => {
         </MainBlock1Card>
         <MainBlock1Card p="30px" flexGrow={1}>
           <MainBlock2StatsText
-            title="Your SCEPTER Balance (Tokens)"
-            value={prettifytolocalstring(localwalletstats.sceptertoken)}
+            title="Airdrops to BATON holders (since day 1 (USD)"
+            value={prettifyamounts(localwalletstats.sceptertoken)}
             align="left"
             growthDirection="negative"
             percentageValue="10.2"
@@ -134,8 +134,8 @@ const DashboardPage = (props) => {
         </MainBlock1Card>
         <MainBlock1Card p="30px" flexGrow={1}>
           <MainBlock2StatsText
-            title="Your SCEPTER Balance (Tokens)"
-            value={prettifytolocalstring(localwalletstats.sceptertoken)}
+            title="RISK Treasury Growth since day 1"
+            value={prettifyamounts(localwalletstats.sceptertoken)}
             align="left"
             growthDirection="positive"
             percentageValue="1000.2"

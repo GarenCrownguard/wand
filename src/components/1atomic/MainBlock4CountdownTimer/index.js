@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Box, Tooltip } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 import MainBlock2StatsText from "../MainBlock2StatsText";
 
 const calculateTimeLeft = (time) => {
@@ -64,66 +64,54 @@ const MainBlock4CountdownTimer = (props) => {
     };
   });
   return day === 0 && hour === 0 && minutes === 0 && seconds === 0 ? (
-    <MainBlock2StatsText
-      title={title}
-      value="Nan"
-    />
+    <MainBlock2StatsText title={title} value="Nan" />
   ) : (
     <>
       <Box flex={1} mb="10px">
-          <Text variant="title">{title}</Text>
-        <Tooltip
-          label={
-            <>
-              <Text
-                as="sup"
-                fontSize="6"
-                fontWeight={700}
-                opacity={0.8}
-                ml={"5px"}
-              >
-                DAYS
-              </Text>
-              <Text
-                as="sup"
-                fontSize="6"
-                fontWeight={700}
-                opacity={0.8}
-                ml={"18px"}
-              >
-                HOURS
-              </Text>
-              <Text
-                as="sup"
-                fontSize="6"
-                fontWeight={700}
-                opacity={0.8}
-                ml={"10px"}
-              >
-                MINUTES
-              </Text>
-              <Text
-                as="sup"
-                fontSize="6"
-                fontWeight={700}
-                opacity={0.8}
-                ml={"10px"}
-              >
-                SECONDS
-              </Text>
-            </>
-          }
-          placement="bottom"
-          bg="transparent"
-          mt={"-15px"}
-          isOpen
-        >
-          <Text variant="value">{`${day < 10 ? `0${day}` : day}:${
-            hour < 10 ? `0${hour}` : hour
-          }:${minutes < 10 ? `0${minutes}` : minutes}:${
-            seconds < 10 ? `0${seconds}` : seconds
-          }`}</Text>
-        </Tooltip>
+        <Text variant="title">{title}</Text>
+        <Text variant="value">
+          {`${day < 10 ? `0${day}` : day}:${hour < 10 ? `0${hour}` : hour}:${
+            minutes < 10 ? `0${minutes}` : minutes
+              }:${seconds < 10 ? `0${seconds}` : seconds}`}
+          <Box mt='-15px'>
+            <Text
+              as="sup"
+              fontSize="6"
+              fontWeight={700}
+              opacity={0.8}
+              ml={"5px"}
+            >
+              DAYS
+            </Text>
+            <Text
+              as="sup"
+              fontSize="6"
+              fontWeight={700}
+              opacity={0.8}
+              ml={"18px"}
+            >
+              HOURS
+            </Text>
+            <Text
+              as="sup"
+              fontSize="6"
+              fontWeight={700}
+              opacity={0.8}
+              ml={"10px"}
+            >
+              MINUTES
+            </Text>
+            <Text
+              as="sup"
+              fontSize="6"
+              fontWeight={700}
+              opacity={0.8}
+              ml={"10px"}
+            >
+              SECONDS
+            </Text>
+          </Box>
+        </Text>
       </Box>
     </>
   );

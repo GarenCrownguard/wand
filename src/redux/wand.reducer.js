@@ -22,8 +22,8 @@ const initialState = {
     {
       walletAddress: null,
       tokenlist: ["sceptertoken", "BATON", "USDC"],
-      sceptertoken: 2000000,
-      batontoken: 3400000,
+      sceptertoken: 2000,
+      batontoken: 34000,
       usdctoken: 2000000,
       remainingSwapTime: 1660207700,
       amountOfSptrSwapped: 10000,

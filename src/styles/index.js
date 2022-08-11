@@ -10,15 +10,14 @@ const typography = {
   fsizemedium: 19,
   fsizebig: 26,
 };
-
-const color = {
+const colors = {
   transparent: "transparent",
   white: "white",
   black: "black",
 
-  red: "#AE3C51",
-  green: "#2AE0BF",
-  grey: "#b1afcd",
+  wandRed: "#AE3C51",
+  wandGreen: "#2AE0BF",
+  wandGrey: "#b1afcd",
 };
 
 const theme = extendTheme({
@@ -32,13 +31,13 @@ const theme = extendTheme({
     heading: typography.fontFamily,
     body: typography.fontFamily,
   },
-  color,
+  colors,
   typography,
   styles: {
     global: () => ({
       body: {
-        bg: color.black,
-        color: color.white,
+        bg: colors.black,
+        color: colors.white,
       },
     }),
   },
@@ -49,7 +48,7 @@ const theme = extendTheme({
         fontFamily: typography.fontFamily,
         fontStyle: "normal",
         fontSize: 19,
-        color: color.white,
+        color: colors.white,
       },
       variants: {
         "investment-heading-text": {
@@ -74,13 +73,13 @@ const theme = extendTheme({
           fontWeight: 500,
           fontSize: 12,
           marginLeft: "6px",
-          color: "#2ae0bf",
+          color: colors.wandGreen,
         },
         negativeGrowth: {
           fontWeight: 500,
           fontSize: 12,
           marginLeft: "6px",
-          color: "#AE3C51",
+          color: colors.wandRed,
         },
       },
     },

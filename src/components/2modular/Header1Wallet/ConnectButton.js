@@ -84,9 +84,9 @@ function ConnectButton(props) {
               account.length
             )}`}
         </Text>
-        <Icon viewBox="0 0 200 200" color="red.500">
+        <Icon viewBox="0 0 200 200" color="#AE3C51">
           <path
-            fill="red"
+            fill="#AE3C51"
             d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
           />
         </Icon>
