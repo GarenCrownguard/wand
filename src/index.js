@@ -7,16 +7,14 @@ import "./index.css";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import ChakraTheme from "./styles"
-// Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
-// Store only has getState and setState. Hence its a pipeline structure. You can only set a state using the dispatch function
+
 // console.log(store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  // <ThemeProvider theme={Theme}>
     <ChakraProvider theme={ChakraTheme}>
       <Provider store={store}>
         <Router>
@@ -24,5 +22,4 @@ root.render(
         </Router>
       </Provider>
     </ChakraProvider>
-  // </ThemeProvider>
 );
