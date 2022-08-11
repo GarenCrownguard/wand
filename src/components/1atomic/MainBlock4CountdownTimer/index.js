@@ -26,7 +26,7 @@ const calculateTimeLeft = (time) => {
 };
 
 const MainBlock4CountdownTimer = (props) => {
-  const { timeUNIX } = props;
+  const { title, timeUNIX } = props;
   var timeleft = calculateTimeLeft(timeUNIX * 1000);
 
   //   console.log(timeleft);
@@ -63,43 +63,68 @@ const MainBlock4CountdownTimer = (props) => {
       clearInterval(myInterval);
     };
   });
-  return (
+  return day === 0 && hour === 0 && minutes === 0 && seconds === 0 ? (
+    <MainBlock2StatsText
+      title={title}
+      value="Nan"
+    />
+  ) : (
     <>
-      <Text color="white">
-        {day === 0 && hour === 0 && minutes === 0 && seconds === 0 ? (
-          <MainBlock2StatsText
-            title="Remaining days left for swap conclusion"
-            value="Nan"
-          />
-        ) : (
-          <>
-            <Box flex={1}>
-              <Text variant="title">
-                Remaining days left for swap conclusion
-              </Text>
-              <Tooltip
-                label={
-                  <Text as="sup" variant={"positiveGrowth"} fontSize="6">
-                    DAYS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    HOURS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    MINUTES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SECONDS
-                  </Text>
-                }
-                placement="bottom"
-                bg="transparent"
-                mt={"-15px"}
-                isOpen
+      <Box flex={1} mb="10px">
+          <Text variant="title">{title}</Text>
+        <Tooltip
+          label={
+            <>
+              <Text
+                as="sup"
+                fontSize="6"
+                fontWeight={700}
+                opacity={0.8}
+                ml={"5px"}
               >
-                <Text variant="value">{`${
-                  day < 10 ? `0${day}` : day
-                }:${hour < 10 ? `0${hour}` : hour}:${
-                  minutes < 10 ? `0${minutes}` : minutes
-                }:${seconds < 10 ? `0${seconds}` : seconds}`}</Text>
-              </Tooltip>
-            </Box>
-          </>
-        )}
-      </Text>
+                DAYS
+              </Text>
+              <Text
+                as="sup"
+                fontSize="6"
+                fontWeight={700}
+                opacity={0.8}
+                ml={"18px"}
+              >
+                HOURS
+              </Text>
+              <Text
+                as="sup"
+                fontSize="6"
+                fontWeight={700}
+                opacity={0.8}
+                ml={"10px"}
+              >
+                MINUTES
+              </Text>
+              <Text
+                as="sup"
+                fontSize="6"
+                fontWeight={700}
+                opacity={0.8}
+                ml={"10px"}
+              >
+                SECONDS
+              </Text>
+            </>
+          }
+          placement="bottom"
+          bg="transparent"
+          mt={"-15px"}
+          isOpen
+        >
+          <Text variant="value">{`${day < 10 ? `0${day}` : day}:${
+            hour < 10 ? `0${hour}` : hour
+          }:${minutes < 10 ? `0${minutes}` : minutes}:${
+            seconds < 10 ? `0${seconds}` : seconds
+          }`}</Text>
+        </Tooltip>
+      </Box>
     </>
   );
 };
