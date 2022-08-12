@@ -7,9 +7,21 @@ import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
 
 import MainBlock2Divider from 'components/1atomic/MainBlock2Divider'
 import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
-import { Flex, Image, Text, Box } from '@chakra-ui/react'
+import {
+  Flex,
+  Image,
+  Text,
+  Box,
+  Button,
+  IconButton,
+  Input,
+} from '@chakra-ui/react'
 import MainBlock2OutstandingStats from 'components/2modular/MainBlock2OutstandingStats'
 import MainBlock1OverviewStats from 'components/2modular/MainBlock1OverviewStats'
+
+import Icon1swap from './icons/icon-1swap'
+import Icon2downarrow from './icons/icon-4usdt'
+
 const SwapPage = (props) => {
   const { stats, investmentList, localwalletstats } = props
 
@@ -94,8 +106,154 @@ const SwapPage = (props) => {
         <MainBlock1Card
           minHeight="345px"
           minWidth={['320px', '356px', '356px']}
+          flexDirection="column"
+          alignItems="flex-start"
+          p="25px"
         >
-          Chart 1
+          <Text variant="value" textAlign="left" color="wandGreen">
+            Swap
+          </Text>
+          <Text variant="title" textAlign="left">
+            Choose the tokens to swap
+          </Text>
+          <Flex
+            alignItems="stretch"
+            flexDirection="column"
+            minWidth="100%"
+            backgroundColor="#0B1A28"
+            borderRadius="7px"
+            maxHeight="60px"
+            pl="10px"
+            pr="10px"
+            pt="5px"
+          >
+            <Flex p="0px" justifyContent="space-between" alignItems="center">
+              <Text
+                color="#2AE0BF"
+                fontSize="10px"
+                lineHeight="12px"
+                fontWeight="bold"
+                letterSpacing="0.5px"
+                display="block"
+              >
+                SCEPTER
+              </Text>
+              <Button
+                variant="link"
+                size="xs"
+                color="#8C8C8C"
+                display="block"
+                p="0px"
+                colorScheme="#8C8C8C"
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
+              >
+                Balance: 23232 SPTR
+              </Button>
+            </Flex>
+            <Flex p="0px">
+              <Input
+                color="#DFDFDF"
+                border="none"
+                fontSize="14px"
+                letterSpacing="tighter"
+                fontWeight="bold"
+                size="sm"
+                isFullWidth
+                p="0px"
+              />
+              <Button
+                variant="solid"
+                size="xs"
+                background="tranparent"
+                rightIcon={<Icon2downarrow />}
+                _hover={{
+                  background: '#B1AFCD',
+                }}
+              >
+                <Image boxSize="20px" src="/assets/images/icon2sptr.png" />
+              </Button>
+            </Flex>
+          </Flex>
+          <Flex width="100%" justifyContent="center" p="8px">
+            <IconButton icon={<Icon1swap />} size="xs" width={0} height={0} />
+          </Flex>
+          <Flex
+            alignItems="stretch"
+            flexDirection="column"
+            minWidth="100%"
+            backgroundColor="#0B1A28"
+            borderRadius="7px"
+            maxHeight="60px"
+            pl="10px"
+            pr="10px"
+            pt="5px"
+          >
+            <Flex p="0px" justifyContent="space-between" alignItems="center">
+              <Text
+                color="#2AE0BF"
+                fontSize="10px"
+                lineHeight="12px"
+                fontWeight="bold"
+                letterSpacing="0.5px"
+                display="block"
+              >
+                BUSD
+              </Text>
+              <Button
+                variant="link"
+                size="xs"
+                color="#8C8C8C"
+                display="block"
+                p="0px"
+                colorScheme="#8C8C8C"
+                _hover={{
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
+              >
+                Balance: 23232 BUSD
+              </Button>
+            </Flex>
+            <Flex p="0px">
+              <Input
+                color="#DFDFDF"
+                border="none"
+                fontSize="14px"
+                letterSpacing="tighter"
+                fontWeight="bold"
+                size="sm"
+                isFullWidth
+                p="0px"
+              />
+              <Button
+                variant="solid"
+                size="xs"
+                background="tranparent"
+                rightIcon={<Icon2downarrow />}
+                _hover={{
+                  background: '#B1AFCD',
+                }}
+              >
+                <Image boxSize="20px" src="/assets/images/icon3baton.png" />
+              </Button>
+            </Flex>
+          </Flex>
+          <Button
+            variant="solid"
+            size="md"
+            width="100%"
+            mt="20px"
+            backgroundColor="#06141D"
+            color="#FFFFFF;"
+            fontSize="12px"
+            fontWeight="bold"
+            letterSpacing="0.5px"
+          >
+            Swap
+          </Button>
         </MainBlock1Card>
       </Flex>
       <Box h="70px" /* Only for spacing*/ />

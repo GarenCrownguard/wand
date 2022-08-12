@@ -1,6 +1,6 @@
 import React from 'react'
 
-const icon1swap = () => (
+const icon5busd = () => (
   <svg
     width="25"
     height="25"
@@ -30,4 +30,4 @@ const icon1swap = () => (
   </svg>
 )
 
-export default icon1swap
+export default icon5busd;
