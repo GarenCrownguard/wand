@@ -37,6 +37,9 @@
       "react-app"
     ]
   },
+  "engines": {
+    "node": "16.15.x"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
