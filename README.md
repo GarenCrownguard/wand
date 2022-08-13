@@ -166,6 +166,21 @@ Structure:
 
 https://betterprogramming.pub/how-to-host-your-react-app-on-github-pages-for-free-919ad201a4cb#:~:text=When%20you've%20successfully%20deployed,is%20hosted%20on%20GitHub%20Pages.
 
+
+<!-- Deploying react app to heroku -->
+https://devcenter.heroku.com/articles/deploying-nodejs
+
+Add the engines in the package.json
+Remember to keep the yarn.lock file on the repo. This will help heroku use yarn instead of npm.
+In the buildpack put this link: https://github.com/mars/create-react-app-buildpack
+If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-buildpack-nodejs
+```json
+"engines": {
+    "node": "16.15.1",
+    "npm": "8.13.2",
+    "yarn": "1.22.19"
+  },
+```
 # Future work
 
 1. prop types
