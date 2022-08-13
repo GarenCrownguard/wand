@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "Garen Crowngaurd",
-  "homepage": "https://GarenCrownguard.github.io/",
+  "homepage": "https://garencrownguard.github.io/wand-deploy/dashboard",
   "description": "Dapp for Wand Investments",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.4",
