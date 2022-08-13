@@ -67,9 +67,9 @@ const MainBlock4CountdownTimer = (props) => {
     <MainBlock2StatsText title={title} value="Nan" />
   ) : (
     <>
-      <Box flex={1} mb="10px">
+      <Box flex={1} mb="10px" textAlign="center">
         <Text variant="title">{title}</Text>
-        <Text variant="value">
+        <Text as='span' variant="value">
           {`${day < 10 ? `0${day}` : day}:${hour < 10 ? `0${hour}` : hour}:${
             minutes < 10 ? `0${minutes}` : minutes
               }:${seconds < 10 ? `0${seconds}` : seconds}`}

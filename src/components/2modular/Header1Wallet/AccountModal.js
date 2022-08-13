@@ -18,42 +18,42 @@ import { useToast } from "@chakra-ui/react";
 
 
 export default function AccountModal({ isOpen, onClose, isMobile }) {
-  const [account, setAccount] = useState(null);
-  const toast = useToast();
+  const [account, setAccount] = useState(null)
+  const toast = useToast()
 
   useEffect(() => {
     async function accountdata() {
-      const { ethereum } = window;
+      const { ethereum } = window
 
       if (!ethereum) {
         toast({
-          title: "No wallet detected!",
-          status: "warning",
+          title: 'No wallet detected!',
+          status: 'warning',
           duration: 1000,
-          position: "bottom-right",
+          position: 'bottom-right',
           containerStyle: {
-            width: "50px",
+            width: '50px',
           },
-        });
+        })
       }
 
       try {
         const accounts = await ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        console.log("Found an account! Address: ", accounts[0]);
-        setAccount(accounts[0]);
+          method: 'eth_requestAccounts',
+        })
+        console.log('Found an account! Address: ', accounts[0])
+        setAccount(accounts[0])
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     }
 
-    accountdata();
-  });
+    accountdata()
+  })
 
   function handleDeactivateAccount() {
-    setAccount(null);
-    onClose();
+    setAccount(null)
+    onClose()
   }
 
   return (
@@ -73,7 +73,7 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
           color="white"
           fontSize="sm"
           _hover={{
-            color: "whiteAlpha.700",
+            color: 'whiteAlpha.700',
           }}
         />
         <ModalBody pt={0} px={4}>
@@ -102,8 +102,8 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
                 px={2}
                 height="26px"
                 _hover={{
-                  background: "none",
-                  borderColor: "transparent",
+                  background: 'none',
+                  borderColor: 'transparent',
                 }}
                 onClick={handleDeactivateAccount}
               >
@@ -138,11 +138,11 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
                 fontWeight="normal"
                 fontSize="sm"
                 _hover={{
-                  textDecoration: "none",
-                  color: "whiteAlpha.800",
+                  textDecoration: 'none',
+                  color: 'whiteAlpha.800',
                 }}
                 onClick={() => {
-                  navigator.clipboard.writeText(`${account}`);
+                  navigator.clipboard.writeText(`${account}`)
                 }}
               >
                 <CopyIcon mr={1} />
@@ -157,8 +157,8 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
                 color="gray.400"
                 ml={6}
                 _hover={{
-                  color: "whiteAlpha.800",
-                  textDecoration: "underline",
+                  color: 'whiteAlpha.800',
+                  textDecoration: 'underline',
                 }}
               >
                 <ExternalLinkIcon mr={1} />
@@ -169,5 +169,5 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
         </ModalBody>
       </ModalContent>
     </Modal>
-  );
+  )
 }

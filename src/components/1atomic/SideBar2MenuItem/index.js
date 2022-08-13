@@ -1,61 +1,65 @@
-import React from "react";
+import React from 'react'
 
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, Link } from '@chakra-ui/react'
 
-import IconSoon from "./icon-soon";
+import IconSoon from './icon-soon'
 
 const buttonstyle = {
-  bg: "tranparent",
-  color: "grey",
-  size: "lg",
-  fontSize: "lg",
+  bg: 'tranparent',
+  color: 'grey',
+  size: 'lg',
+  fontSize: 'lg',
   fontWeight: 400,
-  w: "100%",
-  pl: "25px",
-  pt: "10px",
-  pb: "10px",
+  w: '100%',
+  pl: '25px',
+  pt: '10px',
+  pb: '10px',
   _hover: {
-    color: "white",
+    color: 'white',
   },
   _active: {
-    color: "white",
-    borderColor: "white",
+    color: 'white',
+    borderColor: 'white',
   },
   _visited: {
-    color: "white",
-    borderColor: "white",
+    color: 'white',
+    borderColor: 'white',
   },
-};
+}
 
-const SideBar2MenuItem = ({ icon: Icon, onClick, title, soon }) => {
+const linkstyle = {
+  _hover: { textDecoration: 'none' },
+}
+
+const SideBar2MenuItem = ({ icon: Icon, href, isexternal, title, soon }) => {
   return soon ? (
-    <Button
-      sx={buttonstyle}
-      onClick={onClick}
-      leftIcon={<Icon fill="currentColor" />}
-      variant="link"
-      display="flex"
-      justifyContent="flex-start"
-      iconSpacing="15px"
-    >
-      {title}
-      <Box mr="30px" ml="auto">
-        <IconSoon />
-      </Box>
-    </Button>
-  ) : (
-    <Box>
+    <Link href={href} isExternal={isexternal} {...linkstyle} w='100%'>
       <Button
         sx={buttonstyle}
-        onClick={onClick}
+        leftIcon={<Icon fill="currentColor" />}
+        variant="link"
+        display="flex"
+        justifyContent="flex-start"
+        iconSpacing="15px"
+      >
+        {title}
+        <Box mr="30px" ml="auto">
+          <IconSoon />
+        </Box>
+      </Button>
+    </Link>
+  ) : (
+    <Link href={href} isExternal={isexternal} {...linkstyle}>
+      <Button
+        sx={buttonstyle}
         leftIcon={<Icon fill="currentColor" />}
         variant="link"
         iconSpacing="15px"
       >
         {title}
       </Button>
-    </Box>
-  );
-};
+    </Link>
+  )
+}
 
-export default SideBar2MenuItem;
+export default SideBar2MenuItem

@@ -1,25 +1,24 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 
-import { Flex, Tooltip } from "@chakra-ui/react";
-import { InfoOutlineIcon } from "@chakra-ui/icons";
-import MainBlock1Card from "components/1atomic/MainBlock1Card";
-import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
-import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
-import MainBlock2OutstandingStats from "components/2modular/MainBlock2OutstandingStats";
-import MainBlock1OverviewStats from "components/2modular/MainBlock1OverviewStats";
-import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
-import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
+import { Flex, Box } from '@chakra-ui/react'
+import MainBlock1Card from 'components/1atomic/MainBlock1Card'
+import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
+import MainBlock2Divider from 'components/1atomic/MainBlock2Divider'
+import MainBlock2OutstandingStats from 'components/2modular/MainBlock2OutstandingStats'
+import MainBlock1OverviewStats from 'components/2modular/MainBlock1OverviewStats'
+import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
+import MainBlock3HeaderText from 'components/1atomic/MainBlock3HeaderText'
 
 const AccountPage = (props) => {
-  const { stats, localwalletstats } = props;
+  const { stats, localwalletstats } = props
   return (
     <>
       <Flex
         justifyContent="space-between"
         m={0}
         p={0}
-        flexDirection={["column", "column", "row"]}
+        flexDirection={['column', 'column', 'row']}
       >
         <Flex flexDirection="column" flexGrow={1}>
           <MainBlock3HeaderText
@@ -36,24 +35,10 @@ const AccountPage = (props) => {
             <MainBlock2Divider />
             <MainBlock2StatsText
               title="Current Price"
-              value={
-                <>
-                  {prettifyamounts(stats.scepterBackingPrice)}
-                  <Tooltip
-                    hasArrow
-                    label={`Current Value: ${prettifyamounts(
-                      localwalletstats.sceptertoken * stats.scepterBackingPrice
-                    )}`}
-                    bg="wandGreen"
-                    color="black"
-                  >
-                    <InfoOutlineIcon
-                      color="wandGreen"
-                      sx={{ ml: "5px", fontSize: "sm" }}
-                    />
-                  </Tooltip>
-                </>
-              }
+              value={prettifyamounts(stats.scepterBackingPrice)}
+              tooltipLabel={`Current Value: ${prettifyamounts(
+                localwalletstats.sceptertoken * stats.scepterBackingPrice
+              )}`}
             />
           </MainBlock1Card>
         </Flex>
@@ -73,39 +58,26 @@ const AccountPage = (props) => {
             <MainBlock2Divider />
             <MainBlock2StatsText
               title="Last Airdrop"
-              value={
-                <>
-                  {prettifyamounts(stats.scepterBackingPrice)}
-                  <Tooltip
-                    hasArrow
-                    label={`Total (since start): ${prettifyamounts(
-                      localwalletstats.sceptertoken * stats.scepterBackingPrice
-                    )}`}
-                    bg="wandGreen"
-                    color="black"
-                  >
-                    <InfoOutlineIcon
-                      color="wandGreen"
-                      sx={{ ml: "5px", fontSize: "sm" }}
-                    />
-                  </Tooltip>
-                </>
-              }
+              value={prettifyamounts(stats.scepterBackingPrice)}
+              tooltipLabel={`Total (since start): ${prettifyamounts(
+                localwalletstats.sceptertoken * stats.scepterBackingPrice
+              )}`}
             />
           </MainBlock1Card>
         </Flex>
       </Flex>
       <MainBlock2OutstandingStats />
       <MainBlock1OverviewStats />
+      <Box h="70px" /* Only for spacing*/ />
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
     investmentList: state.investmentList[0],
     localwalletstats: state.localwalletstats[0],
-  };
-};
-export default connect(mapStateToProps)(AccountPage);
+  }
+}
+export default connect(mapStateToProps)(AccountPage)

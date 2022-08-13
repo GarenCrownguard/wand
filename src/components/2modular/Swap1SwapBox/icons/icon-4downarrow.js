@@ -1,6 +1,6 @@
 import React from 'react'
 
-const icon2downarrow = () => (
+const icon4downarrow = () => (
   <svg
     width="10"
     height="6"
@@ -16,7 +16,7 @@ const icon2downarrow = () => (
       <path
         d="M10 2.56842L10 3.97233e-08L5 3.41053L-2.62268e-07 4.76837e-07L-1.49999e-07 2.56842L5 6L10 2.56842Z"
         fill="white"
-        fill-opacity="0.8"
+        fillOpacity="0.8"
       />
     </g>
     <defs>
@@ -27,9 +27,9 @@ const icon2downarrow = () => (
         width="10"
         height="6"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -63,11 +63,11 @@ const icon2downarrow = () => (
         y2="3"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
       </linearGradient>
     </defs>
   </svg>
 )
 
-export default icon2downarrow;
+export default icon4downarrow
