@@ -40,17 +40,25 @@ const Treasury1InvestmentTable = () => {
 
   return (
     <TableContainer>
-      <Table variant="simple" size="md" colorScheme="Red.400">
+      <Table variant="simple" size="md" colorScheme="gray.400">
         <Thead>
           <Tr>
             {/* <Th>Chain</Th> */}
             <Th>
               <Text variant="investment-heading-text">Protocol</Text>
             </Th>
-            <Th>Investment</Th>
-            <Th>Date</Th>
-            <Th>Expected APY</Th>
-            <Th>Transaction Details</Th>
+            <Th>
+              <Text variant="investment-heading-text">Investment</Text>
+            </Th>
+            <Th>
+              <Text variant="investment-heading-text">Date</Text>
+            </Th>
+            <Th>
+              <Text variant="investment-heading-text">Expected APY</Text>
+            </Th>
+            <Th>
+              <Text variant="investment-heading-text">Transaction Details</Text>
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -69,7 +77,7 @@ const Treasury1InvestmentTable = () => {
         </Tbody>
       </Table>
     </TableContainer>
-  );
+  )
 };
 
 export default Treasury1InvestmentTable;

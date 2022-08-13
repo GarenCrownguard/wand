@@ -173,6 +173,8 @@ https://betterprogramming.pub/how-to-host-your-react-app-on-github-pages-for-fre
 3. state for isMobile classname.
 4. emmet/ eslint
 5. MainBlock1Card refactoring
+6. Skeleton for cards to load.
+7. Loading spinners on buttons
 
 # Template
 ```js
@@ -197,4 +199,21 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps)(MainBlock2OutstandingStats);
+```
+
+```js
+import React from 'react'
+
+import MainBlock1Card from '../MainBlock1Card'
+
+const GraphTotalValueDepositArea = (props) => {
+
+  return (
+    <MainBlock1Card minHeight="345px" flexGrow={1}>
+              Chart 1
+            </MainBlock1Card>
+  )
+}
+
+export default GraphTotalValueDepositArea
 ```

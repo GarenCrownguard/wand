@@ -55,6 +55,7 @@ const theme = extendTheme({
           color: "white",
           fontWeight: 700,
           fontSize: "17px",
+          textTransform: 'none'
         },
         title: {
           color: "#B1AFCD",

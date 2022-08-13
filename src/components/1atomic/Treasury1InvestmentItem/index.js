@@ -3,6 +3,8 @@ import React from "react";
 import { Tr, Link, Td } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
+import { prettifyamounts } from "resources/utilities";
+
 const Treasury1InvestmentItem = (props) => {
   /* EXAMPLE */
   /* 
@@ -28,22 +30,22 @@ const Treasury1InvestmentItem = (props) => {
     <Tr>
       {/* <Td>{chain}</Td> */}
       <Td>
-        <Link color="teal.500" href={protocolUrl} isExternal>
+        <Link color="wandGreen" href={protocolUrl} isExternal>
           {protocolName}
-          <ExternalLinkIcon mx="2px" />
+          <ExternalLinkIcon mx="5px" mt="-5px" />
         </Link>
       </Td>
-      <Td>{investmentAmount}</Td>
+      <Td>{prettifyamounts(investmentAmount)}</Td>
       <Td>{date}</Td>
-      <Td>{expectedApy}</Td>
+      <Td>{expectedApy}%</Td>
       <Td>
-        <Link color="teal.500" href={transactionLink} isExternal>
+        <Link color="wandGreen" href={transactionLink} isExternal>
           View Transaction
-          <ExternalLinkIcon mx="2px" />
+          <ExternalLinkIcon mx="5px" mt="-5px" />
         </Link>
       </Td>
     </Tr>
-  );
+  )
 };
 
 export default Treasury1InvestmentItem;
