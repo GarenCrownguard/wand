@@ -21,28 +21,29 @@ const initialState = {
   localwalletstats: [
     {
       walletAddress: null,
-      tokenlist: ["sceptertoken", "BATON", "USDC"],
-      sceptertoken: 2000,
-      batontoken: 34000,
-      usdctoken: 2000000,
-      remainingSwapTime: 1660207700,
-      amountOfSptrSwapped: 10000,
-      SptrSellPrice: 12.46,
+      sceptertoken: 5678,
+      batontoken: 4567,
+      usdctoken: 3456,
+      usdttoken: 2345,
+      busdtoken: 1234,
+      remainingSwapTime: 1660507700,
+      amountOfSptrSwapped: 10050,
+      sptrSellPriceAtSwap: 12.46
     },
   ],
   investmentList: [
     {
-      date: "31/05/2022",
-      protocolName: "Anchor",
-      protocolUrl: "https://app.anchorprotocol.com/",
+      date: '31/05/2022',
+      protocolName: 'Anchor',
+      protocolUrl: 'https://app.anchorprotocol.com/',
       investedAmount: 1000000,
       expectedAPY: 20,
       transactionLink:
-        "https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3",
-      chain: "terra",
+        'https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3',
+      chain: 'terra',
     },
-  ],
-};
+  ]
+}
 
 const postReducer = (currentState = initialState, action) => {
   const { type, payload } = action;

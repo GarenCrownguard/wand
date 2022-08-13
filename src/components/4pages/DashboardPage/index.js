@@ -8,9 +8,7 @@ import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
 import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
 import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
 
-import {
-  Flex
-} from "@chakra-ui/react";
+import {Flex, Box} from "@chakra-ui/react";
 
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props;
@@ -23,7 +21,7 @@ const DashboardPage = (props) => {
         justifyContent="space-between"
         m={0}
         p={0}
-        flexDirection={["column", "column", "row"]}
+        flexDirection={['column', 'column', 'row']}
       >
         <Flex flexDirection="column" width="100%">
           <MainBlock1Card p="25px" minHeight="111px">
@@ -38,7 +36,7 @@ const DashboardPage = (props) => {
             />
           </MainBlock1Card>
           <MainBlock1Card minHeight="222px" flexDirection="column">
-            <Flex flexDirection={["column", "column", "row"]}>
+            <Flex flexDirection={['column', 'column', 'row']}>
               <MainBlock2StatsText
                 title="$SCEPTER Treasury Value"
                 value={prettifyamounts(stats.scepterTreasuryValue)}
@@ -48,7 +46,7 @@ const DashboardPage = (props) => {
                 value={prettifyamounts(stats.riskTreasuryValue)}
               />
             </Flex>
-            <Flex flexDirection={["column", "column", "row"]}>
+            <Flex flexDirection={['column', 'column', 'row']}>
               <MainBlock2StatsText
                 title="Airdrops distributed (last 3 months)"
                 value={prettifyamounts(stats.airdrops3Months)}
@@ -62,7 +60,7 @@ const DashboardPage = (props) => {
         </Flex>
         <MainBlock1Card
           minHeight="345px"
-          minWidth={["320px", "356px", "356px"]}
+          minWidth={['320px', '356px', '356px']}
         >
           Chart 1
         </MainBlock1Card>
@@ -87,20 +85,20 @@ const DashboardPage = (props) => {
         />
       </MainBlock1Card>
       <MainBlock3HeaderText text="Treasuries Overview" />
-      <Flex flexDirection={["column", "column", "row"]}>
+      <Flex flexDirection={['column', 'column', 'row']}>
         <MainBlock1Card minHeight="345px" flexGrow={1}>
           Chart 1
         </MainBlock1Card>
         <MainBlock1Card
           minHeight="345px"
-          minWidth={["320px", "356px", "356px"]}
+          minWidth={['320px', '356px', '356px']}
         >
           Chart 2
         </MainBlock1Card>
       </Flex>
       <Flex
         justifyContent="space-between"
-        flexDirection={["column", "column", "row"]}
+        flexDirection={['column', 'column', 'row']}
       >
         <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
@@ -130,8 +128,9 @@ const DashboardPage = (props) => {
           />
         </MainBlock1Card>
       </Flex>
+      <Box h="70px" /* Only for spacing*/ />
     </>
-  );
+  )
 };
 
 const mapStateToProps = (state) => {

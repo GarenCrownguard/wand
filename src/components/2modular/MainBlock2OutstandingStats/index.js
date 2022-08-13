@@ -38,7 +38,7 @@ const MainBlock2OutstandingStats = (props) => {
           opacity={0.9}
           boxShadow="0px 1.92982px 14.9561px #BA1358;"
           h="42px"
-          maxWidth={["90%", "330px", "330px"]}
+          maxWidth={['90%', '330px', '330px']}
           borderRadius="5px"
           m="7px"
           mb="13px"
@@ -46,7 +46,7 @@ const MainBlock2OutstandingStats = (props) => {
           <AlertTitle>
             <Text fontSize="14px" fontWeight={400}>
               Your outstanding locked amount
-              <Icon viewBox="0 0 12 12" ml={["15px", "15px", "20px"]}>
+              <Icon viewBox="0 0 12 12" ml={['15px', '15px', '20px']}>
                 <IconBottomRightArrow fill="white" />
               </Icon>
             </Text>
@@ -57,10 +57,10 @@ const MainBlock2OutstandingStats = (props) => {
             fontSize="10px"
             bg="black"
             ml="auto"
-            mr={["-10px", "-10px", "5px"]}
+            mr={['-10px', '-10px', '5px']}
             _hover={{
-              background: "black",
-              color: "white",
+              background: 'black',
+              color: 'white',
             }}
             onClick={onClose}
             icon={<CloseIcon />}
@@ -79,12 +79,12 @@ const MainBlock2OutstandingStats = (props) => {
         />
         <MainBlock2StatsText
           title="SCEPTER Sell Price at swap (USD)"
-          value={prettifyamounts(localwalletstats.SptrSellPrice)}
+          value={prettifyamounts(localwalletstats.sptrSellPriceAtSwap)}
         />
       </MainBlock1Card>
       <Box h="30px" /* Only for spacing*/ />
     </>
-  );
+  )
 };
 
 const mapStateToProps = (state) => {

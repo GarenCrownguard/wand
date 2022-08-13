@@ -11,7 +11,6 @@ function ConnectButton(props) {
   const { handleOpenModal, isMobile, localwalletstats} = props;
 
   const [account, setAccount] = useState(null);
-  // const [SPTRbalance, setSPTRbalance] = useState("2.3568");
   const toast = useToast();
 
   // console.log(isMobile);
@@ -50,26 +49,30 @@ function ConnectButton(props) {
       borderRadius="xl"
       py="0"
     >
-      {/* <Box px="3">
-        <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
-          {SPTRbalance && parseFloat(SPTRbalance).toFixed(3)} SPTR
-        </Text>
-      </Box> */}
+      {!isMobile && (
+        <Box px="3">
+          <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
+            {localwalletstats.sceptertoken &&
+              parseFloat(localwalletstats.sceptertoken).toFixed(2)}{' '}
+            SPTR
+          </Text>
+        </Box>
+      )}
       <Button
         onClick={handleOpenModal}
         bg="gray.800"
         border="1px solid transparent"
         leftIcon={<IconWallet fill="currentColor" />}
         _hover={{
-          border: "1px",
-          borderStyle: "solid",
-          borderColor: "blue.400",
-          backgroundColor: "gray.700",
+          border: '1px',
+          borderStyle: 'solid',
+          borderColor: 'blue.400',
+          backgroundColor: 'gray.700',
         }}
         borderRadius="xl"
         m="1px"
         px={3}
-        height={isMobile ? "30px" : "38px"}
+        height={isMobile ? '30px' : '38px'}
       >
         <Text
           color="white"
@@ -105,10 +108,10 @@ function ConnectButton(props) {
         borderRadius="xl"
         border="1px solid transparent"
         _hover={{
-          borderColor: "grey",
+          borderColor: 'grey',
           boxShadow:
-            "-2px -4px 20px rgba(42, 224, 191, 0.2), 0px 4px 20px rgba(234, 58, 246, 0.25)",
-          color: "grey",
+            '-2px -4px 20px rgba(42, 224, 191, 0.2), 0px 4px 20px rgba(234, 58, 246, 0.25)',
+          color: 'grey',
         }}
       >
         <Text
@@ -122,7 +125,7 @@ function ConnectButton(props) {
       </Button>
       {localwalletstats.walletAddress}
     </>
-  );
+  )
 }
 
 const mapStateToProps = (state) => {
