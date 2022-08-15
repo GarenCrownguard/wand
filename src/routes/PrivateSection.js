@@ -13,7 +13,7 @@ import PrivateRoutes from "./PrivateRoutes";
 
 import { connect } from "react-redux";
 
-function PrivateSection() {
+const PrivateSection = () => {
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 

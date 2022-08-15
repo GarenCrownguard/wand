@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Box, Text, Icon } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
+import * as reducer from 'redux/reducerCalls'
 
-import { UPDATE_ADDRESS } from 'redux/reducerCalls'
-
-function ConnectButton(props) {
+const ConnectButton = (props) =>{
   const { handleOpenModal, isMobile, localwalletstats } = props
 
-  const [account, setAccount] = useState(null)
+  const account = localwalletstats.walletAddress
   const toast = useToast()
-
-  // console.log(isMobile);
 
   const handleConnectWallet = async () => {
     const { ethereum } = window
+
     if (!ethereum) {
       toast({
         title: 'No wallet detected!',
@@ -26,19 +24,38 @@ function ConnectButton(props) {
           width: '50px',
         },
       })
-    }
+    } else {
+      try {
+        const accounts = await ethereum.request({
+          method: 'eth_requestAccounts',
+        })
 
-    try {
-      const accounts = await ethereum.request({
-        method: 'eth_requestAccounts',
-      })
-      // console.log("Found an account! Address: ", accounts[0]);
-      UPDATE_ADDRESS({ walletAddress: accounts[0] })
-      setAccount(accounts[0])
-    } catch (err) {
-      console.log(err)
+        if (accounts.length !== 0) {
+          const account = accounts[0]
+          // console.log('Found an authorized account: ', account)
+
+          reducer.UPDATE_ADDRESS({ walletAddress: account })
+        } else {
+          // console.log('No authorized account found')
+          toast({
+            title: 'Wallet detected but something went wrong!',
+            status: 'error',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '50px',
+            },
+          })
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
+
+  useEffect(() => {
+    handleConnectWallet()
+  }, [])
 
   return account ? (
     <Box
@@ -95,43 +112,40 @@ function ConnectButton(props) {
       </Button>
     </Box>
   ) : (
-    <>
-      <Button
-        onClick={handleConnectWallet}
-        bg="transparent"
+    <Button
+      onClick={handleConnectWallet}
+      bg="transparent"
+      color="white"
+      size="md"
+      fontSize={isMobile ? 14 : 19}
+      fontWeight="light"
+      leftIcon={<IconWallet fill="currentColor" />}
+      borderRadius="xl"
+      border="1px solid transparent"
+      _hover={{
+        borderColor: 'grey',
+        boxShadow:
+          '-2px -4px 20px rgba(42, 224, 191, 0.2), 0px 4px 20px rgba(234, 58, 246, 0.25)',
+        color: 'grey',
+      }}
+    >
+      <Text
         color="white"
-        size="md"
         fontSize={isMobile ? 14 : 19}
         fontWeight="light"
-        leftIcon={<IconWallet fill="currentColor" />}
-        borderRadius="xl"
-        border="1px solid transparent"
-        _hover={{
-          borderColor: 'grey',
-          boxShadow:
-            '-2px -4px 20px rgba(42, 224, 191, 0.2), 0px 4px 20px rgba(234, 58, 246, 0.25)',
-          color: 'grey',
-        }}
+        mt="5px"
       >
-        <Text
-          color="white"
-          fontSize={isMobile ? 14 : 19}
-          fontWeight="light"
-          mt="5px"
-        >
-          Connect wallet
-        </Text>
-      </Button>
-      {localwalletstats.walletAddress}
-    </>
+        Connect wallet
+      </Text>
+    </Button>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
+    stats: state.stats,
 
-    localwalletstats: state.localwalletstats[0],
+    localwalletstats: state.localwalletstats,
   }
 }
 

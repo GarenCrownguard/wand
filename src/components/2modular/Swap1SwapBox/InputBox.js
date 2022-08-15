@@ -22,7 +22,7 @@ const InputBox = (props) => {
     setIsModalFrom,
   } = props
 
-  function handelOnClick() {
+  const handelOnClick = () =>{
     handleOpenModal()
     setIsModalFrom(from)
   }
@@ -124,9 +124,9 @@ const InputBox = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
+    stats: state.stats,
 
-    localwalletstats: state.localwalletstats[0],
+    localwalletstats: state.localwalletstats,
   }
 }
 export default connect(mapStateToProps)(InputBox)

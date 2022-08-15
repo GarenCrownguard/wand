@@ -148,9 +148,9 @@ const Treasury2IndividualDetails = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
+    stats: state.stats,
 
-    localwalletstats: state.localwalletstats[0],
+    localwalletstats: state.localwalletstats,
   }
 }
 export default connect(mapStateToProps)(Treasury2IndividualDetails)

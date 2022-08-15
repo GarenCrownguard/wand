@@ -7,7 +7,6 @@ import store from "./store";
 import * as actions from './action.types';
 
 export const GET_FE_STATS = async (props) => {
-  const { API_URL } = props;
 
   // store.dispatch({
   //   type: actions.GET_FE_STATS,
@@ -17,21 +16,8 @@ export const GET_FE_STATS = async (props) => {
   // });
 };
 
-export const GET_TRANSACTION_LIST = async (props) => {
-  // Implemented filter by just userID. Filtering by ID or both should be easy with few if statements.
-  const { API_URL, userId } = props;
-
-  store.dispatch({
-    type: actions.GET_TRANSACTION_LIST,
-    payload: {
-      userId: userId,
-    },
-  });
-};
-
 export const UPDATE_ADDRESS = async (props) => {
   const { walletAddress } = props;
-  console.log(walletAddress);
   store.dispatch({
     type: actions.UPDATE_ADDRESS,
     payload: {
@@ -39,3 +25,12 @@ export const UPDATE_ADDRESS = async (props) => {
     },
   });
 };
+
+export const WALLET_DISCONNECT = async (props) => {
+  store.dispatch({
+    type: actions.WALLET_DISCONNECT,
+    payload: {
+
+    }
+  })
+}

@@ -11,7 +11,7 @@ const ContractInteractionPage = lazy(() =>
 )
 
 
-function PrivateRoutes() {
+const PrivateRoutes = () => {
   return (
     <Suspense>
       <Switch>

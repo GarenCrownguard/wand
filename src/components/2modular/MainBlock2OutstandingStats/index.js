@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 
 import {
   Alert,
@@ -9,25 +9,22 @@ import {
   IconButton,
   Icon,
   Box,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
-import { CloseIcon } from "@chakra-ui/icons";
-import MainBlock1Card from "components/1atomic/MainBlock1Card";
-import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
-import MainBlock4CountdownTimer from "components/1atomic/MainBlock4CountdownTimer";
+import { CloseIcon } from '@chakra-ui/icons'
+import MainBlock1Card from 'components/1atomic/MainBlock1Card'
+import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
+import MainBlock4CountdownTimer from 'components/1atomic/MainBlock4CountdownTimer'
 
-import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
-import IconBottomRightArrow from "./icon";
+import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
+import IconBottomRightArrow from './icon'
 
 const MainBlock2OutstandingStats = (props) => {
-  const { localwalletstats } = props;
+  const { localwalletstats } = props
 
-  const {
-    isOpen: isAlertVisible,
-    onClose,
-  } = useDisclosure({
+  const { isOpen: isAlertVisible, onClose } = useDisclosure({
     defaultIsOpen: true,
-  });
+  })
 
   return (
     <>
@@ -85,11 +82,11 @@ const MainBlock2OutstandingStats = (props) => {
       <Box h="30px" /* Only for spacing*/ />
     </>
   )
-};
+}
 
 const mapStateToProps = (state) => {
   return {
-    localwalletstats: state.localwalletstats[0]
-  };
-};
-export default connect(mapStateToProps)(MainBlock2OutstandingStats);
+    localwalletstats: state.localwalletstats,
+  }
+}
+export default connect(mapStateToProps)(MainBlock2OutstandingStats)

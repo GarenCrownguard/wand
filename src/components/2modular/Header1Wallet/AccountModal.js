@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from 'react'
+import { connect } from 'react-redux'
 import {
   Box,
   Button,
@@ -12,47 +13,14 @@ import {
   ModalCloseButton,
   Text,
   Icon,
-} from "@chakra-ui/react";
-import { ExternalLinkIcon, CopyIcon } from "@chakra-ui/icons";
-import { useToast } from "@chakra-ui/react";
+} from '@chakra-ui/react'
+import { ExternalLinkIcon, CopyIcon } from '@chakra-ui/icons'
+import * as reducer from 'redux/reducerCalls'
 
-
-export default function AccountModal({ isOpen, onClose, isMobile }) {
-  const [account, setAccount] = useState(null)
-  const toast = useToast()
-
-  useEffect(() => {
-    async function accountdata() {
-      const { ethereum } = window
-
-      if (!ethereum) {
-        toast({
-          title: 'No wallet detected!',
-          status: 'warning',
-          duration: 1000,
-          position: 'bottom-right',
-          containerStyle: {
-            width: '50px',
-          },
-        })
-      }
-
-      try {
-        const accounts = await ethereum.request({
-          method: 'eth_requestAccounts',
-        })
-        console.log('Found an account! Address: ', accounts[0])
-        setAccount(accounts[0])
-      } catch (err) {
-        console.log(err)
-      }
-    }
-
-    accountdata()
-  })
-
-  function handleDeactivateAccount() {
-    setAccount(null)
+const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
+  const account = localwalletstats.walletAddress;
+  const handleDeactivateAccount = ()=> {
+    reducer.WALLET_DISCONNECT();
     onClose()
   }
 
@@ -171,3 +139,10 @@ export default function AccountModal({ isOpen, onClose, isMobile }) {
     </Modal>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    localwalletstats: state.localwalletstats,
+  }
+}
+export default connect(mapStateToProps)(AccountModal)

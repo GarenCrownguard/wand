@@ -1,27 +1,93 @@
-import React from 'react'
-// Everything is AVAX interaction
+import React, { useState } from 'react'
+import { ethers } from 'ethers'
+import { connect } from 'react-redux'
 
-import mockUSDCabi from 'contracts/abi/AVAXChainTestnet/mockUSDC.json'
-import SPTRabi from 'contracts/abi/AVAXChainTestnet/SPTR.json'
-import BATONabi from 'contracts/abi/AVAXChainTestnet/BATON.json'
-import wandabi from 'contracts/abi/AVAXChainTestnet/wand.json'
+import { abis } from 'contracts/abis'
+import { contractAddresses } from 'contracts/addresses'
+import * as reducer from 'redux/reducerCalls'
 
-import { Button } from '@chakra-ui/react'
+import { Button, useToast, Box } from '@chakra-ui/react'
 
 const ContractInteractionPage = (props) => {
+  const { localwalletstats } = props
+  const account = localwalletstats.walletAddress
+  const toast = useToast()
 
-    /* AVAX Testnet Contract Addresses */
-    const mockUSDC = '0x8f2431dcb2Ad3581cb1f75FA456931e7A15C6d43';
-    const SPTR = '0xD8098BE05A7d32636f806660E40451ab1df3f840'
-    const BATON = '0x0A0AebE2ABF81bd34d5dA7E242C0994B51fF5c1f'
-    const wand = '0x39920479F867C393408844DD588D3B51b960233B'
+  const handleConnectWallet = async () => {
+    const { ethereum } = window
 
+    if (!ethereum) {
+      toast({
+        title: 'No wallet detected!',
+        status: 'warning',
+        duration: 1000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '50px',
+        },
+      })
+    } else {
+      try {
+        const accounts = await ethereum.request({
+          method: 'eth_requestAccounts',
+        })
 
+        if (accounts.length !== 0) {
+          const account = accounts[0]
+          // console.log('Found an authorized account: ', account)
+          toast({
+            title: 'Wallet connected!',
+            status: 'success',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '50px',
+            },
+          })
+          reducer.UPDATE_ADDRESS({ walletAddress: account })
+        } else {
+          // console.log('No authorized account found')
+          toast({
+            title: 'Wallet detected but something went wrong!',
+            status: 'error',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '50px',
+            },
+          })
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+  const handleDisconnectWallet = () => {
+    reducer.WALLET_DISCONNECT()
+  }
   return (
     <>
+      {!account && (
+        <Button onClick={handleConnectWallet} colorScheme="blue">
+          Connect wallet
+        </Button>
+      )}
+      {account && (
+        <Button onClick={handleDisconnectWallet} colorScheme="blue">
+          Disconnect wallet
+        </Button>
+      )}
+      {account}
+      <Box bg='transparent' h='10px'/>
+      <Button colorScheme="blue">Button</Button>
       <Button colorScheme="blue">Button</Button>
     </>
   )
 }
 
-export default ContractInteractionPage
+const mapStateToProps = (state) => {
+  return {
+    localwalletstats: state.localwalletstats,
+  }
+}
+export default connect(mapStateToProps)(ContractInteractionPage)

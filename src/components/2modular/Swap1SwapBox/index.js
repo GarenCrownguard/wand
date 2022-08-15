@@ -78,7 +78,7 @@ const Swap1SwapBox = (props) => {
   console.log(tokenlist.filter((eachtoken) => eachtoken.name === 'BATON')[0])
   */
 
-  function swapClickHandler() {
+  const swapClickHandler = ()=> {
     setSwapFromToken(swapToToken)
     setSwapToToken(swapFromToken)
   }
@@ -177,9 +177,9 @@ const Swap1SwapBox = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
+    stats: state.stats,
 
-    localwalletstats: state.localwalletstats[0],
+    localwalletstats: state.localwalletstats,
   }
 }
 export default connect(mapStateToProps)(Swap1SwapBox)

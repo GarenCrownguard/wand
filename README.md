@@ -219,9 +219,9 @@ const MainBlock2OutstandingStats = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
+    stats: state.stats,
 
-    localwalletstats: state.localwalletstats[0],
+    localwalletstats: state.localwalletstats,
   }
 }
 export default connect(mapStateToProps)(MainBlock2OutstandingStats)
