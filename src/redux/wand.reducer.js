@@ -14,7 +14,6 @@ const initialState = {
       scepterSellPrice: 11.2,
       sellFactor: 0.3,
       batonRedeemingPrice: 5.4234,
-      currentWalletScepterAmount: 100.0,
       addmore: [],
     },
   ],
@@ -26,7 +25,7 @@ const initialState = {
       usdctoken: 3456,
       usdttoken: 2345,
       busdtoken: 1234,
-      remainingSwapTime: 1660507700,
+      remainingSwapTime: 1665507700,
       amountOfSptrSwapped: 10050,
       sptrSellPriceAtSwap: 12.46
     },

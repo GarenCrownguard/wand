@@ -1,4 +1,7 @@
 const links = {
+  /* Development */
+  contractionInteraction: '/contract-interaction',
+
   /* side-bar route */
   dashboard: '/dashboard',
   account: '/account',
