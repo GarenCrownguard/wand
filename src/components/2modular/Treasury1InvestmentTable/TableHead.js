@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SimpleGrid, Text, chakra, Divider } from '@chakra-ui/react'
+import { SimpleGrid, Text, chakra } from '@chakra-ui/react'
 
 const TableHead = ({ isMobile }) => {
   return (

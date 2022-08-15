@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Tr, Link, Td, Flex, SimpleGrid, chakra } from '@chakra-ui/react'
+import { Link, Flex, SimpleGrid, chakra } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 import { prettifyamounts } from 'resources/utilities'

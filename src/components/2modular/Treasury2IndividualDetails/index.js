@@ -36,7 +36,7 @@ const tooltipunselectedstyles = {
 }
 
 const Treasury2IndividualDetails = (props) => {
-  const { stats, investmentList, localwalletstats } = props
+  // const { stats, investmentList, localwalletstats } = props
   const [tabIndex, setTabIndex] = useState(0)
 
   return (

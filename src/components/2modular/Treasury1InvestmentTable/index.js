@@ -54,22 +54,23 @@ const Treasury1InvestmentTable = () => {
             <Divider />
           </>
         )}
-        {investmentList.map((investment, tid) => (
-          <>
-            <Treasury1InvestmentItem
-              key={tid}
-              // chain={investment.chain}
-              protocolName={investment.protocolName}
-              protocolUrl={investment.protocolURL}
-              investmentAmount={investment.investedAmount}
-              date={investment.date}
-              expectedApy={investment.expectedAPY}
-              transactionLink={investment.transactionLink}
-              isMobile={variantScreenSize.isMobile}
-            />
-            <Divider />
-          </>
-        ))}
+        {React.Children.toArray(
+          investmentList.map((investment) => (
+            <>
+              <Treasury1InvestmentItem
+                // chain={investment.chain}
+                protocolName={investment.protocolName}
+                protocolUrl={investment.protocolURL}
+                investmentAmount={investment.investedAmount}
+                date={investment.date}
+                expectedApy={investment.expectedAPY}
+                transactionLink={investment.transactionLink}
+                isMobile={variantScreenSize.isMobile}
+              />
+              <Divider />
+            </>
+          ))
+        )}
       </Stack>
     </Flex>
   )

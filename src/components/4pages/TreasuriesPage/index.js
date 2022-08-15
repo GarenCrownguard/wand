@@ -1,20 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   Flex,
   Box,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Text,
-  Tooltip,
 } from '@chakra-ui/react'
 
 import Treasury1InvestmentTable from 'components/2modular/Treasury1InvestmentTable'
 
-import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 import MainBlock3HeaderText from 'components/1atomic/MainBlock3HeaderText'
 import Treasury2IndividualDetails from 'components/2modular/Treasury2IndividualDetails'
 import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEvolutionOfTreasuriesStacked'

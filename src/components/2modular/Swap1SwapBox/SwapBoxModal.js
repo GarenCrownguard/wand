@@ -50,10 +50,10 @@ export default function SwapBoxModal({
           <Flex direction="column">
             {tokenlist
               .filter((eachtoken) => eachtoken.name === otherToken)[0]
-              .canSwapTo.map((eachtokenName) => {
+              .canSwapTo.map((eachtokenName, key) => {
                 return (
                   <Button
-                    key={Math.random()}
+                    key={key}
                     variant="outline"
                     color="wandGreen"
                     fontSize="13px"
