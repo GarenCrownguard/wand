@@ -12,7 +12,6 @@
     "@emotion/styled": "^11.10.0",
     "axios": "^0.27.2",
     "babel-loader": "8.1.0",
-    "concurrently": "^7.3.0",
     "css-loader": "^6.7.1",
     "framer-motion": "^4.1.17",
     "json-loader": "^0.5.7",
@@ -30,7 +29,6 @@
     "start-api": "node api/index.js",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
-    "dev": "concurrently --kill-others \"npm start\" \"npm run start-api\""
   },
   "eslintConfig": {
     "extends": [
