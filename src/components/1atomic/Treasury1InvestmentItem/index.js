@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react'
 
-import { Tr, Link, Td } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Tr, Link, Td, Flex, SimpleGrid, chakra } from '@chakra-ui/react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
-import { prettifyamounts } from "resources/utilities";
+import { prettifyamounts } from 'resources/utilities'
+import TableHead from 'components/2modular/Treasury1InvestmentTable/TableHead'
 
 const Treasury1InvestmentItem = (props) => {
   /* EXAMPLE */
@@ -24,28 +25,62 @@ const Treasury1InvestmentItem = (props) => {
     date,
     expectedApy,
     transactionLink,
-  } = props;
+    isMobile,
+  } = props
 
   return (
-    <Tr>
-      {/* <Td>{chain}</Td> */}
-      <Td>
-        <Link color="wandGreen" href={protocolUrl} isExternal>
-          {protocolName}
-          <ExternalLinkIcon mx="5px" mt="-5px" />
-        </Link>
-      </Td>
-      <Td>{prettifyamounts(investmentAmount)}</Td>
-      <Td>{date}</Td>
-      <Td>{expectedApy}%</Td>
-      <Td>
-        <Link color="wandGreen" href={transactionLink} isExternal>
-          View Transaction
-          <ExternalLinkIcon mx="5px" mt="-5px" />
-        </Link>
-      </Td>
-    </Tr>
-  )
-};
+    <Flex
+      direction={{
+        base: 'row',
+        md: 'column',
+      }}
+    >
+      {isMobile && <TableHead isMobile={isMobile} />}
+      <SimpleGrid
+        spacingY={3}
+        columns={{
+          base: 1,
+          md: 5,
+        }}
+        w="full"
+        py={2}
+        px={10}
+        fontWeight="hairline"
+      >
+        <chakra.span
+          textOverflow="ellipsis"
+          overflow="hidden"
+          whiteSpace="nowrap"
+          color="black"
+        >
+          <Link color="wandGreen" href={protocolUrl} isExternal>
+            {protocolName}
+            <ExternalLinkIcon mx="5px" mt="-5px" />
+          </Link>
+        </chakra.span>
+        <chakra.span
+          textOverflow="ellipsis"
+          overflow="hidden"
+          whiteSpace="nowrap"
+        >
+          {prettifyamounts(investmentAmount)}
+        </chakra.span>
+        <Flex>{date}</Flex>
+        <Flex>{expectedApy} %</Flex>
+        <Flex
+          justify={{
+            md: 'start',
+          }}
+        >
+          <Link color="wandGreen" href={transactionLink} isExternal>
+            {isMobile ? 'View' : 'View Transaction'}
 
-export default Treasury1InvestmentItem;
+            <ExternalLinkIcon mx="5px" mt="-5px" />
+          </Link>
+        </Flex>
+      </SimpleGrid>
+    </Flex>
+  )
+}
+
+export default Treasury1InvestmentItem

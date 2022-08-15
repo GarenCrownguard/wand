@@ -20,8 +20,6 @@ import Treasury2IndividualDetails from 'components/2modular/Treasury2IndividualD
 import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEvolutionOfTreasuriesStacked'
 import GraphTreasuryAllocationDonut from 'components/1atomic/Graphs/GraphTreasuryAllocationDonut'
 
-import Newtable from 'components/2modular/Treasury1InvestmentTable/newtable'
-
 const TreasuriesPage = () => {
 
   return (
@@ -38,7 +36,7 @@ const TreasuriesPage = () => {
 
       <Treasury1InvestmentTable />
 
-      <Newtable />
+      {/* <Newtable /> */}
       <Box h="70px" /* Only for spacing*/ />
     </>
   )

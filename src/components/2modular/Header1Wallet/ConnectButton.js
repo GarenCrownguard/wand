@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import IconWallet from "./icon-wallet";
 import { connect } from "react-redux";
 
-import { UPDATE_ADDRESS } from "redux/reducer-calls";
+import { UPDATE_ADDRESS } from "redux/reducerCalls";
 
 function ConnectButton(props) {
 
