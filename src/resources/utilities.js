@@ -1,9 +1,12 @@
-export const convertSlugToUrl = (slug, parameters) => {
-  let url = slug
-  Object.entries(parameters).forEach(([key, value]) => {
-    url = url.replace(`:${key}`, value)
-  })
-  return url
+import { ethers } from 'ethers'
+
+const decimals = {
+  mockUSDC: 6,
+  USDC: 18,
+  DAI: 18,
+  BUSD: 18,
+  SPTR: 18,
+  BATON: 18,
 }
 
 export const prettifytolocalstring = (amount) => {
@@ -22,4 +25,10 @@ export const prettifyGrowthPercentage = (direction, value) => {
   } else {
     return 'Nan'
   }
+}
+
+export const BigNumberFormat = (amount, tokenDecimal) => {
+  return amount && decimals[tokenDecimal]
+    ? ethers.utils.formatUnits(amount, decimals[tokenDecimal])
+    : 'NULL'
 }

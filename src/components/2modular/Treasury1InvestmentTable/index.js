@@ -22,7 +22,7 @@ const Treasury1InvestmentTable = () => {
       investedAmount: 'Updating...',
       protocolName: 'Updating...',
       protocolURL: 'Updating...',
-      transactionLink: 'https://snowtrace.io/',
+      transactionLink: 'https://bscscan.com/',
     },
   ])
 

@@ -120,7 +120,7 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
                 fontSize="sm"
                 display="flex"
                 alignItems="center"
-                href={`https://snowtrace.io/address/${account}`}
+                href={`https://bscscan.com/address/${account}`}
                 isExternal
                 color="gray.400"
                 ml={6}

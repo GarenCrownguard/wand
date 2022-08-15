@@ -5,10 +5,10 @@ const AVAXTestnetContractAddresses = {
   wand: '0x39920479F867C393408844DD588D3B51b960233B',
 }
 const BSCTestnetContractAddresses = {
-  mockUSDC: '',
-  SPTR: '',
-  BATON: '',
-  wand: '',
+  mockUSDC: null,
+  SPTR: null,
+  BATON: null,
+  wand: null,
 }
 const BSCMainnetContractAddresses = {
   USDC: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
@@ -16,9 +16,9 @@ const BSCMainnetContractAddresses = {
   DAI: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
   FRAX: '0x90C97F71E18723b0Cf0dfa30ee176Ab653E89F40',
 
-  SPTR: '',
-  BATON: '',
-  wand: '',
+  SPTR: null,
+  BATON: null,
+  wand: null,
 }
 
 let contractAddresses = {}
@@ -37,4 +37,4 @@ if (process.env.REACT_APP_NETWORK === 'AVAX') {
   console.log('[addresses] Check Environment variables for REACT_APP_NETWORK')
 }
 
-export { contractAddresses }
+export default contractAddresses 

@@ -18,4 +18,5 @@ if (process.env.REACT_APP_NETWORK === 'AVAX') {
   console.log('[abis] Check Environment variables for REACT_APP_NETWORK')
 }
 
-export { abis }
+
+export default abis

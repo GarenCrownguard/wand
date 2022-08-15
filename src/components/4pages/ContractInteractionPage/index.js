@@ -1,31 +1,20 @@
-import React, { useState } from 'react'
-import { ethers } from 'ethers'
+import React from 'react'
 import { connect } from 'react-redux'
-
-import { abis } from 'contracts/abis'
-import { contractAddresses } from 'contracts/addresses'
+import { ethers } from 'ethers'
 import * as reducer from 'redux/reducerCalls'
-
-import { Button, useToast, Box } from '@chakra-ui/react'
+import contracts from 'contracts/contracts'
+import { Button, Box } from '@chakra-ui/react'
+import { BigNumberFormat } from 'resources/utilities'
 
 const ContractInteractionPage = (props) => {
   const { localwalletstats } = props
   const account = localwalletstats.walletAddress
-  const toast = useToast()
 
   const handleConnectWallet = async () => {
     const { ethereum } = window
 
     if (!ethereum) {
-      toast({
-        title: 'No wallet detected!',
-        status: 'warning',
-        duration: 1000,
-        position: 'bottom-right',
-        containerStyle: {
-          width: '50px',
-        },
-      })
+      console.log('no wallet detected')
     } else {
       try {
         const accounts = await ethereum.request({
@@ -34,28 +23,11 @@ const ContractInteractionPage = (props) => {
 
         if (accounts.length !== 0) {
           const account = accounts[0]
-          // console.log('Found an authorized account: ', account)
-          toast({
-            title: 'Wallet connected!',
-            status: 'success',
-            duration: 1000,
-            position: 'bottom-right',
-            containerStyle: {
-              width: '50px',
-            },
-          })
+          console.log('Found an authorized account: ', account)
+
           reducer.UPDATE_ADDRESS({ walletAddress: account })
         } else {
-          // console.log('No authorized account found')
-          toast({
-            title: 'Wallet detected but something went wrong!',
-            status: 'error',
-            duration: 1000,
-            position: 'bottom-right',
-            containerStyle: {
-              width: '50px',
-            },
-          })
+          console.log('No authorized account found')
         }
       } catch (err) {
         console.log(err)
@@ -65,6 +37,19 @@ const ContractInteractionPage = (props) => {
   const handleDisconnectWallet = () => {
     reducer.WALLET_DISCONNECT()
   }
+
+  const getContracts = async () => {
+    let mockUSDCbalance =
+      (await contracts.mockUSDCContract?.balanceOf(account)) ??
+      'mockUSDC getting balance error'
+    console.log(BigNumberFormat(mockUSDCbalance, 'mockUSDC'))
+    let SPTRbalance =
+      (await contracts.SPTRContract?.balanceOf(account)) ??
+      'SPTR getting balance error'
+    console.log(BigNumberFormat(SPTRbalance, 'SPTR'))
+  }
+  getContracts()
+
   return (
     <>
       {!account && (
@@ -78,7 +63,7 @@ const ContractInteractionPage = (props) => {
         </Button>
       )}
       {account}
-      <Box bg='transparent' h='10px'/>
+      <Box bg="transparent" h="10px" />
       <Button colorScheme="blue">Button</Button>
       <Button colorScheme="blue">Button</Button>
     </>
