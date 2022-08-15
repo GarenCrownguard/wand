@@ -1,62 +1,63 @@
-import React, { useEffect, useState } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Text,
-  TableContainer,
-} from "@chakra-ui/react";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Flex, Stack, useBreakpointValue, Divider } from '@chakra-ui/react'
+import * as myConstants from 'resources/constants'
 
-import Treasury1InvestmentItem from "components/1atomic/Treasury1InvestmentItem";
-
-import * as myConstants from "resources/constants";
-import axios from "axios";
+import TableHead from './TableHead'
+import Treasury1InvestmentItem from 'components/1atomic/Treasury1InvestmentItem'
 
 const Treasury1InvestmentTable = () => {
+  const variantScreenSize = useBreakpointValue({
+    base: {
+      isMobile: true,
+    },
+    md: {
+      isMobile: false,
+    },
+  })
+
   const [investmentList, setInvestmentList] = useState([
     {
-      date: "Updating...",
-      chain: "Updating...",
-      expectedAPY: "Updating...",
-      investedAmount: "Updating...",
-      protocolName: "Updating...",
-      protocolURL: "Updating...",
-      transactionLink: "https://snowtrace.io/",
+      date: 'Updating...',
+      chain: 'Updating...',
+      expectedAPY: 'Updating...',
+      investedAmount: 'Updating...',
+      protocolName: 'Updating...',
+      protocolURL: 'Updating...',
+      transactionLink: 'https://snowtrace.io/',
     },
-  ]);
+  ])
 
   useEffect(() => {
     async function getdata() {
       await axios
         .get(`${myConstants.API_URL}/investment-list-data`)
         .then((res) => {
-          setInvestmentList(res.data);
-        });
+          setInvestmentList(res.data)
+        })
     }
-    getdata();
-  }, []);
+    getdata()
+  }, [])
 
   return (
-    <TableContainer>
-      <Table variant="simple" size="md" colorScheme="Red.400">
-        <Thead>
-          <Tr>
-            {/* <Th>Chain</Th> */}
-            <Th>
-              <Text variant="investment-heading-text">Protocol</Text>
-            </Th>
-            <Th>Investment</Th>
-            <Th>Date</Th>
-            <Th>Expected APY</Th>
-            <Th>Transaction Details</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {investmentList.map((investment) => (
+    <Flex w="full" alignItems="center" justifyContent="center">
+      <Stack
+        direction={{
+          base: 'column',
+        }}
+        w="full"
+        shadow="lg"
+      >
+        {!variantScreenSize.isMobile && (
+          <>
+            <TableHead isMobile={variantScreenSize.isMobile} />
+            <Divider />
+          </>
+        )}
+        {investmentList.map((investment, tid) => (
+          <>
             <Treasury1InvestmentItem
-              key={investment.date}
+              key={tid}
               // chain={investment.chain}
               protocolName={investment.protocolName}
               protocolUrl={investment.protocolURL}
@@ -64,12 +65,14 @@ const Treasury1InvestmentTable = () => {
               date={investment.date}
               expectedApy={investment.expectedAPY}
               transactionLink={investment.transactionLink}
+              isMobile={variantScreenSize.isMobile}
             />
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
-  );
-};
+            <Divider />
+          </>
+        ))}
+      </Stack>
+    </Flex>
+  )
+}
 
-export default Treasury1InvestmentTable;
+export default Treasury1InvestmentTable

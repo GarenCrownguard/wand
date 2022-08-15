@@ -165,6 +165,10 @@ Structure:
 <!-- Deploying react app to github -->
 
 https://betterprogramming.pub/how-to-host-your-react-app-on-github-pages-for-free-919ad201a4cb#:~:text=When%20you've%20successfully%20deployed,is%20hosted%20on%20GitHub%20Pages.
+<!-- Add the following to package.json -->
+
+"homepage": "https://garencrownguard.github.io/wand-deploy",
+
 
 
 <!-- Deploying react app to heroku -->
@@ -188,6 +192,8 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 3. state for isMobile classname.
 4. emmet/ eslint
 5. MainBlock1Card refactoring
+6. Skeleton for cards to load.
+7. Loading spinners on buttons
 
 # Template
 ```js
@@ -212,4 +218,21 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps)(MainBlock2OutstandingStats);
+```
+
+```js
+import React from 'react'
+
+import MainBlock1Card from '../MainBlock1Card'
+
+const GraphTotalValueDepositArea = (props) => {
+
+  return (
+    <MainBlock1Card minHeight="345px" flexGrow={1}>
+              Chart 1
+            </MainBlock1Card>
+  )
+}
+
+export default GraphTotalValueDepositArea
 ```

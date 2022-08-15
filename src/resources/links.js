@@ -40,7 +40,8 @@ const links = {
   medium: 'https://medium.com/@WAND-Investments',
   twitter: 'https://twitter.com/WANDinvestments',
   discord: 'https://discord.gg/wand',
-  youtube: 'https://www.youtube.com/channel/UC26jsp29LKvF2KpY6dXW6Zw?sub_confirmation=1',
+  youtube:
+    'https://www.youtube.com/channel/UC26jsp29LKvF2KpY6dXW6Zw?sub_confirmation=1',
   telegram: '',
 }
 

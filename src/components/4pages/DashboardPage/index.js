@@ -7,7 +7,8 @@ import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
 import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
 import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
 import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
-
+import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEvolutionOfTreasuriesStacked'
+import GraphTreasuryAllocationDonut from 'components/1atomic/Graphs/GraphTreasuryAllocationDonut'
 import {Flex, Box} from "@chakra-ui/react";
 
 const DashboardPage = (props) => {
@@ -86,15 +87,8 @@ const DashboardPage = (props) => {
       </MainBlock1Card>
       <MainBlock3HeaderText text="Treasuries Overview" />
       <Flex flexDirection={['column', 'column', 'row']}>
-        <MainBlock1Card minHeight="345px" flexGrow={1}>
-          Chart 1
-        </MainBlock1Card>
-        <MainBlock1Card
-          minHeight="345px"
-          minWidth={['320px', '356px', '356px']}
-        >
-          Chart 2
-        </MainBlock1Card>
+        <GraphEvolutionOfTreasuriesStacked />
+        <GraphTreasuryAllocationDonut />
       </Flex>
       <Flex
         justifyContent="space-between"

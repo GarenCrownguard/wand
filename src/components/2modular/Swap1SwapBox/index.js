@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import * as myConstants from 'resources/constants'
 import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 
 import {
@@ -129,7 +128,8 @@ const Swap1SwapBox = (props) => {
       {swapFromToken === 'SPTR' && swapToToken !== 'BATON' && (
         <>
           <Text variant="title" textAlign="left" mb="35px">
-            {myConstants.Disclaimer} -{' '}
+            When you sell SCEPTER, you have a maximum of 10 days vesting period
+            with dynamic tax applied&nbsp;-&nbsp;
             <Link color="wandGreen" href={links.disclaimerSPTRSell} isExternal>
               Learn more
             </Link>
