@@ -37,6 +37,11 @@
       "react-app"
     ]
   },
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.13.2",
+    "yarn": "1.22.19"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
