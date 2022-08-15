@@ -1,45 +1,44 @@
-import React, { useState } from "react";
-import { Button, Box, Text, Icon } from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/react";
-import IconWallet from "./icon-wallet";
-import { connect } from "react-redux";
+import React, { useState } from 'react'
+import { Button, Box, Text, Icon } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
+import IconWallet from './icon-wallet'
+import { connect } from 'react-redux'
 
-import { UPDATE_ADDRESS } from "redux/reducerCalls";
+import { UPDATE_ADDRESS } from 'redux/reducerCalls'
 
 function ConnectButton(props) {
+  const { handleOpenModal, isMobile, localwalletstats } = props
 
-  const { handleOpenModal, isMobile, localwalletstats} = props;
-
-  const [account, setAccount] = useState(null);
-  const toast = useToast();
+  const [account, setAccount] = useState(null)
+  const toast = useToast()
 
   // console.log(isMobile);
 
   const handleConnectWallet = async () => {
-    const { ethereum } = window;
+    const { ethereum } = window
     if (!ethereum) {
       toast({
-        title: "No wallet detected!",
-        status: "warning",
+        title: 'No wallet detected!',
+        status: 'warning',
         duration: 1000,
-        position: "bottom-right",
+        position: 'bottom-right',
         containerStyle: {
-          width: "50px",
+          width: '50px',
         },
-      });
+      })
     }
 
     try {
       const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
+        method: 'eth_requestAccounts',
+      })
       // console.log("Found an account! Address: ", accounts[0]);
-      UPDATE_ADDRESS({ walletAddress: accounts[0] });
-      setAccount(accounts[0]);
+      UPDATE_ADDRESS({ walletAddress: accounts[0] })
+      setAccount(accounts[0])
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return account ? (
     <Box
@@ -131,9 +130,9 @@ function ConnectButton(props) {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
-    investmentList: state.investmentList[0],
-    localwalletstats: state.localwalletstats[0],
-  };
-};
 
-export default connect(mapStateToProps)(ConnectButton);
+    localwalletstats: state.localwalletstats[0],
+  }
+}
+
+export default connect(mapStateToProps)(ConnectButton)

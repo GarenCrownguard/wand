@@ -98,7 +98,7 @@ const SwapPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
-    investmentList: state.investmentList[0],
+
     localwalletstats: state.localwalletstats[0],
   }
 }

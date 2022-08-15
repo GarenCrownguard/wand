@@ -19,12 +19,12 @@ const InputBox = (props) => {
     setinputvalue,
     handleOpenModal,
     from,
-    setIsModalFrom
+    setIsModalFrom,
   } = props
 
-  function handelOnClick(){
-    handleOpenModal();
-    setIsModalFrom(from);
+  function handelOnClick() {
+    handleOpenModal()
+    setIsModalFrom(from)
   }
 
   return (
@@ -35,9 +35,9 @@ const InputBox = (props) => {
       backgroundColor="#0B1A28"
       borderRadius="7px"
       maxHeight="60px"
-      border= "1px solid rgba(165, 239, 255, 0.2)"
-      mb='9px'
-      mt='9px'
+      border="1px solid rgba(165, 239, 255, 0.2)"
+      mb="9px"
+      mt="9px"
     >
       <Flex
         alignItems="stretch"
@@ -125,7 +125,7 @@ const InputBox = (props) => {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
-    investmentList: state.investmentList[0],
+
     localwalletstats: state.localwalletstats[0],
   }
 }

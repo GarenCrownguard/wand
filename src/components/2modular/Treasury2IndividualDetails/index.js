@@ -10,7 +10,7 @@ import {
   TabPanel,
   Text,
   Tooltip,
-  Flex
+  Flex,
 } from '@chakra-ui/react'
 
 import GraphTotalValueDepositArea from 'components/1atomic/Graphs/GraphTotalValueDepositArea'
@@ -36,7 +36,7 @@ const tooltipunselectedstyles = {
 }
 
 const Treasury2IndividualDetails = (props) => {
-  // const { stats, investmentList, localwalletstats } = props
+  // const { stats, localwalletstats } = props
   const [tabIndex, setTabIndex] = useState(0)
 
   return (
@@ -149,7 +149,7 @@ const Treasury2IndividualDetails = (props) => {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
-    investmentList: state.investmentList[0],
+
     localwalletstats: state.localwalletstats[0],
   }
 }

@@ -1,18 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import MainBlock1Card from "components/1atomic/MainBlock1Card";
+import React from 'react'
+import { connect } from 'react-redux'
+import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 
-import MainBlock2StatsText from "components/1atomic/MainBlock2StatsText";
+import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
 
-import MainBlock2Divider from "components/1atomic/MainBlock2Divider";
-import MainBlock3HeaderText from "components/1atomic/MainBlock3HeaderText";
-import { prettifytolocalstring, prettifyamounts } from "resources/utilities";
+import MainBlock2Divider from 'components/1atomic/MainBlock2Divider'
+import MainBlock3HeaderText from 'components/1atomic/MainBlock3HeaderText'
+import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
 import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEvolutionOfTreasuriesStacked'
 import GraphTreasuryAllocationDonut from 'components/1atomic/Graphs/GraphTreasuryAllocationDonut'
-import {Flex, Box} from "@chakra-ui/react";
+import { Flex, Box } from '@chakra-ui/react'
 
 const DashboardPage = (props) => {
-  const { stats, localwalletstats } = props;
+  const { stats, localwalletstats } = props
 
   // console.log(useBreakpointValue(["base", "sm screen", "large screen"]));
 
@@ -125,13 +125,13 @@ const DashboardPage = (props) => {
       <Box h="70px" /* Only for spacing*/ />
     </>
   )
-};
+}
 
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
-    investmentList: state.investmentList[0],
+
     localwalletstats: state.localwalletstats[0],
-  };
-};
-export default connect(mapStateToProps)(DashboardPage);
+  }
+}
+export default connect(mapStateToProps)(DashboardPage)

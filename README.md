@@ -4,12 +4,13 @@ FrontEnd for Wand Investments project.
 
 git config --global user.name "Garen Crowngaurd"
 git config --global user.email 0xgaren@protonmail.com
+
 # Metamask
 
 1. https://github.com/MetaMask/test-dapp Test: https://metamask.github.io/test-dapp/
 
-
 # REPO REFERENCE
+
 [1] Dynamic screen size: https://github.com/kingflamez/use-screen-size
 
 [2] Burger menu: https://github.com/negomi/react-burger-menu
@@ -37,9 +38,10 @@ git config --global user.email 0xgaren@protonmail.com
 11. yarn
 12. start git-bash
 
+#### Wand inestments responsive design:
 
-#### Wand inestments responsive design: 
 < 450 width -> mobile
+
 > 450 width -> tablet/ desktop
 
 Common Responsive Breakpoints
@@ -54,18 +56,20 @@ Laptop: 1366 x 768.
 High-res laptop or desktop: 1920 x 1080.
 
 # Decisions:
+
 1. growth/ sell factor is absolute number, no %.
 2. The buy/ sell have a tooltip showing the formula.
 3. 'Your SCEPTER holdings' and 'Your SCEPTER value' -> no graph.
 4. remove the 'minimum received' field from the swap pages
 
-
 # Updates
+
 New contract: https://testnet.snowtrace.io/address/0x17d7d6e0bd141d1e92d2f3dd9f3f4edc33104bbc#readContract
 Function: scepterData
 CONNECTION_STRING = "mongodb+srv://reader:dbReader$2022@cluster0.leenlb7.mongodb.net/?retryWrites=true&w=majority"
 Database: Wand_Data
 Collection: mainContractData and Investments
+
 # Database
 
 ### <|> Transaction List
@@ -122,7 +126,7 @@ Example:
       "USDT": 10000.0,
       "USDC": 30000.0,
       "UST": 10000.0
-      }
+    }
   },
   "baton": {
     "backingPrice": 10.0,
@@ -133,7 +137,7 @@ Example:
       "USDT": 20000.0,
       "USDC": 60000.0,
       "UST": 20000.0
-      }
+    }
   },
   "riskTreasury": {
     "balance": 500000.0,
@@ -141,43 +145,44 @@ Example:
       "USDT": 100000.0,
       "USDC": 300000.0,
       "UST": 100000.0
-      }
+    }
   }
 }
 ```
 
 Structure:
 
-| Field                      	| Type      	| Description                                       	| Example    	|
-|----------------------------	|-----------	|---------------------------------------------------	|------------	|
-| timestamp                  	| Timestamp 	| Timestamp of investment                           	| 1653991989 	|
-| growthFactor               	| Double    	| The current growth factor of the project.         	| 12         	|
-| sellFactor                 	| Double    	| The current sell factor of the project.           	| 25         	|
-| airdropsDistributed3Months 	| Double    	| Total amount of airdrops distributed in USD.      	| 200000     	|
-| backingPrice               	| Double    	| The backing price of the token.                   	| 100        	|
-| treasuryBalance            	| Double    	| The treasury balance of a particular token.       	| 2000000    	|
-| circulatingSupply          	| Double    	| Current circulating supply of a particular token. 	| 10000      	|
-| redeemingPrice             	| Double    	| The redeeming price of BATON                      	| 50         	|
-| USDT                       	| Double    	| Number of USDT token in treasury.                 	| 10000000   	|
-| USDC                       	| Double    	| Number of USDC token in treasury.                 	| 10000000   	|
-| UST                        	| Double    	| Number of UST token in treasury.                  	| 10000000   	|
+| Field                      | Type      | Description                                       | Example    |
+| -------------------------- | --------- | ------------------------------------------------- | ---------- |
+| timestamp                  | Timestamp | Timestamp of investment                           | 1653991989 |
+| growthFactor               | Double    | The current growth factor of the project.         | 12         |
+| sellFactor                 | Double    | The current sell factor of the project.           | 25         |
+| airdropsDistributed3Months | Double    | Total amount of airdrops distributed in USD.      | 200000     |
+| backingPrice               | Double    | The backing price of the token.                   | 100        |
+| treasuryBalance            | Double    | The treasury balance of a particular token.       | 2000000    |
+| circulatingSupply          | Double    | Current circulating supply of a particular token. | 10000      |
+| redeemingPrice             | Double    | The redeeming price of BATON                      | 50         |
+| USDT                       | Double    | Number of USDT token in treasury.                 | 10000000   |
+| USDC                       | Double    | Number of USDC token in treasury.                 | 10000000   |
+| UST                        | Double    | Number of UST token in treasury.                  | 10000000   |
 
 <!-- Deploying react app to github -->
 
 https://betterprogramming.pub/how-to-host-your-react-app-on-github-pages-for-free-919ad201a4cb#:~:text=When%20you've%20successfully%20deployed,is%20hosted%20on%20GitHub%20Pages.
+
 <!-- Add the following to package.json -->
 
 "homepage": "https://garencrownguard.github.io/wand-deploy",
 
-
-
 <!-- Deploying react app to heroku -->
+
 https://devcenter.heroku.com/articles/deploying-nodejs
 
 Add the engines in the package.json
 Remember to keep the yarn.lock file on the repo. This will help heroku use yarn instead of npm.
 In the buildpack put this link: https://github.com/mars/create-react-app-buildpack
 If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-buildpack-nodejs
+
 ```json
 "engines": {
     "node": "16.15.1",
@@ -185,6 +190,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
     "yarn": "1.22.19"
   },
 ```
+
 # Future work
 
 1. prop types
@@ -196,28 +202,29 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 7. Loading spinners on buttons
 
 # Template
+
 ```js
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 
 const MainBlock2OutstandingStats = (props) => {
-  const { stats, investmentList, localwalletstats } = props;
+  const { stats, localwalletstats } = props
 
   return (
     <>
       mehul<>mehul</>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     stats: state.stats[0],
-    investmentList: state.investmentList[0],
+
     localwalletstats: state.localwalletstats[0],
-  };
-};
-export default connect(mapStateToProps)(MainBlock2OutstandingStats);
+  }
+}
+export default connect(mapStateToProps)(MainBlock2OutstandingStats)
 ```
 
 ```js
@@ -226,11 +233,10 @@ import React from 'react'
 import MainBlock1Card from '../MainBlock1Card'
 
 const GraphTotalValueDepositArea = (props) => {
-
   return (
     <MainBlock1Card minHeight="345px" flexGrow={1}>
-              Chart 1
-            </MainBlock1Card>
+      Chart 1
+    </MainBlock1Card>
   )
 }
 
