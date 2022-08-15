@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Flex, Stack, useBreakpointValue, Divider } from '@chakra-ui/react'
-import * as myConstants from 'resources/constants'
-
 import TableHead from './TableHead'
 import Treasury1InvestmentItem from 'components/1atomic/Treasury1InvestmentItem'
 
@@ -31,7 +29,7 @@ const Treasury1InvestmentTable = () => {
   useEffect(() => {
     async function getdata() {
       await axios
-        .get(`${myConstants.API_URL}/investment-list-data`)
+        .get(`${process.env.REACT_APP_API_URL}/investment-list-data`)
         .then((res) => {
           setInvestmentList(res.data)
         })
