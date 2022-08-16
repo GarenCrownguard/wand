@@ -53,79 +53,83 @@ const ConnectButton = (props) => {
           reducer.UPDATE_ADDRESS({ walletAddress: account })
 
           /* Getting localwallet stats */
-          const SPTRbalance =
-            (await contracts.SPTRContract?.balanceOf(account)) ?? null
+          const SPTRbalance = contracts.SPTRContract?.balanceOf(account) ?? null
           const BATONbalance =
-            (await contracts.BATONContract?.balanceOf(account)) ?? null
-          const USDCbalance =
-            (await contracts.USDCContract?.balanceOf(account)) ?? null
-          const BUSDbalance =
-            (await contracts.BUSDContract?.balanceOf(account)) ?? null
-          const DAIbalance =
-            (await contracts.DAIContract?.balanceOf(account)) ?? null
-          const FRAXbalance =
-            (await contracts.FRAXContract?.balanceOf(account)) ?? null
+            contracts.BATONContract?.balanceOf(account) ?? null
+          const USDCbalance = contracts.USDCContract?.balanceOf(account) ?? null
+          const BUSDbalance = contracts.BUSDContract?.balanceOf(account) ?? null
+          const DAIbalance = contracts.DAIContract?.balanceOf(account) ?? null
+          const FRAXbalance = contracts.FRAXContract?.balanceOf(account) ?? null
 
-          // console.log(outstandingStats)
+          const AllBalances = await Promise.all([
+            SPTRbalance,
+            BATONbalance,
+            USDCbalance,
+            BUSDbalance,
+            DAIbalance,
+            FRAXbalance,
+          ])
+
+          // console.log(AllBalances[0])
           // console.log(localwalletstats.remainingSwapTime)
 
           reducer.WALLET_UPDATE_STATS({
-            sptrbal: BigNumberToActual(SPTRbalance, 'SPTR'),
-            batonbal: BigNumberToActual(BATONbalance, 'BATON'),
-            usdcbal: BigNumberToActual(USDCbalance, 'USDC'),
-            busdbal: BigNumberToActual(BUSDbalance, 'BUSD'),
-            daibal: BigNumberToActual(DAIbalance, 'DAI'),
-            fraxbal: BigNumberToActual(FRAXbalance, 'FRAX'),
+            sptrbal: BigNumberToActual(AllBalances[0], 'SPTR'),
+            batonbal: BigNumberToActual(AllBalances[1], 'BATON'),
+            usdcbal: BigNumberToActual(AllBalances[2], 'USDC'),
+            busdbal: BigNumberToActual(AllBalances[3], 'BUSD'),
+            daibal: BigNumberToActual(AllBalances[4], 'DAI'),
+            fraxbal: BigNumberToActual(AllBalances[5], 'FRAX'),
           })
 
           /* Getting FE stats */
-          const wandScepterData =
-            (await contracts.wandContract?.scepterData()) ?? null
+          const wandScepterData = contracts.wandContract?.scepterData() ?? null
 
           const btonTreasuryBal =
-            (await contracts.wandContract?.btonTreasuryBal()) ?? null
+            contracts.wandContract?.btonTreasuryBal() ?? null
 
           const btonRedeemingPrice =
-            (await contracts.wandContract?.getBTONRedeemingPrice()) ?? null
-
-          reducer.UPDATE_STATS({
-            sptrGrowthFactor: BigNumberToActual(
-              wandScepterData.sptrGrowthFactor,
-              'SPTR'
-            ),
-            sptrSellFactor: BigNumberToActual(
-              wandScepterData.sptrSellFactor,
-              'SPTR'
-            ),
-            sptrBuyPrice: BigNumberToActual(
-              wandScepterData.sptrBuyPrice,
-              'SPTR'
-            ),
-            sptrSellPrice: BigNumberToActual(
-              wandScepterData.sptrSellPrice,
-              'SPTR'
-            ),
-            sptrBackingPrice: BigNumberToActual(
-              wandScepterData.sptrBackingPrice,
-              'SPTR'
-            ),
-            sptrTreasuryBal: BigNumberToActual(
-              wandScepterData.sptrTreasuryBal,
-              'SPTR'
-            ),
-            btonTreasuryBal: BigNumberToActual(btonTreasuryBal, 'BATON'),
-            btonRedeemingPrice: BigNumberToActual(btonRedeemingPrice, 'BATON'),
-          })
+            contracts.wandContract?.getBTONRedeemingPrice() ?? null
 
           /* Updating the outstanding locked amount */
           const outstandingStats =
-            (await contracts.wandContract?.withheldWithdrawals(account)) ?? null
+            contracts.wandContract?.withheldWithdrawals(account) ?? null
+
+          const AllStats = await Promise.all([
+            wandScepterData,
+            btonTreasuryBal,
+            btonRedeemingPrice,
+            outstandingStats,
+          ])
+
+          reducer.UPDATE_STATS({
+            sptrGrowthFactor: BigNumberToActual(
+              AllStats[0].sptrGrowthFactor,
+              'SPTR'
+            ),
+            sptrSellFactor: BigNumberToActual(
+              AllStats[0].sptrSellFactor,
+              'SPTR'
+            ),
+            sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
+            sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
+            sptrBackingPrice: BigNumberToActual(
+              AllStats[0].sptrBackingPrice,
+              'SPTR'
+            ),
+            sptrTreasuryBal: BigNumberToActual(
+              AllStats[0].sptrTreasuryBal,
+              'SPTR'
+            ),
+            btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
+            btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
+          })
 
           reducer.UPDATE_OUTSTANDING_STATS({
             outstandingTimeLocked:
-              BigNumberToActual(outstandingStats.timeUnlocked, 'one') * 10,
+              BigNumberToActual(AllStats[3].timeUnlocked, 'one') * 10,
             outstandingSwappedAmounts: BigNumberToActual(
-              outstandingStats.amounts,
+              AllStats[3].amounts,
               'SPTR'
             ),
           })
@@ -146,7 +150,7 @@ const ConnectButton = (props) => {
       }
     }
   }
-  
+
   useEffect(() => {
     handleConnectWallet()
     // eslint-disable-next-line react-hooks/exhaustive-deps
