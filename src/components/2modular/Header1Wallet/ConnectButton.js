@@ -52,6 +52,7 @@ const ConnectButton = (props) => {
 
           reducer.UPDATE_ADDRESS({ walletAddress: account })
 
+          /* Getting localwallet stats */
           const SPTRbalance =
             (await contracts.SPTRContract?.balanceOf(account)) ?? null
           const BATONbalance =
@@ -65,6 +66,9 @@ const ConnectButton = (props) => {
           const FRAXbalance =
             (await contracts.FRAXContract?.balanceOf(account)) ?? null
 
+          // console.log(outstandingStats)
+          // console.log(localwalletstats.remainingSwapTime)
+
           reducer.WALLET_UPDATE_STATS({
             sptrbal: BigNumberToActual(SPTRbalance, 'SPTR'),
             batonbal: BigNumberToActual(BATONbalance, 'BATON'),
@@ -72,6 +76,58 @@ const ConnectButton = (props) => {
             busdbal: BigNumberToActual(BUSDbalance, 'BUSD'),
             daibal: BigNumberToActual(DAIbalance, 'DAI'),
             fraxbal: BigNumberToActual(FRAXbalance, 'FRAX'),
+          })
+
+          /* Getting FE stats */
+          const wandScepterData =
+            (await contracts.wandContract?.scepterData()) ?? null
+
+          const btonTreasuryBal =
+            (await contracts.wandContract?.btonTreasuryBal()) ?? null
+
+          const btonRedeemingPrice =
+            (await contracts.wandContract?.getBTONRedeemingPrice()) ?? null
+
+          reducer.UPDATE_STATS({
+            sptrGrowthFactor: BigNumberToActual(
+              wandScepterData.sptrGrowthFactor,
+              'SPTR'
+            ),
+            sptrSellFactor: BigNumberToActual(
+              wandScepterData.sptrSellFactor,
+              'SPTR'
+            ),
+            sptrBuyPrice: BigNumberToActual(
+              wandScepterData.sptrBuyPrice,
+              'SPTR'
+            ),
+            sptrSellPrice: BigNumberToActual(
+              wandScepterData.sptrSellPrice,
+              'SPTR'
+            ),
+            sptrBackingPrice: BigNumberToActual(
+              wandScepterData.sptrBackingPrice,
+              'SPTR'
+            ),
+            sptrTreasuryBal: BigNumberToActual(
+              wandScepterData.sptrTreasuryBal,
+              'SPTR'
+            ),
+            btonTreasuryBal: BigNumberToActual(btonTreasuryBal, 'BATON'),
+            btonRedeemingPrice: BigNumberToActual(btonRedeemingPrice, 'BATON'),
+          })
+
+          /* Updating the outstanding locked amount */
+          const outstandingStats =
+            (await contracts.wandContract?.withheldWithdrawals(account)) ?? null
+
+          reducer.UPDATE_OUTSTANDING_STATS({
+            outstandingTimeLocked:
+              BigNumberToActual(outstandingStats.timeUnlocked, 'one') * 10,
+            outstandingSwappedAmounts: BigNumberToActual(
+              outstandingStats.amounts,
+              'SPTR'
+            ),
           })
         } else {
           // console.log('No authorized account found')
@@ -90,7 +146,7 @@ const ConnectButton = (props) => {
       }
     }
   }
-
+  
   useEffect(() => {
     handleConnectWallet()
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -26,10 +26,10 @@ const calculateTimeLeft = (time) => {
 };
 
 const MainBlock4CountdownTimer = (props) => {
-  const { title, timeUNIX } = props;
+  const { title, timeUNIX, isOutstanding } = props
   var timeleft = calculateTimeLeft(timeUNIX * 1000);
 
-  //   console.log(timeleft);
+    // console.log(timeleft);
 
   const [day, setDay] = useState(timeleft.days);
   const [hour, setHour] = useState(timeleft.hours);
@@ -53,6 +53,7 @@ const MainBlock4CountdownTimer = (props) => {
               setDay(day - 1);
               setHour(24);
             } else {
+              isOutstanding(false);
               clearInterval(myInterval);
             }
           }
@@ -63,6 +64,7 @@ const MainBlock4CountdownTimer = (props) => {
       clearInterval(myInterval);
     };
   });
+  
   return day === 0 && hour === 0 && minutes === 0 && seconds === 0 ? (
     <MainBlock2StatsText title={title} value="Nan" />
   ) : (

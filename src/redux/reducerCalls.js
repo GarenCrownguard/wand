@@ -40,3 +40,18 @@ export const WALLET_UPDATE_STATS = async (props) => {
     payload: props,
   })
 }
+
+export const UPDATE_STATS = async (props) => {
+  store.dispatch({
+    type: actions.UPDATE_STATS,
+    payload: props,
+  })
+}
+
+export const UPDATE_OUTSTANDING_STATS = async (props) => {
+  store.dispatch({
+    type: actions.UPDATE_OUTSTANDING_STATS,
+    payload: props,
+  })
+}
+

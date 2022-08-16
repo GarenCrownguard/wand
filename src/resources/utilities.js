@@ -6,14 +6,15 @@ const decimals = {
   BUSD: 18,
   SPTR: 18,
   BATON: 18,
+  one: 1
 }
 
 export const prettifytolocalstring = (amount) => {
-  return amount ? amount.toLocaleString() : null
+  return amount ? amount.toLocaleString() : '...'
 }
 
 export const prettifyamounts = (amount) => {
-  return amount ? '$' + prettifytolocalstring(amount) : null
+  return amount ? '$' + prettifytolocalstring(amount) : '...'
 }
 
 export const prettifyGrowthPercentage = (direction, value) => {
@@ -22,7 +23,7 @@ export const prettifyGrowthPercentage = (direction, value) => {
   } else if (direction === 'negative') {
     return '-' + value + '%'
   } else {
-    return null
+    return '...'
   }
 }
 
@@ -31,7 +32,7 @@ export const BigNumberToActual = (amount, tokenDecimal) => {
     ? parseFloat(
         parseFloat(
           ethers.utils.formatUnits(amount, decimals[tokenDecimal])
-        )?.toFixed(2)
+        )?.toFixed(3)
       )
     : null
 }
