@@ -27,8 +27,20 @@ export const prettifyGrowthPercentage = (direction, value) => {
   }
 }
 
-export const BigNumberFormat = (amount, tokenDecimal) => {
+export const BigNumberToActual = (amount, tokenDecimal) => {
   return amount && decimals[tokenDecimal]
-    ? ethers.utils.formatUnits(amount, decimals[tokenDecimal])
+    ? parseFloat(ethers.utils.formatUnits(amount, decimals[tokenDecimal]))
+    : null
+}
+
+export const ActualToBigNumber = (amount, tokenDecimal) => {
+  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal]))
+  // console.log(amount);
+  // console.log(amount * Math.pow(10, decimals[tokenDecimal]))
+
+  return amount && decimals[tokenDecimal]
+    ? ethers.BigNumber.from(amount * Math.pow(10, decimals[tokenDecimal]/2)).mul(
+        ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2)
+      )
     : null
 }

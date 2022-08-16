@@ -4,7 +4,7 @@ import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
 import * as reducer from 'redux/reducerCalls'
-import { BigNumberFormat } from 'resources/utilities'
+import { BigNumberToActual } from 'resources/utilities'
 import contracts from 'contracts/contracts'
 
 const ConnectButton = (props) => {
@@ -66,12 +66,12 @@ const ConnectButton = (props) => {
             (await contracts.FRAXContract?.balanceOf(account)) ?? null
 
           reducer.WALLET_UPDATE_STATS({
-            sptrbal: BigNumberFormat(SPTRbalance, 'SPTR'),
-            batonbal: BigNumberFormat(BATONbalance, 'BATON'),
-            usdcbal: BigNumberFormat(USDCbalance, 'USDC'),
-            busdbal: BigNumberFormat(BUSDbalance, 'BUSD'),
-            daibal: BigNumberFormat(DAIbalance, 'DAI'),
-            fraxbal: BigNumberFormat(FRAXbalance, 'FRAX'),
+            sptrbal: BigNumberToActual(SPTRbalance, 'SPTR'),
+            batonbal: BigNumberToActual(BATONbalance, 'BATON'),
+            usdcbal: BigNumberToActual(USDCbalance, 'USDC'),
+            busdbal: BigNumberToActual(BUSDbalance, 'BUSD'),
+            daibal: BigNumberToActual(DAIbalance, 'DAI'),
+            fraxbal: BigNumberToActual(FRAXbalance, 'FRAX'),
           })
         } else {
           // console.log('No authorized account found')

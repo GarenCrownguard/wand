@@ -15,7 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-
+import { ActualToBigNumber } from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenUSDT,
@@ -85,8 +85,8 @@ const Swap1SwapBox = (props) => {
   ]
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [swapFromToken, setSwapFromToken] = useState('SPTR')
-  const [swapToToken, setSwapToToken] = useState('USDC')
+  const [swapFromToken, setSwapFromToken] = useState('USDC')
+  const [swapToToken, setSwapToToken] = useState('SPTR')
   const [isModalFrom, setIsModalFrom] = useState('true')
   const [swapFromInput1, setSwapFromInput1] = useState(0)
   const [swapToInput2, setSwapToInput2] = useState(0)
@@ -95,87 +95,109 @@ const Swap1SwapBox = (props) => {
   const [approved, setapproved] = useState(false)
   const [approving, setApproving] = useState(false)
 
-  var wandAllowanceSPTR = 0;
+  var wandAllowanceSPTR = null
+  var wandAllowanceBATON = null
+  var wandAllowanceUSDC = null
+  var wandAllowanceBUSD = null
+  var wandAllowanceDAI = null
+  var wandAllowanceFRAX = null
 
-  const checkAllowance = async () => {
-    switch (swapFromToken) {
+  // console.log(
+  //   wandAllowanceSPTR?.gt(
+  //     ethers.BigNumber.from(localwalletstats.sceptertoken ?? 0)
+  //   ) ?? false
+  // )
+
+  const checkAllowance = async (fromtoken) => {
+    wandAllowanceSPTR =
+      (await contracts.SPTRContract?.allowance(
+        account,
+        contractAddresses.wand
+      )) ?? ethers.BigNumber.from(0)
+    wandAllowanceBATON =
+      (await contracts.BATONContract?.allowance(
+        account,
+        contractAddresses.wand
+      )) ?? ethers.BigNumber.from(0)
+
+    wandAllowanceUSDC =
+      (await contracts.USDCContract?.allowance(
+        account,
+        contractAddresses.wand
+      )) ?? ethers.BigNumber.from(0)
+    wandAllowanceBUSD =
+      (await contracts.BUSDContract?.allowance(
+        account,
+        contractAddresses.wand
+      )) ?? ethers.BigNumber.from(0)
+
+    wandAllowanceDAI =
+      (await contracts.DAIContract?.allowance(
+        account,
+        contractAddresses.wand
+      )) ?? ethers.BigNumber.from(0)
+
+    wandAllowanceFRAX =
+      (await contracts.FRAXContract?.allowance(
+        account,
+        contractAddresses.wand
+      )) ?? ethers.BigNumber.from(0)
+
+    // console.log(wandAllowanceBATON)
+
+    // console.log(
+    //   wandAllowanceSPTR?.gt(
+    //     ethers.BigNumber.from(localwalletstats.sceptertoken ?? 0)
+    //   )
+    // )
+
+    switch (fromtoken) {
       case 'SPTR':
-        const wandAllowanceSPTR =
-          (await contracts.SPTRContract?.allowance(
-            account,
-            contractAddresses.wand
-          )) ?? 0
-
-        if (wandAllowanceSPTR > (localwalletstats.sceptertoken ?? 0)) {
-          setapproved(true)
-        } else {
-          setapproved(false)
-        }
+        // console.log(fromtoken)
+        // console.log(ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR'))
+        setapproved(
+          wandAllowanceSPTR?.gt(
+            ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
+          ) ?? false
+        )
         break
       case 'BATON':
-        const wandAllowanceBATON =
-          (await contracts.BATONContract?.allowance(
-            account,
-            contractAddresses.wand
-          )) ?? 0
+        // console.log(fromtoken)
+        // console.log(wandAllowanceBATON)
 
-        if (wandAllowanceBATON > (localwalletstats.batontoken ?? 0)) {
-          setapproved(true)
-        } else {
-          setapproved(false)
-        }
+        setapproved(
+          wandAllowanceBATON?.gt(
+            ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
+          ) ?? false
+        )
         break
       case 'USDC':
-        const wandAllowanceUSDC =
-          (await contracts.USDCContract?.allowance(
-            account,
-            contractAddresses.wand
-          )) ?? 0
-
-        if (wandAllowanceUSDC > (localwalletstats.usdctoken ?? 0)) {
-          setapproved(true)
-        } else {
-          setapproved(false)
-        }
+        setapproved(
+          wandAllowanceUSDC?.gt(
+            ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
+          ) ?? false
+        )
         break
       case 'BUSD':
-        const wandAllowanceBUSD =
-          (await contracts.BUSDContract?.allowance(
-            account,
-            contractAddresses.wand
-          )) ?? 0
-
-        if (wandAllowanceBUSD > (localwalletstats.busdtoken ?? 0)) {
-          setapproved(true)
-        } else {
-          setapproved(false)
-        }
+        setapproved(
+          wandAllowanceBUSD?.gt(
+            ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
+          ) ?? false
+        )
         break
       case 'DAI':
-        const wandAllowanceDAI =
-          (await contracts.DAIContract?.allowance(
-            account,
-            contractAddresses.wand
-          )) ?? 0
-
-        if (wandAllowanceDAI > (localwalletstats.daitoken ?? 0)) {
-          setapproved(true)
-        } else {
-          setapproved(false)
-        }
+        setapproved(
+          wandAllowanceDAI?.gt(
+            ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
+          ) ?? false
+        )
         break
       case 'FRAX':
-        const wandAllowanceFRAX =
-          (await contracts.FRAXContract?.allowance(
-            account,
-            contractAddresses.wand
-          )) ?? 0
-
-        if (wandAllowanceFRAX > (localwalletstats.fraxtoken ?? 0)) {
-          setapproved(true)
-        } else {
-          setapproved(false)
-        }
+        setapproved(
+          wandAllowanceFRAX?.gt(
+            ActualToBigNumber(localwalletstats.fraxtoken, 'FRAX') ?? 0
+          ) ?? false
+        )
         break
       default:
         console.log('Cannot get the Allowance of the wallet')
@@ -251,11 +273,12 @@ const Swap1SwapBox = (props) => {
   useEffect(() => {
     // setApprove
     // setApproving
-    checkAllowance()
 
-    // if (swapFromToken === 'BATON' && swapToToken === 'SPTR') {
-    //   setSwapToToken('USDC')
-    // }
+    if (swapFromToken === 'BATON' && swapToToken === 'SPTR') {
+      setSwapToToken('USDC')
+    }
+
+    checkAllowance(swapFromToken)
 
     // if (swapFromToken !== 'SPTR' && swapFromToken !== 'BATON') {
     //   // Stable -> xxx
@@ -270,7 +293,7 @@ const Swap1SwapBox = (props) => {
     //   // SPTR or BATON -> xxx
     //   setapproved(true)
     // }
-  }, [swapFromToken, swapToToken])
+  }, [swapFromToken, localwalletstats])
 
   useEffect(() => {
     if (swapFromToken === 'SPTR') {

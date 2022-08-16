@@ -4,7 +4,7 @@ import { ethers } from 'ethers'
 import * as reducer from 'redux/reducerCalls'
 import contracts from 'contracts/contracts'
 import { Button, Box, Flex } from '@chakra-ui/react'
-import { BigNumberFormat } from 'resources/utilities'
+import { BigNumberToActual } from 'resources/utilities'
 import contractAddresses from 'contracts/addresses'
 
 const MAX_APPROVAL = ethers.BigNumber.from(
@@ -16,36 +16,38 @@ const ContractInteractionPage = (props) => {
   const account = localwalletstats.walletAddress
 
   const [approvalAmount, setApprovalAmount] = useState('')
+  const [approveStaus, getApproveStatus] = useState('')
 
   //   const getContracts = async () => {
   //     let mockUSDCbalance =
   //       (await contracts.mockUSDCContract?.balanceOf(account)) ??
   //       'mockUSDC getting balance error'
-  //     console.log(BigNumberFormat(mockUSDCbalance, 'mockUSDC'))
+  //     console.log(BigNumberToActual(mockUSDCbalance, 'mockUSDC'))
   //     let SPTRbalance =
   //       (await contracts.SPTRContract?.balanceOf(account)) ??
   //       'SPTR getting balance error'
-  //     console.log(BigNumberFormat(SPTRbalance, 'SPTR'))
+  //     console.log(BigNumberToActual(SPTRbalance, 'SPTR'))
   //   }
   //   getContracts()
 
   const batonapprove = async () => {
     try {
-      console.log('Initialize BATON approval')
+      getApproveStatus('Initialize BATON approval')
       let ApproveBATON =
         (await contracts.BATONContract?.approve(
           contractAddresses.wand,
-            MAX_APPROVAL
-        //   1000000000000
+          MAX_APPROVAL
+          //   1000000000000
         )) ?? 'BATON approving failed'
 
-      console.log('Approving... please wait')
+      getApproveStatus('Approving... please wait')
       await ApproveBATON.wait()
 
-      console.log(
+      getApproveStatus(
         `Approved, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
       )
     } catch (error) {
+      getApproveStatus(`Failure: ERROR: ${error.code}`)
       console.log(error.code === 4001)
     }
   }
@@ -67,9 +69,9 @@ const ContractInteractionPage = (props) => {
       //     `Checked, see transaction: https://testnet.snowtrace.io/tx/${wandAllowanceBATON.hash}`
       //   )
 
-      setApprovalAmount(wandAllowanceBATON.toString());
+      setApprovalAmount(wandAllowanceBATON.toString())
 
-      console.log(BigNumberFormat(wandAllowanceBATON, 'BATON'))
+      console.log(BigNumberToActual(wandAllowanceBATON, 'BATON'))
       console.log(wandAllowanceBATON.gt(ethers.BigNumber.from(compareTokens)))
       console.log(wandAllowanceBATON.gt(compareTokens))
     } catch (error) {
@@ -87,6 +89,7 @@ const ContractInteractionPage = (props) => {
       <Button onClick={batonapprove} colorScheme="blue">
         Approve baton spend
       </Button>
+      Status: {approveStaus}
     </Flex>
   )
 }
