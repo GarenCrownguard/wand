@@ -19,10 +19,10 @@ import * as reducer from 'redux/reducerCalls'
 
 const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
   const account = localwalletstats.walletAddress;
-  const handleDeactivateAccount = ()=> {
-    reducer.WALLET_DISCONNECT();
-    onClose()
-  }
+  // const handleDeactivateAccount = ()=> {
+  //   reducer.WALLET_DISCONNECT();
+  //   onClose()
+  // }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="sm">
@@ -59,7 +59,7 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
               <Text color="gray.400" fontSize="sm">
                 Connected with Wallet
               </Text>
-              <Button
+              {/* <Button
                 variant="outline"
                 size="sm"
                 borderColor="wandRed"
@@ -76,7 +76,7 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
                 onClick={handleDeactivateAccount}
               >
                 Disconnect
-              </Button>
+              </Button> */}
             </Flex>
             <Flex alignItems="center" mt={2} mb={4} lineHeight={1}>
               <Icon viewBox="0 0 200 200" color="wandRed">

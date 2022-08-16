@@ -19,10 +19,10 @@ const ContractInteractionPage = (props) => {
   const [approveStaus, getApproveStatus] = useState('')
 
   //   const getContracts = async () => {
-  //     let mockUSDCbalance =
-  //       (await contracts.mockUSDCContract?.balanceOf(account)) ??
-  //       'mockUSDC getting balance error'
-  //     console.log(BigNumberToActual(mockUSDCbalance, 'mockUSDC'))
+  //     let USDCbalance =
+  //       (await contracts.USDCContract?.balanceOf(account)) ??
+  //       'USDC getting balance error'
+  //     console.log(BigNumberToActual(USDCbalance, 'USDC'))
   //     let SPTRbalance =
   //       (await contracts.SPTRContract?.balanceOf(account)) ??
   //       'SPTR getting balance error'

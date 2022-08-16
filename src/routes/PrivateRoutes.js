@@ -21,7 +21,9 @@ const PrivateRoutes = (props) => {
         <Route
           exact
           path={links.account}
-          component={isconnected ? AccountPage : () => <div>Wallet Not Connected!</div>}
+          component={
+            isconnected ? AccountPage : () => <div>Wallet Not Connected!</div>
+          }
         />
         <Route exact path={links.swap} component={SwapPage} />
         <Route
@@ -53,7 +55,11 @@ const PrivateRoutes = (props) => {
         <Route
           exact
           path={links.contractionInteraction}
-          component={ContractInteractionPage}
+          component={
+            (process.env.REACT_APP_CHAIN === 'Testnet'
+              ? ContractInteractionPage
+              : () => <div>There is nothing here!</div>)
+          }
         />
         <Redirect to={links.homepage} />
       </Switch>

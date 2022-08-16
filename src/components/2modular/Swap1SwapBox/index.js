@@ -88,8 +88,8 @@ const Swap1SwapBox = (props) => {
   const [swapFromToken, setSwapFromToken] = useState('USDC')
   const [swapToToken, setSwapToToken] = useState('SPTR')
   const [isModalFrom, setIsModalFrom] = useState('true')
-  const [swapFromInput1, setSwapFromInput1] = useState(0)
-  const [swapToInput2, setSwapToInput2] = useState(0)
+  const [swapFromInput1, setSwapFromInput1] = useState('')
+  const [swapToInput2, setSwapToInput2] = useState('')
   const [taxSliderValue, setTaxSliderValue] = useState(0)
 
   const [approved, setapproved] = useState(false)
@@ -102,13 +102,8 @@ const Swap1SwapBox = (props) => {
   var wandAllowanceDAI = null
   var wandAllowanceFRAX = null
 
-  // console.log(
-  //   wandAllowanceSPTR?.gt(
-  //     ethers.BigNumber.from(localwalletstats.sceptertoken ?? 0)
-  //   ) ?? false
-  // )
-
   const checkAllowance = async (fromtoken) => {
+    setApproving(true);
     wandAllowanceSPTR =
       (await contracts.SPTRContract?.allowance(
         account,
@@ -143,14 +138,6 @@ const Swap1SwapBox = (props) => {
         contractAddresses.wand
       )) ?? ethers.BigNumber.from(0)
 
-    // console.log(wandAllowanceBATON)
-
-    // console.log(
-    //   wandAllowanceSPTR?.gt(
-    //     ethers.BigNumber.from(localwalletstats.sceptertoken ?? 0)
-    //   )
-    // )
-
     switch (fromtoken) {
       case 'SPTR':
         // console.log(fromtoken)
@@ -160,6 +147,7 @@ const Swap1SwapBox = (props) => {
             ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
           ) ?? false
         )
+        setApproving(false)
         break
       case 'BATON':
         // console.log(fromtoken)
@@ -170,6 +158,7 @@ const Swap1SwapBox = (props) => {
             ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
           ) ?? false
         )
+        setApproving(false)
         break
       case 'USDC':
         setapproved(
@@ -177,6 +166,7 @@ const Swap1SwapBox = (props) => {
             ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
           ) ?? false
         )
+        setApproving(false)
         break
       case 'BUSD':
         setapproved(
@@ -184,6 +174,7 @@ const Swap1SwapBox = (props) => {
             ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
           ) ?? false
         )
+        setApproving(false)
         break
       case 'DAI':
         setapproved(
@@ -191,6 +182,7 @@ const Swap1SwapBox = (props) => {
             ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
           ) ?? false
         )
+        setApproving(false)
         break
       case 'FRAX':
         setapproved(
@@ -198,10 +190,12 @@ const Swap1SwapBox = (props) => {
             ActualToBigNumber(localwalletstats.fraxtoken, 'FRAX') ?? 0
           ) ?? false
         )
+        setApproving(false)
         break
       default:
         console.log('Cannot get the Allowance of the wallet')
         setapproved(false)
+        setApproving(true)
         break
     }
   }
@@ -399,7 +393,7 @@ const Swap1SwapBox = (props) => {
 
       <Button
         variant="solid"
-        onClick={approved ? swap : approve}
+        onClick={approved ? swap : approving ? (()=> {}) :approve}
         size="md"
         width="100%"
         mt="20px"
@@ -415,7 +409,7 @@ const Swap1SwapBox = (props) => {
           color: '#FFFFFF',
         }}
       >
-        {approved ? 'Swap' : approving ? 'Approving...' : 'Approve'}
+        {approved ? 'Swap' : approving ? 'Checking for allowance...' : 'Approve'}
       </Button>
 
       {/* Modal placeholder */}

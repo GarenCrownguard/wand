@@ -1,11 +1,11 @@
 const AVAXTestnetContractAddresses = {
-  mockUSDC: '0x8f2431dcb2Ad3581cb1f75FA456931e7A15C6d43',
+  USDC: '0x8f2431dcb2Ad3581cb1f75FA456931e7A15C6d43',
   SPTR: '0xD8098BE05A7d32636f806660E40451ab1df3f840',
   BATON: '0x0A0AebE2ABF81bd34d5dA7E242C0994B51fF5c1f',
   wand: '0x39920479F867C393408844DD588D3B51b960233B',
 }
 const BSCTestnetContractAddresses = {
-  mockUSDC: null,
+  USDC: null,
   SPTR: null,
   BATON: null,
   wand: null,

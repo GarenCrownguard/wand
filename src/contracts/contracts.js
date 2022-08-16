@@ -13,7 +13,6 @@ if (ethereum) {
   var SPTRContract = null;
   var BATONContract = null;
   var wandContract = null;
-  var mockUSDCContract = null;
   var USDCContract = null;
   var BUSDContract = null;
   var DAIContract = null;
@@ -39,13 +38,6 @@ if (ethereum) {
     wandContract = new ethers.Contract(
       contractAddresses.wand,
       abis.wandabi,
-      signer
-    )
-  }
-  if (contractAddresses.mockUSDC && abis.mockUSDCabi) {
-    mockUSDCContract = new ethers.Contract(
-      contractAddresses.mockUSDC,
-      abis.mockUSDCabi,
       signer
     )
   }
@@ -79,7 +71,6 @@ if (ethereum) {
   }
 
   contracts = {
-    mockUSDCContract,
     SPTRContract,
     BATONContract,
     wandContract,
