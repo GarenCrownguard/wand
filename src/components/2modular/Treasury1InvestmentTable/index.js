@@ -28,11 +28,17 @@ const Treasury1InvestmentTable = () => {
 
   useEffect(() => {
     async function getdata() {
-      await axios
-        .get(`${process.env.REACT_APP_API_URL}/investment-list-data`)
-        .then((res) => {
-          setInvestmentList(res.data)
-        })
+      try {
+        await axios
+          .get(`${process.env.REACT_APP_API_URL}/investment-list-data`)
+          .then((res) => {
+            setInvestmentList(res.data)
+          })
+      } catch (error) {
+        console.log(error);
+        setInvestmentList(null);
+      }
+      
     }
     getdata()
   }, [])
@@ -52,7 +58,7 @@ const Treasury1InvestmentTable = () => {
             <Divider />
           </>
         )}
-        {React.Children.toArray(
+        {investmentList && React.Children.toArray(
           investmentList.map((investment) => (
             <>
               <Treasury1InvestmentItem
