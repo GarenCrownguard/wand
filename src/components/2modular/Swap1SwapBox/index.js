@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import MainBlock1Card from 'components/1atomic/MainBlock1Card'
-
+import { ethers } from 'ethers'
+import contracts from 'contracts/contracts'
+import contractAddresses from 'contracts/addresses'
 import {
   Flex,
   Text,
@@ -10,7 +12,9 @@ import {
   useDisclosure,
   Link,
   Box,
+  useToast,
 } from '@chakra-ui/react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 import {
   Icon1swap,
@@ -26,59 +30,273 @@ import SwapBoxModal from './SwapBoxModal'
 import links from 'resources/links'
 import TaxSlider from './TaxSlider'
 
+const MAX_APPROVAL = ethers.BigNumber.from(
+  '0xfffffffffffffffffffffffffffffffffffffffffffff'
+)
+
 const Swap1SwapBox = (props) => {
-  const { localwalletstats } = props
+  const { stats, localwalletstats } = props
+  const toast = useToast()
+  const account = localwalletstats.walletAddress
+
   const tokenlist = [
     {
       name: 'SPTR',
-      balance: localwalletstats.sceptertoken,
-      canSwapTo: ['BATON', 'USDT', 'USDC', 'BUSD'],
+      balance: localwalletstats.sceptertoken ?? 0,
+      canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI', 'FRAX'],
       icon: <IconTokenSPTR />,
     },
     {
       name: 'BATON',
-      balance: localwalletstats.batontoken,
-      canSwapTo: ['USDT', 'USDC', 'BUSD'],
-      icon: <IconTokenBATON />,
+      balance: localwalletstats.batontoken ?? 0,
+      canSwapTo: ['USDC', 'BUSD', 'DAI', 'FRAX'],
+      // icon: <IconTokenBATON />,
     },
-    {
-      name: 'USDT',
-      balance: localwalletstats.usdttoken,
-      canSwapTo: ['SPTR'],
-      icon: <IconTokenUSDT />,
-    },
+    // {
+    //   name: 'USDT',
+    //   balance: localwalletstats.usdttoken ?? 0,
+    //   canSwapTo: ['SPTR'],
+    //   icon: <IconTokenUSDT />,
+    // },
     {
       name: 'USDC',
-      balance: localwalletstats.usdctoken,
+      balance: localwalletstats.usdctoken ?? 0,
       canSwapTo: ['SPTR'],
       icon: <IconTokenUSDC />,
     },
     {
       name: 'BUSD',
-      balance: localwalletstats.busdtoken,
+      balance: localwalletstats.busdtoken ?? 0,
       canSwapTo: ['SPTR'],
       icon: <IconTokenBUSD />,
+    },
+    {
+      name: 'DAI',
+      balance: localwalletstats.daitoken ?? 0,
+      canSwapTo: ['SPTR'],
+      // icon: <IconTokenUSDC />,
+    },
+    {
+      name: 'FRAX',
+      balance: localwalletstats.fraxtoken ?? 0,
+      canSwapTo: ['SPTR'],
+      // icon: <IconTokenUSDC />,
     },
   ]
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [swapFromToken, setSwapFromToken] = useState('SPTR')
-  const [swapToToken, setSwapToToken] = useState('USDT')
+  const [swapToToken, setSwapToToken] = useState('USDC')
   const [isModalFrom, setIsModalFrom] = useState('true')
-  const [swapFromInput1, setSwapFromInput1] = useState('')
-  const [swapToInput2, setSwapToInput2] = useState('')
+  const [swapFromInput1, setSwapFromInput1] = useState(0)
+  const [swapToInput2, setSwapToInput2] = useState(0)
   const [taxSliderValue, setTaxSliderValue] = useState(0)
-  /*
-  tokenlist.map((eachtoken) => {
-    console.log(eachtoken)
-    eachtoken.name === 'BATON'
-      ? console.log(eachtoken.balance)
-      : console.log(eachtoken.canSwapTo)
-  })
-  console.log(tokenlist.filter((eachtoken) => eachtoken.name === 'BATON')[0])
-  */
 
-  const swapClickHandler = ()=> {
+  const [approved, setapproved] = useState(false)
+  const [approving, setApproving] = useState(false)
+
+  var wandAllowanceSPTR = 0;
+
+  const checkAllowance = async () => {
+    switch (swapFromToken) {
+      case 'SPTR':
+        const wandAllowanceSPTR =
+          (await contracts.SPTRContract?.allowance(
+            account,
+            contractAddresses.wand
+          )) ?? 0
+
+        if (wandAllowanceSPTR > (localwalletstats.sceptertoken ?? 0)) {
+          setapproved(true)
+        } else {
+          setapproved(false)
+        }
+        break
+      case 'BATON':
+        const wandAllowanceBATON =
+          (await contracts.BATONContract?.allowance(
+            account,
+            contractAddresses.wand
+          )) ?? 0
+
+        if (wandAllowanceBATON > (localwalletstats.batontoken ?? 0)) {
+          setapproved(true)
+        } else {
+          setapproved(false)
+        }
+        break
+      case 'USDC':
+        const wandAllowanceUSDC =
+          (await contracts.USDCContract?.allowance(
+            account,
+            contractAddresses.wand
+          )) ?? 0
+
+        if (wandAllowanceUSDC > (localwalletstats.usdctoken ?? 0)) {
+          setapproved(true)
+        } else {
+          setapproved(false)
+        }
+        break
+      case 'BUSD':
+        const wandAllowanceBUSD =
+          (await contracts.BUSDContract?.allowance(
+            account,
+            contractAddresses.wand
+          )) ?? 0
+
+        if (wandAllowanceBUSD > (localwalletstats.busdtoken ?? 0)) {
+          setapproved(true)
+        } else {
+          setapproved(false)
+        }
+        break
+      case 'DAI':
+        const wandAllowanceDAI =
+          (await contracts.DAIContract?.allowance(
+            account,
+            contractAddresses.wand
+          )) ?? 0
+
+        if (wandAllowanceDAI > (localwalletstats.daitoken ?? 0)) {
+          setapproved(true)
+        } else {
+          setapproved(false)
+        }
+        break
+      case 'FRAX':
+        const wandAllowanceFRAX =
+          (await contracts.FRAXContract?.allowance(
+            account,
+            contractAddresses.wand
+          )) ?? 0
+
+        if (wandAllowanceFRAX > (localwalletstats.fraxtoken ?? 0)) {
+          setapproved(true)
+        } else {
+          setapproved(false)
+        }
+        break
+      default:
+        console.log('Cannot get the Allowance of the wallet')
+        setapproved(false)
+        break
+    }
+  }
+
+  const approve = async () => {
+    // try {
+    //   // console.log('Initialize approval')
+    //   let ApproveCall =
+    //     (await contracts.BATONContract?.approve(
+    //       contractAddresses.wand,
+    //       MAX_APPROVAL
+    //     )) ?? 'BATON approving failed'
+    //   // console.log('Approving... please wait')
+    //   setApproving(true)
+    //   await ApproveCall.wait()
+    //   var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
+    //   toast({
+    //     title: (
+    //       <Link color="wandGreen" href={transactionLink} isExternal>
+    //         Approved. Check transaction.
+    //         <ExternalLinkIcon mx="5px" mt="-5px" />
+    //       </Link>
+    //     ),
+    //     status: 'success',
+    //     duration: 1000,
+    //     position: 'bottom-right',
+    //     containerStyle: {
+    //       width: '50px',
+    //     },
+    //   })
+    //   setApproving(false)
+    //   setapproved(true)
+    //   // console.log(
+    //   //   `Mined, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
+    //   // )
+    // } catch (error) {
+    //   console.log(error.code === 4001)
+    //   setapproved(false)
+    //   toast({
+    //     title: 'Transaction Rejected!',
+    //     status: 'error',
+    //     duration: 1000,
+    //     position: 'bottom-right',
+    //     containerStyle: {
+    //       width: '50px',
+    //     },
+    //   })
+    // }
+  }
+
+  const swap = async () => {
+    // try {
+    //   console.log('Initialize BATON approval')
+    //   let ApproveBATON =
+    //     (await contracts.BATONContract?.approve(
+    //       contractAddresses.wand,
+    //       MAX_APPROVAL
+    //     )) ?? 'BATON approving failed'
+    //   console.log('Approving... please wait')
+    //   await ApproveBATON.wait()
+    //   console.log(
+    //     `Mined, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
+    //   )
+    // } catch (error) {
+    //   console.log(error.code === 4001)
+    // }
+  }
+
+  useEffect(() => {
+    // setApprove
+    // setApproving
+    checkAllowance()
+
+    // if (swapFromToken === 'BATON' && swapToToken === 'SPTR') {
+    //   setSwapToToken('USDC')
+    // }
+
+    // if (swapFromToken !== 'SPTR' && swapFromToken !== 'BATON') {
+    //   // Stable -> xxx
+    //   if (swapToToken === 'SPTR') {
+    //     // Stable -> SPTR
+    //     approve(swapFromToken)
+    //   } else {
+    //     // Stable -> BATON *** situation not possible
+    //     setapproved(false)
+    //   }
+    // } else {
+    //   // SPTR or BATON -> xxx
+    //   setapproved(true)
+    // }
+  }, [swapFromToken, swapToToken])
+
+  useEffect(() => {
+    if (swapFromToken === 'SPTR') {
+      if (swapToToken === 'BATON') {
+        setSwapToInput2(swapFromInput1)
+      } else {
+        setSwapToInput2(swapFromInput1 * stats.scepterSellPrice)
+      }
+    } else if (swapFromToken === 'BATON') {
+      setSwapToInput2(swapFromInput1 * stats.batonRedeemingPrice)
+    } else {
+      setSwapToInput2(swapFromInput1 * stats.scepterBuyPrice)
+      // console.log('[error] swapFromInput1')
+    }
+  }, [
+    swapFromInput1,
+    swapFromToken,
+    swapToToken,
+    stats.batonRedeemingPrice,
+    stats.scepterSellPrice,
+    stats.scepterBuyPrice,
+  ])
+
+  const swapClickHandler = () => {
+    setSwapFromInput1(0)
+    setSwapToInput2(0)
     setSwapFromToken(swapToToken)
     setSwapToToken(swapFromToken)
   }
@@ -125,6 +343,19 @@ const Swap1SwapBox = (props) => {
         from={false}
         setIsModalFrom={setIsModalFrom}
       />
+      <Text variant="title" textAlign="left">
+        {swapFromToken === 'SPTR'
+          ? swapToToken === 'BATON'
+            ? // SPTR -> BATON
+              `1 ${swapFromToken} = 1 ${swapToToken}`
+            : // SPT -> Stable
+              `1 ${swapFromToken} = ${stats.scepterSellPrice} ${swapToToken}`
+          : swapFromToken === 'BATON'
+          ? // BATON -> Stable
+            `1 ${swapFromToken} = ${stats.batonRedeemingPrice} ${swapToToken}`
+          : // Stable -> SPTR
+            `1 ${swapFromToken} = ${stats.scepterBuyPrice} ${swapToToken}`}
+      </Text>
       {swapFromToken === 'SPTR' && swapToToken !== 'BATON' && (
         <>
           <Text variant="title" textAlign="left" mb="35px">
@@ -142,52 +373,27 @@ const Swap1SwapBox = (props) => {
           </Box>
         </>
       )}
-      <Flex
-        justifyContent="space-between"
-        m={0}
-        p={0}
-        w='100%'
-        flexDirection={['column', 'column', 'row']}
-      >
-        <Button
-          variant="solid"
-          size="md"
-          width="100%"
-          mt="20px"
-          mr='10px'
-          backgroundColor="#06141D"
-          color="#8C8C8C"
-          fontSize="12px"
-          fontWeight="bold"
-          letterSpacing="0.5px"
-          border="1px solid rgba(165, 239, 255, 0.2)"
-          _hover={{
-            backgroundColor: '#030a0f',
-            color: '#FFFFFF',
-          }}
-        >
-          Approve
-        </Button>
 
-        <Button
-          variant="solid"
-          size="md"
-          width="100%"
-          mt="20px"
-          backgroundColor="#06141D"
-          color="#8C8C8C"
-          fontSize="12px"
-          fontWeight="bold"
-          letterSpacing="0.5px"
-          border="1px solid rgba(165, 239, 255, 0.2)"
-          _hover={{
-            backgroundColor: '#030a0f',
-            color: '#FFFFFF',
-          }}
-        >
-          Swap
-        </Button>
-      </Flex>
+      <Button
+        variant="solid"
+        onClick={approved ? swap : approve}
+        size="md"
+        width="100%"
+        mt="20px"
+        mr="10px"
+        backgroundColor="#06141D"
+        color="#8C8C8C"
+        fontSize="12px"
+        fontWeight="bold"
+        letterSpacing="0.5px"
+        border="1px solid rgba(165, 239, 255, 0.2)"
+        _hover={{
+          backgroundColor: '#030a0f',
+          color: '#FFFFFF',
+        }}
+      >
+        {approved ? 'Swap' : approving ? 'Approving...' : 'Approve'}
+      </Button>
 
       {/* Modal placeholder */}
       <SwapBoxModal

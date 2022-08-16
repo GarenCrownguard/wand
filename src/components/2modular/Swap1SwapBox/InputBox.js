@@ -64,6 +64,10 @@ const InputBox = (props) => {
           <Button
             variant="link"
             size="xs"
+            onClick={() => setinputvalue(
+              tokenlist.filter((eachtoken) => eachtoken.name === token)[0]
+                .balance
+            )}
             color="#8C8C8C"
             display="block"
             p="0px"

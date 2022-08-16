@@ -10,7 +10,7 @@ const initialState = {
     riskTreasuryValue: 250000.4857,
     growthFactor: 0.287,
     scepterBuyPrice: 12.43,
-    scepterSellPrice: 11.2,
+    scepterSellPrice: 100,
     sellFactor: 0.3,
     batonRedeemingPrice: 5.4234,
     addmore: [],

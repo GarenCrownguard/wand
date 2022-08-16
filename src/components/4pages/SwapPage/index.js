@@ -35,6 +35,7 @@ const SwapPage = (props) => {
               value={prettifyamounts(
                 localwalletstats.sceptertoken * stats.scepterBackingPrice
               )}
+              tooltipLabel={'Value = Balance * Backing Price'}
             />
           </MainBlock1Card>
           <MainBlock1Card
