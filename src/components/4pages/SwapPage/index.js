@@ -35,6 +35,7 @@ const SwapPage = (props) => {
               value={prettifyamounts(
                 localwalletstats.sceptertoken * stats.scepterBackingPrice
               )}
+              tooltipLabel={'Value = Balance * Backing Price'}
             />
           </MainBlock1Card>
           <MainBlock1Card
@@ -97,9 +98,9 @@ const SwapPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
-    investmentList: state.investmentList[0],
-    localwalletstats: state.localwalletstats[0],
+    stats: state.stats,
+
+    localwalletstats: state.localwalletstats,
   }
 }
 export default connect(mapStateToProps)(SwapPage)

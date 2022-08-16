@@ -19,12 +19,12 @@ const InputBox = (props) => {
     setinputvalue,
     handleOpenModal,
     from,
-    setIsModalFrom
+    setIsModalFrom,
   } = props
 
-  function handelOnClick(){
-    handleOpenModal();
-    setIsModalFrom(from);
+  const handelOnClick = () =>{
+    handleOpenModal()
+    setIsModalFrom(from)
   }
 
   return (
@@ -35,9 +35,9 @@ const InputBox = (props) => {
       backgroundColor="#0B1A28"
       borderRadius="7px"
       maxHeight="60px"
-      border= "1px solid rgba(165, 239, 255, 0.2)"
-      mb='9px'
-      mt='9px'
+      border="1px solid rgba(165, 239, 255, 0.2)"
+      mb="9px"
+      mt="9px"
     >
       <Flex
         alignItems="stretch"
@@ -64,6 +64,10 @@ const InputBox = (props) => {
           <Button
             variant="link"
             size="xs"
+            onClick={() => setinputvalue(
+              tokenlist.filter((eachtoken) => eachtoken.name === token)[0]
+                .balance
+            )}
             color="#8C8C8C"
             display="block"
             p="0px"
@@ -124,9 +128,9 @@ const InputBox = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
-    investmentList: state.investmentList[0],
-    localwalletstats: state.localwalletstats[0],
+    stats: state.stats,
+
+    localwalletstats: state.localwalletstats,
   }
 }
 export default connect(mapStateToProps)(InputBox)

@@ -1,47 +1,158 @@
-import React, { useState } from "react";
-import { Button, Box, Text, Icon } from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/react";
-import IconWallet from "./icon-wallet";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react'
+import { Button, Box, Text, Icon } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
+import IconWallet from './icon-wallet'
+import { connect } from 'react-redux'
+import * as reducer from 'redux/reducerCalls'
+import { BigNumberToActual } from 'resources/utilities'
+import contracts from 'contracts/contracts'
 
-import { UPDATE_ADDRESS } from "redux/reducerCalls";
+const ConnectButton = (props) => {
+  const { handleOpenModal, isMobile, localwalletstats } = props
 
-function ConnectButton(props) {
+  const account = localwalletstats.walletAddress
+  const isconnected = localwalletstats.isconnected
+  const toast = useToast()
+  const { ethereum } = window
 
-  const { handleOpenModal, isMobile, localwalletstats} = props;
+  // console.log(ethereum.isConnected())
+  if (ethereum) {
+    ethereum.on('accountsChanged', (accounts) => {
+      /* Disconnecting wallet from metamask acts as account change */
+      // console.log('accounts change event')
+      window.location.reload()
+    })
 
-  const [account, setAccount] = useState(null);
-  const toast = useToast();
-
-  // console.log(isMobile);
+    ethereum.on('chainChanged', (chainId) => {
+      // console.log('chain change event')
+      window.location.reload()
+    })
+  }
 
   const handleConnectWallet = async () => {
-    const { ethereum } = window;
     if (!ethereum) {
       toast({
-        title: "No wallet detected!",
-        status: "warning",
+        title: 'No wallet detected!',
+        status: 'warning',
         duration: 1000,
-        position: "bottom-right",
+        position: 'bottom-right',
         containerStyle: {
-          width: "50px",
+          width: '50px',
         },
-      });
-    }
+      })
+    } else {
+      try {
+        const accounts = await ethereum.request({
+          method: 'eth_requestAccounts',
+        })
 
-    try {
-      const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      // console.log("Found an account! Address: ", accounts[0]);
-      UPDATE_ADDRESS({ walletAddress: accounts[0] });
-      setAccount(accounts[0]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+        if (accounts.length !== 0) {
+          const account = accounts[0]
+          // console.log('Found an authorized account: ', account)
 
-  return account ? (
+          reducer.UPDATE_ADDRESS({ walletAddress: account })
+
+          /* Getting localwallet stats */
+          const SPTRbalance =
+            (await contracts.SPTRContract?.balanceOf(account)) ?? null
+          const BATONbalance =
+            (await contracts.BATONContract?.balanceOf(account)) ?? null
+          const USDCbalance =
+            (await contracts.USDCContract?.balanceOf(account)) ?? null
+          const BUSDbalance =
+            (await contracts.BUSDContract?.balanceOf(account)) ?? null
+          const DAIbalance =
+            (await contracts.DAIContract?.balanceOf(account)) ?? null
+          const FRAXbalance =
+            (await contracts.FRAXContract?.balanceOf(account)) ?? null
+
+          // console.log(outstandingStats)
+          // console.log(localwalletstats.remainingSwapTime)
+
+          reducer.WALLET_UPDATE_STATS({
+            sptrbal: BigNumberToActual(SPTRbalance, 'SPTR'),
+            batonbal: BigNumberToActual(BATONbalance, 'BATON'),
+            usdcbal: BigNumberToActual(USDCbalance, 'USDC'),
+            busdbal: BigNumberToActual(BUSDbalance, 'BUSD'),
+            daibal: BigNumberToActual(DAIbalance, 'DAI'),
+            fraxbal: BigNumberToActual(FRAXbalance, 'FRAX'),
+          })
+
+          /* Getting FE stats */
+          const wandScepterData =
+            (await contracts.wandContract?.scepterData()) ?? null
+
+          const btonTreasuryBal =
+            (await contracts.wandContract?.btonTreasuryBal()) ?? null
+
+          const btonRedeemingPrice =
+            (await contracts.wandContract?.getBTONRedeemingPrice()) ?? null
+
+          reducer.UPDATE_STATS({
+            sptrGrowthFactor: BigNumberToActual(
+              wandScepterData.sptrGrowthFactor,
+              'SPTR'
+            ),
+            sptrSellFactor: BigNumberToActual(
+              wandScepterData.sptrSellFactor,
+              'SPTR'
+            ),
+            sptrBuyPrice: BigNumberToActual(
+              wandScepterData.sptrBuyPrice,
+              'SPTR'
+            ),
+            sptrSellPrice: BigNumberToActual(
+              wandScepterData.sptrSellPrice,
+              'SPTR'
+            ),
+            sptrBackingPrice: BigNumberToActual(
+              wandScepterData.sptrBackingPrice,
+              'SPTR'
+            ),
+            sptrTreasuryBal: BigNumberToActual(
+              wandScepterData.sptrTreasuryBal,
+              'SPTR'
+            ),
+            btonTreasuryBal: BigNumberToActual(btonTreasuryBal, 'BATON'),
+            btonRedeemingPrice: BigNumberToActual(btonRedeemingPrice, 'BATON'),
+          })
+
+          /* Updating the outstanding locked amount */
+          const outstandingStats =
+            (await contracts.wandContract?.withheldWithdrawals(account)) ?? null
+
+          reducer.UPDATE_OUTSTANDING_STATS({
+            outstandingTimeLocked:
+              BigNumberToActual(outstandingStats.timeUnlocked, 'one') * 10,
+            outstandingSwappedAmounts: BigNumberToActual(
+              outstandingStats.amounts,
+              'SPTR'
+            ),
+          })
+        } else {
+          // console.log('No authorized account found')
+          toast({
+            title: 'Wallet detected but something went wrong!',
+            status: 'error',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '50px',
+            },
+          })
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+  
+  useEffect(() => {
+    handleConnectWallet()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return account && isconnected ? (
     <Box
       display="flex"
       alignItems="center"
@@ -49,12 +160,10 @@ function ConnectButton(props) {
       borderRadius="xl"
       py="0"
     >
-      {!isMobile && (
+      {!isMobile && localwalletstats.sceptertoken && (
         <Box px="3">
           <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
-            {localwalletstats.sceptertoken &&
-              parseFloat(localwalletstats.sceptertoken).toFixed(2)}{' '}
-            SPTR
+            {parseFloat(localwalletstats.sceptertoken)?.toFixed(2)} SPTR
           </Text>
         </Box>
       )}
@@ -96,44 +205,41 @@ function ConnectButton(props) {
       </Button>
     </Box>
   ) : (
-    <>
-      <Button
-        onClick={handleConnectWallet}
-        bg="transparent"
+    <Button
+      onClick={handleConnectWallet}
+      bg="transparent"
+      color="white"
+      size="md"
+      fontSize={isMobile ? 14 : 19}
+      fontWeight="light"
+      leftIcon={<IconWallet fill="currentColor" />}
+      borderRadius="xl"
+      border="1px solid transparent"
+      _hover={{
+        borderColor: 'grey',
+        boxShadow:
+          '-2px -4px 20px rgba(42, 224, 191, 0.2), 0px 4px 20px rgba(234, 58, 246, 0.25)',
+        color: 'grey',
+      }}
+    >
+      <Text
         color="white"
-        size="md"
         fontSize={isMobile ? 14 : 19}
         fontWeight="light"
-        leftIcon={<IconWallet fill="currentColor" />}
-        borderRadius="xl"
-        border="1px solid transparent"
-        _hover={{
-          borderColor: 'grey',
-          boxShadow:
-            '-2px -4px 20px rgba(42, 224, 191, 0.2), 0px 4px 20px rgba(234, 58, 246, 0.25)',
-          color: 'grey',
-        }}
+        mt="5px"
       >
-        <Text
-          color="white"
-          fontSize={isMobile ? 14 : 19}
-          fontWeight="light"
-          mt="5px"
-        >
-          Connect wallet
-        </Text>
-      </Button>
-      {localwalletstats.walletAddress}
-    </>
+        Connect wallet
+      </Text>
+    </Button>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    stats: state.stats[0],
-    investmentList: state.investmentList[0],
-    localwalletstats: state.localwalletstats[0],
-  };
-};
+    stats: state.stats,
 
-export default connect(mapStateToProps)(ConnectButton);
+    localwalletstats: state.localwalletstats,
+  }
+}
+
+export default connect(mapStateToProps)(ConnectButton)

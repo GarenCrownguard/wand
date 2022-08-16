@@ -1,5 +1,5 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import { VStack, Box, Divider } from "@chakra-ui/react";
 
 import SideBar2MenuItem from "components/1atomic/SideBar2MenuItem";
@@ -17,7 +17,8 @@ import {
   Icon9docs,
 } from "./icons";
 
-const SideBar2Menu = () => {
+const SideBar2Menu = (props) => {
+const isconnected = props.localwalletstats.isconnected;
 
   return (
     <Box>
@@ -28,12 +29,14 @@ const SideBar2Menu = () => {
           icon={Icon1dashboard}
           href={links.dashboard}
         />
-        <SideBar2MenuItem
-          id={links.account}
-          title="Account"
-          icon={Icon2account}
-          href={links.account}
-        />
+        {isconnected && (
+          <SideBar2MenuItem
+            id={links.account}
+            title="Account"
+            icon={Icon2account}
+            href={links.account}
+          />
+        )}
         <Divider borderColor={'#6f6c99'} />
         <SideBar2MenuItem
           id={links.swap}
@@ -88,4 +91,10 @@ const SideBar2Menu = () => {
   )
 };
 
-export default SideBar2Menu;
+const mapStateToProps = (state) => {
+  return {
+    localwalletstats: state.localwalletstats,
+  }
+}
+
+export default connect(mapStateToProps)(SideBar2Menu)

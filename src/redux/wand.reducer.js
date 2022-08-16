@@ -1,83 +1,134 @@
-import * as actions from "./action.types";
+import actions from './action.types'
 
 const initialState = {
-  stats: [
-    {
-      scepterCirculatingSupply: 10000000.2345,
-      scepterBackingPrice: 34.1234,
-      airdrops3Months: 500000000.4567,
-      scepterTreasuryValue: 500450000.8475,
-      batonTreasuryValue: 250001.2093,
-      riskTreasuryValue: 250000.4857,
-      growthFactor: 0.287,
-      scepterBuyPrice: 12.43,
-      scepterSellPrice: 11.2,
-      sellFactor: 0.3,
-      batonRedeemingPrice: 5.4234,
-      currentWalletScepterAmount: 100.0,
-      addmore: [],
-    },
-  ],
-  localwalletstats: [
-    {
-      walletAddress: null,
-      sceptertoken: 5678,
-      batontoken: 4567,
-      usdctoken: 3456,
-      usdttoken: 2345,
-      busdtoken: 1234,
-      remainingSwapTime: 1660507700,
-      amountOfSptrSwapped: 10050,
-      sptrSellPriceAtSwap: 12.46
-    },
-  ],
-  investmentList: [
-    {
-      date: '31/05/2022',
-      protocolName: 'Anchor',
-      protocolUrl: 'https://app.anchorprotocol.com/',
-      investedAmount: 1000000,
-      expectedAPY: 20,
-      transactionLink:
-        'https://finder.terra.money/classic/tx/AC53B6A60009CE3AAFE147505C4235F5A1BC6EC5C56A7EF59D3C21839C3E25C3',
-      chain: 'terra',
-    },
-  ]
+  stats: {
+    scepterCirculatingSupply: 99899.9999,
+    scepterBackingPrice: null,
+    airdrops3Months: 99899.9999,
+    scepterTreasuryValue: null,
+    batonTreasuryValue: null,
+    riskTreasuryValue: 99899.9999,
+    growthFactor: null,
+    scepterBuyPrice: null,
+    scepterSellPrice: null,
+    sellFactor: null,
+    batonRedeemingPrice: null,
+    addmore: [],
+  },
+  localwalletstats: {
+    isconnected: false,
+    walletAddress: null,
+    sceptertoken: null,
+    batontoken: null,
+    usdctoken: null,
+    busdtoken: null,
+    daitoken: null,
+    fraxtoken: null,
+    remainingSwapTime: null,
+    amountOfSptrSwapped: null,
+    // sptrSellPriceAtSwap: 12.46,
+  },
 }
 
 const postReducer = (currentState = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload } = action
 
   switch (type) {
     case actions.UPDATE_ADDRESS:
       return {
-        stats: [...currentState.stats],
-        localwalletstats: [
-          {
-            walletAddress: payload.address,
-            ...currentState.localwalletstats[0],
-          },
-        ],
-        investmentList: [...currentState.investmentList],
-      };
+        stats: { ...currentState.stats },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+          walletAddress: payload.address,
+          isconnected: true,
+        },
+      }
+
+    case actions.WALLET_DISCONNECT:
+      return {
+        stats: { ...currentState.stats },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+          walletAddress: null,
+          isconnected: false,
+        },
+      }
+
+    case actions.WALLET_UPDATE_STATS:
+      const { sptrbal, batonbal, usdcbal, busdbal, daibal, fraxbal } = payload
+      return {
+        stats: { ...currentState.stats },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+          sceptertoken: sptrbal,
+          batontoken: batonbal,
+          usdctoken: usdcbal,
+          busdtoken: busdbal,
+          daitoken: daibal,
+          fraxtoken: fraxbal,
+        },
+      }
+
+    case actions.UPDATE_STATS:
+      const {
+        sptrGrowthFactor,
+        sptrSellFactor,
+        sptrBuyPrice,
+        sptrSellPrice,
+        sptrBackingPrice,
+        sptrTreasuryBal,
+        btonTreasuryBal,
+        btonRedeemingPrice
+      } = payload
+      return {
+        stats: {
+          ...currentState.stats,
+          growthFactor: sptrGrowthFactor,
+          sellFactor: sptrSellFactor,
+          scepterBuyPrice: sptrBuyPrice,
+          scepterSellPrice: sptrSellPrice,
+          scepterBackingPrice: sptrBackingPrice,
+          scepterTreasuryValue: sptrTreasuryBal,
+          batonTreasuryValue: btonTreasuryBal,
+          batonRedeemingPrice: btonRedeemingPrice,
+        },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+        },
+      }
+
+    case actions.UPDATE_OUTSTANDING_STATS:
+      const {
+        outstandingTimeLocked,
+        outstandingSwappedAmounts,
+      } = payload
+      return {
+        stats: {
+          ...currentState.stats,
+        },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+          remainingSwapTime: outstandingTimeLocked,
+          amountOfSptrSwapped: outstandingSwappedAmounts,
+        },
+      }
+
     case actions.GET_FE_STATS:
       // This is the new State after the action is performed.
       return {
         stats: [...currentState.stats, ...payload.allposts],
-        investmentList: [...currentState.investmentList],
-      };
+      }
     case actions.UPDATE_AIRDROP_AMOUNT:
       return {
         stats: [...currentState.stats],
-        investmentList: [...currentState.investmentList],
-      };
+      }
     case actions.GET_TRANSACTION_LIST:
       return {
         ...currentState,
-      };
+      }
     default:
-      return currentState;
+      return currentState
   }
-};
+}
 
-export default postReducer;
+export default postReducer

@@ -10,7 +10,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 
-export default function SwapBoxModal({
+const SwapBoxModal = ({
   isOpen,
   onClose,
   tokenlist,
@@ -18,9 +18,9 @@ export default function SwapBoxModal({
   otherToken,
   setSwapFromToken,
   setSwapToToken,
-}) {
+})=> {
   // console.log(tokenlist.filter((eachtoken) => eachtoken.name === otherToken)[0].canSwapTo)
-  function handleOnClick(name) {
+  const handleOnClick = (name)=> {
     // console.log(`Is from token: ${isModalFrom} and the name is: ${name}`);
     isModalFrom ? setSwapFromToken(name) : setSwapToToken(name)
 
@@ -81,3 +81,5 @@ export default function SwapBoxModal({
     </Modal>
   )
 }
+
+export default SwapBoxModal;
