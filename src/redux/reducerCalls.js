@@ -3,8 +3,7 @@
 // import axios from "axios";
 
 import store from "./store";
-
-import * as actions from './action.types';
+import actions from "./action.types";
 
 export const GET_FE_STATS = async (props) => {
 
@@ -32,5 +31,12 @@ export const WALLET_DISCONNECT = async (props) => {
     payload: {
 
     }
+  })
+}
+
+export const WALLET_UPDATE_STATS = async (props) => {
+  store.dispatch({
+    type: actions.WALLET_UPDATE_STATS,
+    payload: props,
   })
 }

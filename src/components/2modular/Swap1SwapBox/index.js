@@ -142,25 +142,53 @@ const Swap1SwapBox = (props) => {
           </Box>
         </>
       )}
-
-      <Button
-        variant="solid"
-        size="md"
-        width="100%"
-        mt="20px"
-        backgroundColor="#06141D"
-        color="#8C8C8C"
-        fontSize="12px"
-        fontWeight="bold"
-        letterSpacing="0.5px"
-        border="1px solid rgba(165, 239, 255, 0.2)"
-        _hover={{
-          backgroundColor: '#030a0f',
-          color: '#FFFFFF',
-        }}
+      <Flex
+        justifyContent="space-between"
+        m={0}
+        p={0}
+        w='100%'
+        flexDirection={['column', 'column', 'row']}
       >
-        Swap
-      </Button>
+        <Button
+          variant="solid"
+          size="md"
+          width="100%"
+          mt="20px"
+          mr='10px'
+          backgroundColor="#06141D"
+          color="#8C8C8C"
+          fontSize="12px"
+          fontWeight="bold"
+          letterSpacing="0.5px"
+          border="1px solid rgba(165, 239, 255, 0.2)"
+          _hover={{
+            backgroundColor: '#030a0f',
+            color: '#FFFFFF',
+          }}
+        >
+          Approve
+        </Button>
+
+        <Button
+          variant="solid"
+          size="md"
+          width="100%"
+          mt="20px"
+          backgroundColor="#06141D"
+          color="#8C8C8C"
+          fontSize="12px"
+          fontWeight="bold"
+          letterSpacing="0.5px"
+          border="1px solid rgba(165, 239, 255, 0.2)"
+          _hover={{
+            backgroundColor: '#030a0f',
+            color: '#FFFFFF',
+          }}
+        >
+          Swap
+        </Button>
+      </Flex>
+
       {/* Modal placeholder */}
       <SwapBoxModal
         isOpen={isOpen}

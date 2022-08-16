@@ -66,25 +66,30 @@ const DashboardPage = (props) => {
           Chart 1
         </MainBlock1Card>
       </Flex>
-      <MainBlock3HeaderText text="Account Overview" />
-      <MainBlock1Card p="30px">
-        <MainBlock2StatsText
-          title="Your SCEPTER Balance (Tokens)"
-          value={prettifytolocalstring(localwalletstats.sceptertoken)}
-        />
-        <MainBlock2Divider />
-        <MainBlock2StatsText
-          title="Your SCEPTER Balance (Value)"
-          value={prettifyamounts(
-            localwalletstats.sceptertoken * stats.scepterBackingPrice
-          )}
-        />
-        <MainBlock2Divider />
-        <MainBlock2StatsText
-          title="Number of BATON tokens"
-          value={prettifytolocalstring(localwalletstats.batontoken)}
-        />
-      </MainBlock1Card>
+      {localwalletstats.isconnected && (
+        <>
+          <MainBlock3HeaderText text="Account Overview" />
+          <MainBlock1Card p="30px">
+            <MainBlock2StatsText
+              title="Your SCEPTER Balance (Tokens)"
+              value={prettifytolocalstring(localwalletstats.sceptertoken)}
+            />
+            <MainBlock2Divider />
+            <MainBlock2StatsText
+              title="Your SCEPTER Balance (Value)"
+              value={prettifyamounts(
+                localwalletstats.sceptertoken * stats.scepterBackingPrice
+              )}
+            />
+            <MainBlock2Divider />
+            <MainBlock2StatsText
+              title="Number of BATON tokens"
+              value={prettifytolocalstring(localwalletstats.batontoken)}
+            />
+          </MainBlock1Card>
+        </>
+      )}
+
       <MainBlock3HeaderText text="Treasuries Overview" />
       <Flex flexDirection={['column', 'column', 'row']}>
         <GraphEvolutionOfTreasuriesStacked />

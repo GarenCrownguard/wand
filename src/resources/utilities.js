@@ -10,11 +10,11 @@ const decimals = {
 }
 
 export const prettifytolocalstring = (amount) => {
-  return amount ? amount.toLocaleString() : 'NULL'
+  return amount ? amount.toLocaleString() : null
 }
 
 export const prettifyamounts = (amount) => {
-  return amount ? '$' + prettifytolocalstring(amount) : 'NULL'
+  return amount ? '$' + prettifytolocalstring(amount) : null
 }
 
 export const prettifyGrowthPercentage = (direction, value) => {
@@ -23,12 +23,12 @@ export const prettifyGrowthPercentage = (direction, value) => {
   } else if (direction === 'negative') {
     return '-' + value + '%'
   } else {
-    return 'Nan'
+    return null
   }
 }
 
 export const BigNumberFormat = (amount, tokenDecimal) => {
   return amount && decimals[tokenDecimal]
     ? ethers.utils.formatUnits(amount, decimals[tokenDecimal])
-    : 'NULL'
+    : null
 }

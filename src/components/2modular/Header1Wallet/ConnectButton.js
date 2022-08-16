@@ -4,16 +4,32 @@ import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
 import * as reducer from 'redux/reducerCalls'
+import { BigNumberFormat } from 'resources/utilities'
+import contracts from 'contracts/contracts'
 
-const ConnectButton = (props) =>{
+const ConnectButton = (props) => {
   const { handleOpenModal, isMobile, localwalletstats } = props
 
   const account = localwalletstats.walletAddress
+  const isconnected = localwalletstats.isconnected
   const toast = useToast()
+  const { ethereum } = window
+
+  // console.log(ethereum.isConnected())
+  if (ethereum) {
+    ethereum.on('accountsChanged', (accounts) => {
+      /* Disconnecting wallet from metamask acts as account change */
+      // console.log('accounts change event')
+      window.location.reload()
+    })
+
+    ethereum.on('chainChanged', (chainId) => {
+      // console.log('chain change event')
+      window.location.reload()
+    })
+  }
 
   const handleConnectWallet = async () => {
-    const { ethereum } = window
-
     if (!ethereum) {
       toast({
         title: 'No wallet detected!',
@@ -35,6 +51,28 @@ const ConnectButton = (props) =>{
           // console.log('Found an authorized account: ', account)
 
           reducer.UPDATE_ADDRESS({ walletAddress: account })
+
+          const SPTRbalance =
+            (await contracts.SPTRContract?.balanceOf(account)) ?? null
+          const BATONbalance =
+            (await contracts.BATONContract?.balanceOf(account)) ?? null
+          const USDCbalance =
+            (await contracts.USDCContract?.balanceOf(account)) ?? null
+          const BUSDbalance =
+            (await contracts.BUSDContract?.balanceOf(account)) ?? null
+          const DAIbalance =
+            (await contracts.DAIContract?.balanceOf(account)) ?? null
+          const FRAXbalance =
+            (await contracts.FRAXContract?.balanceOf(account)) ?? null
+
+          reducer.WALLET_UPDATE_STATS({
+            sptrbal: BigNumberFormat(SPTRbalance, 'SPTR'),
+            batonbal: BigNumberFormat(BATONbalance, 'BATON'),
+            usdcbal: BigNumberFormat(USDCbalance, 'USDC'),
+            busdbal: BigNumberFormat(BUSDbalance, 'BUSD'),
+            daibal: BigNumberFormat(DAIbalance, 'DAI'),
+            fraxbal: BigNumberFormat(FRAXbalance, 'FRAX'),
+          })
         } else {
           // console.log('No authorized account found')
           toast({
@@ -55,9 +93,10 @@ const ConnectButton = (props) =>{
 
   useEffect(() => {
     handleConnectWallet()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return account ? (
+  return account && isconnected ? (
     <Box
       display="flex"
       alignItems="center"
@@ -65,12 +104,10 @@ const ConnectButton = (props) =>{
       borderRadius="xl"
       py="0"
     >
-      {!isMobile && (
+      {!isMobile && localwalletstats.sceptertoken && (
         <Box px="3">
           <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
-            {localwalletstats.sceptertoken &&
-              parseFloat(localwalletstats.sceptertoken).toFixed(2)}{' '}
-            SPTR
+            {parseFloat(localwalletstats.sceptertoken)?.toFixed(2)} SPTR
           </Text>
         </Box>
       )}

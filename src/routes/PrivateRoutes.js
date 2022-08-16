@@ -1,22 +1,28 @@
-import React, { Suspense, lazy } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import links from "resources/links";
+import React, { Suspense, lazy } from 'react'
+import { connect } from 'react-redux'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import links from 'resources/links'
 
-const TreasuriesPage = lazy(() => import("components/4pages/TreasuriesPage"));
-const DashboardPage = lazy(() => import("components/4pages/DashboardPage"));
-const AccountPage = lazy(() => import("components/4pages/AccountPage"));
-const SwapPage = lazy(() => import("components/4pages/SwapPage"));
+const TreasuriesPage = lazy(() => import('components/4pages/TreasuriesPage'))
+const DashboardPage = lazy(() => import('components/4pages/DashboardPage'))
+const AccountPage = lazy(() => import('components/4pages/AccountPage'))
+const SwapPage = lazy(() => import('components/4pages/SwapPage'))
 const ContractInteractionPage = lazy(() =>
   import('components/4pages/ContractInteractionPage')
 )
 
+const PrivateRoutes = (props) => {
+  const isconnected = props.localwalletstats.isconnected
 
-const PrivateRoutes = () => {
   return (
     <Suspense>
       <Switch>
         <Route exact path={links.dashboard} component={DashboardPage} />
-        <Route exact path={links.account} component={AccountPage} />
+        <Route
+          exact
+          path={links.account}
+          component={isconnected ? AccountPage : () => <div>Wallet Not Connected!</div>}
+        />
         <Route exact path={links.swap} component={SwapPage} />
         <Route
           exact
@@ -55,4 +61,10 @@ const PrivateRoutes = () => {
   )
 }
 
-export default PrivateRoutes;
+const mapStateToProps = (state) => {
+  return {
+    localwalletstats: state.localwalletstats,
+  }
+}
+
+export default connect(mapStateToProps)(PrivateRoutes)

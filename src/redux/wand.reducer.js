@@ -1,4 +1,4 @@
-import * as actions from './action.types'
+import actions from './action.types'
 
 const initialState = {
   stats: {
@@ -16,14 +16,16 @@ const initialState = {
     addmore: [],
   },
   localwalletstats: {
+    isconnected: false,
     walletAddress: null,
-    sceptertoken: 5678,
-    batontoken: 4567,
-    usdctoken: 3456,
-    usdttoken: 2345,
-    busdtoken: 1234,
+    sceptertoken: null,
+    batontoken: null,
+    usdctoken: null,
+    busdtoken: null,
+    daitoken: null,
+    fraxtoken: null,
     remainingSwapTime: 1665507700,
-    amountOfSptrSwapped: 10050,
+    amountOfSptrSwapped: 3333,
     sptrSellPriceAtSwap: 12.46,
   },
 }
@@ -38,6 +40,7 @@ const postReducer = (currentState = initialState, action) => {
         localwalletstats: {
           ...currentState.localwalletstats,
           walletAddress: payload.address,
+          isconnected: true
         },
       }
 
@@ -47,6 +50,22 @@ const postReducer = (currentState = initialState, action) => {
         localwalletstats: {
           ...currentState.localwalletstats,
           walletAddress: null,
+          isconnected: false,
+        },
+      }
+
+    case actions.WALLET_UPDATE_STATS:
+      const { sptrbal, batonbal, usdcbal, busdbal, daibal, fraxbal } = payload
+      return {
+        stats: { ...currentState.stats },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+          sceptertoken: sptrbal,
+          batontoken: batonbal,
+          usdctoken: usdcbal,
+          busdtoken: busdbal,
+          daitoken: daibal,
+          fraxtoken: fraxbal,
         },
       }
     case actions.GET_FE_STATS:
