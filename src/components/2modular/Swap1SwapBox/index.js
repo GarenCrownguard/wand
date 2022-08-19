@@ -18,11 +18,12 @@ import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { ActualToBigNumber } from 'resources/utilities'
 import {
   Icon1swap,
-  IconTokenUSDT,
   IconTokenBUSD,
   IconTokenUSDC,
   IconTokenBATON,
   IconTokenSPTR,
+  IconTokenDAI,
+  IconTokenFRAX,
 } from './icons'
 
 import InputBox from './InputBox'
@@ -44,43 +45,43 @@ const Swap1SwapBox = (props) => {
       name: 'SPTR',
       balance: localwalletstats.sceptertoken ?? 0,
       canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI', 'FRAX'],
+      canSwapFrom: ['BATON', 'USDC', 'BUSD', 'DAI', 'FRAX'],
       icon: <IconTokenSPTR />,
     },
     {
       name: 'BATON',
       balance: localwalletstats.batontoken ?? 0,
       canSwapTo: ['USDC', 'BUSD', 'DAI', 'FRAX'],
-      // icon: <IconTokenBATON />,
+      canSwapFrom: ['SPTR'],
+      icon: <IconTokenBATON />,
     },
-    // {
-    //   name: 'USDT',
-    //   balance: localwalletstats.usdttoken ?? 0,
-    //   canSwapTo: ['SPTR'],
-    //   icon: <IconTokenUSDT />,
-    // },
     {
       name: 'USDC',
       balance: localwalletstats.usdctoken ?? 0,
       canSwapTo: ['SPTR'],
+      canSwapFrom: ['BATON', 'SPTR'],
       icon: <IconTokenUSDC />,
     },
     {
       name: 'BUSD',
       balance: localwalletstats.busdtoken ?? 0,
       canSwapTo: ['SPTR'],
+      canSwapFrom: ['BATON', 'SPTR'],
       icon: <IconTokenBUSD />,
     },
     {
       name: 'DAI',
       balance: localwalletstats.daitoken ?? 0,
       canSwapTo: ['SPTR'],
-      // icon: <IconTokenUSDC />,
+      canSwapFrom: ['BATON', 'SPTR'],
+      icon: <IconTokenDAI />,
     },
     {
       name: 'FRAX',
       balance: localwalletstats.fraxtoken ?? 0,
       canSwapTo: ['SPTR'],
-      // icon: <IconTokenUSDC />,
+      canSwapFrom: ['BATON', 'SPTR'],
+      icon: <IconTokenFRAX />,
     },
   ]
 
@@ -103,58 +104,50 @@ const Swap1SwapBox = (props) => {
   var wandAllowanceFRAX = null
 
   const checkAllowance = async (fromtoken) => {
-    setApproving(true);
+    setApproving(true)
     wandAllowanceSPTR =
-      (await contracts.SPTRContract?.allowance(
-        account,
-        contractAddresses.wand
-      )) ?? ethers.BigNumber.from(0)
+      contracts.SPTRContract?.allowance(account, contractAddresses.wand) ??
+      ethers.BigNumber.from(0)
     wandAllowanceBATON =
-      (await contracts.BATONContract?.allowance(
-        account,
-        contractAddresses.wand
-      )) ?? ethers.BigNumber.from(0)
+      contracts.BATONContract?.allowance(account, contractAddresses.wand) ??
+      ethers.BigNumber.from(0)
 
     wandAllowanceUSDC =
-      (await contracts.USDCContract?.allowance(
-        account,
-        contractAddresses.wand
-      )) ?? ethers.BigNumber.from(0)
+      contracts.USDCContract?.allowance(account, contractAddresses.wand) ??
+      ethers.BigNumber.from(0)
     wandAllowanceBUSD =
-      (await contracts.BUSDContract?.allowance(
-        account,
-        contractAddresses.wand
-      )) ?? ethers.BigNumber.from(0)
+      contracts.BUSDContract?.allowance(account, contractAddresses.wand) ??
+      ethers.BigNumber.from(0)
 
     wandAllowanceDAI =
-      (await contracts.DAIContract?.allowance(
-        account,
-        contractAddresses.wand
-      )) ?? ethers.BigNumber.from(0)
+      contracts.DAIContract?.allowance(account, contractAddresses.wand) ??
+      ethers.BigNumber.from(0)
 
     wandAllowanceFRAX =
-      (await contracts.FRAXContract?.allowance(
-        account,
-        contractAddresses.wand
-      )) ?? ethers.BigNumber.from(0)
+      contracts.FRAXContract?.allowance(account, contractAddresses.wand) ??
+      ethers.BigNumber.from(0)
+
+    const AllAllowance = await Promise.all([
+      wandAllowanceSPTR,
+      wandAllowanceBATON,
+      wandAllowanceUSDC,
+      wandAllowanceBUSD,
+      wandAllowanceDAI,
+      wandAllowanceFRAX,
+    ])
 
     switch (fromtoken) {
       case 'SPTR':
-        // console.log(fromtoken)
-        // console.log(ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR'))
         setapproved(
-          wandAllowanceSPTR?.gt(
+          AllAllowance[0]?.gt(
             ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
           ) ?? false
         )
         setApproving(false)
         break
       case 'BATON':
-        // console.log(fromtoken)
-        // console.log(wandAllowanceBATON)
-
         setapproved(
-          wandAllowanceBATON?.gt(
+          AllAllowance[1]?.gt(
             ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
           ) ?? false
         )
@@ -162,7 +155,7 @@ const Swap1SwapBox = (props) => {
         break
       case 'USDC':
         setapproved(
-          wandAllowanceUSDC?.gt(
+          AllAllowance[2]?.gt(
             ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
           ) ?? false
         )
@@ -170,7 +163,7 @@ const Swap1SwapBox = (props) => {
         break
       case 'BUSD':
         setapproved(
-          wandAllowanceBUSD?.gt(
+          AllAllowance[3]?.gt(
             ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
           ) ?? false
         )
@@ -178,7 +171,7 @@ const Swap1SwapBox = (props) => {
         break
       case 'DAI':
         setapproved(
-          wandAllowanceDAI?.gt(
+          AllAllowance[4]?.gt(
             ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
           ) ?? false
         )
@@ -186,64 +179,134 @@ const Swap1SwapBox = (props) => {
         break
       case 'FRAX':
         setapproved(
-          wandAllowanceFRAX?.gt(
+          AllAllowance[5]?.gt(
             ActualToBigNumber(localwalletstats.fraxtoken, 'FRAX') ?? 0
           ) ?? false
         )
         setApproving(false)
         break
       default:
-        console.log('Cannot get the Allowance of the wallet')
+        // console.log('Cannot get the Allowance of the wallet')
+        toast({
+          title: 'Cannot get the Allowance of the wallet',
+          status: 'error',
+          duration: 1000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '50px',
+          },
+        })
         setapproved(false)
         setApproving(true)
         break
     }
   }
 
-  const approve = async () => {
-    // try {
-    //   // console.log('Initialize approval')
-    //   let ApproveCall =
-    //     (await contracts.BATONContract?.approve(
-    //       contractAddresses.wand,
-    //       MAX_APPROVAL
-    //     )) ?? 'BATON approving failed'
-    //   // console.log('Approving... please wait')
-    //   setApproving(true)
-    //   await ApproveCall.wait()
-    //   var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
-    //   toast({
-    //     title: (
-    //       <Link color="wandGreen" href={transactionLink} isExternal>
-    //         Approved. Check transaction.
-    //         <ExternalLinkIcon mx="5px" mt="-5px" />
-    //       </Link>
-    //     ),
-    //     status: 'success',
-    //     duration: 1000,
-    //     position: 'bottom-right',
-    //     containerStyle: {
-    //       width: '50px',
-    //     },
-    //   })
-    //   setApproving(false)
-    //   setapproved(true)
-    //   // console.log(
-    //   //   `Mined, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
-    //   // )
-    // } catch (error) {
-    //   console.log(error.code === 4001)
-    //   setapproved(false)
-    //   toast({
-    //     title: 'Transaction Rejected!',
-    //     status: 'error',
-    //     duration: 1000,
-    //     position: 'bottom-right',
-    //     containerStyle: {
-    //       width: '50px',
-    //     },
-    //   })
-    // }
+  const approve = async (swapFromToken) => {
+    try {
+      var ApproveCall
+      switch (swapFromToken) {
+        case 'SPTR':
+          ApproveCall =
+            (await contracts.SPTRContract?.approve(
+              contractAddresses.wand,
+              MAX_APPROVAL
+            )) ?? false
+          break
+        case 'BATON':
+          ApproveCall =
+            (await contracts.BATONContract?.approve(
+              contractAddresses.wand,
+              MAX_APPROVAL
+            )) ?? false
+          break
+        case 'USDC':
+          ApproveCall =
+            (await contracts.USDCContract?.approve(
+              contractAddresses.wand,
+              MAX_APPROVAL
+            )) ?? false
+          break
+        case 'BUSD':
+          ApproveCall =
+            (await contracts.BUSDContract?.approve(
+              contractAddresses.wand,
+              MAX_APPROVAL
+            )) ?? false
+          break
+        case 'DAI':
+          ApproveCall =
+            (await contracts.DAIContract?.approve(
+              contractAddresses.wand,
+              MAX_APPROVAL
+            )) ?? false
+          break
+        case 'FRAX':
+          ApproveCall =
+            (await contracts.FRAXContract?.approve(
+              contractAddresses.wand,
+              MAX_APPROVAL
+            )) ?? false
+          break
+        default:
+          // console.log('Cannot get the Allowance of the wallet')
+          toast({
+            title: 'Approve failed! Try Again.',
+            status: 'error',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '50px',
+            },
+          })
+          setapproved(false)
+          setApproving(false)
+          checkAllowance(swapFromToken)
+          break
+      }
+
+      // console.log('Initialize approval')
+      ApproveCall =
+        (await contracts.BATONContract?.approve(
+          contractAddresses.wand,
+          MAX_APPROVAL
+        )) ?? 'BATON approving failed'
+      // console.log('Approving... please wait')
+      setApproving(true)
+      await ApproveCall.wait()
+      var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
+      toast({
+        title: (
+          <Link color="wandGreen" href={transactionLink} isExternal>
+            Approved. Check transaction.
+            <ExternalLinkIcon mx="5px" mt="-5px" />
+          </Link>
+        ),
+        status: 'success',
+        duration: 1000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '50px',
+        },
+      })
+      setApproving(false)
+      setapproved(true)
+      // console.log(
+      //   `Mined, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
+      // )
+    } catch (error) {
+      console.log(error.code === 4001)
+      setapproved(false)
+      toast({
+        title: 'Transaction Rejected!',
+        status: 'error',
+        duration: 1000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '50px',
+        },
+      })
+    }
   }
 
   const swap = async () => {
@@ -393,7 +456,7 @@ const Swap1SwapBox = (props) => {
 
       <Button
         variant="solid"
-        onClick={approved ? swap : approving ? (()=> {}) :approve}
+        onClick={approved ? swap : approving ? () => {} : approve}
         size="md"
         width="100%"
         mt="20px"
@@ -409,7 +472,11 @@ const Swap1SwapBox = (props) => {
           color: '#FFFFFF',
         }}
       >
-        {approved ? 'Swap' : approving ? 'Checking for allowance...' : 'Approve'}
+        {approved
+          ? 'Swap'
+          : approving
+          ? 'Checking for allowance...'
+          : 'Approve'}
       </Button>
 
       {/* Modal placeholder */}

@@ -30,30 +30,6 @@ const ConnectButton = (props) => {
   }
 
   const handleConnectWallet = async () => {
-    /* Getting FE stats */
-    const wandScepterData = contracts.wandContract?.scepterData() ?? null
-
-    const btonTreasuryBal = contracts.wandContract?.btonTreasuryBal() ?? null
-
-    const btonRedeemingPrice =
-      contracts.wandContract?.getBTONRedeemingPrice() ?? null
-
-    const AllStats = await Promise.all([
-      wandScepterData,
-      btonTreasuryBal,
-      btonRedeemingPrice,
-    ])
-
-    reducer.UPDATE_STATS({
-      sptrGrowthFactor: BigNumberToActual(AllStats[0].sptrGrowthFactor, 'SPTR'),
-      sptrSellFactor: BigNumberToActual(AllStats[0].sptrSellFactor, 'SPTR'),
-      sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
-      sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
-      sptrBackingPrice: BigNumberToActual(AllStats[0].sptrBackingPrice, 'SPTR'),
-      sptrTreasuryBal: BigNumberToActual(AllStats[0].sptrTreasuryBal, 'SPTR'),
-      btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
-      btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
-    })
 
     if (!ethereum) {
       toast({
@@ -119,6 +95,45 @@ const ConnectButton = (props) => {
               'SPTR'
             ),
           })
+
+          /* Getting FE stats */
+          const wandScepterData = contracts.wandContract?.scepterData() ?? null
+
+          const btonTreasuryBal =
+            contracts.wandContract?.btonTreasuryBal() ?? null
+
+          const btonRedeemingPrice =
+            contracts.wandContract?.getBTONRedeemingPrice() ?? null
+
+          const AllStats = await Promise.all([
+            wandScepterData,
+            btonTreasuryBal,
+            btonRedeemingPrice,
+          ])
+
+          reducer.UPDATE_STATS({
+            sptrGrowthFactor: BigNumberToActual(
+              AllStats[0].sptrGrowthFactor,
+              'SPTR'
+            ),
+            sptrSellFactor: BigNumberToActual(
+              AllStats[0].sptrSellFactor,
+              'SPTR'
+            ),
+            sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
+            sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
+            sptrBackingPrice: BigNumberToActual(
+              AllStats[0].sptrBackingPrice,
+              'SPTR'
+            ),
+            sptrTreasuryBal: BigNumberToActual(
+              AllStats[0].sptrTreasuryBal,
+              'SPTR'
+            ),
+            btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
+            btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
+          })
+
         } else {
           // console.log('No authorized account found')
           toast({

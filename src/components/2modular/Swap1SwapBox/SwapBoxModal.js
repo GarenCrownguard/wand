@@ -8,7 +8,10 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  Text,
+  chakra,
 } from '@chakra-ui/react'
+
 
 const SwapBoxModal = ({
   isOpen,
@@ -18,9 +21,9 @@ const SwapBoxModal = ({
   otherToken,
   setSwapFromToken,
   setSwapToToken,
-})=> {
+}) => {
   // console.log(tokenlist.filter((eachtoken) => eachtoken.name === otherToken)[0].canSwapTo)
-  const handleOnClick = (name)=> {
+  const handleOnClick = (name) => {
     // console.log(`Is from token: ${isModalFrom} and the name is: ${name}`);
     isModalFrom ? setSwapFromToken(name) : setSwapToToken(name)
 
@@ -48,33 +51,123 @@ const SwapBoxModal = ({
         />
         <ModalBody pt={0} px={4}>
           <Flex direction="column">
-            {tokenlist
-              .filter((eachtoken) => eachtoken.name === otherToken)[0]
-              .canSwapTo.map((eachtokenName, key) => {
-                return (
-                  <Button
-                    key={key}
-                    variant="outline"
-                    color="wandGreen"
-                    fontSize="13px"
-                    fontWeight="normal"
-                    borderRadius="3xl"
-                    borderColor="gray.600"
-                    mb={3}
-                    _hover={{
-                      background: 'gray',
-                      borderColor: 'transparent',
-                    }}
-                    _active={{
-                      background: 'none',
-                      borderColor: 'transparent',
-                    }}
-                    onClick={() => handleOnClick(eachtokenName)}
-                  >
-                    {eachtokenName}
-                  </Button>
-                )
-              })}
+            {isModalFrom
+              ? tokenlist
+                  .filter((eachtoken) => eachtoken.name === otherToken)[0]
+                  .canSwapFrom.map((eachtokenName, key) => {
+                    return (
+                      <Button
+                        key={key}
+                        variant="outline"
+                        borderRadius="3xl"
+                        borderColor="gray.600"
+                        mb={3}
+                        justifyContent="flex-start"
+                        leftIcon={
+                          tokenlist.filter(
+                            (eachtoken) => eachtoken.name === eachtokenName
+                          )[0].icon
+                        }
+                        _hover={{
+                          background: 'gray',
+                          borderColor: 'transparent',
+                        }}
+                        _active={{
+                          background: 'none',
+                          borderColor: 'transparent',
+                        }}
+                        onClick={() => handleOnClick(eachtokenName)}
+                      >
+                        <Text
+                          color="wandGreen"
+                          fontSize="13px"
+                          lineHeight="12px"
+                          fontWeight="bold"
+                          letterSpacing="0.5px"
+                          display="block"
+                          ml="0"
+                        >
+                          {eachtokenName}
+                        </Text>
+                        <chakra.span
+                          color="#B1AFCD"
+                          fontSize="13px"
+                          textAlign="center"
+                          mr="0px"
+                          ml="auto"
+                        >
+                          Balance:{' '}
+                          {`${
+                            tokenlist.filter(
+                              (eachtoken) => eachtoken.name === eachtokenName
+                            )[0].balance
+                          } ${
+                            tokenlist.filter(
+                              (eachtoken) => eachtoken.name === eachtokenName
+                            )[0].name
+                          }`}
+                        </chakra.span>
+                      </Button>
+                    )
+                  })
+              : tokenlist
+                  .filter((eachtoken) => eachtoken.name === otherToken)[0]
+                  .canSwapTo.map((eachtokenName, key) => {
+                    return (
+                      <Button
+                        key={key}
+                        variant="outline"
+                        borderRadius="3xl"
+                        borderColor="gray.600"
+                        mb={3}
+                        justifyContent="flex-start"
+                        leftIcon={
+                          tokenlist.filter(
+                            (eachtoken) => eachtoken.name === eachtokenName
+                          )[0].icon
+                        }
+                        _hover={{
+                          background: 'gray',
+                          borderColor: 'transparent',
+                        }}
+                        _active={{
+                          background: 'none',
+                          borderColor: 'transparent',
+                        }}
+                        onClick={() => handleOnClick(eachtokenName)}
+                      >
+                        <Text
+                          color="wandGreen"
+                          fontSize="13px"
+                          lineHeight="12px"
+                          fontWeight="bold"
+                          letterSpacing="0.5px"
+                          display="block"
+                          ml="0"
+                        >
+                          {eachtokenName}
+                        </Text>
+                        <chakra.span
+                          color="#B1AFCD"
+                          fontSize="13px"
+                          textAlign="center"
+                          mr="0px"
+                          ml="auto"
+                        >
+                          Balance:{' '}
+                          {`${
+                            tokenlist.filter(
+                              (eachtoken) => eachtoken.name === eachtokenName
+                            )[0].balance
+                          } ${
+                            tokenlist.filter(
+                              (eachtoken) => eachtoken.name === eachtokenName
+                            )[0].name
+                          }`}
+                        </chakra.span>
+                      </Button>
+                    )
+                  })}
           </Flex>
         </ModalBody>
       </ModalContent>
@@ -82,4 +175,4 @@ const SwapBoxModal = ({
   )
 }
 
-export default SwapBoxModal;
+export default SwapBoxModal
