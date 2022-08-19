@@ -30,6 +30,31 @@ const ConnectButton = (props) => {
   }
 
   const handleConnectWallet = async () => {
+    /* Getting FE stats */
+    const wandScepterData = contracts.wandContract?.scepterData() ?? null
+
+    const btonTreasuryBal = contracts.wandContract?.btonTreasuryBal() ?? null
+
+    const btonRedeemingPrice =
+      contracts.wandContract?.getBTONRedeemingPrice() ?? null
+
+    const AllStats = await Promise.all([
+      wandScepterData,
+      btonTreasuryBal,
+      btonRedeemingPrice,
+    ])
+
+    reducer.UPDATE_STATS({
+      sptrGrowthFactor: BigNumberToActual(AllStats[0].sptrGrowthFactor, 'SPTR'),
+      sptrSellFactor: BigNumberToActual(AllStats[0].sptrSellFactor, 'SPTR'),
+      sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
+      sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
+      sptrBackingPrice: BigNumberToActual(AllStats[0].sptrBackingPrice, 'SPTR'),
+      sptrTreasuryBal: BigNumberToActual(AllStats[0].sptrTreasuryBal, 'SPTR'),
+      btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
+      btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
+    })
+
     if (!ethereum) {
       toast({
         title: 'No wallet detected!',
@@ -61,6 +86,10 @@ const ConnectButton = (props) => {
           const DAIbalance = contracts.DAIContract?.balanceOf(account) ?? null
           const FRAXbalance = contracts.FRAXContract?.balanceOf(account) ?? null
 
+          /* Updating the outstanding locked amount */
+          const outstandingStats =
+            contracts.wandContract?.withheldWithdrawals(account) ?? null
+
           const AllBalances = await Promise.all([
             SPTRbalance,
             BATONbalance,
@@ -68,8 +97,8 @@ const ConnectButton = (props) => {
             BUSDbalance,
             DAIbalance,
             FRAXbalance,
+            outstandingStats,
           ])
-
           // console.log(AllBalances[0])
           // console.log(localwalletstats.remainingSwapTime)
 
@@ -82,54 +111,11 @@ const ConnectButton = (props) => {
             fraxbal: BigNumberToActual(AllBalances[5], 'FRAX'),
           })
 
-          /* Getting FE stats */
-          const wandScepterData = contracts.wandContract?.scepterData() ?? null
-
-          const btonTreasuryBal =
-            contracts.wandContract?.btonTreasuryBal() ?? null
-
-          const btonRedeemingPrice =
-            contracts.wandContract?.getBTONRedeemingPrice() ?? null
-
-          /* Updating the outstanding locked amount */
-          const outstandingStats =
-            contracts.wandContract?.withheldWithdrawals(account) ?? null
-
-          const AllStats = await Promise.all([
-            wandScepterData,
-            btonTreasuryBal,
-            btonRedeemingPrice,
-            outstandingStats,
-          ])
-
-          reducer.UPDATE_STATS({
-            sptrGrowthFactor: BigNumberToActual(
-              AllStats[0].sptrGrowthFactor,
-              'SPTR'
-            ),
-            sptrSellFactor: BigNumberToActual(
-              AllStats[0].sptrSellFactor,
-              'SPTR'
-            ),
-            sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
-            sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
-            sptrBackingPrice: BigNumberToActual(
-              AllStats[0].sptrBackingPrice,
-              'SPTR'
-            ),
-            sptrTreasuryBal: BigNumberToActual(
-              AllStats[0].sptrTreasuryBal,
-              'SPTR'
-            ),
-            btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
-            btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
-          })
-
           reducer.UPDATE_OUTSTANDING_STATS({
             outstandingTimeLocked:
-              BigNumberToActual(AllStats[3].timeUnlocked, 'one') * 10,
+              BigNumberToActual(AllBalances[6].timeUnlocked, 'one') * 10,
             outstandingSwappedAmounts: BigNumberToActual(
-              AllStats[3].amounts,
+              AllBalances[6].amounts,
               'SPTR'
             ),
           })
@@ -146,7 +132,16 @@ const ConnectButton = (props) => {
           })
         }
       } catch (err) {
-        console.log(err)
+        // console.log(err)
+        toast({
+          title: 'User cancelled request!',
+          status: 'error',
+          duration: 1000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '50px',
+          },
+        })
       }
     }
   }
