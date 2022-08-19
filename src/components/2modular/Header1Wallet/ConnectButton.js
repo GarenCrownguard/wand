@@ -38,7 +38,7 @@ const ConnectButton = (props) => {
         duration: 1000,
         position: 'bottom-right',
         containerStyle: {
-          width: '50px',
+          width: '100%',
         },
       })
     } else {
@@ -142,7 +142,7 @@ const ConnectButton = (props) => {
             duration: 1000,
             position: 'bottom-right',
             containerStyle: {
-              width: '50px',
+              width: '100%',
             },
           })
         }
@@ -154,7 +154,7 @@ const ConnectButton = (props) => {
           duration: 1000,
           position: 'bottom-right',
           containerStyle: {
-            width: '50px',
+            width: '100%',
           },
         })
       }

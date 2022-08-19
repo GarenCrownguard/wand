@@ -193,7 +193,7 @@ const Swap1SwapBox = (props) => {
           duration: 1000,
           position: 'bottom-right',
           containerStyle: {
-            width: '50px',
+            width: '100%',
           },
         })
         setapproved(false)
@@ -202,7 +202,8 @@ const Swap1SwapBox = (props) => {
     }
   }
 
-  const approve = async (swapFromToken) => {
+  const approve = async () => {
+    setApproving(true);
     try {
       var ApproveCall
       switch (swapFromToken) {
@@ -256,7 +257,7 @@ const Swap1SwapBox = (props) => {
             duration: 1000,
             position: 'bottom-right',
             containerStyle: {
-              width: '50px',
+              width: '100%',
             },
           })
           setapproved(false)
@@ -265,19 +266,12 @@ const Swap1SwapBox = (props) => {
           break
       }
 
-      // console.log('Initialize approval')
-      ApproveCall =
-        (await contracts.BATONContract?.approve(
-          contractAddresses.wand,
-          MAX_APPROVAL
-        )) ?? 'BATON approving failed'
-      // console.log('Approving... please wait')
-      setApproving(true)
       await ApproveCall.wait()
+      
       var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
       toast({
         title: (
-          <Link color="wandGreen" href={transactionLink} isExternal>
+          <Link color="white" href={transactionLink} isExternal>
             Approved. Check transaction.
             <ExternalLinkIcon mx="5px" mt="-5px" />
           </Link>
@@ -286,24 +280,20 @@ const Swap1SwapBox = (props) => {
         duration: 1000,
         position: 'bottom-right',
         containerStyle: {
-          width: '50px',
+          width: '70px',
         },
       })
-      setApproving(false)
       setapproved(true)
-      // console.log(
-      //   `Mined, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
-      // )
+      setApproving(false)
     } catch (error) {
-      console.log(error.code === 4001)
       setapproved(false)
       toast({
-        title: 'Transaction Rejected!',
+        title: 'Transaction Error!',
         status: 'error',
         duration: 1000,
         position: 'bottom-right',
         containerStyle: {
-          width: '50px',
+          width: '100%',
         },
       })
     }
@@ -467,6 +457,7 @@ const Swap1SwapBox = (props) => {
         fontWeight="bold"
         letterSpacing="0.5px"
         border="1px solid rgba(165, 239, 255, 0.2)"
+        isLoading={approving}
         _hover={{
           backgroundColor: '#030a0f',
           color: '#FFFFFF',

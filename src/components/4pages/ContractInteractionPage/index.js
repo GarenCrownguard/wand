@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { ethers } from 'ethers'
 import * as reducer from 'redux/reducerCalls'
 import contracts from 'contracts/contracts'
-import { Button, Box, Flex } from '@chakra-ui/react'
+import { Button, Box, Flex, Link, useToast } from '@chakra-ui/react'
 import { BigNumberToActual } from 'resources/utilities'
 import contractAddresses from 'contracts/addresses'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const MAX_APPROVAL = ethers.BigNumber.from(
   '0xfffffffffffffffffffffffffffffffff'
@@ -29,6 +30,23 @@ const ContractInteractionPage = (props) => {
   //     console.log(BigNumberToActual(SPTRbalance, 'SPTR'))
   //   }
   //   getContracts()
+
+  const toast = useToast();
+
+  // toast({
+  //   title: (
+  //     <Link color="white" isExternal>
+  //       Approved. Check transaction.
+  //       <ExternalLinkIcon mx="5px" mt="-5px" />
+  //     </Link>
+  //   ),
+  //   status: 'success',
+  //   duration: 10000000,
+  //   position: 'bottom-right',
+  //   containerStyle: {
+  //     width: '100%',
+  //   },
+  // })
 
   const batonapprove = async () => {
     try {
@@ -55,6 +73,9 @@ const ContractInteractionPage = (props) => {
   const checkAllowance = async () => {
     const compareTokens = '999999999999999999999999999'
     try {
+
+      
+
       console.log('Checking BATON allowance')
       let wandAllowanceBATON =
         (await contracts.BATONContract?.allowance(
