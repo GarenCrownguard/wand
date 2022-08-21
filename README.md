@@ -200,6 +200,16 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 5. MainBlock1Card refactoring
 6. Skeleton for cards to load.
 7. Loading spinners on buttons
+8. go back to slugs for route change. this reloads the whole page.
+9. move all api calls to seperate file -> API call to reducer GET_FE call
+10. After swapping/ selling/ buying recheck all the values and update them.
+11. refactor all the toasts to one file.
+12. refactor all contract interaction - allowance, swap, getdata
+13. automatically render the changes (swapping -> updating balances)
+
+TO DO:
+1. get the rest of data from the API
+2. Graphs
 
 # Template
 

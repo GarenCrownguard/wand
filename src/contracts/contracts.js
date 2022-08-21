@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import abis from './abis'
+import abis from './abi/abis'
 import contractAddresses from './addresses'
 
 const { ethereum } = window
@@ -33,7 +33,6 @@ if (ethereum) {
       signer
     )
   }
-
   if (contractAddresses.wand && abis.wandabi) {
     wandContract = new ethers.Contract(
       contractAddresses.wand,

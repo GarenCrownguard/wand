@@ -24,7 +24,7 @@ const initialState = {
     busdtoken: null,
     daitoken: null,
     fraxtoken: null,
-    remainingSwapTime: null,
+    remainingSwapTime: 1660600440,
     amountOfSptrSwapped: null,
     // sptrSellPriceAtSwap: 12.46,
   },

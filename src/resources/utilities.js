@@ -6,15 +6,15 @@ const decimals = {
   BUSD: 18,
   SPTR: 18,
   BATON: 18,
-  one: 1
+  one: 1,
 }
 
 export const prettifytolocalstring = (amount) => {
-  return amount ? amount.toLocaleString() : '...'
+  return amount != null ? amount.toLocaleString() : '...'
 }
 
 export const prettifyamounts = (amount) => {
-  return amount ? '$' + prettifytolocalstring(amount) : '...'
+  return amount != null ? '$' + prettifytolocalstring(amount) : '...'
 }
 
 export const prettifyGrowthPercentage = (direction, value) => {
@@ -40,11 +40,11 @@ export const BigNumberToActual = (amount, tokenDecimal) => {
 export const ActualToBigNumber = (amount, tokenDecimal) => {
   // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal]))
   // console.log(amount);
-  // console.log(amount * Math.pow(10, decimals[tokenDecimal]))
 
+  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
   return amount && decimals[tokenDecimal]
     ? ethers.BigNumber.from(
-        amount * Math.pow(10, decimals[tokenDecimal] / 2)
+        `${amount * Math.pow(10, decimals[tokenDecimal] / 2)}`
       ).mul(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
     : null
 }

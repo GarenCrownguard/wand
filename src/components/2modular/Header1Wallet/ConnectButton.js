@@ -3,9 +3,7 @@ import { Button, Box, Text, Icon } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
-import * as reducer from 'redux/reducerCalls'
-import { BigNumberToActual } from 'resources/utilities'
-import contracts from 'contracts/contracts'
+import { getDataFromContract } from 'contracts/ContractInteraction'
 
 const ConnectButton = (props) => {
   const { handleOpenModal, isMobile, localwalletstats } = props
@@ -37,7 +35,7 @@ const ConnectButton = (props) => {
         duration: 1000,
         position: 'bottom-right',
         containerStyle: {
-          width: '50px',
+          width: '100%',
         },
       })
     } else {
@@ -47,88 +45,7 @@ const ConnectButton = (props) => {
         })
 
         if (accounts.length !== 0) {
-          const account = accounts[0]
-          // console.log('Found an authorized account: ', account)
-
-          reducer.UPDATE_ADDRESS({ walletAddress: account })
-
-          /* Getting localwallet stats */
-          const SPTRbalance =
-            (await contracts.SPTRContract?.balanceOf(account)) ?? null
-          const BATONbalance =
-            (await contracts.BATONContract?.balanceOf(account)) ?? null
-          const USDCbalance =
-            (await contracts.USDCContract?.balanceOf(account)) ?? null
-          const BUSDbalance =
-            (await contracts.BUSDContract?.balanceOf(account)) ?? null
-          const DAIbalance =
-            (await contracts.DAIContract?.balanceOf(account)) ?? null
-          const FRAXbalance =
-            (await contracts.FRAXContract?.balanceOf(account)) ?? null
-
-          // console.log(outstandingStats)
-          // console.log(localwalletstats.remainingSwapTime)
-
-          reducer.WALLET_UPDATE_STATS({
-            sptrbal: BigNumberToActual(SPTRbalance, 'SPTR'),
-            batonbal: BigNumberToActual(BATONbalance, 'BATON'),
-            usdcbal: BigNumberToActual(USDCbalance, 'USDC'),
-            busdbal: BigNumberToActual(BUSDbalance, 'BUSD'),
-            daibal: BigNumberToActual(DAIbalance, 'DAI'),
-            fraxbal: BigNumberToActual(FRAXbalance, 'FRAX'),
-          })
-
-          /* Getting FE stats */
-          const wandScepterData =
-            (await contracts.wandContract?.scepterData()) ?? null
-
-          const btonTreasuryBal =
-            (await contracts.wandContract?.btonTreasuryBal()) ?? null
-
-          const btonRedeemingPrice =
-            (await contracts.wandContract?.getBTONRedeemingPrice()) ?? null
-
-          reducer.UPDATE_STATS({
-            sptrGrowthFactor: BigNumberToActual(
-              wandScepterData.sptrGrowthFactor,
-              'SPTR'
-            ),
-            sptrSellFactor: BigNumberToActual(
-              wandScepterData.sptrSellFactor,
-              'SPTR'
-            ),
-            sptrBuyPrice: BigNumberToActual(
-              wandScepterData.sptrBuyPrice,
-              'SPTR'
-            ),
-            sptrSellPrice: BigNumberToActual(
-              wandScepterData.sptrSellPrice,
-              'SPTR'
-            ),
-            sptrBackingPrice: BigNumberToActual(
-              wandScepterData.sptrBackingPrice,
-              'SPTR'
-            ),
-            sptrTreasuryBal: BigNumberToActual(
-              wandScepterData.sptrTreasuryBal,
-              'SPTR'
-            ),
-            btonTreasuryBal: BigNumberToActual(btonTreasuryBal, 'BATON'),
-            btonRedeemingPrice: BigNumberToActual(btonRedeemingPrice, 'BATON'),
-          })
-
-          /* Updating the outstanding locked amount */
-          const outstandingStats =
-            (await contracts.wandContract?.withheldWithdrawals(account)) ?? null
-
-          reducer.UPDATE_OUTSTANDING_STATS({
-            outstandingTimeLocked:
-              BigNumberToActual(outstandingStats.timeUnlocked, 'one') * 10,
-            outstandingSwappedAmounts: BigNumberToActual(
-              outstandingStats.amounts,
-              'SPTR'
-            ),
-          })
+          getDataFromContract()
         } else {
           // console.log('No authorized account found')
           toast({
@@ -137,16 +54,25 @@ const ConnectButton = (props) => {
             duration: 1000,
             position: 'bottom-right',
             containerStyle: {
-              width: '50px',
+              width: '100%',
             },
           })
         }
       } catch (err) {
-        console.log(err)
+        // console.log(err)
+        toast({
+          title: 'Metamask Error! Check network and chain!',
+          status: 'error',
+          duration: 1000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '100%',
+          },
+        })
       }
     }
   }
-  
+
   useEffect(() => {
     handleConnectWallet()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -160,7 +86,7 @@ const ConnectButton = (props) => {
       borderRadius="xl"
       py="0"
     >
-      {!isMobile && localwalletstats.sceptertoken && (
+      {!isMobile && localwalletstats.sceptertoken !== null && (
         <Box px="3">
           <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
             {parseFloat(localwalletstats.sceptertoken)?.toFixed(2)} SPTR
