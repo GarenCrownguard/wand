@@ -1,80 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import { prettifyamounts } from 'resources/utilities'
 import MainBlock1Card from '../MainBlock1Card'
-import MainBlock2StatsText from '../MainBlock2StatsText'
 import { ResponsivePie } from '@nivo/pie'
 import axios from 'axios'
 import { Box, Text } from '@chakra-ui/react'
 
+import { connect } from 'react-redux'
+
 const GraphTreasuryAllocationDonut = (props) => {
-  const [APIData, setAPIData] = useState({})
+  const {
+    scepterTreasuryValue: SCEPTER,
+    batonTreasuryValue: BATON,
+    riskTreasuryValue: RISK,
+  } = props.stats
+
   const [data, setData] = useState()
 
   useEffect(() => {
-    const getAPIData = async () => {
-      try {
-        await axios
-          .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
-          .then((res) => {
-            console.log(res.data);
-          })
-      } catch (error) {
-        console.log('fetch data failed', error)
-      }
-    }
+    const currentData = [
+      {
+        id: 'SCEPTER',
+        // label: "SCEPTER",
+        value: SCEPTER,
+        formattedValue: `${Number(
+          ((SCEPTER * 100) / (SCEPTER + RISK + BATON)).toFixed(2)
+        )}%`,
+        color: 'hsl(276, 70%, 50%)',
+      },
+      {
+        id: 'BATON',
+        // label: "BATON",
+        value: BATON,
+        formattedValue: `${Number(
+          ((BATON * 100) / (SCEPTER + RISK + BATON)).toFixed(2)
+        )}%`,
+        color: 'hsl(227, 70%, 50%)',
+      },
+      {
+        id: 'RISK',
+        // label: "RISK",
+        value: RISK,
+        formattedValue: `${Number(
+          ((RISK * 100) / (SCEPTER + RISK + BATON)).toFixed(2)
+        )}%`,
+        color: 'hsl(332, 100%, 63%)',
+      },
+    ]
 
-    const getdata = async () => {
-      try {
-        await axios
-          .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
-          .then((res) => {
-            setData([
-              {
-                id: 'SCEPTER',
-                // label: "SCEPTER",
-                value: res.data.SCEPTER,
-                formattedValue: `${Number(
-                  (
-                    (res.data.SCEPTER * 100) /
-                    (res.data.SCEPTER + res.data.RISK + res.data.BATON)
-                  ).toFixed(1)
-                )}%`,
-                color: 'hsl(276, 70%, 50%)',
-              },
-              {
-                id: 'BATON',
-                // label: "BATON",
-                value: res.data.BATON,
-                formattedValue: `${Number(
-                  (
-                    (res.data.BATON * 100) /
-                    (res.data.SCEPTER + res.data.RISK + res.data.BATON)
-                  ).toFixed(1)
-                )}%`,
-                color: 'hsl(227, 70%, 50%)',
-              },
-              {
-                id: 'RISK',
-                // label: "RISK",
-                value: res.data.RISK,
-                formattedValue: `${Number(
-                  (
-                    (res.data.RISK * 100) /
-                    (res.data.SCEPTER + res.data.RISK + res.data.BATON)
-                  ).toFixed(1)
-                )}%`,
-                color: 'hsl(332, 100%, 63%)',
-              },
-            ])
-          })
-      } catch (error) {
-        console.log('fetch data failed', error)
-      }
-    }
-
-    getAPIData()
-    getdata()
-  }, [])
+    setData(currentData)
+  }, [BATON, RISK, SCEPTER])
 
   return (
     data && (
@@ -146,4 +120,10 @@ const GraphTreasuryAllocationDonut = (props) => {
   )
 }
 
-export default GraphTreasuryAllocationDonut
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats,
+  }
+}
+
+export default connect(mapStateToProps)(GraphTreasuryAllocationDonut)

@@ -55,3 +55,9 @@ export const UPDATE_OUTSTANDING_STATS = async (props) => {
   })
 }
 
+export const UPDATE_RISK_TREASURY_VALUE = async (props) => {
+  store.dispatch({
+    type: actions.UPDATE_RISK_TREASURY_VALUE,
+    payload: props,
+  })
+}
