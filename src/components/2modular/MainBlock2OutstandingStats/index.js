@@ -10,14 +10,15 @@ import {
   Icon,
   Box,
 } from '@chakra-ui/react'
-
+import contracts from 'contracts/contracts'
 import { CloseIcon } from '@chakra-ui/icons'
 import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
 import MainBlock4CountdownTimer from 'components/1atomic/MainBlock4CountdownTimer'
-
+import * as reducer from 'redux/reducerCalls'
 import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
 import IconBottomRightArrow from './icon'
+import { BigNumberToActual } from 'resources/utilities'
 
 const calculateTimeLeft = (time) => {
   let timeLeft = {}
@@ -47,19 +48,38 @@ const MainBlock2OutstandingStats = (props) => {
   const { stats, localwalletstats } = props
 
   const [isOutstanding, setIsOutstanding] = useState(false)
-  const [timeleft, setTimeleft] = useState(
-    calculateTimeLeft(localwalletstats.remainingSwapTime * 1000)
-  )
-  
+  const [timeleft, setTimeleft] = useState({})
+
   useEffect(() => {
-    setTimeleft(calculateTimeLeft(localwalletstats.remainingSwapTime * 1000))
-    timeleft.days === 0 &&
-    timeleft.hours === 0 &&
-    timeleft.minutes === 0 &&
-    timeleft.seconds === 0
-      ? setIsOutstanding(false)
-      : setIsOutstanding(true)
-  }, [localwalletstats.remainingSwapTime])
+    const getOutstandingStats = async () => {
+      /* Updating the outstanding locked amount */
+      const outstandingStats =
+        (await contracts.wandContract?.withheldWithdrawals(
+          localwalletstats.walletAddress
+        )) ?? null
+
+      const outstandingTime =
+        BigNumberToActual(outstandingStats.timeUnlocked, 'one') * 10
+
+      reducer.UPDATE_OUTSTANDING_STATS({
+        outstandingTimeLocked: outstandingTime,
+        outstandingSwappedAmounts: BigNumberToActual(
+          outstandingStats.amounts,
+          'SPTR'
+        ),
+      })
+
+      setTimeleft(calculateTimeLeft(outstandingTime * 1000))
+      timeleft.days === 0 &&
+      timeleft.hours === 0 &&
+      timeleft.minutes === 0 &&
+      timeleft.seconds === 0
+        ? setIsOutstanding(false)
+        : setIsOutstanding(true)
+    }
+
+    getOutstandingStats()
+  }, [])
 
   const { isOpen: isAlertVisible, onClose } = useDisclosure({
     defaultIsOpen: true,

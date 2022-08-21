@@ -203,7 +203,7 @@ const Swap1SwapBox = (props) => {
   }
 
   const approve = async () => {
-    setApproving(true);
+    setApproving(true)
     try {
       var ApproveCall
       switch (swapFromToken) {
@@ -267,7 +267,7 @@ const Swap1SwapBox = (props) => {
       }
 
       await ApproveCall.wait()
-      
+
       var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
       toast({
         title: (
@@ -300,47 +300,111 @@ const Swap1SwapBox = (props) => {
   }
 
   const swap = async () => {
-    // try {
-    //   console.log('Initialize BATON approval')
-    //   let ApproveBATON =
-    //     (await contracts.BATONContract?.approve(
-    //       contractAddresses.wand,
-    //       MAX_APPROVAL
-    //     )) ?? 'BATON approving failed'
-    //   console.log('Approving... please wait')
-    //   await ApproveBATON.wait()
-    //   console.log(
-    //     `Mined, see transaction: https://testnet.snowtrace.io/tx/${ApproveBATON.hash}`
-    //   )
-    // } catch (error) {
-    //   console.log(error.code === 4001)
-    // }
+    // swaptotoken == sptr => buyScepter(amount, stableChosen)
+    // swapfromtoken == baton => cashOutBaton(amount, stableChosen)
+    // swapfromtoken == sptr => cashOutScepter(amount, daysChosenLocked, stableChosen)
+    // swapfromtoken == sptr && swaptotoken == baton => transformScepterToBaton(amount)
+
+    try {
+      setApproving(true)
+      var SwapCall
+
+      if (swapFromToken === 'SPTR') {
+        if (swapToToken === 'BATON') {
+          // transformScepterToBaton(amount) -- tested
+          // console.log('transformScepterToBaton')
+          SwapCall =
+            (await contracts.wandContract?.transformScepterToBaton(
+              ActualToBigNumber(swapFromInput1, swapFromToken)
+            )) ?? false
+        } else {
+          // cashOutScepter(amount, daysChosenLocked, stableChosen) -- tested
+          // console.log(`cashOutScepter(${swapFromInput1}, ${taxSliderValue}, ${swapToToken})`)
+          SwapCall =
+            (await contracts.wandContract?.cashOutScepter(
+              ActualToBigNumber(swapFromInput1, swapFromToken),
+              taxSliderValue,
+              swapToToken
+            )) ?? false
+        }
+      } else if (swapFromToken === 'BATON') {
+        // Assuming the swaptotoken will be a stable
+        // cashOutBaton(amount, stableChosen) -- tested
+        // console.log('cashOutBaton')
+
+        SwapCall =
+          (await contracts.wandContract?.cashOutBaton(
+            ActualToBigNumber(swapFromInput1, swapFromToken),
+            swapToToken
+          )) ?? false
+      } else if (swapToToken === 'SPTR') {
+        // Assuming the swapFromtoken will always be a stable
+        // buyScepter(amount, stableChosen) -- tested
+        // console.log('buyScepter')
+
+        SwapCall =
+          (await contracts.wandContract?.buyScepter(
+            ActualToBigNumber(swapToInput2, swapToToken),
+            swapFromToken
+          )) ?? false
+      } else {
+        // console.log('swap error')
+        toast({
+          title: 'Swap Error! Something went wrong!',
+          status: 'error',
+          duration: 2000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '100%',
+          },
+        })
+        setApproving(false)
+      }
+
+      await SwapCall.wait()
+
+      var transactionLink = `https://testnet.snowtrace.io/tx/${SwapCall.hash}`
+      toast({
+        title: (
+          <Link color="white" href={transactionLink} isExternal>
+            Approved. Check transaction.
+            <ExternalLinkIcon mx="5px" mt="-5px" />
+          </Link>
+        ),
+        status: 'success',
+        duration: 1000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '100%',
+        },
+      })
+      setapproved(true)
+      setApproving(false)
+    } catch (error) {
+      // console.log(error)
+      toast({
+        title: 'Swap Error! Check the balance!',
+        status: 'error',
+        duration: 2000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '100%',
+        },
+      })
+      setApproving(false)
+    }
   }
 
   useEffect(() => {
-    // setApprove
-    // setApproving
-
     if (swapFromToken === 'BATON' && swapToToken === 'SPTR') {
       setSwapToToken('USDC')
     }
+    if (swapFromToken !== 'SPTR' && swapToToken === 'BATON') {
+      setSwapFromToken('SPTR')
+    }
 
     checkAllowance(swapFromToken)
-
-    // if (swapFromToken !== 'SPTR' && swapFromToken !== 'BATON') {
-    //   // Stable -> xxx
-    //   if (swapToToken === 'SPTR') {
-    //     // Stable -> SPTR
-    //     approve(swapFromToken)
-    //   } else {
-    //     // Stable -> BATON *** situation not possible
-    //     setapproved(false)
-    //   }
-    // } else {
-    //   // SPTR or BATON -> xxx
-    //   setapproved(true)
-    // }
-  }, [swapFromToken, localwalletstats])
+  }, [swapFromToken, swapToToken, localwalletstats])
 
   useEffect(() => {
     if (swapFromToken === 'SPTR') {
@@ -353,7 +417,6 @@ const Swap1SwapBox = (props) => {
       setSwapToInput2(swapFromInput1 * stats.batonRedeemingPrice)
     } else {
       setSwapToInput2(swapFromInput1 * stats.scepterBuyPrice)
-      // console.log('[error] swapFromInput1')
     }
   }, [
     swapFromInput1,
@@ -365,7 +428,7 @@ const Swap1SwapBox = (props) => {
   ])
 
   const swapClickHandler = () => {
-    setSwapFromInput1(0)
+    setSwapFromInput1('')
     setSwapToInput2(0)
     setSwapFromToken(swapToToken)
     setSwapToToken(swapFromToken)

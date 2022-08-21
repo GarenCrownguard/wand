@@ -62,10 +62,6 @@ const ConnectButton = (props) => {
           const DAIbalance = contracts.DAIContract?.balanceOf(account) ?? null
           const FRAXbalance = contracts.FRAXContract?.balanceOf(account) ?? null
 
-          /* Updating the outstanding locked amount */
-          const outstandingStats =
-            contracts.wandContract?.withheldWithdrawals(account) ?? null
-
           const AllBalances = await Promise.all([
             SPTRbalance,
             BATONbalance,
@@ -73,7 +69,6 @@ const ConnectButton = (props) => {
             BUSDbalance,
             DAIbalance,
             FRAXbalance,
-            outstandingStats,
           ])
           // console.log(AllBalances[0])
           // console.log(localwalletstats.remainingSwapTime)
@@ -85,15 +80,6 @@ const ConnectButton = (props) => {
             busdbal: BigNumberToActual(AllBalances[3], 'BUSD'),
             daibal: BigNumberToActual(AllBalances[4], 'DAI'),
             fraxbal: BigNumberToActual(AllBalances[5], 'FRAX'),
-          })
-
-          reducer.UPDATE_OUTSTANDING_STATS({
-            outstandingTimeLocked:
-              BigNumberToActual(AllBalances[6].timeUnlocked, 'one') * 10,
-            outstandingSwappedAmounts: BigNumberToActual(
-              AllBalances[6].amounts,
-              'SPTR'
-            ),
           })
 
           /* Getting FE stats */
@@ -149,7 +135,7 @@ const ConnectButton = (props) => {
       } catch (err) {
         // console.log(err)
         toast({
-          title: 'User cancelled request!',
+          title: 'Metamask Error! Check network and chain!',
           status: 'error',
           duration: 1000,
           position: 'bottom-right',
@@ -174,7 +160,7 @@ const ConnectButton = (props) => {
       borderRadius="xl"
       py="0"
     >
-      {!isMobile && localwalletstats.sceptertoken && (
+      {!isMobile && localwalletstats.sceptertoken !== null && (
         <Box px="3">
           <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
             {parseFloat(localwalletstats.sceptertoken)?.toFixed(2)} SPTR
