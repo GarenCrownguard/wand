@@ -3,9 +3,7 @@ import { Button, Box, Text, Icon } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
-import * as reducer from 'redux/reducerCalls'
-import { BigNumberToActual } from 'resources/utilities'
-import contracts from 'contracts/contracts'
+import { getDataFromContract } from 'contracts/ContractInteraction'
 
 const ConnectButton = (props) => {
   const { handleOpenModal, isMobile, localwalletstats } = props
@@ -30,7 +28,6 @@ const ConnectButton = (props) => {
   }
 
   const handleConnectWallet = async () => {
-
     if (!ethereum) {
       toast({
         title: 'No wallet detected!',
@@ -48,78 +45,7 @@ const ConnectButton = (props) => {
         })
 
         if (accounts.length !== 0) {
-          const account = accounts[0]
-          // console.log('Found an authorized account: ', account)
-
-          reducer.UPDATE_ADDRESS({ walletAddress: account })
-
-          /* Getting localwallet stats */
-          const SPTRbalance = contracts.SPTRContract?.balanceOf(account) ?? null
-          const BATONbalance =
-            contracts.BATONContract?.balanceOf(account) ?? null
-          const USDCbalance = contracts.USDCContract?.balanceOf(account) ?? null
-          const BUSDbalance = contracts.BUSDContract?.balanceOf(account) ?? null
-          const DAIbalance = contracts.DAIContract?.balanceOf(account) ?? null
-          const FRAXbalance = contracts.FRAXContract?.balanceOf(account) ?? null
-
-          const AllBalances = await Promise.all([
-            SPTRbalance,
-            BATONbalance,
-            USDCbalance,
-            BUSDbalance,
-            DAIbalance,
-            FRAXbalance,
-          ])
-          // console.log(AllBalances[0])
-          // console.log(localwalletstats.remainingSwapTime)
-
-          reducer.WALLET_UPDATE_STATS({
-            sptrbal: BigNumberToActual(AllBalances[0], 'SPTR'),
-            batonbal: BigNumberToActual(AllBalances[1], 'BATON'),
-            usdcbal: BigNumberToActual(AllBalances[2], 'USDC'),
-            busdbal: BigNumberToActual(AllBalances[3], 'BUSD'),
-            daibal: BigNumberToActual(AllBalances[4], 'DAI'),
-            fraxbal: BigNumberToActual(AllBalances[5], 'FRAX'),
-          })
-
-          /* Getting FE stats */
-          const wandScepterData = contracts.wandContract?.scepterData() ?? null
-
-          const btonTreasuryBal =
-            contracts.wandContract?.btonTreasuryBal() ?? null
-
-          const btonRedeemingPrice =
-            contracts.wandContract?.getBTONRedeemingPrice() ?? null
-
-          const AllStats = await Promise.all([
-            wandScepterData,
-            btonTreasuryBal,
-            btonRedeemingPrice,
-          ])
-
-          reducer.UPDATE_STATS({
-            sptrGrowthFactor: BigNumberToActual(
-              AllStats[0].sptrGrowthFactor,
-              'SPTR'
-            ),
-            sptrSellFactor: BigNumberToActual(
-              AllStats[0].sptrSellFactor,
-              'SPTR'
-            ),
-            sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
-            sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
-            sptrBackingPrice: BigNumberToActual(
-              AllStats[0].sptrBackingPrice,
-              'SPTR'
-            ),
-            sptrTreasuryBal: BigNumberToActual(
-              AllStats[0].sptrTreasuryBal,
-              'SPTR'
-            ),
-            btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
-            btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
-          })
-
+          getDataFromContract()
         } else {
           // console.log('No authorized account found')
           toast({

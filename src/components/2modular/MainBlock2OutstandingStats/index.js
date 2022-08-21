@@ -74,9 +74,9 @@ const MainBlock2OutstandingStats = (props) => {
 
   useEffect(() => {
     const { days, hours, minutes, seconds } = timeleft
-    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0 && localwalletstats.amountOfSptrSwapped !== 0) {
       setIsClaimDisabled(false)
-    } else {
+    }else {
       setIsClaimDisabled(true)
     }
     // setIsClaimDisabled(false) // comment this out after testing
@@ -203,12 +203,6 @@ const MainBlock2OutstandingStats = (props) => {
           title="Amount locked (USD) if not claimed"
           value={prettifytolocalstring(localwalletstats.amountOfSptrSwapped)}
         />
-        {/* <MainBlock2StatsText
-          title="SCEPTER Value (USD)"
-          value={prettifyamounts(
-            localwalletstats.amountOfSptrSwapped * stats.scepterBackingPrice
-          )}
-        /> */}
         <Flex flexGrow={0.5} justifyContent="space-around">
           <Button
             variant="solid"

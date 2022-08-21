@@ -40,10 +40,11 @@ export const BigNumberToActual = (amount, tokenDecimal) => {
 export const ActualToBigNumber = (amount, tokenDecimal) => {
   // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal]))
   // console.log(amount);
-  // console.log(amount * Math.pow(10, decimals[tokenDecimal]))
+
+  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
   return amount && decimals[tokenDecimal]
     ? ethers.BigNumber.from(
-        amount * Math.pow(10, decimals[tokenDecimal] / 2)
+        `${amount * Math.pow(10, decimals[tokenDecimal] / 2)}`
       ).mul(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
     : null
 }

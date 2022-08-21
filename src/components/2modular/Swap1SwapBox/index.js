@@ -30,6 +30,7 @@ import InputBox from './InputBox'
 import SwapBoxModal from './SwapBoxModal'
 import links from 'resources/links'
 import TaxSlider from './TaxSlider'
+import { getDataFromContract } from 'contracts/ContractInteraction'
 
 const MAX_APPROVAL = ethers.BigNumber.from(
   '0xfffffffffffffffffffffffffffffffffffffffffffff'
@@ -266,9 +267,10 @@ const Swap1SwapBox = (props) => {
           break
       }
 
-      await ApproveCall.wait()
+      // await ApproveCall.wait()
 
       var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
+
       toast({
         title: (
           <Link color="white" href={transactionLink} isExternal>
@@ -277,10 +279,10 @@ const Swap1SwapBox = (props) => {
           </Link>
         ),
         status: 'success',
-        duration: 1000,
+        duration: 3000,
         position: 'bottom-right',
         containerStyle: {
-          width: '70px',
+          width: '100%',
         },
       })
       setapproved(true)
@@ -290,7 +292,7 @@ const Swap1SwapBox = (props) => {
       toast({
         title: 'Transaction Error!',
         status: 'error',
-        duration: 1000,
+        duration: 3000,
         position: 'bottom-right',
         containerStyle: {
           width: '100%',
@@ -361,7 +363,7 @@ const Swap1SwapBox = (props) => {
         setApproving(false)
       }
 
-      await SwapCall.wait()
+      // await SwapCall.wait()
 
       var transactionLink = `https://testnet.snowtrace.io/tx/${SwapCall.hash}`
       toast({
@@ -381,7 +383,7 @@ const Swap1SwapBox = (props) => {
       setapproved(true)
       setApproving(false)
     } catch (error) {
-      // console.log(error)
+      console.log(error)
       toast({
         title: 'Swap Error! Check the balance!',
         status: 'error',
@@ -409,14 +411,39 @@ const Swap1SwapBox = (props) => {
   useEffect(() => {
     if (swapFromToken === 'SPTR') {
       if (swapToToken === 'BATON') {
-        setSwapToInput2(swapFromInput1)
+        // sptr -> baton
+        // tested
+        setSwapToInput2(
+          isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
+            ? 0
+            : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
+        )
       } else {
-        setSwapToInput2(swapFromInput1 * stats.scepterSellPrice)
+        // sptr -> stable
+        setSwapToInput2(
+          parseFloat(
+            parseFloat(swapFromInput1 * stats.scepterSellPrice)?.toFixed(3)
+          )
+        )
       }
     } else if (swapFromToken === 'BATON') {
-      setSwapToInput2(swapFromInput1 * stats.batonRedeemingPrice)
+      // baton -> stable
+      // tested
+      setSwapToInput2(
+        parseFloat(
+          parseFloat(swapFromInput1 * stats.batonRedeemingPrice)?.toFixed(3)
+        )
+      )
     } else {
-      setSwapToInput2(swapFromInput1 * stats.scepterBuyPrice)
+      // buy sptr
+      // tested
+      setSwapToInput2(
+        isNaN(swapFromInput1 / stats.scepterBuyPrice)
+          ? 0
+          : parseFloat(
+              parseFloat(swapFromInput1 / stats.scepterBuyPrice)?.toFixed(3)
+            )
+      )
     }
   }, [
     swapFromInput1,
@@ -487,7 +514,9 @@ const Swap1SwapBox = (props) => {
           ? // BATON -> Stable
             `1 ${swapFromToken} = ${stats.batonRedeemingPrice} ${swapToToken}`
           : // Stable -> SPTR
-            `1 ${swapFromToken} = ${stats.scepterBuyPrice} ${swapToToken}`}
+            `1 ${swapFromToken} = ${parseFloat(
+              parseFloat(1 / stats.scepterBuyPrice)?.toFixed(3)
+            )} ${swapToToken}`}
       </Text>
       {swapFromToken === 'SPTR' && swapToToken !== 'BATON' && (
         <>
