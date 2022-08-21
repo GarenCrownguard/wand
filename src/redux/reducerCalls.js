@@ -5,17 +5,7 @@
 import store from "./store";
 import actions from "./action.types";
 
-export const GET_FE_STATS = async (props) => {
-
-  // store.dispatch({
-  //   type: actions.GET_FE_STATS,
-  //   payload: {
-  //     allposts: res.data,
-  //   },
-  // });
-};
-
-export const UPDATE_ADDRESS = async (props) => {
+export const UPDATE_ADDRESS = (props) => {
   const { walletAddress } = props;
   store.dispatch({
     type: actions.UPDATE_ADDRESS,
@@ -25,7 +15,7 @@ export const UPDATE_ADDRESS = async (props) => {
   });
 };
 
-export const WALLET_DISCONNECT = async (props) => {
+export const WALLET_DISCONNECT = () => {
   store.dispatch({
     type: actions.WALLET_DISCONNECT,
     payload: {
@@ -34,30 +24,37 @@ export const WALLET_DISCONNECT = async (props) => {
   })
 }
 
-export const WALLET_UPDATE_STATS = async (props) => {
+export const WALLET_UPDATE_STATS = (props) => {
   store.dispatch({
     type: actions.WALLET_UPDATE_STATS,
     payload: props,
   })
 }
 
-export const UPDATE_STATS = async (props) => {
+export const UPDATE_STATS = (props) => {
   store.dispatch({
     type: actions.UPDATE_STATS,
     payload: props,
   })
 }
 
-export const UPDATE_OUTSTANDING_STATS = async (props) => {
+export const UPDATE_OUTSTANDING_STATS = (props) => {
   store.dispatch({
     type: actions.UPDATE_OUTSTANDING_STATS,
     payload: props,
   })
 }
 
-export const UPDATE_RISK_TREASURY_VALUE = async (props) => {
+export const UPDATE_RISK_TREASURY_VALUE = (props) => {
   store.dispatch({
     type: actions.UPDATE_RISK_TREASURY_VALUE,
     payload: props,
   })
 }
+
+export const UPDATE_INVESTMENT_LIST = (props) => {
+  store.dispatch({
+    type: actions.UPDATE_INVESTMENT_LIST,
+    payload: props,
+  })
+} 

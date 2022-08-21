@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { prettifyamounts } from 'resources/utilities'
 import MainBlock1Card from '../MainBlock1Card'
 import { ResponsivePie } from '@nivo/pie'
-import axios from 'axios'
 import { Box, Text } from '@chakra-ui/react'
 
 import { connect } from 'react-redux'

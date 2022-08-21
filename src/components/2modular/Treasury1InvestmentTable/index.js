@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import { Flex, Stack, useBreakpointValue, Divider } from '@chakra-ui/react'
 import TableHead from './TableHead'
 import Treasury1InvestmentItem from 'components/1atomic/Treasury1InvestmentItem'
+import { connect } from 'react-redux'
 
-const Treasury1InvestmentTable = () => {
+const Treasury1InvestmentTable = (props) => {
+
+    const { investmentlist } = props.stats
+
   const variantScreenSize = useBreakpointValue({
     base: {
       isMobile: true,
@@ -13,35 +16,6 @@ const Treasury1InvestmentTable = () => {
       isMobile: false,
     },
   })
-
-  const [investmentList, setInvestmentList] = useState([
-    {
-      date: 'Updating...',
-      chain: 'Updating...',
-      expectedAPY: 'Updating...',
-      investedAmount: 'Updating...',
-      protocolName: 'Updating...',
-      protocolURL: 'Updating...',
-      transactionLink: 'https://bscscan.com/',
-    },
-  ])
-
-  useEffect(() => {
-    async function getdata() {
-      try {
-        await axios
-          .get(`${process.env.REACT_APP_API_URL}/investment-list-data`)
-          .then((res) => {
-            setInvestmentList(res.data)
-          })
-      } catch (error) {
-        console.log(error);
-        setInvestmentList(null);
-      }
-      
-    }
-    getdata()
-  }, [])
 
   return (
     <Flex w="full" alignItems="center" justifyContent="center">
@@ -58,26 +32,33 @@ const Treasury1InvestmentTable = () => {
             <Divider />
           </>
         )}
-        {investmentList && React.Children.toArray(
-          investmentList.map((investment) => (
-            <>
-              <Treasury1InvestmentItem
-                // chain={investment.chain}
-                protocolName={investment.protocolName}
-                protocolUrl={investment.protocolURL}
-                investmentAmount={investment.investedAmount}
-                date={investment.date}
-                expectedApy={investment.expectedAPY}
-                transactionLink={investment.transactionLink}
-                isMobile={variantScreenSize.isMobile}
-              />
-              <Divider />
-            </>
-          ))
-        )}
+        {investmentlist &&
+          React.Children.toArray(
+            investmentlist.map((investment) => (
+              <>
+                <Treasury1InvestmentItem
+                  // chain={investment.chain}
+                  protocolName={investment.protocolName}
+                  protocolUrl={investment.protocolURL}
+                  investmentAmount={investment.investedAmount}
+                  date={investment.date}
+                  expectedApy={investment.expectedAPY}
+                  transactionLink={investment.transactionLink}
+                  isMobile={variantScreenSize.isMobile}
+                />
+                <Divider />
+              </>
+            ))
+          )}
       </Stack>
     </Flex>
   )
 }
 
-export default Treasury1InvestmentTable
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats,
+  }
+}
+
+export default connect(mapStateToProps)(Treasury1InvestmentTable)

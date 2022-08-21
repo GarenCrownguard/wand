@@ -4,7 +4,7 @@ import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
 import { getDataFromContract } from 'contracts/ContractInteraction'
-import { getRiskTreasuryValue } from 'resources/api'
+import { getRiskTreasuryValue, getInvestmentListData } from 'resources/api'
 
 const ConnectButton = (props) => {
   const { handleOpenModal, isMobile, localwalletstats } = props
@@ -75,8 +75,14 @@ const ConnectButton = (props) => {
   }
 
   useEffect(() => {
-    getRiskTreasuryValue()
-    handleConnectWallet()
+    try {
+      getRiskTreasuryValue()
+      getInvestmentListData()
+      handleConnectWallet()
+    } catch (error) {
+      console.log('connectButton useeffect error')
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

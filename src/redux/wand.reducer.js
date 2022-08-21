@@ -13,6 +13,15 @@ const initialState = {
     scepterSellPrice: null,
     sellFactor: null,
     batonRedeemingPrice: null,
+    investmentlist: {
+      date: 'Updating...',
+      chain: 'Updating...',
+      expectedAPY: 'Updating...',
+      investedAmount: 'Updating...',
+      protocolName: 'Updating...',
+      protocolURL: 'Updating...',
+      transactionLink: 'https://bscscan.com/',
+    },
     addmore: [],
   },
   localwalletstats: {
@@ -122,19 +131,25 @@ const postReducer = (currentState = initialState, action) => {
         },
       }
 
-    case actions.GET_FE_STATS:
-      // This is the new State after the action is performed.
+      case actions.UPDATE_INVESTMENT_LIST:
+        const { investmentlist } = payload
       return {
-        stats: [...currentState.stats, ...payload.allposts],
+        stats: {
+          ...currentState.stats,
+          investmentlist: investmentlist,
+        },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+        },
       }
+
+
+    
     case actions.UPDATE_AIRDROP_AMOUNT:
       return {
         stats: [...currentState.stats],
       }
-    case actions.GET_TRANSACTION_LIST:
-      return {
-        ...currentState,
-      }
+    
     default:
       return currentState
   }
