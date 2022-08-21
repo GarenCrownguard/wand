@@ -372,7 +372,7 @@ const Swap1SwapBox = (props) => {
           </Link>
         ),
         status: 'success',
-        duration: 1000,
+        duration: 3000,
         position: 'bottom-right',
         containerStyle: {
           width: '100%',
@@ -438,7 +438,7 @@ const Swap1SwapBox = (props) => {
     <MainBlock1Card
       minHeight="345px"
       minWidth={['320px', '356px', '356px']}
-      maxWidth={['100%', '356px', '356px']}
+      maxWidth={['100%', '100%', '356px']}
       flexDirection="column"
       alignItems="flex-start"
       p="25px"

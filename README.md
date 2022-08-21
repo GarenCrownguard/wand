@@ -203,6 +203,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 8. go back to slugs for route change. this reloads the whole page.
 9. move all api calls to seperate file -> API call to reducer GET_FE call
 10. After swapping/ selling/ buying recheck all the values and update them.
+11. refactor all the toasts to one file.
 
 # Template
 
