@@ -206,6 +206,9 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 11. refactor all the toasts to one file.
 12. refactor all contract interaction - allowance, swap, getdata
 13. automatically render the changes (swapping -> updating balances)
+14. wallet persistant.
+15. sidebar selected color.
+
 
 TO DO:
 1. get the rest of data from the API

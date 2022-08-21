@@ -7,10 +7,23 @@ import axios from 'axios'
 import { Box, Text } from '@chakra-ui/react'
 
 const GraphTreasuryAllocationDonut = (props) => {
+  const [APIData, setAPIData] = useState({})
   const [data, setData] = useState()
 
   useEffect(() => {
-    async function getdata() {
+    const getAPIData = async () => {
+      try {
+        await axios
+          .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
+          .then((res) => {
+            console.log(res.data);
+          })
+      } catch (error) {
+        console.log('fetch data failed', error)
+      }
+    }
+
+    const getdata = async () => {
       try {
         await axios
           .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
@@ -58,6 +71,8 @@ const GraphTreasuryAllocationDonut = (props) => {
         console.log('fetch data failed', error)
       }
     }
+
+    getAPIData()
     getdata()
   }, [])
 
@@ -96,7 +111,7 @@ const GraphTreasuryAllocationDonut = (props) => {
               <Box
                 display="flex"
                 p={0}
-                alignItems='center'
+                alignItems="center"
                 backgroundColor="white"
                 borderRadius="5px"
                 border="2px solid #2AE0BF"
@@ -108,7 +123,7 @@ const GraphTreasuryAllocationDonut = (props) => {
                   justifyContent="center"
                   flexDirection="column"
                 >
-                  <Text fontSize={12} color="black" mt='3px'>
+                  <Text fontSize={12} color="black" mt="3px">
                     {datum.data.id} : ${datum.data.value}
                   </Text>
                 </Box>
