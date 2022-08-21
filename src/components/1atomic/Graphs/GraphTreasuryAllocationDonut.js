@@ -13,7 +13,7 @@ const GraphTreasuryAllocationDonut = (props) => {
     async function getdata() {
       try {
         await axios
-          .get('http://localhost:8448/treasury-allocation')
+          .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
           .then((res) => {
             setData([
               {
