@@ -225,7 +225,7 @@ const MainBlock2OutstandingStats = (props) => {
 
   return (
     <>
-      mehul<>mehul</>
+      Garen<>Crowngaurd</>
     </>
   )
 }
