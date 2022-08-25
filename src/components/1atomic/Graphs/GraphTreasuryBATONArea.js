@@ -16,8 +16,15 @@ const GraphTreasuryBATONArea = () => {
         await axios
           .get(`${process.env.REACT_APP_API_URL}/baton`)
           .then((res) => {
-            setParsedData(res.data)
-            setLastValue(res.data[res.data.length - 1].value)
+
+            const total = res.data;
+
+            total.sort((total, totalTemp) => {
+              return new Date(total.timestamp) - new Date(totalTemp.timestamp)
+            })
+
+            setParsedData(total)
+            setLastValue(total[total.length - 1].value)
           })
       } catch (error) {
         console.log('fetch data failed', error)
@@ -61,7 +68,7 @@ const GraphTreasuryBATONArea = () => {
     },
   }
 
-  return (
+  return parsedData && (
     <MainBlock1Card
       minHeight="345px"
       minWidth={['320px', '356px', '356px']}

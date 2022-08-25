@@ -14,8 +14,14 @@ const GraphTreasuryRiskArea = () => {
     const getdata = async () => {
       try {
         await axios.get(`${process.env.REACT_APP_API_URL}/risk`).then((res) => {
-          setParsedData(res.data)
-          setLastValue(res.data[res.data.length - 1].value)
+          const total = res.data
+
+          total.sort((total, totalTemp) => {
+            return new Date(total.timestamp) - new Date(totalTemp.timestamp)
+          })
+
+          setParsedData(total)
+          setLastValue(total[total.length - 1].value)
         })
       } catch (error) {
         console.log('fetch data failed', error)
@@ -59,7 +65,7 @@ const GraphTreasuryRiskArea = () => {
     },
   }
 
-  return (
+  return parsedData && (
     <MainBlock1Card
       minHeight="345px"
       minWidth={['320px', '356px', '356px']}

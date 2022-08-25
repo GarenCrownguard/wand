@@ -31,6 +31,11 @@ const GraphEvolutionOfTreasuriesStacked = () => {
           total.push(...res.data)
           setLastRiskValue(res.data[res.data.length - 1].value)
         })
+
+        total.sort((total, totalTemp) => {
+          return new Date(total.timestamp) - new Date(totalTemp.timestamp)
+        })
+
         setParsedData(total)
       } catch (error) {
         console.log('fetch data failed', error)
@@ -72,7 +77,7 @@ const GraphEvolutionOfTreasuriesStacked = () => {
     },
   }
 
-  return (
+  return parsedData && (
     <MainBlock1Card
       minHeight="345px"
       minWidth={['320px', '356px', '356px']}
@@ -80,7 +85,7 @@ const GraphEvolutionOfTreasuriesStacked = () => {
       flexDirection="column"
       flexGrow={1}
     >
-      <Box flex={1} h='55px'>
+      <Box flex={1} h="55px">
         <Text variant="title" textAlign="left">
           Treasury Allocation
         </Text>

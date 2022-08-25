@@ -91,12 +91,12 @@ const MainBlock2OutstandingStats = (props) => {
         )) ?? null
 
       const outstandingTime =
-        BigNumberToActual(outstandingStats.timeUnlocked, 'one') * 10
+        BigNumberToActual(outstandingStats?.timeUnlocked ?? 0, 'one') * 10
 
       reducer.UPDATE_OUTSTANDING_STATS({
         outstandingTimeLocked: outstandingTime,
         outstandingSwappedAmounts: BigNumberToActual(
-          outstandingStats.amounts,
+          outstandingStats?.amounts ?? 0,
           'SPTR'
         ),
       })
