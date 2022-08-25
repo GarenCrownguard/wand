@@ -10,7 +10,7 @@ import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
 import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEvolutionOfTreasuriesStacked'
 import GraphTreasuryAllocationDonut from 'components/1atomic/Graphs/GraphTreasuryAllocationDonut'
 import { Flex, Box } from '@chakra-ui/react'
-
+import GraphTotalValueDepositArea from 'components/1atomic/Graphs/GraphTotalValueDepositArea'
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props
 
@@ -61,12 +61,7 @@ const DashboardPage = (props) => {
             </Flex>
           </MainBlock1Card>
         </Flex>
-        <MainBlock1Card
-          minHeight="345px"
-          minWidth={['320px', '356px', '356px']}
-        >
-          Chart 1
-        </MainBlock1Card>
+        <GraphTotalValueDepositArea />
       </Flex>
       {localwalletstats.isconnected && (
         <>

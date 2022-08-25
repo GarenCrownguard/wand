@@ -3,51 +3,63 @@ import { prettifyamounts } from 'resources/utilities'
 import MainBlock1Card from '../MainBlock1Card'
 import { ResponsivePie } from '@nivo/pie'
 import { Box, Text } from '@chakra-ui/react'
+import axios from 'axios'
 
-import { connect } from 'react-redux'
-
-const GraphTreasuryAllocationDonut = (props) => {
-  const {
-    scepterTreasuryValue: SCEPTER,
-    batonTreasuryValue: BATON,
-    riskTreasuryValue: RISK,
-  } = props.stats
-
+const GraphTreasuryAllocationDonut = () => {
   const [data, setData] = useState()
 
   useEffect(() => {
-    const currentData = [
-      {
-        id: 'SCEPTER',
-        // label: "SCEPTER",
-        value: SCEPTER,
-        formattedValue: `${Number(
-          ((SCEPTER * 100) / (SCEPTER + RISK + BATON)).toFixed(2)
-        )}%`,
-        color: 'hsl(276, 70%, 50%)',
-      },
-      {
-        id: 'BATON',
-        // label: "BATON",
-        value: BATON,
-        formattedValue: `${Number(
-          ((BATON * 100) / (SCEPTER + RISK + BATON)).toFixed(2)
-        )}%`,
-        color: 'hsl(227, 70%, 50%)',
-      },
-      {
-        id: 'RISK',
-        // label: "RISK",
-        value: RISK,
-        formattedValue: `${Number(
-          ((RISK * 100) / (SCEPTER + RISK + BATON)).toFixed(2)
-        )}%`,
-        color: 'hsl(332, 100%, 63%)',
-      },
-    ]
 
-    setData(currentData)
-  }, [BATON, RISK, SCEPTER])
+    async function getdata() {
+      try {
+        await axios
+          .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
+          .then((res) => {
+            setData([
+              {
+                id: 'SCEPTER',
+                // label: "SCEPTER",
+                value: res.data.SCEPTER,
+                formattedValue: `${Number(
+                  (
+                    (res.data.SCEPTER * 100) /
+                    (res.data.SCEPTER + res.data.RISK + res.data.BATON)
+                  ).toFixed(1)
+                )}%`,
+                color: 'hsl(276, 70%, 50%)',
+              },
+              {
+                id: 'BATON',
+                // label: "BATON",
+                value: res.data.BATON,
+                formattedValue: `${Number(
+                  (
+                    (res.data.BATON * 100) /
+                    (res.data.SCEPTER + res.data.RISK + res.data.BATON)
+                  ).toFixed(1)
+                )}%`,
+                color: 'hsl(227, 70%, 50%)',
+              },
+              {
+                id: 'RISK',
+                // label: "RISK",
+                value: res.data.RISK,
+                formattedValue: `${Number(
+                  (
+                    (res.data.RISK * 100) /
+                    (res.data.SCEPTER + res.data.RISK + res.data.BATON)
+                  ).toFixed(1)
+                )}%`,
+                color: 'hsl(332, 100%, 63%)',
+              },
+            ])
+          })
+      } catch (error) {
+        console.log('fetch data failed', error)
+      }
+    }
+    getdata()
+  }, [])
 
   return (
     data && (
@@ -68,61 +80,63 @@ const GraphTreasuryAllocationDonut = (props) => {
             </Text>
           </Text>
         </Box>
-
-        <ResponsivePie
-          data={data}
-          margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-          innerRadius={0.45}
-          padAngle={2}
-          cornerRadius={7}
-          activeOuterRadiusOffset={6}
-          enableArcLabels={true}
-          arcLabel={(d) => `${d.data.formattedValue}`}
-          arcLabelsRadiusOffset={0.5}
-          tooltip={({ datum }) => {
-            return (
-              <Box
-                display="flex"
-                p={0}
-                alignItems="center"
-                backgroundColor="white"
-                borderRadius="5px"
-                border="2px solid #2AE0BF"
-              >
-                <Box backgroundColor={datum.color} mr="5px" h="15px" w="15px" />
-                <Box
-                  p={0}
-                  display="flex"
-                  justifyContent="center"
-                  flexDirection="column"
-                >
-                  <Text fontSize={12} color="black" mt="3px">
-                    {datum.data.id} : ${datum.data.value}
-                  </Text>
-                </Box>
-              </Box>
-            )
-          }}
-          arcLabelsTextColor="black"
-          // arcLinkLabel='id'
-          arcLinkLabelsSkipAngle={10}
-          arcLinkLabelsTextColor="#2AE0BF"
-          arcLinkLabelsThickness={2}
-          arcLinkLabelsDiagonalLength={10}
-          arcLinkLabelsStraightLength={10}
-          arcLinkLabelsTextOffset={5}
-          arcLinkLabelsColor="#2AE0BF"
-          colors={['#FF409A', '#1F8FDF', '#B1AFCD']}
-        />
+        <Box h="100%" w="100%" alignSelf='center'>
+          {data && (
+            <ResponsivePie
+              data={data}
+              margin={{ top: 20, bottom: 20, right: 60}}
+              innerRadius={0.45}
+              padAngle={2}
+              cornerRadius={7}
+              activeOuterRadiusOffset={6}
+              enableArcLabels={true}
+              arcLabel={(d) => `${d.data.formattedValue}`}
+              arcLabelsRadiusOffset={0.5}
+              tooltip={({ datum }) => {
+                return (
+                  <Box
+                    display="flex"
+                    p='3px'
+                    alignItems="center"
+                    backgroundColor="white"
+                    borderRadius="5px"
+                    border="2px solid #2AE0BF"
+                  >
+                    <Box
+                      backgroundColor={datum.color}
+                      mr="5px"
+                      h="15px"
+                      w="15px"
+                    />
+                    <Box
+                      p={0}
+                      display="flex"
+                      justifyContent="center"
+                      flexDirection="column"
+                    >
+                      <Text fontSize={12} color="black" mt="3px">
+                        {datum.data.id} : ${datum.data.value}
+                      </Text>
+                    </Box>
+                  </Box>
+                )
+              }}
+              arcLabelsTextColor="black"
+              // arcLinkLabel='id'
+              arcLinkLabelsSkipAngle={10}
+              arcLinkLabelsTextColor="#2AE0BF"
+              arcLinkLabelsThickness={2}
+              arcLinkLabelsDiagonalLength={10}
+              arcLinkLabelsStraightLength={10}
+              arcLinkLabelsTextOffset={5}
+              arcLinkLabelsColor="#2AE0BF"
+              colors={['#FF409A', '#1F8FDF', '#B1AFCD']}
+            />
+          )}
+        </Box>
       </MainBlock1Card>
     )
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    stats: state.stats,
-  }
-}
-
-export default connect(mapStateToProps)(GraphTreasuryAllocationDonut)
+export default (GraphTreasuryAllocationDonut)
