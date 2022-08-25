@@ -7,12 +7,21 @@ const initialState = {
     airdrops3Months: 99899.9999,
     scepterTreasuryValue: null,
     batonTreasuryValue: null,
-    riskTreasuryValue: 99899.9999,
+    riskTreasuryValue: null,
     growthFactor: null,
     scepterBuyPrice: null,
     scepterSellPrice: null,
     sellFactor: null,
     batonRedeemingPrice: null,
+    investmentlist: {
+      date: 'Updating...',
+      chain: 'Updating...',
+      expectedAPY: 'Updating...',
+      investedAmount: 'Updating...',
+      protocolName: 'Updating...',
+      protocolURL: 'Updating...',
+      transactionLink: 'https://bscscan.com/',
+    },
     addmore: [],
   },
   localwalletstats: {
@@ -78,7 +87,7 @@ const postReducer = (currentState = initialState, action) => {
         sptrBackingPrice,
         sptrTreasuryBal,
         btonTreasuryBal,
-        btonRedeemingPrice
+        btonRedeemingPrice,
       } = payload
       return {
         stats: {
@@ -98,10 +107,7 @@ const postReducer = (currentState = initialState, action) => {
       }
 
     case actions.UPDATE_OUTSTANDING_STATS:
-      const {
-        outstandingTimeLocked,
-        outstandingSwappedAmounts,
-      } = payload
+      const { outstandingTimeLocked, outstandingSwappedAmounts } = payload
       return {
         stats: {
           ...currentState.stats,
@@ -113,19 +119,37 @@ const postReducer = (currentState = initialState, action) => {
         },
       }
 
-    case actions.GET_FE_STATS:
-      // This is the new State after the action is performed.
+    case actions.UPDATE_RISK_TREASURY_VALUE:
+      const { value } = payload
       return {
-        stats: [...currentState.stats, ...payload.allposts],
+        stats: {
+          ...currentState.stats,
+          riskTreasuryValue: value
+        },
+        localwalletstats: {
+          ...currentState.localwalletstats
+        },
       }
+
+      case actions.UPDATE_INVESTMENT_LIST:
+        const { investmentlist } = payload
+      return {
+        stats: {
+          ...currentState.stats,
+          investmentlist: investmentlist,
+        },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+        },
+      }
+
+
+    
     case actions.UPDATE_AIRDROP_AMOUNT:
       return {
         stats: [...currentState.stats],
       }
-    case actions.GET_TRANSACTION_LIST:
-      return {
-        ...currentState,
-      }
+    
     default:
       return currentState
   }

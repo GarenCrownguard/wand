@@ -10,14 +10,14 @@ import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
 import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEvolutionOfTreasuriesStacked'
 import GraphTreasuryAllocationDonut from 'components/1atomic/Graphs/GraphTreasuryAllocationDonut'
 import { Flex, Box } from '@chakra-ui/react'
-
+import GraphTotalValueDepositArea from 'components/1atomic/Graphs/GraphTotalValueDepositArea'
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props
 
   // console.log(useBreakpointValue(["base", "sm screen", "large screen"]));
-  console.log(
-    `env network: ${process.env.REACT_APP_NETWORK} env chain: ${process.env.REACT_APP_CHAIN}`
-  )
+  // console.log(
+  //   `env network: ${process.env.REACT_APP_NETWORK} env chain: ${process.env.REACT_APP_CHAIN}`
+  // )
   return (
     <>
       <Flex
@@ -61,12 +61,7 @@ const DashboardPage = (props) => {
             </Flex>
           </MainBlock1Card>
         </Flex>
-        <MainBlock1Card
-          minHeight="345px"
-          minWidth={['320px', '356px', '356px']}
-        >
-          Chart 1
-        </MainBlock1Card>
+        <GraphTotalValueDepositArea />
       </Flex>
       {localwalletstats.isconnected && (
         <>
@@ -103,29 +98,29 @@ const DashboardPage = (props) => {
       >
         <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
-            title="SCEPTER Price Growth since day 1 (USD)"
-            value={prettifyamounts(localwalletstats.sceptertoken)}
+            title="SCEPTER Treasury Growth since day 1"
+            value={prettifyamounts(stats.scepterTreasuryValue)}
             align="left"
             growthDirection="positive"
-            percentageValue="10.2"
+            percentageValue={`${stats.scepterTreasuryValue * 100}`}
           />
         </MainBlock1Card>
         <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
-            title="Airdrops to BATON holders (since day 1 (USD)"
-            value={prettifyamounts(localwalletstats.sceptertoken)}
+            title="BATON Treasury Growth since day 1"
+            value={prettifyamounts(stats.batonTreasuryValue)}
             align="left"
-            growthDirection="negative"
-            percentageValue="10.2"
+            growthDirection="positive"
+            percentageValue={`${stats.batonTreasuryValue * 100}`}
           />
         </MainBlock1Card>
         <MainBlock1Card p="15px" flexGrow={1}>
           <MainBlock2StatsText
             title="RISK Treasury Growth since day 1"
-            value={prettifyamounts(localwalletstats.sceptertoken)}
+            value={prettifyamounts(stats.riskTreasuryValue)}
             align="left"
             growthDirection="positive"
-            percentageValue="1000.2"
+            percentageValue={`${stats.riskTreasuryValue * 100}`}
           />
         </MainBlock1Card>
       </Flex>
