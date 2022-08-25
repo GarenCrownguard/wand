@@ -9,12 +9,12 @@ import MainBlock1Card from '../MainBlock1Card'
 const GraphTotalValueDepositArea = () => {
   const [parsedData, setParsedData] = useState([])
   const [lastValue, setLastValue] = useState(0)
+  var total = []
 
   useEffect(() => {
     var sptr = []
     var baton = []
     var risk = []
-    var total = []
     const getdata = async () => {
       try {
         await axios.get(`${process.env.REACT_APP_API_URL}/sptr`).then((res) => {
@@ -32,12 +32,19 @@ const GraphTotalValueDepositArea = () => {
         for (var i = 0; i < sptr.length; i++) {
           total[i] = {
             timestamp: sptr[i].timestamp,
-            value: sptr[i].value + baton[i].value + risk[i].value,
+            value:
+              Number(
+                (sptr[i]?.value + baton[i]?.value + risk[i]?.value).toFixed(3)
+              ) ?? null,
           }
         }
+
+        total.sort((total, totalTemp) => {
+          return new Date(total.timestamp) - new Date(totalTemp.timestamp)
+        })
+
         setParsedData(total)
         setLastValue(total[total.length - 1].value)
-
       } catch (error) {
         console.log('fetch data failed', error)
       }
@@ -81,27 +88,29 @@ const GraphTotalValueDepositArea = () => {
   }
 
   return (
-    <MainBlock1Card
-      minHeight="345px"
-      minWidth={['320px', '356px', '356px']}
-      p="20px"
-      flexDirection="column"
-    >
-      <Box flex={1} h="55px">
-        <Text variant="title" textAlign="left">
-          Total Value Deposited in USD
-        </Text>
-        <Text variant="value" color="white" textAlign="left">
-          {prettifyamounts(lastValue)}
-          <Text as="sup" color="#FF409A" fontSize={12} ml="9px">
-            Total in USD
+    total && (
+      <MainBlock1Card
+        minHeight="345px"
+        minWidth={['320px', '356px', '356px']}
+        p="20px"
+        flexDirection="column"
+      >
+        <Box flex={1} h="55px">
+          <Text variant="title" textAlign="left">
+            Total Value Deposited in USD
           </Text>
-        </Text>
-      </Box>
-      <Box h="225px" w="100%">
-        <Area {...config} />
-      </Box>
-    </MainBlock1Card>
+          <Text variant="value" color="white" textAlign="left">
+            {prettifyamounts(lastValue)}
+            <Text as="sup" color="#FF409A" fontSize={12} ml="9px">
+              Total in USD
+            </Text>
+          </Text>
+        </Box>
+        <Box h="225px" w="100%">
+          <Area {...config} />
+        </Box>
+      </MainBlock1Card>
+    )
   )
 }
 

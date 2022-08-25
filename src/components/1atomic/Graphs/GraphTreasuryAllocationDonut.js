@@ -6,10 +6,9 @@ import { Box, Text } from '@chakra-ui/react'
 import axios from 'axios'
 
 const GraphTreasuryAllocationDonut = () => {
-  const [data, setData] = useState()
+  const [data, setData] = useState(null)
 
   useEffect(() => {
-
     async function getdata() {
       try {
         await axios
@@ -80,63 +79,61 @@ const GraphTreasuryAllocationDonut = () => {
             </Text>
           </Text>
         </Box>
-        <Box h="100%" w="100%" alignSelf='center'>
-          {data && (
-            <ResponsivePie
-              data={data}
-              margin={{ top: 20, bottom: 20, right: 60}}
-              innerRadius={0.45}
-              padAngle={2}
-              cornerRadius={7}
-              activeOuterRadiusOffset={6}
-              enableArcLabels={true}
-              arcLabel={(d) => `${d.data.formattedValue}`}
-              arcLabelsRadiusOffset={0.5}
-              tooltip={({ datum }) => {
-                return (
+        <Box h="250px" w="100%" alignSelf="center">
+          <ResponsivePie
+            data={data}
+            margin={{ top: 20, bottom: 20, right: 60 }}
+            innerRadius={0.45}
+            padAngle={2}
+            cornerRadius={7}
+            activeOuterRadiusOffset={6}
+            enableArcLabels={true}
+            arcLabel={(d) => `${d.data.formattedValue}`}
+            arcLabelsRadiusOffset={0.5}
+            tooltip={({ datum }) => {
+              return (
+                <Box
+                  display="flex"
+                  p="3px"
+                  alignItems="center"
+                  backgroundColor="white"
+                  borderRadius="5px"
+                  border="2px solid #2AE0BF"
+                >
                   <Box
+                    backgroundColor={datum.color}
+                    mr="5px"
+                    h="15px"
+                    w="15px"
+                  />
+                  <Box
+                    p={0}
                     display="flex"
-                    p='3px'
-                    alignItems="center"
-                    backgroundColor="white"
-                    borderRadius="5px"
-                    border="2px solid #2AE0BF"
+                    justifyContent="center"
+                    flexDirection="column"
                   >
-                    <Box
-                      backgroundColor={datum.color}
-                      mr="5px"
-                      h="15px"
-                      w="15px"
-                    />
-                    <Box
-                      p={0}
-                      display="flex"
-                      justifyContent="center"
-                      flexDirection="column"
-                    >
-                      <Text fontSize={12} color="black" mt="3px">
-                        {datum.data.id} : ${datum.data.value}
-                      </Text>
-                    </Box>
+                    <Text fontSize={12} color="black" mt="3px">
+                      {datum.data.id} : ${datum.data.value}
+                    </Text>
                   </Box>
-                )
-              }}
-              arcLabelsTextColor="black"
-              // arcLinkLabel='id'
-              arcLinkLabelsSkipAngle={10}
-              arcLinkLabelsTextColor="#2AE0BF"
-              arcLinkLabelsThickness={2}
-              arcLinkLabelsDiagonalLength={10}
-              arcLinkLabelsStraightLength={10}
-              arcLinkLabelsTextOffset={5}
-              arcLinkLabelsColor="#2AE0BF"
-              colors={['#FF409A', '#1F8FDF', '#B1AFCD']}
-            />
-          )}
+                </Box>
+              )
+            }}
+            arcLabelsTextColor="black"
+            // arcLinkLabel='id'
+            arcLinkLabelsSkipAngle={10}
+            arcLinkLabelsTextColor="#2AE0BF"
+            arcLinkLabelsThickness={2}
+            arcLinkLabelsDiagonalLength={10}
+            arcLinkLabelsStraightLength={10}
+            arcLinkLabelsTextOffset={5}
+            arcLinkLabelsColor="#2AE0BF"
+            colors={['#FF409A', '#1F8FDF', '#B1AFCD']}
+          />
         </Box>
       </MainBlock1Card>
     )
   )
 }
 
-export default (GraphTreasuryAllocationDonut)
+export default GraphTreasuryAllocationDonut
