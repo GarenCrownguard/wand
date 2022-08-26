@@ -32,7 +32,7 @@ const Treasury1InvestmentTable = (props) => {
             <Divider />
           </>
         )}
-        {investmentlist &&
+        {
           React.Children.toArray(
             investmentlist.map((investment) => (
               <>

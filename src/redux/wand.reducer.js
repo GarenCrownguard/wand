@@ -13,7 +13,7 @@ const initialState = {
     scepterSellPrice: null,
     sellFactor: null,
     batonRedeemingPrice: null,
-    investmentlist: {
+    investmentlist: [{
       date: 'Updating...',
       chain: 'Updating...',
       expectedAPY: 'Updating...',
@@ -21,7 +21,7 @@ const initialState = {
       protocolName: 'Updating...',
       protocolURL: 'Updating...',
       transactionLink: 'https://bscscan.com/',
-    },
+    }],
     addmore: [],
   },
   localwalletstats: {
