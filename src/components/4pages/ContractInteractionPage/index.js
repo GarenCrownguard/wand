@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { ethers } from 'ethers'
-import * as reducer from 'redux/reducerCalls'
+// import * as reducer from 'redux/reducerCalls'
 import contracts from 'contracts/contracts'
-import { Button, Box, Flex, Link, useToast } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 import { BigNumberToActual } from 'resources/utilities'
 import contractAddresses from 'contracts/addresses'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
+// import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const MAX_APPROVAL = ethers.BigNumber.from(
   '0xfffffffffffffffffffffffffffffffff'
@@ -31,7 +31,7 @@ const ContractInteractionPage = (props) => {
   //   }
   //   getContracts()
 
-  const toast = useToast();
+  // const toast = useToast();
 
   // toast({
   //   title: (

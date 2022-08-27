@@ -46,16 +46,9 @@ export const getDataFromContract = async () => {
     /* Getting FE stats */
     const wandScepterData = contracts.wandContract?.scepterData() ?? null
 
-    const btonTreasuryBal = contracts.wandContract?.btonTreasuryBal() ?? null
+    const btonData = contracts.wandContract?.batonData() ?? null
 
-    const btonRedeemingPrice =
-      contracts.wandContract?.getBTONRedeemingPrice() ?? null
-
-    const AllStats = await Promise.all([
-      wandScepterData,
-      btonTreasuryBal,
-      btonRedeemingPrice,
-    ])
+    const AllStats = await Promise.all([wandScepterData, btonData])
 
     reducer.UPDATE_STATS({
       sptrGrowthFactor: BigNumberToActual(AllStats[0].sptrGrowthFactor, 'SPTR'),
@@ -64,8 +57,9 @@ export const getDataFromContract = async () => {
       sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
       sptrBackingPrice: BigNumberToActual(AllStats[0].sptrBackingPrice, 'SPTR'),
       sptrTreasuryBal: BigNumberToActual(AllStats[0].sptrTreasuryBal, 'SPTR'),
-      btonTreasuryBal: BigNumberToActual(AllStats[1], 'BATON'),
-      btonRedeemingPrice: BigNumberToActual(AllStats[2], 'BATON'),
+      btonTreasuryBal: BigNumberToActual(AllStats[1].btonTreasuryBal, 'BATON'),
+      btonRedeemingPrice: BigNumberToActual(AllStats[1].btonRedeemingPrice,'BATON'),
+      btonBackingPrice: BigNumberToActual(AllStats[1].btonBackingPrice, 'BATON'),
     })
   }
 }

@@ -10,15 +10,16 @@ if (ethereum) {
   const provider = new ethers.providers.Web3Provider(ethereum)
   const signer = provider.getSigner()
 
-  var SPTRContract = null;
-  var BATONContract = null;
-  var wandContract = null;
-  var USDCContract = null;
-  var BUSDContract = null;
-  var DAIContract = null;
-  var FRAXContract = null;
+  var SPTRContract = null
+  var BATONContract = null
+  var wandContract = null
+  var USDCContract = null
+  var BUSDContract = null
+  var DAIContract = null
+  var FRAXContract = null
 
-  
+  const mainnet = false
+
   if (contractAddresses.SPTR && abis.SPTRabi) {
     SPTRContract = new ethers.Contract(
       contractAddresses.SPTR,
@@ -47,21 +48,21 @@ if (ethereum) {
       signer
     )
   }
-  if (contractAddresses.BUSD && abis.BUSDabi) {
+  if (contractAddresses.BUSD && abis.BUSDabi && mainnet) {
     BUSDContract = new ethers.Contract(
       contractAddresses.BUSD,
       abis.BUSDabi,
       signer
     )
   }
-  if (contractAddresses.DAI && abis.DAIabi) {
+  if (contractAddresses.DAI && abis.DAIabi && mainnet) {
     DAIContract = new ethers.Contract(
       contractAddresses.DAI,
       abis.DAIabi,
       signer
     )
   }
-  if (contractAddresses.FRAX && abis.FRAXabi) {
+  if (contractAddresses.FRAX && abis.FRAXabi && mainnet) {
     FRAXContract = new ethers.Contract(
       contractAddresses.FRAX,
       abis.FRAXabi,

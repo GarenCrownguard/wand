@@ -2,9 +2,10 @@ import actions from './action.types'
 
 const initialState = {
   stats: {
-    scepterCirculatingSupply: 99899.9999,
+    scepterCirculatingSupply: 99899.9999, // not being used
     scepterBackingPrice: null,
-    airdrops3Months: 99899.9999,
+    airdrops3Months: 99899.9999, // not being used
+    airdropDaily: null,
     scepterTreasuryValue: null,
     batonTreasuryValue: null,
     riskTreasuryValue: null,
@@ -13,7 +14,8 @@ const initialState = {
     scepterSellPrice: null,
     sellFactor: null,
     batonRedeemingPrice: null,
-    investmentlist: {
+    btonBackingPrice: null,
+    investmentlist: [{
       date: 'Updating...',
       chain: 'Updating...',
       expectedAPY: 'Updating...',
@@ -21,7 +23,7 @@ const initialState = {
       protocolName: 'Updating...',
       protocolURL: 'Updating...',
       transactionLink: 'https://bscscan.com/',
-    },
+    }],
     addmore: [],
   },
   localwalletstats: {
@@ -88,6 +90,7 @@ const postReducer = (currentState = initialState, action) => {
         sptrTreasuryBal,
         btonTreasuryBal,
         btonRedeemingPrice,
+        btonBackingPrice,
       } = payload
       return {
         stats: {
@@ -100,6 +103,7 @@ const postReducer = (currentState = initialState, action) => {
           scepterTreasuryValue: sptrTreasuryBal,
           batonTreasuryValue: btonTreasuryBal,
           batonRedeemingPrice: btonRedeemingPrice,
+          btonBackingPrice: btonBackingPrice,
         },
         localwalletstats: {
           ...currentState.localwalletstats,
@@ -124,15 +128,15 @@ const postReducer = (currentState = initialState, action) => {
       return {
         stats: {
           ...currentState.stats,
-          riskTreasuryValue: value
+          riskTreasuryValue: value,
         },
         localwalletstats: {
-          ...currentState.localwalletstats
+          ...currentState.localwalletstats,
         },
       }
 
-      case actions.UPDATE_INVESTMENT_LIST:
-        const { investmentlist } = payload
+    case actions.UPDATE_INVESTMENT_LIST:
+      const { investmentlist } = payload
       return {
         stats: {
           ...currentState.stats,
@@ -143,13 +147,19 @@ const postReducer = (currentState = initialState, action) => {
         },
       }
 
-
-    
-    case actions.UPDATE_AIRDROP_AMOUNT:
+    case actions.UPDATE_AIRDROPS:
+      const { airdrops3Months, airdropDaily } = payload
       return {
-        stats: [...currentState.stats],
+        stats: {
+          ...currentState.stats,
+          airdrops3Months: airdrops3Months,
+          airdropDaily: airdropDaily
+        },
+        localwalletstats: {
+          ...currentState.localwalletstats,
+        },
       }
-    
+
     default:
       return currentState
   }

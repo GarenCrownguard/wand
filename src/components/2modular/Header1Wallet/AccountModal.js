@@ -15,7 +15,6 @@ import {
   Icon,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon, CopyIcon } from '@chakra-ui/icons'
-import * as reducer from 'redux/reducerCalls'
 
 const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
   const account = localwalletstats.walletAddress;

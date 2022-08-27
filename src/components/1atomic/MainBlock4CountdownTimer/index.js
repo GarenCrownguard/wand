@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Text, Box } from '@chakra-ui/react'
-import MainBlock2StatsText from '../MainBlock2StatsText'
 
 const MainBlock4CountdownTimer = (props) => {
   const { title, timeleft } = props

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Flex, Stack, useBreakpointValue, Divider } from '@chakra-ui/react'
 import TableHead from './TableHead'
 import Treasury1InvestmentItem from 'components/1atomic/Treasury1InvestmentItem'
@@ -32,7 +32,7 @@ const Treasury1InvestmentTable = (props) => {
             <Divider />
           </>
         )}
-        {investmentlist &&
+        {
           React.Children.toArray(
             investmentlist.map((investment) => (
               <>

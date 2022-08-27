@@ -54,7 +54,7 @@ const GraphEvolutionOfTreasuriesStacked = () => {
 
     color: ['#FF409A', '#1F8FDF', '#B1AFCD'],
     areaStyle: {
-      fillOpacity: 1,
+      fillOpacity: 0.75,
     },
     axis: {
       grid: {

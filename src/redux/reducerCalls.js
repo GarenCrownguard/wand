@@ -58,3 +58,10 @@ export const UPDATE_INVESTMENT_LIST = (props) => {
     payload: props,
   })
 } 
+
+export const UPDATE_AIRDROPS = (props) => {
+  store.dispatch({
+    type: actions.UPDATE_AIRDROPS,
+    payload: props,
+  })
+}

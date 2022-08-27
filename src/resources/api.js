@@ -24,3 +24,18 @@ export const getInvestmentListData = async () => {
     console.log('[getInvestmentListData] fetch data failed', error)
   }
 }
+
+export const getAirdropData = async () => {
+  try {
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}/airdrops`)
+      .then((res) => {
+        reducer.UPDATE_AIRDROPS({
+          airdrops3Months: res.data.airdrops3Months,
+          airdropDaily: res.data.airdropsDaily,
+        })
+      })
+  } catch (error) {
+    console.log('[getAirdropData] fetch data failed', error)
+  }
+}
