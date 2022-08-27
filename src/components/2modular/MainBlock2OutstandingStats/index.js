@@ -82,8 +82,9 @@ const MainBlock2OutstandingStats = (props) => {
     }else {
       setIsClaimDisabled(true)
     }
-    // setIsClaimDisabled(false) // comment this out after testing
-  }, [localwalletstats.amountOfSptrSwapped, timeleft])
+    // setIsClaimDisabled(false) // comment this after testing
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeleft])
 
   useEffect(() => {
     const getOutstandingStats = async () => {

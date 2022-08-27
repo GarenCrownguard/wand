@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "Garen Crowngaurd",
-  "homepage": "https://garencrownguard.github.io/",
+  "homepage": "https://wandinvestments.com/",
   "description": "Dapp for Wand Investments",
   "dependencies": {
     "@ant-design/charts": "^1.4.2",
@@ -27,9 +27,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.2.0",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "source-map-explorer": "^2.5.2"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "start-api": "node api/index.js",
     "build": "react-scripts build",
