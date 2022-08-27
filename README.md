@@ -5,6 +5,10 @@ FrontEnd for Wand Investments project.
 git config --global user.name "Garen Crowngaurd"
 git config --global user.email 0xgaren@protonmail.com
 
+# Bundle Analyzer
+[Ref] https://create-react-app.dev/docs/analyzing-the-bundle-size/
+yarn run analyze
+
 # Metamask
 
 1. https://github.com/MetaMask/test-dapp Test: https://metamask.github.io/test-dapp/
