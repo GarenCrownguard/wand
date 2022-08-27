@@ -383,9 +383,9 @@ const Swap1SwapBox = (props) => {
       setapproved(true)
       setApproving(false)
     } catch (error) {
-      console.log(error)
+      // console.log(error.reason)
       toast({
-        title: 'Swap Error! Check the balance!',
+        title: error.reason,
         status: 'error',
         duration: 2000,
         position: 'bottom-right',
