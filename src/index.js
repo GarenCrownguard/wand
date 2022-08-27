@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from 'react-router-dom'
+/* 
+Why to use HashRouter: https://stackoverflow.com/a/36623117 
+BrowserRouter does not work on the build.
+*/
+import { HashRouter as Router } from 'react-router-dom'
 import PrivateSection from './routes/PrivateSection'
 import "./fonts.css";
 import "./index.css";

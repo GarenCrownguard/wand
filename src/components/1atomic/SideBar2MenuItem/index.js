@@ -1,7 +1,7 @@
 import React from 'react'
-
+import { useHistory } from 'react-router-dom'
 import { Button, Box, Link } from '@chakra-ui/react'
-
+import { convertSlugToUrl } from 'resources/utilities'
 import IconSoon from './icon-soon'
 
 const buttonstyle = {
@@ -32,8 +32,23 @@ const linkstyle = {
 }
 
 const SideBar2MenuItem = ({ icon: Icon, href, isexternal, title, soon }) => {
+  const { push } = useHistory()
+
+  function onClick(slug, external, parameters = {}) {
+    if (external) {
+      window.open(slug, '_blank')
+      return
+    }
+    push(convertSlugToUrl(slug, parameters))
+  }
+
   return soon ? (
-    <Link href={href} isExternal={isexternal} {...linkstyle} w='100%'>
+    <Link
+      // href={href}
+      isExternal={isexternal}
+      {...linkstyle}
+      w="100%"
+    >
       <Button
         sx={buttonstyle}
         leftIcon={<Icon fill="currentColor" />}
@@ -41,6 +56,7 @@ const SideBar2MenuItem = ({ icon: Icon, href, isexternal, title, soon }) => {
         display="flex"
         justifyContent="flex-start"
         iconSpacing="15px"
+        onClick={() => onClick(href)}
       >
         {title}
         <Box mr="30px" ml="auto">
@@ -49,12 +65,17 @@ const SideBar2MenuItem = ({ icon: Icon, href, isexternal, title, soon }) => {
       </Button>
     </Link>
   ) : (
-    <Link href={href} isExternal={isexternal} {...linkstyle}>
+    <Link
+      // href={href}
+      isExternal={isexternal}
+      {...linkstyle}
+    >
       <Button
         sx={buttonstyle}
         leftIcon={<Icon fill="currentColor" />}
         variant="link"
         iconSpacing="15px"
+        onClick={() => onClick(href, isexternal)}
       >
         {title}
       </Button>

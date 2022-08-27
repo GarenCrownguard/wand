@@ -52,3 +52,11 @@ export const ActualToBigNumber = (amount, tokenDecimal) => {
 export const GenerateTransactionLink = (hash) => {
   return `https://testnet.bscscan.com/tx/${hash}`
 }
+
+export function convertSlugToUrl(slug, parameters) {
+  let url = slug
+  Object.entries(parameters).forEach(([key, value]) => {
+    url = url.replace(`:${key}`, value)
+  })
+  return url
+}
