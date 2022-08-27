@@ -210,11 +210,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 13. automatically render the changes (swapping -> updating balances)
 14. wallet persistant.
 15. sidebar selected color.
-
-
-TO DO:
-1. get the rest of data from the API
-2. Graphs
+16. Improve performance by using bundle analyzer.
 
 # Template
 
