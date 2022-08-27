@@ -1,4 +1,8 @@
 import { ethers } from 'ethers'
+const fixValue = (value) => {
+  return parseFloat(parseFloat(value)?.toFixed(2))
+}
+
 
 const decimals = {
   USDC: 18,
@@ -19,9 +23,9 @@ export const prettifyamounts = (amount) => {
 
 export const prettifyGrowthPercentage = (direction, value) => {
   if (direction === 'positive') {
-    return '+' + value + '%'
+    return '+' + fixValue(value) + '%'
   } else if (direction === 'negative') {
-    return '-' + value + '%'
+    return '-' + fixValue(value) + '%'
   } else {
     return '...'
   }
@@ -29,11 +33,7 @@ export const prettifyGrowthPercentage = (direction, value) => {
 
 export const BigNumberToActual = (amount, tokenDecimal) => {
   return amount && decimals[tokenDecimal]
-    ? parseFloat(
-        parseFloat(
-          ethers.utils.formatUnits(amount, decimals[tokenDecimal])
-        )?.toFixed(3)
-      )
+    ? fixValue(ethers.utils.formatUnits(amount, decimals[tokenDecimal]))
     : null
 }
 
