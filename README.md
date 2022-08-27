@@ -5,6 +5,10 @@ FrontEnd for Wand Investments project.
 git config --global user.name "Garen Crowngaurd"
 git config --global user.email 0xgaren@protonmail.com
 
+# Bundle Analyzer
+[Ref] https://create-react-app.dev/docs/analyzing-the-bundle-size/
+yarn run analyze
+
 # Metamask
 
 1. https://github.com/MetaMask/test-dapp Test: https://metamask.github.io/test-dapp/
@@ -206,11 +210,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 13. automatically render the changes (swapping -> updating balances)
 14. wallet persistant.
 15. sidebar selected color.
-
-
-TO DO:
-1. get the rest of data from the API
-2. Graphs
+16. Improve performance by using bundle analyzer.
 
 # Template
 
