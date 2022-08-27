@@ -50,6 +50,7 @@ const GraphTotalValueDepositArea = () => {
       }
     }
     getdata()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const config = {

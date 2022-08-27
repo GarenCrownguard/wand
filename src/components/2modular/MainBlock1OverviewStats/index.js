@@ -4,7 +4,7 @@ import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
 import { Flex } from '@chakra-ui/react'
 
-import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
+import {prettifyamounts } from 'resources/utilities'
 
 const MainBlock1OverviewStats = (props) => {
   const { stats } = props

@@ -7,9 +7,7 @@ const TreasuriesPage = lazy(() => import('components/4pages/TreasuriesPage'))
 const DashboardPage = lazy(() => import('components/4pages/DashboardPage'))
 const AccountPage = lazy(() => import('components/4pages/AccountPage'))
 const SwapPage = lazy(() => import('components/4pages/SwapPage'))
-const ContractInteractionPage = lazy(() =>
-  import('components/4pages/ContractInteractionPage')
-)
+const ContractInteractionPage = lazy(() => import('components/4pages/ContractInteractionPage'))
 
 const PrivateRoutes = (props) => {
   const isconnected = props.localwalletstats.isconnected

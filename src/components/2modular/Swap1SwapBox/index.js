@@ -30,7 +30,6 @@ import InputBox from './InputBox'
 import SwapBoxModal from './SwapBoxModal'
 import links from 'resources/links'
 import TaxSlider from './TaxSlider'
-import { getDataFromContract } from 'contracts/ContractInteraction'
 
 const MAX_APPROVAL = ethers.BigNumber.from(
   '0xfffffffffffffffffffffffffffffffffffffffffffff'
@@ -317,7 +316,8 @@ const Swap1SwapBox = (props) => {
           // console.log('transformScepterToBaton')
           SwapCall =
             (await contracts.wandContract?.transformScepterToBaton(
-              ActualToBigNumber(swapFromInput1, swapFromToken)
+              ActualToBigNumber(swapFromInput1, swapFromToken),
+              'USDC'
             )) ?? false
         } else {
           // cashOutScepter(amount, daysChosenLocked, stableChosen) -- tested
@@ -345,7 +345,7 @@ const Swap1SwapBox = (props) => {
         // console.log('buyScepter')
 
         SwapCall =
-          (await contracts.wandContract?.buyScepter(
+          (await contracts.wandContract?.wlBuyScepter(
             ActualToBigNumber(swapToInput2, swapToToken),
             swapFromToken
           )) ?? false
@@ -406,6 +406,7 @@ const Swap1SwapBox = (props) => {
     }
 
     checkAllowance(swapFromToken)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swapFromToken, swapToToken, localwalletstats])
 
   useEffect(() => {

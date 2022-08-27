@@ -23,7 +23,6 @@ import MainBlock4CountdownTimer from 'components/1atomic/MainBlock4CountdownTime
 import * as reducer from 'redux/reducerCalls'
 import {
   prettifytolocalstring,
-  prettifyamounts,
   GenerateTransactionLink,
 } from 'resources/utilities'
 import IconBottomRightArrow from './icon'
@@ -84,7 +83,7 @@ const MainBlock2OutstandingStats = (props) => {
       setIsClaimDisabled(true)
     }
     // setIsClaimDisabled(false) // comment this out after testing
-  }, [timeleft])
+  }, [localwalletstats.amountOfSptrSwapped, timeleft])
 
   useEffect(() => {
     const getOutstandingStats = async () => {
@@ -109,6 +108,7 @@ const MainBlock2OutstandingStats = (props) => {
     }
 
     getOutstandingStats()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { isOpen: isAlertVisible, onClose } = useDisclosure({
