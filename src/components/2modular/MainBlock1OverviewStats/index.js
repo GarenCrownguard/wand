@@ -13,16 +13,21 @@ const MainBlock1OverviewStats = (props) => {
     <MainBlock1Card minHeight="172px" p="15px" flexDirection="column">
       <Flex flexDirection={['column', 'column', 'row']}>
         <MainBlock2StatsText
-          title="Circulating Supply ($SCEPTER)"
-          value={prettifytolocalstring(stats.scepterCirculatingSupply)}
-        />
-        <MainBlock2StatsText
-          title="$SCEPTER Price"
+          title="$SCEPTER Backing Price"
           value={prettifyamounts(stats.scepterBackingPrice)}
         />
         <MainBlock2StatsText
+          title="BATON Backing Price"
+          value={prettifyamounts(stats.btonBackingPrice)}
+        />
+        {/* <MainBlock2StatsText
           title="Airdrops distributed (last 3 months)"
           value={prettifyamounts(stats.airdrops3Months)}
+        /> */}
+
+        <MainBlock2StatsText
+          title="BATON Redeeming Price"
+          value={prettifyamounts(stats.batonRedeemingPrice)}
         />
       </Flex>
       <Flex flexDirection={['column', 'column', 'row']}>
@@ -31,12 +36,12 @@ const MainBlock1OverviewStats = (props) => {
           value={prettifyamounts(stats.scepterTreasuryValue)}
         />
         <MainBlock2StatsText
-          title="Risk Treasury Value"
-          value={prettifyamounts(stats.riskTreasuryValue)}
-        />
-        <MainBlock2StatsText
           title="Baton treasury value"
           value={prettifyamounts(stats.batonTreasuryValue)}
+        />
+        <MainBlock2StatsText
+          title="Risk Treasury Value"
+          value={prettifyamounts(stats.riskTreasuryValue)}
         />
       </Flex>
     </MainBlock1Card>

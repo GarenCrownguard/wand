@@ -29,13 +29,13 @@ const DashboardPage = (props) => {
         <Flex flexDirection="column" width="100%">
           <MainBlock1Card p="25px" minHeight="111px">
             <MainBlock2StatsText
-              title="Circulating Supply ($SCEPTER)"
-              value={prettifytolocalstring(stats.scepterCirculatingSupply)}
+              title="$SCEPTER Backing Price"
+              value={prettifyamounts(stats.scepterBackingPrice)}
             />
             <MainBlock2Divider />
             <MainBlock2StatsText
-              title="$SCEPTER Price"
-              value={prettifyamounts(stats.scepterBackingPrice)}
+              title="BATON Backing Price"
+              value={prettifyamounts(stats.btonBackingPrice)}
             />
           </MainBlock1Card>
           <MainBlock1Card minHeight="222px" flexDirection="column">
@@ -50,9 +50,13 @@ const DashboardPage = (props) => {
               />
             </Flex>
             <Flex flexDirection={['column', 'column', 'row']}>
-              <MainBlock2StatsText
+              {/* <MainBlock2StatsText
                 title="Airdrops distributed (last 3 months)"
                 value={prettifyamounts(stats.airdrops3Months)}
+              /> */}
+              <MainBlock2StatsText
+                title="BATON Redeeming Price"
+                value={prettifyamounts(stats.batonRedeemingPrice)}
               />
               <MainBlock2StatsText
                 title="Baton treasury value"

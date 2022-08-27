@@ -34,7 +34,7 @@ const AccountPage = (props) => {
             />
             <MainBlock2Divider />
             <MainBlock2StatsText
-              title="Current Price"
+              title="Current Backing Price"
               value={prettifyamounts(stats.scepterBackingPrice)}
               tooltipLabel={`Current Value: ${prettifyamounts(
                 localwalletstats.sceptertoken * stats.scepterBackingPrice
@@ -52,16 +52,15 @@ const AccountPage = (props) => {
           <MainBlock1Card p="25px" minHeight="111px" flexGrow={1}>
             <MainBlock2StatsText
               title="Amount of BATON"
-              v
               value={prettifytolocalstring(localwalletstats.batontoken)}
             />
             <MainBlock2Divider />
             <MainBlock2StatsText
-              title="Last Airdrop"
-              value={prettifyamounts(stats.scepterBackingPrice)}
-              tooltipLabel={`Total (since start): ${prettifyamounts(
-                localwalletstats.sceptertoken * stats.scepterBackingPrice
-              )}`}
+              title="Last Daily Airdrop"
+              value={prettifyamounts(stats.airdropDaily)}
+              // tooltipLabel={`Total (since start): ${prettifyamounts(
+              //   localwalletstats.sceptertoken * stats.scepterBackingPrice
+              // )}`}
             />
           </MainBlock1Card>
         </Flex>

@@ -64,8 +64,6 @@ High-res laptop or desktop: 1920 x 1080.
 
 # Updates
 
-New contract: https://testnet.snowtrace.io/address/0x17d7d6e0bd141d1e92d2f3dd9f3f4edc33104bbc#readContract
-Function: scepterData
 CONNECTION_STRING = "mongodb+srv://reader:dbReader$2022@cluster0.leenlb7.mongodb.net/?retryWrites=true&w=majority"
 Database: Wand_Data
 Collection: mainContractData and Investments
@@ -111,7 +109,7 @@ database: wand-database
 collection: front-end-stats
 
 Example:
-
+Need to update:
 ```json
 {
   "timestamp": 1653991989,

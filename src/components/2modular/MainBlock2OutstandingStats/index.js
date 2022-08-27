@@ -21,7 +21,11 @@ import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
 import MainBlock4CountdownTimer from 'components/1atomic/MainBlock4CountdownTimer'
 import * as reducer from 'redux/reducerCalls'
-import { prettifytolocalstring, prettifyamounts } from 'resources/utilities'
+import {
+  prettifytolocalstring,
+  prettifyamounts,
+  GenerateTransactionLink,
+} from 'resources/utilities'
 import IconBottomRightArrow from './icon'
 import { BigNumberToActual } from 'resources/utilities'
 
@@ -122,7 +126,7 @@ const MainBlock2OutstandingStats = (props) => {
 
       await claimWithdrawals.wait()
 
-      var transactionLink = `https://testnet.snowtrace.io/tx/${claimWithdrawals.hash}`
+      var transactionLink = GenerateTransactionLink(claimWithdrawals.hash);
       toast({
         title: (
           <Link color="white" href={transactionLink} isExternal>

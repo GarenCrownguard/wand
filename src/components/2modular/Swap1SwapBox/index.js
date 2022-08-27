@@ -15,7 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { ActualToBigNumber } from 'resources/utilities'
+import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenBUSD,
@@ -269,7 +269,7 @@ const Swap1SwapBox = (props) => {
 
       // await ApproveCall.wait()
 
-      var transactionLink = `https://testnet.snowtrace.io/tx/${ApproveCall.hash}`
+      var transactionLink = GenerateTransactionLink(ApproveCall.hash);
 
       toast({
         title: (
@@ -365,7 +365,7 @@ const Swap1SwapBox = (props) => {
 
       // await SwapCall.wait()
 
-      var transactionLink = `https://testnet.snowtrace.io/tx/${SwapCall.hash}`
+      var transactionLink = GenerateTransactionLink(SwapCall.hash);
       toast({
         title: (
           <Link color="white" href={transactionLink} isExternal>

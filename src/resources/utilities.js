@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 
 const decimals = {
-  USDC: process.env.REACT_APP_CHAIN === 'Testnet' ? 6 : 18,
+  USDC: 18,
   DAI: 18,
   BUSD: 18,
   SPTR: 18,
@@ -47,4 +47,8 @@ export const ActualToBigNumber = (amount, tokenDecimal) => {
         `${amount * Math.pow(10, decimals[tokenDecimal] / 2)}`
       ).mul(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
     : null
+}
+
+export const GenerateTransactionLink = (hash) => {
+  return `https://testnet.bscscan.com/tx/${hash}`
 }

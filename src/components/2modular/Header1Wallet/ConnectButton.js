@@ -4,7 +4,11 @@ import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
 import { getDataFromContract } from 'contracts/ContractInteraction'
-import { getRiskTreasuryValue, getInvestmentListData } from 'resources/api'
+import {
+  getRiskTreasuryValue,
+  getInvestmentListData,
+  getAirdropData,
+} from 'resources/api'
 
 const ConnectButton = (props) => {
   const { handleOpenModal, isMobile, localwalletstats } = props
@@ -78,6 +82,7 @@ const ConnectButton = (props) => {
     try {
       getRiskTreasuryValue()
       getInvestmentListData()
+      getAirdropData()
       handleConnectWallet()
     } catch (error) {
       console.log('connectButton useeffect error')
