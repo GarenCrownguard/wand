@@ -122,7 +122,7 @@ const MainBlock2OutstandingStats = (props) => {
     onCloseTokenChoose()
     try {
       const claimWithdrawals =
-        (await contracts.wandContract?.claimLockedUSDC(chosenTokenToClaim)) ??
+        (await contracts.wandContract?.claimLockedUSD(chosenTokenToClaim)) ??
         null
 
       await claimWithdrawals.wait()
