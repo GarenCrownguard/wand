@@ -27,14 +27,12 @@ export const getInvestmentListData = async () => {
 
 export const getAirdropData = async () => {
   try {
-    await axios
-      .get(`${process.env.REACT_APP_API_URL}/airdrops`)
-      .then((res) => {
-        reducer.UPDATE_AIRDROPS({
-          airdrops3Months: res.data.airdrops3Months,
-          airdropDaily: res.data.airdropsDaily,
-        })
+    await axios.get(`${process.env.REACT_APP_API_URL}/airdrops`).then((res) => {
+      reducer.UPDATE_AIRDROPS({
+        airdrops3Months: res.data.airdrops3Months,
+        airdropDaily: res.data.airdropsDaily,
       })
+    })
   } catch (error) {
     console.log('[getAirdropData] fetch data failed', error)
   }
@@ -42,9 +40,11 @@ export const getAirdropData = async () => {
 
 export const setAirdropAddress = async (walletAddr) => {
   try {
-    await axios.post(`http://localhost:8448/setBATONAirdropAddresses`, {
-        address: walletAddr
-      })
+    await axios.post(`${process.env.REACT_APP_API_URL}/setBATONAirdropAddresses`,
+      {
+        address: walletAddr,
+      }
+    )
   } catch (error) {
     console.log('[setAirdropAddress] post data failed', error)
   }
@@ -52,10 +52,10 @@ export const setAirdropAddress = async (walletAddr) => {
 
 export const setTreasuryOutgoing = async (walletAddr, amt, time) => {
   try {
-    await axios.post(`http://localhost:8448/TreasuryUSDOutgoing`, {
+    await axios.post(`${process.env.REACT_APP_API_URL}/TreasuryUSDOutgoing`, {
       address: walletAddr,
       amtUSD: amt,
-      timeUnlocked: time
+      timeUnlocked: time,
     })
   } catch (error) {
     console.log('[setAirdropAddress] post data failed', error)
