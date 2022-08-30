@@ -27,7 +27,7 @@ import {
 } from 'resources/utilities'
 import IconBottomRightArrow from './icon'
 import { BigNumberToActual } from 'resources/utilities'
-
+import { setTreasuryOutgoing } from 'resources/api'
 import ChooseTokenModal from './ChooseTokenModal'
 
 const calculateTimeLeft = (time) => {
@@ -56,6 +56,7 @@ const calculateTimeLeft = (time) => {
 
 const MainBlock2OutstandingStats = (props) => {
   const { localwalletstats } = props
+  const account = localwalletstats.walletAddress
   const toast = useToast()
   const [isClaimDisabled, setIsClaimDisabled] = useState(true)
   const [isClaimLoading, setIsClaimLoading] = useState(false)
@@ -77,13 +78,19 @@ const MainBlock2OutstandingStats = (props) => {
 
   useEffect(() => {
     const { days, hours, minutes, seconds } = timeleft
-    if (days === 0 && hours === 0 && minutes === 0 && seconds === 0 && localwalletstats.amountOfSptrSwapped !== 0) {
+    if (
+      days === 0 &&
+      hours === 0 &&
+      minutes === 0 &&
+      seconds === 0 &&
+      localwalletstats.amountOfSptrSwapped !== 0
+    ) {
       setIsClaimDisabled(false)
-    }else {
+    } else {
       setIsClaimDisabled(true)
     }
     // setIsClaimDisabled(false) // comment this after testing
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeleft])
 
   useEffect(() => {
@@ -97,19 +104,28 @@ const MainBlock2OutstandingStats = (props) => {
       const outstandingTime =
         BigNumberToActual(outstandingStats?.timeUnlocked ?? 0, 'one') * 10
 
+      const outstandingSwappedAmounts = BigNumberToActual(
+        outstandingStats?.amounts ?? 0,
+        'SPTR'
+      )
+
       reducer.UPDATE_OUTSTANDING_STATS({
         outstandingTimeLocked: outstandingTime,
-        outstandingSwappedAmounts: BigNumberToActual(
-          outstandingStats?.amounts ?? 0,
-          'SPTR'
-        ),
+        outstandingSwappedAmounts: outstandingSwappedAmounts,
       })
+      if (outstandingTime !== 0) {
+        await setTreasuryOutgoing(
+          account,
+          outstandingSwappedAmounts,
+          outstandingTime
+        )
+      }
 
       setTimeleft(calculateTimeLeft(outstandingTime * 1000))
     }
 
     getOutstandingStats()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { isOpen: isAlertVisible, onClose } = useDisclosure({
@@ -122,16 +138,16 @@ const MainBlock2OutstandingStats = (props) => {
     onCloseTokenChoose()
     try {
       const claimWithdrawals =
-        (await contracts.wandContract?.claimLockedUSDC(chosenTokenToClaim)) ??
+        (await contracts.wandContract?.claimLockedUSD(chosenTokenToClaim)) ??
         null
 
       await claimWithdrawals.wait()
 
-      var transactionLink = GenerateTransactionLink(claimWithdrawals.hash);
+      var transactionLink = GenerateTransactionLink(claimWithdrawals.hash)
       toast({
         title: (
           <Link color="white" href={transactionLink} isExternal>
-            Approved. Check transaction.
+            Submitted. Check transaction.
             <ExternalLinkIcon mx="5px" mt="-5px" />
           </Link>
         ),

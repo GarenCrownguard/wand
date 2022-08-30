@@ -13,9 +13,14 @@ import {
   Link,
   Box,
   useToast,
+  Tag,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
+import {
+  ActualToBigNumber,
+  GenerateTransactionLink,
+  BigNumberToActual,
+} from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenBUSD,
@@ -25,6 +30,8 @@ import {
   IconTokenDAI,
   IconTokenFRAX,
 } from './icons'
+
+import { setAirdropAddress } from 'resources/api'
 
 import InputBox from './InputBox'
 import SwapBoxModal from './SwapBoxModal'
@@ -39,7 +46,6 @@ const Swap1SwapBox = (props) => {
   const { stats, localwalletstats } = props
   const toast = useToast()
   const account = localwalletstats.walletAddress
-
   const tokenlist = [
     {
       name: 'SPTR',
@@ -92,7 +98,9 @@ const Swap1SwapBox = (props) => {
   const [swapFromInput1, setSwapFromInput1] = useState('')
   const [swapToInput2, setSwapToInput2] = useState('')
   const [taxSliderValue, setTaxSliderValue] = useState(0)
-
+  const [isWL, setIsWL] = useState(false)
+  const [WLbuylimit, setWLBuyLimit] = useState(0)
+  const [WLbuybought, setWLBuyBought] = useState(0)
   const [approved, setapproved] = useState(false)
   const [approving, setApproving] = useState(false)
 
@@ -102,6 +110,36 @@ const Swap1SwapBox = (props) => {
   var wandAllowanceBUSD = null
   var wandAllowanceDAI = null
   var wandAllowanceFRAX = null
+
+  const checkWL = async () => {
+    try {
+      const checkwl =
+        (await contracts.wandContract?.whiteListees(account)) ?? false
+
+      if (BigNumberToActual(checkwl[0], 'SPTR') === 0) {
+        setIsWL(false)
+        // console.log(BigNumberToActual(checkwl[0], 'SPTR'))
+        // console.log(checkwl)
+      } else {
+        setIsWL(true)
+        setWLBuyLimit(BigNumberToActual(checkwl[0], 'SPTR'))
+        setWLBuyBought(BigNumberToActual(checkwl[1], 'SPTR'))
+        // console.log('is whitelisted')
+      }
+    } catch (error) {
+      // console.log('Check WL error')
+      setIsWL(false)
+      toast({
+        title: 'Cannot check WL for your account',
+        status: 'error',
+        duration: 2000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '100%',
+        },
+      })
+    }
+  }
 
   const checkAllowance = async (fromtoken) => {
     setApproving(true)
@@ -268,12 +306,12 @@ const Swap1SwapBox = (props) => {
 
       // await ApproveCall.wait()
 
-      var transactionLink = GenerateTransactionLink(ApproveCall.hash);
+      var transactionLink = GenerateTransactionLink(ApproveCall.hash)
 
       toast({
         title: (
           <Link color="white" href={transactionLink} isExternal>
-            Approved. Check transaction.
+            Submitted. Check transaction.
             <ExternalLinkIcon mx="5px" mt="-5px" />
           </Link>
         ),
@@ -319,6 +357,8 @@ const Swap1SwapBox = (props) => {
               ActualToBigNumber(swapFromInput1, swapFromToken),
               'USDC'
             )) ?? false
+
+          await setAirdropAddress(account)
         } else {
           // cashOutScepter(amount, daysChosenLocked, stableChosen) -- tested
           // console.log(`cashOutScepter(${swapFromInput1}, ${taxSliderValue}, ${swapToToken})`)
@@ -365,11 +405,11 @@ const Swap1SwapBox = (props) => {
 
       // await SwapCall.wait()
 
-      var transactionLink = GenerateTransactionLink(SwapCall.hash);
+      var transactionLink = GenerateTransactionLink(SwapCall.hash)
       toast({
         title: (
           <Link color="white" href={transactionLink} isExternal>
-            Approved. Check transaction.
+            Submitted. Check transaction.
             <ExternalLinkIcon mx="5px" mt="-5px" />
           </Link>
         ),
@@ -406,7 +446,7 @@ const Swap1SwapBox = (props) => {
     }
 
     checkAllowance(swapFromToken)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swapFromToken, swapToToken, localwalletstats])
 
   useEffect(() => {
@@ -455,6 +495,10 @@ const Swap1SwapBox = (props) => {
     stats.scepterBuyPrice,
   ])
 
+  useEffect(() => {
+    checkWL()
+  }, [])
+
   const swapClickHandler = () => {
     setSwapFromInput1('')
     setSwapToInput2(0)
@@ -471,9 +515,20 @@ const Swap1SwapBox = (props) => {
       alignItems="flex-start"
       p="25px"
     >
-      <Text variant="value" textAlign="left" color="wandGreen">
-        Swap
-      </Text>
+      <Flex w="100%" alignItems="center" justifyContent="space-between">
+        <Text variant="value" textAlign="left" color="wandGreen" w="100%">
+          WL Swap
+        </Text>
+        {isWL ? (
+          <Tag size="sm" bg="wandGreen" w="100%">
+            {`Buy Limit: ${WLbuybought}/${WLbuylimit}`}
+          </Tag>
+        ) : (
+          <Tag size="sm" bg="wandRed" color="black" w="100%">
+            Not whiteListed.
+          </Tag>
+        )}
+      </Flex>
       <Text variant="title" textAlign="left">
         Choose the tokens to swap
       </Text>

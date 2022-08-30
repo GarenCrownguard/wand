@@ -17,7 +17,7 @@ const MainBlock1OverviewStats = (props) => {
           value={prettifyamounts(stats.scepterBackingPrice)}
         />
         <MainBlock2StatsText
-          title="BATON Backing Price"
+          title="BATON Backing Value"
           value={prettifyamounts(stats.btonBackingPrice)}
         />
         {/* <MainBlock2StatsText

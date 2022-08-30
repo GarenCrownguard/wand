@@ -39,3 +39,25 @@ export const getAirdropData = async () => {
     console.log('[getAirdropData] fetch data failed', error)
   }
 }
+
+export const setAirdropAddress = async (walletAddr) => {
+  try {
+    await axios.post(`http://localhost:8448/setBATONAirdropAddresses`, {
+        address: walletAddr
+      })
+  } catch (error) {
+    console.log('[setAirdropAddress] post data failed', error)
+  }
+}
+
+export const setTreasuryOutgoing = async (walletAddr, amt, time) => {
+  try {
+    await axios.post(`http://localhost:8448/TreasuryUSDOutgoing`, {
+      address: walletAddr,
+      amtUSD: amt,
+      timeUnlocked: time
+    })
+  } catch (error) {
+    console.log('[setAirdropAddress] post data failed', error)
+  }
+}

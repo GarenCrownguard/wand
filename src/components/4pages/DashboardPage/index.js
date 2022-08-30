@@ -34,7 +34,7 @@ const DashboardPage = (props) => {
             />
             <MainBlock2Divider />
             <MainBlock2StatsText
-              title="BATON Backing Price"
+              title="BATON Backing Value"
               value={prettifyamounts(stats.btonBackingPrice)}
             />
           </MainBlock1Card>

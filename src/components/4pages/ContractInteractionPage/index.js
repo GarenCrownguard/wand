@@ -36,7 +36,7 @@ const ContractInteractionPage = (props) => {
   // toast({
   //   title: (
   //     <Link color="white" isExternal>
-  //       Approved. Check transaction.
+  //       Submitted. Check transaction.
   //       <ExternalLinkIcon mx="5px" mt="-5px" />
   //     </Link>
   //   ),
@@ -73,9 +73,6 @@ const ContractInteractionPage = (props) => {
   const checkAllowance = async () => {
     const compareTokens = '999999999999999999999999999'
     try {
-
-      
-
       console.log('Checking BATON allowance')
       let wandAllowanceBATON =
         (await contracts.BATONContract?.allowance(
