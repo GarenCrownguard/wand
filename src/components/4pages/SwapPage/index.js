@@ -35,7 +35,9 @@ const SwapPage = (props) => {
               value={prettifyamounts(
                 localwalletstats.sceptertoken * stats.scepterBackingPrice
               )}
-              tooltipLabel={'Value = Balance * Backing Price'}
+              tooltipLabel={
+                'Calculated based on the backing price of SCEPTER. Value = Balance * Backing Price'
+              }
             />
           </MainBlock1Card>
           <MainBlock1Card
@@ -67,21 +69,27 @@ const SwapPage = (props) => {
                 title="Growth Factor"
                 value={prettifytolocalstring(stats.growthFactor)}
                 valueColor="wandGreen"
-                tooltipLabel={'Write something here'}
+                tooltipLabel={
+                  'The growth factor increases proportionally as the number of purchases over the last 5 days is higher'
+                }
               />
               <MainBlock2Divider />
               <MainBlock2StatsText
                 title="Sell Factor"
                 value={prettifytolocalstring(stats.sellFactor)}
                 valueColor="wandRed"
-                tooltipLabel={'Write something here'}
+                tooltipLabel={
+                  'The sell factor increases proportionally as the number of sales over the last 5 days is higher'
+                }
               />
             </MainBlock1Card>
             <MainBlock1Card p="15px" flexGrow={1}>
               <MainBlock2StatsText
                 title="BATON Redeeming Price"
                 value={prettifyamounts(stats.batonRedeemingPrice)}
-                tooltipLabel={'Write something here'}
+                tooltipLabel={
+                  'The BATON redeeming price is equal to 30% of the BATON backing price and capped to 50% of the SCEPTER backing price'
+                }
               />
             </MainBlock1Card>
           </Flex>

@@ -15,13 +15,56 @@ import {
   Icon,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon, CopyIcon } from '@chakra-ui/icons'
+import contractAddresses from 'contracts/addresses'
 
 const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
-  const account = localwalletstats.walletAddress;
+  const account = localwalletstats.walletAddress
+  const { ethereum } = window
+
   // const handleDeactivateAccount = ()=> {
   //   reducer.WALLET_DISCONNECT();
   //   onClose()
   // }
+
+  const addSptrToken = async () => {
+    try {
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: contractAddresses.SPTR, // The address that the token is at.
+            symbol: 'SPTR', // A ticker symbol or shorthand, up to 5 chars.
+            decimals: 18, // The number of decimals in the token
+            image: `${process.env.REACT_APP_API_URL}/sptrtoken`, // A string url of the token logo
+          },
+        },
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const addBatonToken = async () => {
+    try {
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: contractAddresses.BATON, // The address that the token is at.
+            symbol: 'BTON', // A ticker symbol or shorthand, up to 5 chars.
+            decimals: 18, // The number of decimals in the token
+            image: `${process.env.REACT_APP_API_URL}/batontoken`, // A string url of the token logo
+          },
+        },
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="sm">
@@ -131,6 +174,45 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
                 <ExternalLinkIcon mr={1} />
                 View on Explorer
               </Link>
+            </Flex>
+            <Flex alignContent="center" m={2}>
+              <Button
+                variant="outline"
+                size="sm"
+                borderColor="wandGreen"
+                borderRadius="3xl"
+                color="wandGreen"
+                fontSize="13px"
+                fontWeight="normal"
+                px={2}
+                mr={5}
+                height="26px"
+                _hover={{
+                  background: 'none',
+                  borderColor: 'transparent',
+                }}
+                onClick={addSptrToken}
+              >
+                Add SCEPTER
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                borderColor="wandGreen"
+                borderRadius="3xl"
+                color="wandGreen"
+                fontSize="13px"
+                fontWeight="normal"
+                px={2}
+                height="26px"
+                _hover={{
+                  background: 'none',
+                  borderColor: 'transparent',
+                }}
+                onClick={addBatonToken}
+              >
+                Add BATON
+              </Button>
             </Flex>
           </Box>
         </ModalBody>

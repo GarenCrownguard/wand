@@ -211,6 +211,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 14. wallet persistant.
 15. sidebar selected color.
 16. Improve performance by using bundle analyzer.
+17. Encrypt Post API calls.
 
 # Template
 
