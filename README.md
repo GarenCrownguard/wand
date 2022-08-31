@@ -212,6 +212,8 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 15. sidebar selected color.
 16. Improve performance by using bundle analyzer.
 17. Encrypt Post API calls.
+18. Sidebar icons error on firefox and some browsers.
+19. Default network testing. (if user not on BSC Mainnet than error.)
 
 # Template
 
