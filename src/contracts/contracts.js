@@ -18,8 +18,6 @@ if (ethereum) {
   var DAIContract = null
   var FRAXContract = null
 
-  const mainnet = false
-
   if (contractAddresses.SPTR && abis.SPTRabi) {
     SPTRContract = new ethers.Contract(
       contractAddresses.SPTR,
@@ -48,21 +46,21 @@ if (ethereum) {
       signer
     )
   }
-  if (contractAddresses.BUSD && abis.BUSDabi && mainnet) {
+  if (contractAddresses.BUSD && abis.BUSDabi) {
     BUSDContract = new ethers.Contract(
       contractAddresses.BUSD,
       abis.BUSDabi,
       signer
     )
   }
-  if (contractAddresses.DAI && abis.DAIabi && mainnet) {
+  if (contractAddresses.DAI && abis.DAIabi) {
     DAIContract = new ethers.Contract(
       contractAddresses.DAI,
       abis.DAIabi,
       signer
     )
   }
-  if (contractAddresses.FRAX && abis.FRAXabi && mainnet) {
+  if (contractAddresses.FRAX && abis.FRAXabi) {
     FRAXContract = new ethers.Contract(
       contractAddresses.FRAX,
       abis.FRAXabi,
