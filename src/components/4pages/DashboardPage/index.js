@@ -13,11 +13,7 @@ import { Flex, Box } from '@chakra-ui/react'
 import GraphTotalValueDepositArea from 'components/1atomic/Graphs/GraphTotalValueDepositArea'
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props
-
-  // console.log(useBreakpointValue(["base", "sm screen", "large screen"]));
-  // console.log(
-  //   `env network: ${process.env.REACT_APP_NETWORK} env chain: ${process.env.REACT_APP_CHAIN}`
-  // )
+  
   return (
     <>
       <Flex

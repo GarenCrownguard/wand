@@ -7,7 +7,6 @@ const TreasuriesPage = lazy(() => import('components/4pages/TreasuriesPage'))
 const DashboardPage = lazy(() => import('components/4pages/DashboardPage'))
 const AccountPage = lazy(() => import('components/4pages/AccountPage'))
 const SwapPage = lazy(() => import('components/4pages/SwapPage'))
-const ContractInteractionPage = lazy(() => import('components/4pages/ContractInteractionPage'))
 
 const PrivateRoutes = (props) => {
   const isconnected = props.localwalletstats.isconnected
@@ -49,15 +48,6 @@ const PrivateRoutes = (props) => {
           exact
           path={links.docs}
           render={() => <div>Docs coming soon!</div>}
-        />
-        <Route
-          exact
-          path={links.contractionInteraction}
-          component={
-            (process.env.REACT_APP_CHAIN === 'Testnet'
-              ? ContractInteractionPage
-              : () => <div>There is nothing here!</div>)
-          }
         />
         <Redirect to={links.homepage} />
       </Switch>
