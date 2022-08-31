@@ -497,6 +497,7 @@ const Swap1SwapBox = (props) => {
 
   useEffect(() => {
     checkWL()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const swapClickHandler = () => {
