@@ -50,16 +50,35 @@ export const getDataFromContract = async () => {
 
     const AllStats = await Promise.all([wandScepterData, btonData])
 
-    reducer.UPDATE_STATS({
-      sptrGrowthFactor: BigNumberToActual(AllStats[0].sptrGrowthFactor, 'SPTR'),
-      sptrSellFactor: BigNumberToActual(AllStats[0].sptrSellFactor, 'SPTR'),
-      sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
-      sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
-      sptrBackingPrice: BigNumberToActual(AllStats[0].sptrBackingPrice, 'SPTR'),
-      sptrTreasuryBal: BigNumberToActual(AllStats[0].sptrTreasuryBal, 'SPTR'),
-      btonTreasuryBal: BigNumberToActual(AllStats[1].btonTreasuryBal, 'BATON'),
-      btonRedeemingPrice: BigNumberToActual(AllStats[1].btonRedeemingPrice,'BATON'),
-      btonBackingPrice: BigNumberToActual(AllStats[1].btonBackingPrice, 'BATON'),
-    })
+    if (!process.env.REACT_APP_ISWL) {
+      reducer.UPDATE_STATS({
+        sptrGrowthFactor: BigNumberToActual(
+          AllStats[0].sptrGrowthFactor,
+          'SPTR'
+        ),
+        sptrSellFactor: BigNumberToActual(AllStats[0].sptrSellFactor, 'SPTR'),
+        sptrBuyPrice: BigNumberToActual(AllStats[0].sptrBuyPrice, 'SPTR'),
+        sptrSellPrice: BigNumberToActual(AllStats[0].sptrSellPrice, 'SPTR'),
+        sptrBackingPrice: BigNumberToActual(
+          AllStats[0].sptrBackingPrice,
+          'SPTR'
+        ),
+        sptrTreasuryBal: BigNumberToActual(AllStats[0].sptrTreasuryBal, 'SPTR'),
+        btonTreasuryBal: BigNumberToActual(
+          AllStats[1].btonTreasuryBal,
+          'BATON'
+        ),
+        btonRedeemingPrice: BigNumberToActual(
+          AllStats[1].btonRedeemingPrice,
+          'BATON'
+        ),
+        btonBackingPrice: BigNumberToActual(
+          AllStats[1].btonBackingPrice,
+          'BATON'
+        ),
+      })
+    }
+  }else{
+    console.log('intentionally stopping update stats');
   }
 }

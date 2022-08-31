@@ -1,7 +1,7 @@
 const contractAddresses = {
   /* ======================= BSC MAINNET - Update These ========================== */
-  // USDC: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', // BSC Original USDC original
-  USDC: '0xBA5Fe23f8a3a24BEd3236F05F2FcF35fd0BF0B5C', // BSC Proxy USDC - use this
+  USDC: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', // BSC Original USDC original  - use this
+  // USDC: '0xBA5Fe23f8a3a24BEd3236F05F2FcF35fd0BF0B5C', // BSC Proxy USDC
   BUSD: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', // BSC BUSD
   DAI: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', // BSC DAI
   FRAX: '0x90C97F71E18723b0Cf0dfa30ee176Ab653E89F40', // BSC FRAX
