@@ -1,8 +1,7 @@
-// import USDCabi from './USDC.json'  // BSC Mainnet USDC
+import USDCabi from './USDC.json'
 import BUSDabi from './BUSD.json'
 import DAIabi from './DAI.json'
 import FRAXabi from './FRAX.json'
-import USDCabi from './mockUSDC.json' // AVAX Testnet USDC
 
 import SPTRabi from './SPTR.json'
 import BATONabi from './BATON.json'
