@@ -214,6 +214,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 17. Encrypt Post API calls.
 18. Sidebar icons error on firefox and some browsers.
 19. Default network testing. (if user not on BSC Mainnet than error.)
+20. make setTreasuryOutgoing api call when cashoutscepter is called.
 
 # Template
 

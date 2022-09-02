@@ -486,6 +486,15 @@ const Swap1SwapBox = (props) => {
             )
       )
     }
+    if (process.env.REACT_APP_ISWL) {
+      setSwapToInput2(
+        isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
+          ? 0
+          : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
+      )
+    } else {
+      console.log('not wl')
+    }
   }, [
     swapFromInput1,
     swapFromToken,
@@ -497,6 +506,7 @@ const Swap1SwapBox = (props) => {
 
   useEffect(() => {
     checkWL()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const swapClickHandler = () => {
@@ -517,9 +527,9 @@ const Swap1SwapBox = (props) => {
     >
       <Flex w="100%" alignItems="center" justifyContent="space-between">
         <Text variant="value" textAlign="left" color="wandGreen" w="100%">
-          WL Swap
+          {process.env.REACT_APP_ISWL ? 'WL Swap' : 'Swap'}
         </Text>
-        {isWL ? (
+        {process.env.REACT_APP_ISWL && (isWL ? (
           <Tag size="sm" bg="wandGreen" w="100%">
             {`Buy Limit: ${WLbuybought}/${WLbuylimit}`}
           </Tag>
@@ -527,7 +537,7 @@ const Swap1SwapBox = (props) => {
           <Tag size="sm" bg="wandRed" color="black" w="100%">
             Not whiteListed.
           </Tag>
-        )}
+        ))}
       </Flex>
       <Text variant="title" textAlign="left">
         Choose the tokens to swap
@@ -560,7 +570,9 @@ const Swap1SwapBox = (props) => {
         setIsModalFrom={setIsModalFrom}
       />
       <Text variant="title" textAlign="left">
-        {swapFromToken === 'SPTR'
+        {process.env.REACT_APP_ISWL
+          ? `WL buy: 1 SPTR = 1 USD`
+          : swapFromToken === 'SPTR'
           ? swapToToken === 'BATON'
             ? // SPTR -> BATON
               `1 ${swapFromToken} = 1 ${swapToToken}`
