@@ -11,6 +11,8 @@ import GraphEvolutionOfTreasuriesStacked from 'components/1atomic/Graphs/GraphEv
 import GraphTreasuryAllocationDonut from 'components/1atomic/Graphs/GraphTreasuryAllocationDonut'
 import { Flex, Box } from '@chakra-ui/react'
 import GraphTotalValueDepositArea from 'components/1atomic/Graphs/GraphTotalValueDepositArea'
+import GraphScepterPriceArea from 'components/1atomic/Graphs/GraphScepterPriceArea'
+
 const DashboardPage = (props) => {
   const { stats, localwalletstats } = props
   
@@ -61,6 +63,7 @@ const DashboardPage = (props) => {
             </Flex>
           </MainBlock1Card>
         </Flex>
+        {/* <GraphScepterPriceArea/> */}
         <GraphTotalValueDepositArea />
       </Flex>
       {localwalletstats.isconnected && (
