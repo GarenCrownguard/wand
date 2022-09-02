@@ -1,7 +1,7 @@
 # wand
 
 FrontEnd for Wand Investments project.
-By Garen Crowngaurd
+By Garen Crowngaurd.
 
 git config --global user.name "Garen Crowngaurd"
 git config --global user.email 0xgaren@protonmail.com
