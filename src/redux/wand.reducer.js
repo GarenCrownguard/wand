@@ -34,7 +34,6 @@ const initialState = {
     usdctoken: null,
     busdtoken: null,
     daitoken: null,
-    fraxtoken: null,
     remainingSwapTime: 1660600440,
     amountOfSptrSwapped: null,
     // sptrSellPriceAtSwap: 12.46,
@@ -66,7 +65,7 @@ const postReducer = (currentState = initialState, action) => {
       }
 
     case actions.WALLET_UPDATE_STATS:
-      const { sptrbal, batonbal, usdcbal, busdbal, daibal, fraxbal } = payload
+      const { sptrbal, batonbal, usdcbal, busdbal, daibal} = payload
       return {
         stats: { ...currentState.stats },
         localwalletstats: {
@@ -76,7 +75,6 @@ const postReducer = (currentState = initialState, action) => {
           usdctoken: usdcbal,
           busdtoken: busdbal,
           daitoken: daibal,
-          fraxtoken: fraxbal,
         },
       }
 
