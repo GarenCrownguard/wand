@@ -14,7 +14,6 @@ import Icon1swap from './icon1swap'
 
 const SwapPage = (props) => {
   const { stats, localwalletstats } = props
-
   return (
     <>
       <Flex

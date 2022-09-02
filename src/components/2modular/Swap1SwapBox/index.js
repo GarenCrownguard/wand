@@ -13,14 +13,9 @@ import {
   Link,
   Box,
   useToast,
-  Tag,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import {
-  ActualToBigNumber,
-  GenerateTransactionLink,
-  BigNumberToActual,
-} from 'resources/utilities'
+import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenBUSD,
@@ -28,7 +23,6 @@ import {
   IconTokenBATON,
   IconTokenSPTR,
   IconTokenDAI,
-  IconTokenFRAX,
 } from './icons'
 
 import { setAirdropAddress } from 'resources/api'
@@ -41,23 +35,25 @@ import TaxSlider from './TaxSlider'
 const MAX_APPROVAL = ethers.BigNumber.from(
   '0xfffffffffffffffffffffffffffffffffffffffffffff'
 )
+const { ethereum } = window
 
 const Swap1SwapBox = (props) => {
   const { stats, localwalletstats } = props
   const toast = useToast()
-  const account = localwalletstats.walletAddress
+  var account = localwalletstats.walletAddress
+
   const tokenlist = [
     {
       name: 'SPTR',
       balance: localwalletstats.sceptertoken ?? 0,
-      canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI', 'FRAX'],
-      canSwapFrom: ['BATON', 'USDC', 'BUSD', 'DAI', 'FRAX'],
+      canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI'],
+      canSwapFrom: ['BATON', 'USDC', 'BUSD', 'DAI'],
       icon: <IconTokenSPTR />,
     },
     {
       name: 'BATON',
       balance: localwalletstats.batontoken ?? 0,
-      canSwapTo: ['USDC', 'BUSD', 'DAI', 'FRAX'],
+      canSwapTo: ['USDC', 'BUSD', 'DAI'],
       canSwapFrom: ['SPTR'],
       icon: <IconTokenBATON />,
     },
@@ -82,13 +78,6 @@ const Swap1SwapBox = (props) => {
       canSwapFrom: ['BATON', 'SPTR'],
       icon: <IconTokenDAI />,
     },
-    {
-      name: 'FRAX',
-      balance: localwalletstats.fraxtoken ?? 0,
-      canSwapTo: ['SPTR'],
-      canSwapFrom: ['BATON', 'SPTR'],
-      icon: <IconTokenFRAX />,
-    },
   ]
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -98,9 +87,6 @@ const Swap1SwapBox = (props) => {
   const [swapFromInput1, setSwapFromInput1] = useState('')
   const [swapToInput2, setSwapToInput2] = useState('')
   const [taxSliderValue, setTaxSliderValue] = useState(0)
-  const [isWL, setIsWL] = useState(false)
-  const [WLbuylimit, setWLBuyLimit] = useState(0)
-  const [WLbuybought, setWLBuyBought] = useState(0)
   const [approved, setapproved] = useState(false)
   const [approving, setApproving] = useState(false)
 
@@ -109,134 +95,105 @@ const Swap1SwapBox = (props) => {
   var wandAllowanceUSDC = null
   var wandAllowanceBUSD = null
   var wandAllowanceDAI = null
-  var wandAllowanceFRAX = null
-
-  const checkWL = async () => {
-    try {
-      const checkwl =
-        (await contracts.wandContract?.whiteListees(account)) ?? false
-
-      if (BigNumberToActual(checkwl[0], 'SPTR') === 0) {
-        setIsWL(false)
-        // console.log(BigNumberToActual(checkwl[0], 'SPTR'))
-        // console.log(checkwl)
-      } else {
-        setIsWL(true)
-        setWLBuyLimit(BigNumberToActual(checkwl[0], 'SPTR'))
-        setWLBuyBought(BigNumberToActual(checkwl[1], 'SPTR'))
-        // console.log('is whitelisted')
-      }
-    } catch (error) {
-      // console.log('Check WL error')
-      setIsWL(false)
-      toast({
-        title: 'Cannot check WL for your account',
-        status: 'error',
-        duration: 2000,
-        position: 'bottom-right',
-        containerStyle: {
-          width: '100%',
-        },
-      })
-    }
-  }
 
   const checkAllowance = async (fromtoken) => {
     setApproving(true)
-    wandAllowanceSPTR =
-      contracts.SPTRContract?.allowance(account, contractAddresses.wand) ??
-      ethers.BigNumber.from(0)
-    wandAllowanceBATON =
-      contracts.BATONContract?.allowance(account, contractAddresses.wand) ??
-      ethers.BigNumber.from(0)
 
-    wandAllowanceUSDC =
-      contracts.USDCContract?.allowance(account, contractAddresses.wand) ??
-      ethers.BigNumber.from(0)
-    wandAllowanceBUSD =
-      contracts.BUSDContract?.allowance(account, contractAddresses.wand) ??
-      ethers.BigNumber.from(0)
+    const accounts = await ethereum.request({
+      method: 'eth_requestAccounts',
+    })
 
-    wandAllowanceDAI =
-      contracts.DAIContract?.allowance(account, contractAddresses.wand) ??
-      ethers.BigNumber.from(0)
+    if (accounts.length !== 0) {
+      account = accounts[0]
 
-    wandAllowanceFRAX =
-      contracts.FRAXContract?.allowance(account, contractAddresses.wand) ??
-      ethers.BigNumber.from(0)
+      wandAllowanceSPTR =
+        contracts.SPTRContract?.allowance(account, contractAddresses.wand) ??
+        ethers.BigNumber.from(0)
+      wandAllowanceBATON =
+        contracts.BATONContract?.allowance(account, contractAddresses.wand) ??
+        ethers.BigNumber.from(0)
 
-    const AllAllowance = await Promise.all([
-      wandAllowanceSPTR,
-      wandAllowanceBATON,
-      wandAllowanceUSDC,
-      wandAllowanceBUSD,
-      wandAllowanceDAI,
-      wandAllowanceFRAX,
-    ])
+      wandAllowanceUSDC =
+        contracts.USDCContract?.allowance(account, contractAddresses.wand) ??
+        ethers.BigNumber.from(0)
+      wandAllowanceBUSD =
+        contracts.BUSDContract?.allowance(account, contractAddresses.wand) ??
+        ethers.BigNumber.from(0)
 
-    switch (fromtoken) {
-      case 'SPTR':
-        setapproved(
-          AllAllowance[0]?.gt(
-            ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
-          ) ?? false
-        )
-        setApproving(false)
-        break
-      case 'BATON':
-        setapproved(
-          AllAllowance[1]?.gt(
-            ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
-          ) ?? false
-        )
-        setApproving(false)
-        break
-      case 'USDC':
-        setapproved(
-          AllAllowance[2]?.gt(
-            ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
-          ) ?? false
-        )
-        setApproving(false)
-        break
-      case 'BUSD':
-        setapproved(
-          AllAllowance[3]?.gt(
-            ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
-          ) ?? false
-        )
-        setApproving(false)
-        break
-      case 'DAI':
-        setapproved(
-          AllAllowance[4]?.gt(
-            ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
-          ) ?? false
-        )
-        setApproving(false)
-        break
-      case 'FRAX':
-        setapproved(
-          AllAllowance[5]?.gt(
-            ActualToBigNumber(localwalletstats.fraxtoken, 'FRAX') ?? 0
-          ) ?? false
-        )
-        setApproving(false)
-        break
-      default:
-        // console.log('Cannot get the Allowance of the wallet')
-        toast({
-          title: 'Cannot get the Allowance of the wallet',
-          status: 'error',
-          duration: 1000,
-          position: 'bottom-right',
-          containerStyle: {
-            width: '100%',
-          },
-        })
-        setapproved(false)
-        setApproving(true)
-        break
+      wandAllowanceDAI =
+        contracts.DAIContract?.allowance(account, contractAddresses.wand) ??
+        ethers.BigNumber.from(0)
+
+      try {
+        const AllAllowance = await Promise.all([
+          wandAllowanceSPTR,
+          wandAllowanceBATON,
+          wandAllowanceUSDC,
+          wandAllowanceBUSD,
+          wandAllowanceDAI,
+        ])
+
+        switch (fromtoken) {
+          case 'SPTR':
+            setapproved(
+              AllAllowance[0]?.gt(
+                ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
+              ) ?? false
+            )
+            setApproving(false)
+            break
+          case 'BATON':
+            setapproved(
+              AllAllowance[1]?.gt(
+                ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
+              ) ?? false
+            )
+            setApproving(false)
+            break
+          case 'USDC':
+            setapproved(
+              AllAllowance[2]?.gt(
+                ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
+              ) ?? false
+            )
+            setApproving(false)
+            break
+          case 'BUSD':
+            setapproved(
+              AllAllowance[3]?.gt(
+                ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
+              ) ?? false
+            )
+            setApproving(false)
+            break
+          case 'DAI':
+            setapproved(
+              AllAllowance[4]?.gt(
+                ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
+              ) ?? false
+            )
+            setApproving(false)
+            break
+          default:
+            // console.log('Cannot get the Allowance of the wallet')
+            toast({
+              title: 'Cannot get the Allowance of the wallet',
+              status: 'error',
+              duration: 1000,
+              position: 'bottom-right',
+              containerStyle: {
+                width: '100%',
+              },
+            })
+            setapproved(false)
+            setApproving(true)
+            break
+        }
+      } catch (error) {
+        console.log('Error getting allowance')
+      }
+    } else {
+      console.log('getting address failed in SwapBox')
     }
   }
 
@@ -276,13 +233,6 @@ const Swap1SwapBox = (props) => {
         case 'DAI':
           ApproveCall =
             (await contracts.DAIContract?.approve(
-              contractAddresses.wand,
-              MAX_APPROVAL
-            )) ?? false
-          break
-        case 'FRAX':
-          ApproveCall =
-            (await contracts.FRAXContract?.approve(
               contractAddresses.wand,
               MAX_APPROVAL
             )) ?? false
@@ -486,15 +436,6 @@ const Swap1SwapBox = (props) => {
             )
       )
     }
-    if (process.env.REACT_APP_ISWL) {
-      setSwapToInput2(
-        isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
-          ? 0
-          : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
-      )
-    } else {
-      console.log('not wl')
-    }
   }, [
     swapFromInput1,
     swapFromToken,
@@ -503,11 +444,6 @@ const Swap1SwapBox = (props) => {
     stats.scepterSellPrice,
     stats.scepterBuyPrice,
   ])
-
-  useEffect(() => {
-    checkWL()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const swapClickHandler = () => {
     setSwapFromInput1('')
@@ -527,17 +463,8 @@ const Swap1SwapBox = (props) => {
     >
       <Flex w="100%" alignItems="center" justifyContent="space-between">
         <Text variant="value" textAlign="left" color="wandGreen" w="100%">
-          {process.env.REACT_APP_ISWL ? 'WL Swap' : 'Swap'}
+          Swap
         </Text>
-        {process.env.REACT_APP_ISWL && (isWL ? (
-          <Tag size="sm" bg="wandGreen" w="100%">
-            {`Buy Limit: ${WLbuybought}/${WLbuylimit}`}
-          </Tag>
-        ) : (
-          <Tag size="sm" bg="wandRed" color="black" w="100%">
-            Not whiteListed.
-          </Tag>
-        ))}
       </Flex>
       <Text variant="title" textAlign="left">
         Choose the tokens to swap
@@ -570,9 +497,7 @@ const Swap1SwapBox = (props) => {
         setIsModalFrom={setIsModalFrom}
       />
       <Text variant="title" textAlign="left">
-        {process.env.REACT_APP_ISWL
-          ? `WL buy: 1 SPTR = 1 USD`
-          : swapFromToken === 'SPTR'
+        {swapFromToken === 'SPTR'
           ? swapToToken === 'BATON'
             ? // SPTR -> BATON
               `1 ${swapFromToken} = 1 ${swapToToken}`
@@ -647,7 +572,6 @@ const Swap1SwapBox = (props) => {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats,
-
     localwalletstats: state.localwalletstats,
   }
 }
