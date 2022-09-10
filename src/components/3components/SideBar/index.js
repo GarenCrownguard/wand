@@ -33,7 +33,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
       <Box pt="67px" pb="30px" ml="35px">
         <SideBar1Logo />
       </Box>
-      <SideBar2Menu onClick={onClose} />
+      <SideBar2Menu onClick={onClose} onCloseSideBar={()=>{}}/>
       <Box ml="25px" position="fixed" bottom={0} left={0}>
         <SideBar3Footer />
       </Box>
