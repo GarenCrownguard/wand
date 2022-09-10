@@ -11,6 +11,7 @@ import { Flex, Box } from '@chakra-ui/react'
 import MainBlock2OutstandingStats from 'components/2modular/MainBlock2OutstandingStats'
 import MainBlock1OverviewStats from 'components/2modular/MainBlock1OverviewStats'
 import Icon1swap from './icon1swap'
+import GraphScepterPriceArea from 'components/1atomic/Graphs/GraphScepterPriceArea'
 
 const SwapPage = (props) => {
   const { stats, localwalletstats } = props
@@ -93,6 +94,8 @@ const SwapPage = (props) => {
             </MainBlock1Card>
           </Flex>
         </Flex>
+        <GraphScepterPriceArea />
+
         <Swap1SwapBox />
       </Flex>
       <Box h="70px" /* Only for spacing*/ />

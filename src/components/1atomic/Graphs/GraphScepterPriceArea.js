@@ -15,9 +15,11 @@ const GraphScepterPriceArea = () => {
     var sptrPrice = []
     const getdata = async () => {
       try {
-        await axios.get(`http://localhost:8448/sptrprice`).then((res) => {
-          sptrPrice.push(...res.data)
-        })
+        await axios
+          .get(`${process.env.REACT_APP_API_URL}/sptrprice`)
+          .then((res) => {
+            sptrPrice.push(...res.data)
+          })
 
         for (var i = 0; i < sptrPrice.length; i++) {
           total[i] = {
