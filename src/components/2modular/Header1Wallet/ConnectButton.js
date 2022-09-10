@@ -20,11 +20,6 @@ const ConnectButton = (props) => {
 
   // console.log(ethereum.isConnected())
   if (ethereum) {
-    ethereum.on('accountsChanged', (accounts) => {
-      /* Disconnecting wallet from metamask acts as account change */
-      // console.log('accounts change event')
-      window.location.reload()
-    })
 
     ethereum.on('chainChanged', (chainId) => {
       // console.log('chain change event')
@@ -95,6 +90,8 @@ const ConnectButton = (props) => {
           method: 'eth_requestAccounts',
         })
 
+        // https://github.com/MetaMask/metamask-extension/issues/8990#issuecomment-658871391
+        // https://stackoverflow.com/a/72130755
         await ethereum.request({
           method: 'wallet_requestPermissions',
           params: [
@@ -103,7 +100,7 @@ const ConnectButton = (props) => {
             },
           ],
         })
-        
+
         if (accounts.length !== 0) {
           getDataFromContract()
         } else {

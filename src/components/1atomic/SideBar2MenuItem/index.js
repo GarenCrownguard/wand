@@ -31,10 +31,18 @@ const linkstyle = {
   _hover: { textDecoration: 'none' },
 }
 
-const SideBar2MenuItem = ({ icon: Icon, href, isexternal, title, soon }) => {
+const SideBar2MenuItem = ({
+  icon: Icon,
+  href,
+  isexternal,
+  title,
+  soon,
+  closeSidebar,
+}) => {
   const { push } = useHistory()
 
   function onClick(slug, external, parameters = {}) {
+    closeSidebar();
     if (external) {
       window.open(slug, '_blank')
       return

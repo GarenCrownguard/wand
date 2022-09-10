@@ -16,7 +16,7 @@ import SideBar2Menu from "components/2modular/SideBar2Menu";
 import SideBar3Footer from "components/2modular/SideBar3Footer";
 
 const Sidebar = ({ isOpen, variant, onClose }) => {
-  return variant === "sidebar" ? (
+  return variant === 'sidebar' ? (
     <Box
       position="fixed"
       left={0}
@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
             <DrawerCloseButton size="lg" mt="55px" />
           </DrawerHeader>
           <DrawerBody>
-            <SideBar2Menu />
+            <SideBar2Menu onCloseSideBar={onClose} />
           </DrawerBody>
           <DrawerFooter>
             <SideBar3Footer />
@@ -59,7 +59,7 @@ const Sidebar = ({ isOpen, variant, onClose }) => {
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>
-  );
+  )
 };
 
 export default Sidebar;

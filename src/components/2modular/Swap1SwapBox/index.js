@@ -191,6 +191,15 @@ const Swap1SwapBox = (props) => {
         }
       } catch (error) {
         console.log('Error getting allowance')
+        toast({
+          title: 'Error. Please check the chain or network.',
+          status: 'error',
+          duration: 1000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '100%',
+          },
+        })
       }
     } else {
       console.log('getting address failed in SwapBox')

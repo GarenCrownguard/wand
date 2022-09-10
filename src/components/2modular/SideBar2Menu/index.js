@@ -28,6 +28,7 @@ const isconnected = props.localwalletstats.isconnected;
           title="Dashboard"
           icon={Icon1dashboard}
           href={links.dashboard}
+          closeSidebar={props.onCloseSideBar}
         />
         {isconnected && (
           <SideBar2MenuItem
@@ -35,6 +36,7 @@ const isconnected = props.localwalletstats.isconnected;
             title="Account"
             icon={Icon2account}
             href={links.account}
+            closeSidebar={props.onCloseSideBar}
           />
         )}
         <Divider borderColor={'#6f6c99'} />
@@ -43,6 +45,7 @@ const isconnected = props.localwalletstats.isconnected;
           title="Swap"
           icon={Icon3swap}
           href={links.swap}
+          closeSidebar={props.onCloseSideBar}
         />
         <SideBar2MenuItem
           id={links.bridge}
@@ -50,6 +53,7 @@ const isconnected = props.localwalletstats.isconnected;
           icon={Icon4bridge}
           href={links.bridge}
           soon
+          closeSidebar={props.onCloseSideBar}
         />
         <SideBar2MenuItem
           id={links.lending}
@@ -57,6 +61,7 @@ const isconnected = props.localwalletstats.isconnected;
           icon={Icon5lending}
           href={links.lending}
           soon
+          closeSidebar={props.onCloseSideBar}
         />
         <Divider borderColor={'#6f6c99'} />
         <SideBar2MenuItem
@@ -64,6 +69,7 @@ const isconnected = props.localwalletstats.isconnected;
           title="Treasuries"
           icon={Icon6treasuries}
           href={links.treasuries}
+          closeSidebar={props.onCloseSideBar}
         />
         <SideBar2MenuItem
           id={links.governance}
@@ -71,6 +77,7 @@ const isconnected = props.localwalletstats.isconnected;
           icon={Icon7governance}
           href={links.governance}
           soon
+          closeSidebar={props.onCloseSideBar}
         />
         <SideBar2MenuItem
           id={links.vote}
@@ -78,6 +85,7 @@ const isconnected = props.localwalletstats.isconnected;
           icon={Icon8vote}
           href={links.vote}
           soon
+          closeSidebar={props.onCloseSideBar}
         />
         <SideBar2MenuItem
           id={links.docs}
@@ -85,15 +93,16 @@ const isconnected = props.localwalletstats.isconnected;
           icon={Icon9docs}
           href={links.docs}
           isexternal
+          closeSidebar={props.onCloseSideBar}
         />
       </VStack>
     </Box>
   )
-};
+}
 
 const mapStateToProps = (state) => {
   return {
-    localwalletstats: state.localwalletstats,
+    localwalletstats: state.localwalletstats
   }
 }
 
