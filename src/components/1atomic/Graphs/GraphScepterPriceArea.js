@@ -27,7 +27,7 @@ const GraphScepterPriceArea = () => {
             value: sptrPrice[i].value,
           }
         }
-        console.log(total)
+        // console.log(total)
 
         total.sort((total, totalTemp) => {
           return new Date(total.timestamp) - new Date(totalTemp.timestamp)

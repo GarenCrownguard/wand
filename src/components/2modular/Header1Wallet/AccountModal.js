@@ -16,15 +16,16 @@ import {
 } from '@chakra-ui/react'
 import { ExternalLinkIcon, CopyIcon } from '@chakra-ui/icons'
 import contractAddresses from 'contracts/addresses'
+import * as reducer from 'redux/reducerCalls'
 
 const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
   const account = localwalletstats.walletAddress
   const { ethereum } = window
 
-  // const handleDeactivateAccount = ()=> {
-  //   reducer.WALLET_DISCONNECT();
-  //   onClose()
-  // }
+  const handleDeactivateAccount = ()=> {
+    reducer.WALLET_DISCONNECT();
+    onClose()
+  }
 
   const addSptrToken = async () => {
     try {
@@ -101,7 +102,7 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
               <Text color="gray.400" fontSize="sm">
                 Connected with Wallet
               </Text>
-              {/* <Button
+              <Button
                 variant="outline"
                 size="sm"
                 borderColor="wandRed"
@@ -118,10 +119,10 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
                 onClick={handleDeactivateAccount}
               >
                 Disconnect
-              </Button> */}
+              </Button>
             </Flex>
             <Flex alignItems="center" mt={2} mb={4} lineHeight={1}>
-              <Icon viewBox="0 0 200 200" color="wandRed">
+              <Icon viewBox="0 0 200 200" color="wandGreen">
                 <path
                   fill="currentColor"
                   d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
