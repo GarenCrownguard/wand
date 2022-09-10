@@ -335,7 +335,7 @@ const Swap1SwapBox = (props) => {
         // console.log('buyScepter')
 
         SwapCall =
-          (await contracts.wandContract?.wlBuyScepter(
+          (await contracts.wandContract?.buyScepter(
             ActualToBigNumber(swapToInput2, swapToToken),
             swapFromToken
           )) ?? false

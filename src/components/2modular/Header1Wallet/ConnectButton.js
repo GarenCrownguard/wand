@@ -102,7 +102,7 @@ const ConnectButton = (props) => {
       {!isMobile && localwalletstats.sceptertoken !== null && (
         <Box px="3">
           <Text color="white" fontSize={isMobile ? 14 : 19} fontWeight="light">
-            {parseFloat(localwalletstats.sceptertoken)?.toFixed(2)} SPTR
+            {parseFloat(localwalletstats.sceptertoken)?.toFixed(3)} SPTR
           </Text>
         </Box>
       )}

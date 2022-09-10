@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 const fixValue = (value) => {
-  return parseFloat(parseFloat(value)?.toFixed(2))
+  return parseFloat(parseFloat(value)?.toFixed(4))
 }
 
 
@@ -14,7 +14,9 @@ const decimals = {
 }
 
 export const prettifytolocalstring = (amount) => {
-  return amount != null ? amount.toLocaleString() : '...'
+  return amount != null
+    ? amount.toLocaleString(undefined, { minimumFractionDigits: 4 })
+    : '...'
 }
 
 export const prettifyamounts = (amount) => {

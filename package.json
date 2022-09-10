@@ -33,7 +33,6 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
-    "start-api": "node api/index.js",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build"
   },
