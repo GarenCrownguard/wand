@@ -52,7 +52,7 @@ export const setAirdropAddress = async (walletAddr) => {
 
 export const setTreasuryOutgoing = async (walletAddr, amt, time) => {
   try {
-    await axios.post(`${process.env.REACT_APP_API_URL}/TreasuryUSDOutgoing`, {
+    await axios.post(`${process.env.REACT_APP_API_URL}/setTreasuryUSDOutgoing`, {
       address: walletAddr,
       amtUSD: amt,
       timeUnlocked: time,
