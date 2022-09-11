@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { VStack, Box, Divider } from "@chakra-ui/react";
+import { VStack, Box, Divider, Tag } from "@chakra-ui/react";
 
 import SideBar2MenuItem from "components/1atomic/SideBar2MenuItem";
 import links from "resources/links";
@@ -95,6 +95,12 @@ const isconnected = props.localwalletstats.isconnected;
           isexternal
           closeSidebar={props.onCloseSideBar}
         />
+        {process.env.REACT_APP_DEV && (
+          <Tag colorScheme="red">Development Mode</Tag>
+        )}
+        {process.env.REACT_APP_API_URL.includes("uat") && (
+          <Tag colorScheme="green">UAT Database</Tag>
+        )}
       </VStack>
     </Box>
   )
