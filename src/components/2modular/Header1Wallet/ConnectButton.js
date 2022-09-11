@@ -20,16 +20,57 @@ const ConnectButton = (props) => {
 
   // console.log(ethereum.isConnected())
   if (ethereum) {
-    ethereum.on('accountsChanged', (accounts) => {
-      /* Disconnecting wallet from metamask acts as account change */
-      // console.log('accounts change event')
-      window.location.reload()
-    })
 
     ethereum.on('chainChanged', (chainId) => {
       // console.log('chain change event')
       window.location.reload()
     })
+  }
+
+  const autowalletconnect = async() => {
+        if (!ethereum) {
+          toast({
+            title: 'No wallet detected!',
+            status: 'warning',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '100%',
+            },
+          })
+        } else {
+          try {
+            const accounts = await ethereum.request({
+              method: 'eth_requestAccounts',
+            })
+
+            if (accounts.length !== 0) {
+              getDataFromContract()
+            } else {
+              // console.log('No authorized account found')
+              toast({
+                title: 'Wallet detected but something went wrong!',
+                status: 'error',
+                duration: 1000,
+                position: 'bottom-right',
+                containerStyle: {
+                  width: '100%',
+                },
+              })
+            }
+          } catch (err) {
+            // console.log(err)
+            toast({
+              title: 'Metamask Error! Check network and chain!',
+              status: 'error',
+              duration: 1000,
+              position: 'bottom-right',
+              containerStyle: {
+                width: '100%',
+              },
+            })
+          }
+        }
   }
 
   const handleConnectWallet = async () => {
@@ -47,6 +88,17 @@ const ConnectButton = (props) => {
       try {
         const accounts = await ethereum.request({
           method: 'eth_requestAccounts',
+        })
+
+        // https://github.com/MetaMask/metamask-extension/issues/8990#issuecomment-658871391
+        // https://stackoverflow.com/a/72130755
+        await ethereum.request({
+          method: 'wallet_requestPermissions',
+          params: [
+            {
+              eth_accounts: {},
+            },
+          ],
         })
 
         if (accounts.length !== 0) {
@@ -83,7 +135,8 @@ const ConnectButton = (props) => {
       getRiskTreasuryValue()
       getInvestmentListData()
       getAirdropData()
-      handleConnectWallet()
+      autowalletconnect()
+      // handleConnectWallet()
     } catch (error) {
       console.log('connectButton useeffect error')
     }
@@ -135,9 +188,9 @@ const ConnectButton = (props) => {
               account.length
             )}`}
         </Text>
-        <Icon viewBox="0 0 200 200" color="#AE3C51">
+        <Icon viewBox="0 0 200 200" color="wandGreen">
           <path
-            fill="#AE3C51"
+            fill="currentColor"
             d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
           />
         </Icon>

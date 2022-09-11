@@ -17,7 +17,6 @@ import store from "./redux/store";
 // console.log(store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(
     <ChakraProvider theme={ChakraTheme}>
       <Provider store={store}>

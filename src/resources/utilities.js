@@ -3,7 +3,6 @@ const fixValue = (value) => {
   return parseFloat(parseFloat(value)?.toFixed(4))
 }
 
-
 const decimals = {
   USDC: 18,
   DAI: 18,
@@ -44,6 +43,10 @@ export const ActualToBigNumber = (amount, tokenDecimal) => {
   // console.log(amount);
 
   // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
+
+  // handling 'invalid bignumber error'
+  amount = parseFloat(parseFloat(amount)?.toFixed(5))
+
   return amount && decimals[tokenDecimal]
     ? ethers.BigNumber.from(
         `${amount * Math.pow(10, decimals[tokenDecimal] / 2)}`

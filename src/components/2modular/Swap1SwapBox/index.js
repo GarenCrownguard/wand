@@ -191,6 +191,15 @@ const Swap1SwapBox = (props) => {
         }
       } catch (error) {
         console.log('Error getting allowance')
+        toast({
+          title: 'Error. Please check the chain or network.',
+          status: 'error',
+          duration: 1000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '100%',
+          },
+        })
       }
     } else {
       console.log('getting address failed in SwapBox')
@@ -375,7 +384,7 @@ const Swap1SwapBox = (props) => {
     } catch (error) {
       // console.log(error.reason)
       toast({
-        title: error.reason,
+        title: error.reason ?? error.message,
         status: 'error',
         duration: 2000,
         position: 'bottom-right',
@@ -406,7 +415,7 @@ const Swap1SwapBox = (props) => {
         // tested
         setSwapToInput2(
           isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
-            ? 0
+            ? ''
             : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
         )
       } else {
@@ -430,7 +439,7 @@ const Swap1SwapBox = (props) => {
       // tested
       setSwapToInput2(
         isNaN(swapFromInput1 / stats.scepterBuyPrice)
-          ? 0
+          ? ''
           : parseFloat(
               parseFloat(swapFromInput1 / stats.scepterBuyPrice)?.toFixed(3)
             )
@@ -447,7 +456,7 @@ const Swap1SwapBox = (props) => {
 
   const swapClickHandler = () => {
     setSwapFromInput1('')
-    setSwapToInput2(0)
+    setSwapToInput2('')
     setSwapFromToken(swapToToken)
     setSwapToToken(swapFromToken)
   }
@@ -456,7 +465,6 @@ const Swap1SwapBox = (props) => {
     <MainBlock1Card
       minHeight="345px"
       minWidth={['320px', '356px', '356px']}
-      maxWidth={['100%', '100%', '356px']}
       flexDirection="column"
       alignItems="flex-start"
       p="25px"

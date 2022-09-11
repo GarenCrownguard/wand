@@ -21,7 +21,7 @@ const SwapPage = (props) => {
         justifyContent="space-between"
         m={0}
         p={0}
-        flexDirection={['column', 'column', 'row']}
+        flexDirection={['column', 'column', 'column', 'column', 'row']}
       >
         <Flex flexDirection="column" width="100%">
           <MainBlock1Card p="25px" minHeight="111px">

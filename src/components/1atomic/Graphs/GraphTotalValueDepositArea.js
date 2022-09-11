@@ -77,8 +77,8 @@ const GraphTotalValueDepositArea = () => {
       position: 'bottom-right',
     },
     slider: {
-      start: 0.1,
-      end: 0.9,
+      start: 0,
+      end: 1,
       height: 10,
     },
     theme: {
