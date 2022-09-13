@@ -3,74 +3,81 @@ import { Button, Box, Text, Icon } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import IconWallet from './icon-wallet'
 import { connect } from 'react-redux'
-import { getDataFromContract } from 'contracts/ContractInteraction'
+import {
+  getDataFromContract,
+  checkChainId,
+  chainIdMainnet,
+  chainIdTestnet,
+} from 'contracts/ContractInteraction'
+
 import {
   getRiskTreasuryValue,
   getInvestmentListData,
   getAirdropData,
 } from 'resources/api'
+import { useState } from 'react'
 
 const ConnectButton = (props) => {
   const { handleOpenModal, isMobile, localwalletstats } = props
-
   const account = localwalletstats.walletAddress
   const isconnected = localwalletstats.isconnected
   const toast = useToast()
   const { ethereum } = window
 
+  const [ischainIdCorrect, setIsChainIdCorrect] = useState(true)
+
   // console.log(ethereum.isConnected())
   if (ethereum) {
-
     ethereum.on('chainChanged', (chainId) => {
       // console.log('chain change event')
       window.location.reload()
     })
   }
 
-  const autowalletconnect = async() => {
-        if (!ethereum) {
+  const autowalletconnect = async () => {
+    if (!ethereum) {
+      toast({
+        title: 'No wallet detected!',
+        status: 'warning',
+        duration: 1000,
+        position: 'bottom-right',
+        containerStyle: {
+          width: '100%',
+        },
+      })
+    } else {
+      try {
+        const accounts = await ethereum.request({
+          method: 'eth_requestAccounts',
+        })
+
+        if (accounts.length !== 0) {
+          getDataFromContract()
+        } else {
+          // console.log('No authorized account found')
           toast({
-            title: 'No wallet detected!',
-            status: 'warning',
+            title: 'Wallet detected but something went wrong!',
+            status: 'error',
             duration: 1000,
             position: 'bottom-right',
             containerStyle: {
               width: '100%',
             },
           })
-        } else {
-          try {
-            const accounts = await ethereum.request({
-              method: 'eth_requestAccounts',
-            })
-
-            if (accounts.length !== 0) {
-              getDataFromContract()
-            } else {
-              // console.log('No authorized account found')
-              toast({
-                title: 'Wallet detected but something went wrong!',
-                status: 'error',
-                duration: 1000,
-                position: 'bottom-right',
-                containerStyle: {
-                  width: '100%',
-                },
-              })
-            }
-          } catch (err) {
-            // console.log(err)
-            toast({
-              title: 'Metamask Error! Check network and chain!',
-              status: 'error',
-              duration: 1000,
-              position: 'bottom-right',
-              containerStyle: {
-                width: '100%',
-              },
-            })
-          }
         }
+      } catch (err) {
+        // console.log(err)
+        toast({
+          title: 'Metamask Error! Check network and chain!',
+          status: 'error',
+          duration: 1000,
+          position: 'bottom-right',
+          containerStyle: {
+            width: '100%',
+          },
+        })
+      }
+    }
   }
 
   const handleConnectWallet = async () => {
@@ -130,12 +137,28 @@ const ConnectButton = (props) => {
     }
   }
 
+  const ischainIDcheck = async () => {
+    const currentConnectedChainId = await ethereum.request({
+      method: 'eth_chainId',
+    })
+    if (
+      currentConnectedChainId ===
+      (process.env.REACT_APP_DEV ? chainIdTestnet : chainIdMainnet)
+    ) {
+      setIsChainIdCorrect(true)
+    } else {
+      setIsChainIdCorrect(false)
+    }
+  }
+
   useEffect(() => {
     try {
       getRiskTreasuryValue()
       getInvestmentListData()
       getAirdropData()
       autowalletconnect()
+      ischainIDcheck()
+      checkChainId()
       // handleConnectWallet()
     } catch (error) {
       console.log('connectButton useeffect error')
@@ -143,7 +166,6 @@ const ConnectButton = (props) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
   return account && isconnected ? (
     <Box
       display="flex"
@@ -188,7 +210,10 @@ const ConnectButton = (props) => {
               account.length
             )}`}
         </Text>
-        <Icon viewBox="0 0 200 200" color="wandGreen">
+        <Icon
+          viewBox="0 0 200 200"
+          color={ischainIdCorrect ? 'wandGreen' : 'wandRed'}
+        >
           <path
             fill="currentColor"
             d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
