@@ -16,13 +16,14 @@ const InputBox = (props) => {
     token,
     tokenlist,
     inputvalue,
-    setinputvalue,
+    // setinputvalue,
     handleOpenModal,
+    onChange,
     from,
     setIsModalFrom,
   } = props
 
-  const handelOnClick = () =>{
+  const handelOnClick = () => {
     handleOpenModal()
     setIsModalFrom(from)
   }
@@ -64,10 +65,11 @@ const InputBox = (props) => {
           <Button
             variant="link"
             size="xs"
-            onClick={() => setinputvalue(
+            value={
               tokenlist.filter((eachtoken) => eachtoken.name === token)[0]
                 .balance
-            )}
+            }
+            onClick={onChange}
             color="#8C8C8C"
             display="block"
             p="0px"
@@ -97,12 +99,13 @@ const InputBox = (props) => {
             w="100%"
             p="0px"
             value={inputvalue}
-            onChange={(valueString) => setinputvalue(valueString)}
+            // onChange={(valueString) => setinputvalue(valueString)}
           >
             <NumberInputField
               border="none"
               p="0"
               _focusVisible={{ border: 'none' }}
+              onChange={onChange}
             />
           </NumberInput>
           <Button
@@ -129,7 +132,6 @@ const InputBox = (props) => {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats,
-
     localwalletstats: state.localwalletstats,
   }
 }

@@ -53,7 +53,8 @@ const ChooseTokenModal = (props) => {
     setChosenToken,
   } = props
 
-  const TokenOptions = ['USDC', 'BUSD', 'DAI']
+  const TokenOptions = ['USDC']
+  // const TokenOptions = ['USDC', 'BUSD', 'DAI']
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'wand',

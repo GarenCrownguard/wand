@@ -33,29 +33,25 @@ export const prettifyGrowthPercentage = (direction, value) => {
 }
 
 export const BigNumberToActual = (amount, tokenDecimal) => {
+  // console.log(utils.formatEther(amount))
+  // console.log(amount)
   return amount && decimals[tokenDecimal]
     ? fixValue(ethers.utils.formatUnits(amount, decimals[tokenDecimal]))
     : null
 }
 
 export const ActualToBigNumber = (amount, tokenDecimal) => {
-  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal]))
-  // console.log(amount);
-
-  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
-
-  // handling 'invalid bignumber error'
-  amount = parseFloat(parseFloat(amount)?.toFixed(5))
-
   return amount && decimals[tokenDecimal]
     ? ethers.BigNumber.from(
-        `${amount * Math.pow(10, decimals[tokenDecimal] / 2)}`
+        `${Math.round(amount * Math.pow(10, decimals[tokenDecimal] / 2))}`
       ).mul(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
     : null
 }
 
 export const GenerateTransactionLink = (hash) => {
-  return `https://testnet.bscscan.com/tx/${hash}`
+  return process.env.REACT_APP_DEV
+    ? `https://testnet.bscscan.com/tx/${hash}`
+    : `https://bscscan.com/tx/${hash}`
 }
 
 export function convertSlugToUrl(slug, parameters) {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
   Box,
@@ -17,13 +17,19 @@ import {
 import { ExternalLinkIcon, CopyIcon } from '@chakra-ui/icons'
 import contractAddresses from 'contracts/addresses'
 import * as reducer from 'redux/reducerCalls'
+import {
+  checkChainId,
+  chainIdMainnet,
+  chainIdTestnet,
+} from 'contracts/ContractInteraction'
 
 const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
   const account = localwalletstats.walletAddress
   const { ethereum } = window
+  const [ischainIdCorrect, setIsChainIdCorrect] = useState(true)
 
-  const handleDeactivateAccount = ()=> {
-    reducer.WALLET_DISCONNECT();
+  const handleDeactivateAccount = () => {
+    reducer.WALLET_DISCONNECT()
     onClose()
   }
 
@@ -66,6 +72,31 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
       console.log(error)
     }
   }
+
+  const ischainIDcheck = async () => {
+    const currentConnectedChainId = await ethereum.request({
+      method: 'eth_chainId',
+    })
+    if (
+      currentConnectedChainId ===
+      (process.env.REACT_APP_DEV ? chainIdTestnet : chainIdMainnet)
+    ) {
+      setIsChainIdCorrect(true)
+    } else {
+      setIsChainIdCorrect(false)
+    }
+  }
+
+  useEffect(() => {
+    try {
+      ischainIDcheck()
+      checkChainId()
+    } catch (error) {
+      console.log('AccountModal useffect error')
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="sm">
@@ -122,7 +153,10 @@ const AccountModal = ({ isOpen, onClose, localwalletstats }) => {
               </Button>
             </Flex>
             <Flex alignItems="center" mt={2} mb={4} lineHeight={1}>
-              <Icon viewBox="0 0 200 200" color="wandGreen">
+              <Icon
+                viewBox="0 0 200 200"
+                color={ischainIdCorrect ? 'wandGreen' : 'wandRed'}
+              >
                 <path
                   fill="currentColor"
                   d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"

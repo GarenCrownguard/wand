@@ -15,7 +15,10 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
+import {
+  ActualToBigNumber,
+  GenerateTransactionLink
+} from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenBUSD,
@@ -24,8 +27,11 @@ import {
   IconTokenSPTR,
   IconTokenDAI,
 } from './icons'
-
-import { setAirdropAddress } from 'resources/api'
+import {
+  getDataFromContract,
+  getOutstandingStatsFromContract,
+} from 'contracts/ContractInteraction'
+import { setAirdropAddress, setTreasuryOutgoing } from 'resources/api'
 
 import InputBox from './InputBox'
 import SwapBoxModal from './SwapBoxModal'
@@ -42,18 +48,22 @@ const Swap1SwapBox = (props) => {
   const toast = useToast()
   var account = localwalletstats.walletAddress
 
+  // const allTokenList = ['SPTR', 'BATON', 'USDC', 'BUSD', 'DAI']
+
   const tokenlist = [
     {
       name: 'SPTR',
       balance: localwalletstats.sceptertoken ?? 0,
-      canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI'],
+      canSwapTo: ['BATON', 'USDC'],
+      // canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI'],
       canSwapFrom: ['BATON', 'USDC', 'BUSD', 'DAI'],
       icon: <IconTokenSPTR />,
     },
     {
       name: 'BATON',
       balance: localwalletstats.batontoken ?? 0,
-      canSwapTo: ['USDC', 'BUSD', 'DAI'],
+      canSwapTo: ['USDC'],
+      // canSwapTo: ['USDC', 'BUSD', 'DAI'],
       canSwapFrom: ['SPTR'],
       icon: <IconTokenBATON />,
     },
@@ -132,7 +142,6 @@ const Swap1SwapBox = (props) => {
           wandAllowanceBUSD,
           wandAllowanceDAI,
         ])
-
         switch (fromtoken) {
           case 'SPTR':
             setapproved(
@@ -192,7 +201,7 @@ const Swap1SwapBox = (props) => {
       } catch (error) {
         console.log('Error getting allowance')
         toast({
-          title: 'Error. Please check the chain or network.',
+          title: error.message,
           status: 'error',
           duration: 1000,
           position: 'bottom-right',
@@ -263,7 +272,7 @@ const Swap1SwapBox = (props) => {
           break
       }
 
-      // await ApproveCall.wait()
+      await ApproveCall.wait()
 
       var transactionLink = GenerateTransactionLink(ApproveCall.hash)
 
@@ -306,7 +315,7 @@ const Swap1SwapBox = (props) => {
     try {
       setApproving(true)
       var SwapCall
-
+      var isCashingOut = false
       if (swapFromToken === 'SPTR') {
         if (swapToToken === 'BATON') {
           // transformScepterToBaton(amount) -- tested
@@ -327,6 +336,7 @@ const Swap1SwapBox = (props) => {
               taxSliderValue,
               swapToToken
             )) ?? false
+            isCashingOut=true;
         }
       } else if (swapFromToken === 'BATON') {
         // Assuming the swaptotoken will be a stable
@@ -362,7 +372,7 @@ const Swap1SwapBox = (props) => {
         setApproving(false)
       }
 
-      // await SwapCall.wait()
+      await SwapCall.wait()
 
       var transactionLink = GenerateTransactionLink(SwapCall.hash)
       toast({
@@ -381,6 +391,21 @@ const Swap1SwapBox = (props) => {
       })
       setapproved(true)
       setApproving(false)
+      getDataFromContract()
+      setSwapFromInput1('')
+      setSwapToInput2('')
+
+      if (isCashingOut) {
+        // console.log('Cashing out. Sending API call.')
+        const stats = await getOutstandingStatsFromContract(account)
+        await setTreasuryOutgoing(
+          account,
+          stats.outstandingSwappedAmounts,
+          stats.outstandingTime
+        )
+      } else {
+        // console.log('Not cashing out')
+      }
     } catch (error) {
       // console.log(error.reason)
       toast({
@@ -397,6 +422,8 @@ const Swap1SwapBox = (props) => {
   }
 
   useEffect(() => {
+    setSwapFromInput1('')
+    setSwapToInput2('')
     if (swapFromToken === 'BATON' && swapToToken === 'SPTR') {
       setSwapToToken('USDC')
     }
@@ -406,23 +433,25 @@ const Swap1SwapBox = (props) => {
 
     checkAllowance(swapFromToken)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [swapFromToken, swapToToken, localwalletstats])
+  }, [swapFromToken, swapToToken])
 
-  useEffect(() => {
+  const changeSwapToInputValue = (e) => {
+    setSwapFromInput1(e.target.value)
+
     if (swapFromToken === 'SPTR') {
       if (swapToToken === 'BATON') {
         // sptr -> baton
         // tested
         setSwapToInput2(
-          isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
+          isNaN(parseFloat(parseFloat(e.target.value)?.toFixed(3)))
             ? ''
-            : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
+            : parseFloat(parseFloat(e.target.value)?.toFixed(3))
         )
       } else {
         // sptr -> stable
         setSwapToInput2(
           parseFloat(
-            parseFloat(swapFromInput1 * stats.scepterSellPrice)?.toFixed(3)
+            parseFloat(e.target.value * stats.scepterSellPrice)?.toFixed(3)
           )
         )
       }
@@ -431,28 +460,62 @@ const Swap1SwapBox = (props) => {
       // tested
       setSwapToInput2(
         parseFloat(
-          parseFloat(swapFromInput1 * stats.batonRedeemingPrice)?.toFixed(3)
+          parseFloat(e.target.value * stats.batonRedeemingPrice)?.toFixed(3)
         )
       )
     } else {
       // buy sptr
       // tested
       setSwapToInput2(
-        isNaN(swapFromInput1 / stats.scepterBuyPrice)
+        isNaN(e.target.value / stats.scepterBuyPrice)
           ? ''
           : parseFloat(
-              parseFloat(swapFromInput1 / stats.scepterBuyPrice)?.toFixed(3)
+              parseFloat(e.target.value / stats.scepterBuyPrice)?.toFixed(3)
             )
       )
     }
-  }, [
-    swapFromInput1,
-    swapFromToken,
-    swapToToken,
-    stats.batonRedeemingPrice,
-    stats.scepterSellPrice,
-    stats.scepterBuyPrice,
-  ])
+  }
+
+  const changeSwapFromInputValue = (e) => {
+    setSwapToInput2(e.target.value)
+
+    if (swapFromToken === 'SPTR') {
+      if (swapToToken === 'BATON') {
+        // sptr -> baton
+        // tested
+        setSwapFromInput1(
+          isNaN(parseFloat(parseFloat(e.target.value)?.toFixed(3)))
+            ? ''
+            : parseFloat(parseFloat(e.target.value)?.toFixed(3))
+        )
+      } else {
+        // sptr -> stable
+        setSwapFromInput1(
+          parseFloat(
+            parseFloat(e.target.value / stats.scepterSellPrice)?.toFixed(3)
+          )
+        )
+      }
+    } else if (swapFromToken === 'BATON') {
+      // baton -> stable
+      // tested
+      setSwapFromInput1(
+        parseFloat(
+          parseFloat(e.target.value / stats.batonRedeemingPrice)?.toFixed(3)
+        )
+      )
+    } else {
+      // buy sptr
+      // tested
+      setSwapFromInput1(
+        isNaN(e.target.value * stats.scepterBuyPrice)
+          ? ''
+          : parseFloat(
+              parseFloat(e.target.value * stats.scepterBuyPrice)?.toFixed(3)
+            )
+      )
+    }
+  }
 
   const swapClickHandler = () => {
     setSwapFromInput1('')
@@ -464,7 +527,8 @@ const Swap1SwapBox = (props) => {
   return (
     <MainBlock1Card
       minHeight="345px"
-      minWidth={['320px', '356px', '356px']}
+      minWidth="356px"
+      maxWidth={['100%', '100%', '100%', '100%', '356px']}
       flexDirection="column"
       alignItems="flex-start"
       p="25px"
@@ -481,8 +545,9 @@ const Swap1SwapBox = (props) => {
         token={swapFromToken}
         tokenlist={tokenlist}
         inputvalue={swapFromInput1}
-        setinputvalue={setSwapFromInput1}
+        // setinputvalue={setSwapFromInput1}
         handleOpenModal={onOpen}
+        onChange={changeSwapToInputValue}
         from={true}
         setIsModalFrom={setIsModalFrom}
       />
@@ -499,8 +564,9 @@ const Swap1SwapBox = (props) => {
         token={swapToToken}
         tokenlist={tokenlist}
         inputvalue={swapToInput2}
-        setinputvalue={setSwapToInput2}
+        // setinputvalue={setSwapToInput2}
         handleOpenModal={onOpen}
+        onChange={changeSwapFromInputValue}
         from={false}
         setIsModalFrom={setIsModalFrom}
       />

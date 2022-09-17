@@ -2,6 +2,9 @@ import * as reducer from 'redux/reducerCalls'
 import contracts from './contracts'
 import { BigNumberToActual } from 'resources/utilities'
 
+export const chainIdMainnet = '0x38' // mainnet -> 56 == 0x38
+export const chainIdTestnet = '0x61' // testnet -> 97 == 0x61
+
 const { ethereum } = window
 
 export const getDataFromContract = async () => {
@@ -66,5 +69,91 @@ export const getDataFromContract = async () => {
     })
   } else {
     console.log('intentionally stopping update stats')
+  }
+}
+
+export const getOutstandingStatsFromContract = async (walletAddr) => {
+  /* Updating the outstanding locked amount */
+  const outstandingStats =
+    (await contracts.wandContract?.withheldWithdrawals(walletAddr)) ?? null
+
+  const outstandingTime =
+    BigNumberToActual(outstandingStats?.timeUnlocked ?? 0, 'one') * 10
+
+  const outstandingSwappedAmounts = BigNumberToActual(
+    outstandingStats?.amounts ?? 0,
+    'SPTR'
+  )
+
+  reducer.UPDATE_OUTSTANDING_STATS({
+    outstandingTimeLocked: outstandingTime,
+    outstandingSwappedAmounts: outstandingSwappedAmounts,
+  })
+
+  return { walletAddr, outstandingTime, outstandingSwappedAmounts }
+}
+
+export const checkChainId = async () => {
+  const currentConnectedChainId = await ethereum.request({
+    method: 'eth_chainId',
+  })
+
+  var chainId
+  if (process.env.REACT_APP_DEV) {
+    // testnet -> 91 == 0x61
+    chainId = chainIdTestnet
+  } else {
+    // mainnet -> 91 == 0x38
+    chainId = chainIdMainnet
+  }
+
+  if (currentConnectedChainId !== chainId) {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: chainId }],
+      })
+    } catch (err) {
+      // This error code indicates that the chain has not been added to MetaMask
+      if (err.code === 4902) {
+        if (process.env.REACT_APP_DEV) {
+          // testnet
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainName: 'Binance Smart Chain Testnet',
+                chainId: chainId,
+                nativeCurrency: {
+                  name: 'BNB',
+                  decimals: 18,
+                  symbol: 'tBNB',
+                },
+                rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+              },
+            ],
+          })
+        } else {
+          // mainnet
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainName: 'Binance Smart Chain Mainnet',
+                chainId: chainId,
+                nativeCurrency: {
+                  name: 'BNB',
+                  decimals: 18,
+                  symbol: 'BNB',
+                },
+                rpcUrls: ['https://bsc-dataseed1.binance.org'],
+              },
+            ],
+          })
+        }
+      } else {
+        console.log('error adding the network to metamask')
+      }
+    }
   }
 }

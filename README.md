@@ -6,6 +6,25 @@ By Garen Crowngaurd
 git config --global user.name "Garen Crowngaurd"
 git config --global user.email 0xgaren@protonmail.com
 
+# Release ChangeLog
+
+## Version 2
+
+The following updates have been made:
+1. ```disconnect wallet``` button has been added. There is no official option to disconnect a wallet from metamask but I am simulating it currently.
+https://github.com/MetaMask/metamask-extension/issues/8990
+2. The ```screen refresh``` again and again issue may have been fixed. I have tried something for it but as I never had the issue in the first place, I could not test it. Let's see if people still have issue with dapp refreshing. It may something to do with having multiple wallets.
+3. ```Invalid big number``` issue is fixed.
+4. ```SPTR Price graph``` added on the swap page.
+5. ```wallet dot color``` changed to green when connected.
+6. ```Sidebar``` auto closes after clicking on any new option.
+7. ```TreasuryOutgoing``` issue of duplicate values have been fixed. The current data in the monodb will have to be manually reconciled.
+8. ```Airdrop``` database having multiple documents have been fixed. Now only 1 document will be updated with any new wallet data
+
+## Version 1
+
+Original 
+
 # Bundle Analyzer
 [Ref] https://create-react-app.dev/docs/analyzing-the-bundle-size/
 yarn run analyze
@@ -216,7 +235,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 18. Sidebar icons error on firefox and some browsers.
 19. Default network testing. (if user not on BSC Mainnet than error.)
 20. make setTreasuryOutgoing api call when cashoutscepter is called.
-
+21. refactor ischainIDcheck() checkChainId()
 # Template
 
 ```js
