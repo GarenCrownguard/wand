@@ -235,7 +235,7 @@ If the buildpack fails, try nodejs buildpack: https://github.com/heroku/heroku-b
 18. Sidebar icons error on firefox and some browsers.
 19. Default network testing. (if user not on BSC Mainnet than error.)
 20. make setTreasuryOutgoing api call when cashoutscepter is called.
-
+21. refactor ischainIDcheck() checkChainId()
 # Template
 
 ```js
