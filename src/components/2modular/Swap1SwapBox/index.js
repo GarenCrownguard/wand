@@ -400,6 +400,8 @@ const Swap1SwapBox = (props) => {
   }
 
   useEffect(() => {
+    setSwapFromInput1('')
+    setSwapToInput2('')
     if (swapFromToken === 'BATON' && swapToToken === 'SPTR') {
       setSwapToToken('USDC')
     }
@@ -411,84 +413,23 @@ const Swap1SwapBox = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swapFromToken, swapToToken])
 
-  // useEffect(() => {
-  //   if (swapFromToken === 'SPTR') {
-  //     if (swapToToken === 'BATON') {
-  //       // sptr -> baton
-  //       // tested
-  //       setSwapToInput2(
-  //         isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
-  //           ? ''
-  //           : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
-  //       )
+  const changeSwapToInputValue = (e) => {
+    setSwapFromInput1(e.target.value)
 
-  //       setSwapFromInput1(
-  //         isNaN(parseFloat(parseFloat(swapToInput2)?.toFixed(3)))
-  //           ? ''
-  //           : parseFloat(parseFloat(swapToInput2)?.toFixed(3))
-  //       )
-  //     } else {
-  //       // sptr -> stable
-  //       setSwapToInput2(
-  //         parseFloat(
-  //           parseFloat(swapFromInput1 * stats.scepterSellPrice)?.toFixed(3)
-  //         )
-  //       )
-
-  //       setSwapFromInput1(
-  //         parseFloat(
-  //           parseFloat(swapToInput2 / stats.scepterSellPrice)?.toFixed(3)
-  //         )
-  //       )
-  //     }
-  //   } else if (swapFromToken === 'BATON') {
-  //     // baton -> stable
-  //     // tested
-  //     setSwapToInput2(
-  //       parseFloat(
-  //         parseFloat(swapFromInput1 * stats.batonRedeemingPrice)?.toFixed(3)
-  //       )
-  //     )
-
-  //     setSwapFromInput1(
-  //       parseFloat(
-  //         parseFloat(swapToInput2 / stats.batonRedeemingPrice)?.toFixed(3)
-  //       )
-  //     )
-  //   } else {
-  //     // buy sptr
-  //     // tested
-  //     setSwapToInput2(
-  //       isNaN(swapFromInput1 / stats.scepterBuyPrice)
-  //         ? ''
-  //         : parseFloat(
-  //             parseFloat(swapFromInput1 / stats.scepterBuyPrice)?.toFixed(3)
-  //           )
-  //     )
-  //     setSwapFromInput1(
-  //       isNaN(swapToInput2 / stats.scepterBuyPrice)
-  //         ? ''
-  //         : parseFloat(
-  //             parseFloat(swapToInput2 / stats.scepterBuyPrice)?.toFixed(3)
-  //           )
-  //     )
-  //   }
-  // })
-  useEffect(() => {
     if (swapFromToken === 'SPTR') {
       if (swapToToken === 'BATON') {
         // sptr -> baton
         // tested
         setSwapToInput2(
-          isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
+          isNaN(parseFloat(parseFloat(e.target.value)?.toFixed(3)))
             ? ''
-            : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
+            : parseFloat(parseFloat(e.target.value)?.toFixed(3))
         )
       } else {
         // sptr -> stable
         setSwapToInput2(
           parseFloat(
-            parseFloat(swapFromInput1 * stats.scepterSellPrice)?.toFixed(3)
+            parseFloat(e.target.value*stats.scepterSellPrice)?.toFixed(3)
           )
         )
       }
@@ -497,31 +438,61 @@ const Swap1SwapBox = (props) => {
       // tested
       setSwapToInput2(
         parseFloat(
-          parseFloat(swapFromInput1 * stats.batonRedeemingPrice)?.toFixed(3)
+          parseFloat(e.target.value*stats.batonRedeemingPrice)?.toFixed(3)
         )
       )
     } else {
       // buy sptr
       // tested
       setSwapToInput2(
-        isNaN(swapFromInput1 / stats.scepterBuyPrice)
+        isNaN(e.target.value/stats.scepterBuyPrice)
           ? ''
           : parseFloat(
-              parseFloat(swapFromInput1 / stats.scepterBuyPrice)?.toFixed(3)
+              parseFloat(e.target.value/stats.scepterBuyPrice)?.toFixed(3)
             )
       )
     }
-  }, [
-    swapFromInput1,
-    swapFromToken,
-    swapToToken,
-    stats.batonRedeemingPrice,
-    stats.scepterSellPrice,
-    stats.scepterBuyPrice,
-  ])
+  }
 
-  const changeSwapToInputValue = (e) => {
-    setSwapFromInput1(e.target.value)
+  const changeSwapFromInputValue = (e) => {
+    setSwapToInput2(e.target.value)
+
+    if (swapFromToken === 'SPTR') {
+      if (swapToToken === 'BATON') {
+        // sptr -> baton
+        // tested
+        setSwapFromInput1(
+          isNaN(parseFloat(parseFloat(e.target.value)?.toFixed(3)))
+            ? ''
+            : parseFloat(parseFloat(e.target.value)?.toFixed(3))
+        )
+      } else {
+        // sptr -> stable
+        setSwapFromInput1(
+          parseFloat(
+            parseFloat(e.target.value/stats.scepterSellPrice)?.toFixed(3)
+          )
+        )
+      }
+    } else if (swapFromToken === 'BATON') {
+      // baton -> stable
+      // tested
+      setSwapFromInput1(
+        parseFloat(
+          parseFloat(e.target.value/stats.batonRedeemingPrice)?.toFixed(3)
+        )
+      )
+    } else {
+      // buy sptr
+      // tested
+      setSwapFromInput1(
+        isNaN(e.target.value*stats.scepterBuyPrice)
+          ? ''
+          : parseFloat(
+              parseFloat(e.target.value*stats.scepterBuyPrice)?.toFixed(3)
+            )
+      )
+    }
   }
 
   const swapClickHandler = () => {
@@ -554,6 +525,7 @@ const Swap1SwapBox = (props) => {
         inputvalue={swapFromInput1}
         setinputvalue={setSwapFromInput1}
         handleOpenModal={onOpen}
+        onChange={changeSwapToInputValue}
         from={true}
         setIsModalFrom={setIsModalFrom}
       />
@@ -572,6 +544,7 @@ const Swap1SwapBox = (props) => {
         inputvalue={swapToInput2}
         setinputvalue={setSwapToInput2}
         handleOpenModal={onOpen}
+        onChange={changeSwapFromInputValue}
         from={false}
         setIsModalFrom={setIsModalFrom}
       />
