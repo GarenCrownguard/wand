@@ -1,4 +1,4 @@
-import { utils, ethers } from 'ethers'
+import { ethers } from 'ethers'
 const fixValue = (value) => {
   return parseFloat(parseFloat(value)?.toFixed(4))
 }

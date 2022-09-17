@@ -161,7 +161,7 @@ const ConnectButton = (props) => {
       checkChainId()
       // handleConnectWallet()
     } catch (error) {
-      console.log('connectButton useeffect error')
+      console.log('connectButton useffect error')
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

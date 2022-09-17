@@ -16,7 +16,7 @@ const InputBox = (props) => {
     token,
     tokenlist,
     inputvalue,
-    setinputvalue,
+    // setinputvalue,
     handleOpenModal,
     onChange,
     from,

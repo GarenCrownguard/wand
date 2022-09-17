@@ -15,7 +15,10 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
+import {
+  ActualToBigNumber,
+  GenerateTransactionLink
+} from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenBUSD,
@@ -24,8 +27,11 @@ import {
   IconTokenSPTR,
   IconTokenDAI,
 } from './icons'
-
-import { setAirdropAddress } from 'resources/api'
+import {
+  getDataFromContract,
+  getOutstandingStatsFromContract,
+} from 'contracts/ContractInteraction'
+import { setAirdropAddress, setTreasuryOutgoing } from 'resources/api'
 
 import InputBox from './InputBox'
 import SwapBoxModal from './SwapBoxModal'
@@ -42,7 +48,7 @@ const Swap1SwapBox = (props) => {
   const toast = useToast()
   var account = localwalletstats.walletAddress
 
-  const allTokenList = ['SPTR', 'BATON', 'USDC', 'BUSD', 'DAI']
+  // const allTokenList = ['SPTR', 'BATON', 'USDC', 'BUSD', 'DAI']
 
   const tokenlist = [
     {
@@ -266,7 +272,7 @@ const Swap1SwapBox = (props) => {
           break
       }
 
-      // await ApproveCall.wait()
+      await ApproveCall.wait()
 
       var transactionLink = GenerateTransactionLink(ApproveCall.hash)
 
@@ -309,7 +315,7 @@ const Swap1SwapBox = (props) => {
     try {
       setApproving(true)
       var SwapCall
-
+      var isCashingOut = false
       if (swapFromToken === 'SPTR') {
         if (swapToToken === 'BATON') {
           // transformScepterToBaton(amount) -- tested
@@ -330,6 +336,7 @@ const Swap1SwapBox = (props) => {
               taxSliderValue,
               swapToToken
             )) ?? false
+            isCashingOut=true;
         }
       } else if (swapFromToken === 'BATON') {
         // Assuming the swaptotoken will be a stable
@@ -365,7 +372,7 @@ const Swap1SwapBox = (props) => {
         setApproving(false)
       }
 
-      // await SwapCall.wait()
+      await SwapCall.wait()
 
       var transactionLink = GenerateTransactionLink(SwapCall.hash)
       toast({
@@ -384,6 +391,21 @@ const Swap1SwapBox = (props) => {
       })
       setapproved(true)
       setApproving(false)
+      getDataFromContract()
+      setSwapFromInput1('')
+      setSwapToInput2('')
+
+      if (isCashingOut) {
+        // console.log('Cashing out. Sending API call.')
+        const stats = await getOutstandingStatsFromContract(account)
+        await setTreasuryOutgoing(
+          account,
+          stats.outstandingSwappedAmounts,
+          stats.outstandingTime
+        )
+      } else {
+        // console.log('Not cashing out')
+      }
     } catch (error) {
       // console.log(error.reason)
       toast({
@@ -429,7 +451,7 @@ const Swap1SwapBox = (props) => {
         // sptr -> stable
         setSwapToInput2(
           parseFloat(
-            parseFloat(e.target.value*stats.scepterSellPrice)?.toFixed(3)
+            parseFloat(e.target.value * stats.scepterSellPrice)?.toFixed(3)
           )
         )
       }
@@ -438,17 +460,17 @@ const Swap1SwapBox = (props) => {
       // tested
       setSwapToInput2(
         parseFloat(
-          parseFloat(e.target.value*stats.batonRedeemingPrice)?.toFixed(3)
+          parseFloat(e.target.value * stats.batonRedeemingPrice)?.toFixed(3)
         )
       )
     } else {
       // buy sptr
       // tested
       setSwapToInput2(
-        isNaN(e.target.value/stats.scepterBuyPrice)
+        isNaN(e.target.value / stats.scepterBuyPrice)
           ? ''
           : parseFloat(
-              parseFloat(e.target.value/stats.scepterBuyPrice)?.toFixed(3)
+              parseFloat(e.target.value / stats.scepterBuyPrice)?.toFixed(3)
             )
       )
     }
@@ -470,7 +492,7 @@ const Swap1SwapBox = (props) => {
         // sptr -> stable
         setSwapFromInput1(
           parseFloat(
-            parseFloat(e.target.value/stats.scepterSellPrice)?.toFixed(3)
+            parseFloat(e.target.value / stats.scepterSellPrice)?.toFixed(3)
           )
         )
       }
@@ -479,17 +501,17 @@ const Swap1SwapBox = (props) => {
       // tested
       setSwapFromInput1(
         parseFloat(
-          parseFloat(e.target.value/stats.batonRedeemingPrice)?.toFixed(3)
+          parseFloat(e.target.value / stats.batonRedeemingPrice)?.toFixed(3)
         )
       )
     } else {
       // buy sptr
       // tested
       setSwapFromInput1(
-        isNaN(e.target.value*stats.scepterBuyPrice)
+        isNaN(e.target.value * stats.scepterBuyPrice)
           ? ''
           : parseFloat(
-              parseFloat(e.target.value*stats.scepterBuyPrice)?.toFixed(3)
+              parseFloat(e.target.value * stats.scepterBuyPrice)?.toFixed(3)
             )
       )
     }
@@ -523,7 +545,7 @@ const Swap1SwapBox = (props) => {
         token={swapFromToken}
         tokenlist={tokenlist}
         inputvalue={swapFromInput1}
-        setinputvalue={setSwapFromInput1}
+        // setinputvalue={setSwapFromInput1}
         handleOpenModal={onOpen}
         onChange={changeSwapToInputValue}
         from={true}
@@ -542,7 +564,7 @@ const Swap1SwapBox = (props) => {
         token={swapToToken}
         tokenlist={tokenlist}
         inputvalue={swapToInput2}
-        setinputvalue={setSwapToInput2}
+        // setinputvalue={setSwapToInput2}
         handleOpenModal={onOpen}
         onChange={changeSwapFromInputValue}
         from={false}

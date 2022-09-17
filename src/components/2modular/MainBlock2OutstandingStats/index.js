@@ -20,15 +20,13 @@ import { CloseIcon } from '@chakra-ui/icons'
 import MainBlock1Card from 'components/1atomic/MainBlock1Card'
 import MainBlock2StatsText from 'components/1atomic/MainBlock2StatsText'
 import MainBlock4CountdownTimer from 'components/1atomic/MainBlock4CountdownTimer'
-import * as reducer from 'redux/reducerCalls'
 import {
   prettifytolocalstring,
   GenerateTransactionLink,
 } from 'resources/utilities'
 import IconBottomRightArrow from './icon'
-import { BigNumberToActual } from 'resources/utilities'
-import { setTreasuryOutgoing } from 'resources/api'
 import ChooseTokenModal from './ChooseTokenModal'
+import { getOutstandingStatsFromContract } from 'contracts/ContractInteraction'
 
 const calculateTimeLeft = (time) => {
   let timeLeft = {}
@@ -56,7 +54,7 @@ const calculateTimeLeft = (time) => {
 
 const MainBlock2OutstandingStats = (props) => {
   const { localwalletstats } = props
-  const account = localwalletstats.walletAddress
+  // const account = localwalletstats.walletAddress
   const toast = useToast()
   const [isClaimDisabled, setIsClaimDisabled] = useState(true)
   const [isClaimLoading, setIsClaimLoading] = useState(false)
@@ -95,33 +93,8 @@ const MainBlock2OutstandingStats = (props) => {
 
   useEffect(() => {
     const getOutstandingStats = async () => {
-      /* Updating the outstanding locked amount */
-      const outstandingStats =
-        (await contracts.wandContract?.withheldWithdrawals(
-          localwalletstats.walletAddress
-        )) ?? null
-
-      const outstandingTime =
-        BigNumberToActual(outstandingStats?.timeUnlocked ?? 0, 'one') * 10
-
-      const outstandingSwappedAmounts = BigNumberToActual(
-        outstandingStats?.amounts ?? 0,
-        'SPTR'
-      )
-
-      reducer.UPDATE_OUTSTANDING_STATS({
-        outstandingTimeLocked: outstandingTime,
-        outstandingSwappedAmounts: outstandingSwappedAmounts,
-      })
-      if (outstandingTime !== 0) {
-        await setTreasuryOutgoing(
-          account,
-          outstandingSwappedAmounts,
-          outstandingTime
-        )
-      }
-
-      setTimeleft(calculateTimeLeft(outstandingTime * 1000))
+      const stats = await getOutstandingStatsFromContract(localwalletstats.walletAddress)
+      setTimeleft(calculateTimeLeft(stats.outstandingTime * 1000))
     }
 
     getOutstandingStats()

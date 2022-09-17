@@ -1,5 +1,4 @@
 import * as reducer from 'redux/reducerCalls'
-import { ethers } from 'ethers'
 import contracts from './contracts'
 import { BigNumberToActual } from 'resources/utilities'
 
@@ -71,6 +70,27 @@ export const getDataFromContract = async () => {
   } else {
     console.log('intentionally stopping update stats')
   }
+}
+
+export const getOutstandingStatsFromContract = async (walletAddr) => {
+  /* Updating the outstanding locked amount */
+  const outstandingStats =
+    (await contracts.wandContract?.withheldWithdrawals(walletAddr)) ?? null
+
+  const outstandingTime =
+    BigNumberToActual(outstandingStats?.timeUnlocked ?? 0, 'one') * 10
+
+  const outstandingSwappedAmounts = BigNumberToActual(
+    outstandingStats?.amounts ?? 0,
+    'SPTR'
+  )
+
+  reducer.UPDATE_OUTSTANDING_STATS({
+    outstandingTimeLocked: outstandingTime,
+    outstandingSwappedAmounts: outstandingSwappedAmounts,
+  })
+
+  return { walletAddr, outstandingTime, outstandingSwappedAmounts }
 }
 
 export const checkChainId = async () => {
