@@ -8,8 +8,22 @@ git config --global user.email 0xgaren@protonmail.com
 
 # Release ChangeLog
 
-## Version 2
-
+## Version 3 - 17.09.2022
+The following updates have been made:
+1. ```Invalid bigNumber error``` (due to infinite numbers while swapping)
+2. ```Swap Error Cannot Get Allowance``` Same fix as above.
+3. ```TreasuryOutgoingTable``` API call is made on swap.
+4. ```SwapBox``` width fixes.
+5. ```Cashout BATON/ SPTR/ claiming``` fixed to USDC
+6. ```Swap Input Boxes``` autoupdate dependeing on other input value.
+7. Balances auto-update after swapping.
+8. Wallet connection checks:
+-> Auto check for network ID
+-> Auto request to change to the correst chain network
+-> If chain does note exist than it adds it in.
+-> the ```connectButton & AccountModal``` dot color based on the chain Id.
+ 
+## Version 2 - 11.09.2022
 The following updates have been made:
 1. ```disconnect wallet``` button has been added. There is no official option to disconnect a wallet from metamask but I am simulating it currently.
 https://github.com/MetaMask/metamask-extension/issues/8990
@@ -21,8 +35,7 @@ https://github.com/MetaMask/metamask-extension/issues/8990
 7. ```TreasuryOutgoing``` issue of duplicate values have been fixed. The current data in the monodb will have to be manually reconciled.
 8. ```Airdrop``` database having multiple documents have been fixed. Now only 1 document will be updated with any new wallet data
 
-## Version 1
-
+## Version 1 - 02.09.2022
 Original 
 
 # Bundle Analyzer
