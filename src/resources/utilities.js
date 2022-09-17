@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import { utils, ethers } from 'ethers'
 const fixValue = (value) => {
   return parseFloat(parseFloat(value)?.toFixed(4))
 }
@@ -33,23 +33,17 @@ export const prettifyGrowthPercentage = (direction, value) => {
 }
 
 export const BigNumberToActual = (amount, tokenDecimal) => {
+  // console.log(utils.formatEther(amount))
+  // console.log(amount)
   return amount && decimals[tokenDecimal]
     ? fixValue(ethers.utils.formatUnits(amount, decimals[tokenDecimal]))
     : null
 }
 
 export const ActualToBigNumber = (amount, tokenDecimal) => {
-  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal]))
-  // console.log(amount);
-
-  // console.log(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
-
-  // handling 'invalid bignumber error'
-  amount = parseFloat(parseFloat(amount)?.toFixed(5))
-
   return amount && decimals[tokenDecimal]
     ? ethers.BigNumber.from(
-        `${amount * Math.pow(10, decimals[tokenDecimal] / 2)}`
+        `${Math.round(amount * Math.pow(10, decimals[tokenDecimal] / 2))}`
       ).mul(ethers.BigNumber.from(10).pow(decimals[tokenDecimal] / 2))
     : null
 }

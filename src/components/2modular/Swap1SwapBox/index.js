@@ -42,18 +42,22 @@ const Swap1SwapBox = (props) => {
   const toast = useToast()
   var account = localwalletstats.walletAddress
 
+  const allTokenList = ['SPTR', 'BATON', 'USDC', 'BUSD', 'DAI']
+
   const tokenlist = [
     {
       name: 'SPTR',
       balance: localwalletstats.sceptertoken ?? 0,
-      canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI'],
+      canSwapTo: ['BATON', 'USDC'],
+      // canSwapTo: ['BATON', 'USDC', 'BUSD', 'DAI'],
       canSwapFrom: ['BATON', 'USDC', 'BUSD', 'DAI'],
       icon: <IconTokenSPTR />,
     },
     {
       name: 'BATON',
       balance: localwalletstats.batontoken ?? 0,
-      canSwapTo: ['USDC', 'BUSD', 'DAI'],
+      canSwapTo: ['USDC'],
+      // canSwapTo: ['USDC', 'BUSD', 'DAI'],
       canSwapFrom: ['SPTR'],
       icon: <IconTokenBATON />,
     },
@@ -132,7 +136,6 @@ const Swap1SwapBox = (props) => {
           wandAllowanceBUSD,
           wandAllowanceDAI,
         ])
-
         switch (fromtoken) {
           case 'SPTR':
             setapproved(
@@ -192,7 +195,7 @@ const Swap1SwapBox = (props) => {
       } catch (error) {
         console.log('Error getting allowance')
         toast({
-          title: 'Error. Please check the chain or network.',
+          title: error.message,
           status: 'error',
           duration: 1000,
           position: 'bottom-right',
@@ -406,8 +409,71 @@ const Swap1SwapBox = (props) => {
 
     checkAllowance(swapFromToken)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [swapFromToken, swapToToken, localwalletstats])
+  }, [swapFromToken, swapToToken])
 
+  // useEffect(() => {
+  //   if (swapFromToken === 'SPTR') {
+  //     if (swapToToken === 'BATON') {
+  //       // sptr -> baton
+  //       // tested
+  //       setSwapToInput2(
+  //         isNaN(parseFloat(parseFloat(swapFromInput1)?.toFixed(3)))
+  //           ? ''
+  //           : parseFloat(parseFloat(swapFromInput1)?.toFixed(3))
+  //       )
+
+  //       setSwapFromInput1(
+  //         isNaN(parseFloat(parseFloat(swapToInput2)?.toFixed(3)))
+  //           ? ''
+  //           : parseFloat(parseFloat(swapToInput2)?.toFixed(3))
+  //       )
+  //     } else {
+  //       // sptr -> stable
+  //       setSwapToInput2(
+  //         parseFloat(
+  //           parseFloat(swapFromInput1 * stats.scepterSellPrice)?.toFixed(3)
+  //         )
+  //       )
+
+  //       setSwapFromInput1(
+  //         parseFloat(
+  //           parseFloat(swapToInput2 / stats.scepterSellPrice)?.toFixed(3)
+  //         )
+  //       )
+  //     }
+  //   } else if (swapFromToken === 'BATON') {
+  //     // baton -> stable
+  //     // tested
+  //     setSwapToInput2(
+  //       parseFloat(
+  //         parseFloat(swapFromInput1 * stats.batonRedeemingPrice)?.toFixed(3)
+  //       )
+  //     )
+
+  //     setSwapFromInput1(
+  //       parseFloat(
+  //         parseFloat(swapToInput2 / stats.batonRedeemingPrice)?.toFixed(3)
+  //       )
+  //     )
+  //   } else {
+  //     // buy sptr
+  //     // tested
+  //     setSwapToInput2(
+  //       isNaN(swapFromInput1 / stats.scepterBuyPrice)
+  //         ? ''
+  //         : parseFloat(
+  //             parseFloat(swapFromInput1 / stats.scepterBuyPrice)?.toFixed(3)
+  //           )
+  //     )
+  //     setSwapFromInput1(
+  //       isNaN(swapToInput2 / stats.scepterBuyPrice)
+  //         ? ''
+  //         : parseFloat(
+  //             parseFloat(swapToInput2 / stats.scepterBuyPrice)?.toFixed(3)
+  //           )
+  //     )
+  //   }
+  // })
   useEffect(() => {
     if (swapFromToken === 'SPTR') {
       if (swapToToken === 'BATON') {
@@ -454,6 +520,10 @@ const Swap1SwapBox = (props) => {
     stats.scepterBuyPrice,
   ])
 
+  const changeSwapToInputValue = (e) => {
+    setSwapFromInput1(e.target.value)
+  }
+
   const swapClickHandler = () => {
     setSwapFromInput1('')
     setSwapToInput2('')
@@ -464,7 +534,8 @@ const Swap1SwapBox = (props) => {
   return (
     <MainBlock1Card
       minHeight="345px"
-      minWidth={['320px', '356px', '356px']}
+      minWidth="356px"
+      maxWidth={['100%', '100%', '100%', '100%', '356px']}
       flexDirection="column"
       alignItems="flex-start"
       p="25px"

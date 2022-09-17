@@ -129,7 +129,6 @@ const InputBox = (props) => {
 const mapStateToProps = (state) => {
   return {
     stats: state.stats,
-
     localwalletstats: state.localwalletstats,
   }
 }
