@@ -28,7 +28,11 @@ const PrivateSection = () => {
     },
   })
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
-  console.log(process.env.REACT_APP_DEV ? 'Development Mode' : 'Production Mode! Welcome to WAND. Developed by Garen :)')
+  console.log(
+    process.env.REACT_APP_DEV
+      ? 'Development Mode'
+      : 'Production Mode! Welcome to WAND. Developed by Garen https://twitter.com/0xgaren :)'
+  )
 
   // console.log(
   //   `[PrivateSection]: Size of the screen is: ${variantScreenSize.size}`

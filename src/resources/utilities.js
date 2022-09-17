@@ -49,7 +49,9 @@ export const ActualToBigNumber = (amount, tokenDecimal) => {
 }
 
 export const GenerateTransactionLink = (hash) => {
-  return `https://testnet.bscscan.com/tx/${hash}`
+  return process.env.REACT_APP_DEV
+    ? `https://testnet.bscscan.com/tx/${hash}`
+    : `https://bscscan.com/tx/${hash}`
 }
 
 export function convertSlugToUrl(slug, parameters) {
