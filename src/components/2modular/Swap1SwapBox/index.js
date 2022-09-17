@@ -15,10 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import {
-  ActualToBigNumber,
-  GenerateTransactionLink
-} from 'resources/utilities'
+import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
 import {
   Icon1swap,
   IconTokenBUSD,
@@ -199,9 +196,10 @@ const Swap1SwapBox = (props) => {
             break
         }
       } catch (error) {
-        console.log('Error getting allowance')
+        // console.log('Error getting allowance')
+        console.log(error.reason)
         toast({
-          title: error.message,
+          title: 'Error getting allowance.',
           status: 'error',
           duration: 1000,
           position: 'bottom-right',
@@ -336,7 +334,7 @@ const Swap1SwapBox = (props) => {
               taxSliderValue,
               swapToToken
             )) ?? false
-            isCashingOut=true;
+          isCashingOut = true
         }
       } else if (swapFromToken === 'BATON') {
         // Assuming the swaptotoken will be a stable
@@ -407,9 +405,9 @@ const Swap1SwapBox = (props) => {
         // console.log('Not cashing out')
       }
     } catch (error) {
-      // console.log(error.reason)
+      console.log(error.reason)
       toast({
-        title: error.reason ?? error.message,
+        title: 'Swap error.',
         status: 'error',
         duration: 2000,
         position: 'bottom-right',
