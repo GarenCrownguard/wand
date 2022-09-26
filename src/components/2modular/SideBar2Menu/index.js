@@ -84,7 +84,7 @@ const isconnected = props.localwalletstats.isconnected;
           title="Vote"
           icon={Icon8vote}
           href={links.vote}
-          soon
+          isexternal
           closeSidebar={props.onCloseSideBar}
         />
         <SideBar2MenuItem
@@ -98,7 +98,7 @@ const isconnected = props.localwalletstats.isconnected;
         {process.env.REACT_APP_DEV && (
           <Tag colorScheme="red">Development Mode</Tag>
         )}
-        {process.env.REACT_APP_API_URL.includes("uat") && (
+        {process.env.REACT_APP_API_URL.includes('uat') && (
           <Tag colorScheme="green">UAT Database</Tag>
         )}
       </VStack>
