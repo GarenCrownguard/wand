@@ -10,7 +10,7 @@ const links = {
   lending: '/lending',
   treasuries: '/treasuries',
   governance: '/governance',
-  vote: '/vote',
+  vote: 'https://vote.wandinvestments.com/',
   docs: 'https://wand-investments.gitbook.io/wand-investments/',
 
   /* External */
@@ -41,7 +41,7 @@ const links = {
 
   /* Socials */
   medium: 'https://medium.com/@WAND-Investments',
-  twitter: 'https://twitter.com/WANDinvestments',
+  twitter: 'https://twitter.com/Spacedex_x',
   discord: 'https://discord.gg/wand',
   youtube:
     'https://www.youtube.com/channel/UC26jsp29LKvF2KpY6dXW6Zw?sub_confirmation=1',
