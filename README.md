@@ -8,6 +8,10 @@ git config --global user.email 0xgaren@protonmail.com
 
 # Release ChangeLog
 
+## Version 4 - 26.09.2022
+1. SPTR Backing price graph Y axis fixed to show better upward trend.
+2. The donut chart size has been fixed to stop it from overflowing.
+3. Voting link has been added.
 ## Version 3 - 17.09.2022
 The following updates have been made:
 1. ```Invalid bigNumber error``` (due to infinite numbers while swapping)
