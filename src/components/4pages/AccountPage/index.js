@@ -56,8 +56,8 @@ const AccountPage = (props) => {
             />
             <MainBlock2Divider />
             <MainBlock2StatsText
-              title="Last Daily Airdrop"
-              value={prettifyamounts(stats.airdropDaily)}
+              title="Last Monthly Airdrop"
+              value={prettifyamounts(stats.airdropMonthly)}
               // tooltipLabel={`Total (since start): ${prettifyamounts(
               //   localwalletstats.sceptertoken * stats.scepterBackingPrice
               // )}`}

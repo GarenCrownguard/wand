@@ -1,15 +1,26 @@
 import axios from 'axios'
 import * as reducer from 'redux/reducerCalls'
 
-export const getRiskTreasuryValue = async () => {
+export const getStatsNotConnected = async () => {
   try {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/treasury-allocation`)
+      .get(`${process.env.REACT_APP_API_URL}/stats-not-connected`)
       .then((res) => {
-        reducer.UPDATE_RISK_TREASURY_VALUE({ value: res.data.RISK })
+        reducer.UPDATE_STATS({
+          sptrGrowthFactor: res.data.sptrGrowthFactor,
+          sptrSellFactor: res.data.sptrSellFactor,
+          sptrBuyPrice: res.data.sptrBuyPrice,
+          sptrSellPrice: res.data.sptrSellPrice,
+          sptrBackingPrice: res.data.sptrBacking,
+          sptrTreasuryBal: res.data.sptrTreasuryValue,
+          btonTreasuryBal: res.data.batonTreasuryValue,
+          btonRedeemingPrice: res.data.batonRedeemingPrice,
+          btonBackingPrice: res.data.batonBacking
+        })
+        reducer.UPDATE_RISK_TREASURY_VALUE({ value: res.data.riskTreasuryValue })
       })
   } catch (error) {
-    console.log('[getRiskTreasuryValue] fetch data failed', error)
+    console.log('[getStatsNotConnected] fetch data failed', error)
   }
 }
 
@@ -29,24 +40,12 @@ export const getAirdropData = async () => {
   try {
     await axios.get(`${process.env.REACT_APP_API_URL}/airdrops`).then((res) => {
       reducer.UPDATE_AIRDROPS({
-        airdrops3Months: res.data.airdrops3Months,
-        airdropDaily: res.data.airdropsDaily,
+        airdropsMonthly: res.data.airdropsMonthly,
+        airdropsWeekly: res.data.airdropsWeekly,
       })
     })
   } catch (error) {
     console.log('[getAirdropData] fetch data failed', error)
-  }
-}
-
-export const setAirdropAddress = async (walletAddr) => {
-  try {
-    await axios.post(`${process.env.REACT_APP_API_URL}/setBATONAirdropAddresses`,
-      {
-        address: walletAddr,
-      }
-    )
-  } catch (error) {
-    console.log('[setAirdropAddress] post data failed', error)
   }
 }
 
@@ -58,6 +57,6 @@ export const setTreasuryOutgoing = async (walletAddr, amt, time) => {
       timeUnlocked: time,
     })
   } catch (error) {
-    console.log('[setAirdropAddress] post data failed', error)
+    console.log('[setTreasuryUSDOutgoing] post data failed', error)
   }
 }

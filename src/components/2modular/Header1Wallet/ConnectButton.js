@@ -11,7 +11,7 @@ import {
 } from 'contracts/ContractInteraction'
 
 import {
-  getRiskTreasuryValue,
+  getStatsNotConnected,
   getInvestmentListData,
   getAirdropData,
 } from 'resources/api'
@@ -153,7 +153,7 @@ const ConnectButton = (props) => {
 
   useEffect(() => {
     try {
-      getRiskTreasuryValue()
+      getStatsNotConnected()
       getInvestmentListData()
       getAirdropData()
       autowalletconnect()

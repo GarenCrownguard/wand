@@ -13,6 +13,10 @@ import {
   Link,
   Box,
   useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
@@ -28,7 +32,7 @@ import {
   getDataFromContract,
   getOutstandingStatsFromContract,
 } from 'contracts/ContractInteraction'
-import { setAirdropAddress, setTreasuryOutgoing } from 'resources/api'
+import { setTreasuryOutgoing } from 'resources/api'
 
 import InputBox from './InputBox'
 import SwapBoxModal from './SwapBoxModal'
@@ -323,8 +327,6 @@ const Swap1SwapBox = (props) => {
               ActualToBigNumber(swapFromInput1, swapFromToken),
               'USDC'
             )) ?? false
-
-          await setAirdropAddress(account)
         } else {
           // cashOutScepter(amount, daysChosenLocked, stableChosen) -- tested
           // console.log(`cashOutScepter(${swapFromInput1}, ${taxSliderValue}, ${swapToToken})`)
@@ -598,6 +600,16 @@ const Swap1SwapBox = (props) => {
               setTaxSliderValue={setTaxSliderValue}
             />
           </Box>
+          <Alert
+            status="warning"
+            variant="left-accent"
+            borderRadius={5}
+          >
+            <AlertIcon />
+            <AlertTitle fontSize="15px" color="black">
+              This will extend the unlock time if you have unclaimed amount!
+            </AlertTitle>
+          </Alert>
         </>
       )}
 
