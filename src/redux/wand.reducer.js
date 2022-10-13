@@ -5,7 +5,9 @@ const initialState = {
     scepterCirculatingSupply: 99899.9999, // not being used
     scepterBackingPrice: null,
     airdrops3Months: 99899.9999, // not being used
-    airdropDaily: null,
+    airdropDaily: null, // not being used
+    airdropMonthly: null,
+    airdropWeekly: null, // not being used
     scepterTreasuryValue: null,
     batonTreasuryValue: null,
     riskTreasuryValue: null,
@@ -15,15 +17,17 @@ const initialState = {
     sellFactor: null,
     batonRedeemingPrice: null,
     btonBackingPrice: null,
-    investmentlist: [{
-      date: 'Updating...',
-      chain: 'Updating...',
-      expectedAPY: 'Updating...',
-      investedAmount: 'Updating...',
-      protocolName: 'Updating...',
-      protocolURL: 'Updating...',
-      transactionLink: 'https://bscscan.com/',
-    }],
+    investmentlist: [
+      {
+        date: 'Updating...',
+        chain: 'Updating...',
+        expectedAPY: 'Updating...',
+        investedAmount: 'Updating...',
+        protocolName: 'Updating...',
+        protocolURL: 'Updating...',
+        transactionLink: 'https://bscscan.com/',
+      },
+    ],
     addmore: [],
   },
   localwalletstats: {
@@ -101,7 +105,7 @@ const postReducer = (currentState = initialState, action) => {
           scepterTreasuryValue: sptrTreasuryBal,
           batonTreasuryValue: btonTreasuryBal,
           batonRedeemingPrice: btonRedeemingPrice,
-          btonBackingPrice: btonBackingPrice,
+          btonBackingPrice: btonBackingPrice
         },
         localwalletstats: {
           ...currentState.localwalletstats,
@@ -146,12 +150,12 @@ const postReducer = (currentState = initialState, action) => {
       }
 
     case actions.UPDATE_AIRDROPS:
-      const { airdrops3Months, airdropDaily } = payload
+      const { airdropsMonthly, airdropsWeekly } = payload
       return {
         stats: {
           ...currentState.stats,
-          airdrops3Months: airdrops3Months,
-          airdropDaily: airdropDaily
+          airdropMonthly: airdropsMonthly,
+          airdropWeekly: airdropsWeekly,
         },
         localwalletstats: {
           ...currentState.localwalletstats,

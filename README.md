@@ -8,10 +8,19 @@ git config --global user.email 0xgaren@protonmail.com
 
 # Release ChangeLog
 
+## Version 5 - 13.10.2022
+1. Removed BATONAirdrops post API call and endpoint.
+2. Twitter link updated.
+3. SPTR Graph Y axis updated to fix the new values.
+4. Airdrop values updated from BE.
+5. Warning added for cashout SPTR
+6. Stats are populated with the last data in db if no wallet connected.
+
 ## Version 4 - 26.09.2022
 1. SPTR Backing price graph Y axis fixed to show better upward trend.
 2. The donut chart size has been fixed to stop it from overflowing.
 3. Voting link has been added.
+
 ## Version 3 - 17.09.2022
 The following updates have been made:
 1. ```Invalid bigNumber error``` (due to infinite numbers while swapping)
