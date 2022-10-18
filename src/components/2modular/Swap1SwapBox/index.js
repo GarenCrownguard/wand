@@ -15,8 +15,7 @@ import {
   useToast,
   Alert,
   AlertIcon,
-  AlertTitle,
-  AlertDescription,
+  AlertTitle
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
