@@ -4,9 +4,15 @@ FrontEnd for Wand Investments project.
 By Garen Crowngaurd
 
 git config --global user.name "Garen Crowngaurd"
-git config --global user.email 0xgaren@protonmail.com
+
+git config --global user.email "0xgaren@protonmail.com"
 
 # Release ChangeLog
+
+## Version 6 - 31.12.2022 - TBD
+1. Replacing the WAND logo by the SpaceFUND logo.
+2. Changing the chart on the Dashboard.
+3. Remove Bridge and Lending and add Bots instead, to link towards SpaceBOTS.
 
 ## Version 5 - 13.10.2022
 1. Removed BATONAirdrops post API call and endpoint.
