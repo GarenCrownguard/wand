@@ -3,10 +3,11 @@ import { Area } from '@ant-design/plots'
 import { Box, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { prettifyamounts } from 'resources/utilities'
+import { connect } from 'react-redux'
 
 import MainBlock1Card from '../MainBlock1Card'
 
-const GraphScepterPriceArea = () => {
+const GraphScepterPriceArea = ({ stats }) => {
   const [parsedData, setParsedData] = useState([])
   const [lastValue, setLastValue] = useState(0)
   var total = []
@@ -97,7 +98,7 @@ const GraphScepterPriceArea = () => {
             SCEPTER Backing Price
           </Text>
           <Text variant="value" color="white" textAlign="left">
-            {prettifyamounts(lastValue)}
+            {prettifyamounts(stats.scepterBackingPrice ?? lastValue)}
             <Text as="sup" color="#FF409A" fontSize={12} ml="9px">
               Total in USD
             </Text>
@@ -111,4 +112,10 @@ const GraphScepterPriceArea = () => {
   )
 }
 
-export default GraphScepterPriceArea
+const mapStateToProps = (state) => {
+  return {
+    stats: state.stats,
+  }
+}
+
+export default connect(mapStateToProps)(GraphScepterPriceArea)
