@@ -14,6 +14,7 @@ git config --global user.email "0xgaren@protonmail.com"
 2. Changing the chart on the Dashboard -> different backingPrice on the graph and overview. Y-axis fix. Donut size fix.
 3. Remove Bridge and Lending and add Bots instead, to link towards SpaceBOTS.
 4. Wallet error handling when opening the dapp without a wallet.
+5. Tooltip for claiming to let users know about the dev wallet tax.
 
 ## Version 5 - 13.10.2022
 1. Removed BATONAirdrops post API call and endpoint.
