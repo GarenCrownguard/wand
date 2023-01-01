@@ -9,7 +9,7 @@ git config --global user.email "0xgaren@protonmail.com"
 
 # Release ChangeLog
 
-## Version 6 - 31.12.2022 - TBD
+## Version 6 - 02.01.2023
 1. Replacing the WAND logo by the SpaceFUND logo -> merged the header and sidebar logo into one.
 2. Changing the chart on the Dashboard -> different backingPrice on the graph and overview. Y-axis fix. Donut size fix.
 3. Remove Bridge and Lending and add Bots instead, to link towards SpaceBOTS.

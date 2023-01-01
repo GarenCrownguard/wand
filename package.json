@@ -1,10 +1,10 @@
 {
-  "name": "wand-investments",
+  "name": "spacefund",
   "version": "1.0.0",
   "private": true,
   "author": "Garen Crowngaurd",
   "homepage": "https://fund.spacedefi.tech/",
-  "description": "Dapp for Wand Investments",
+  "description": "Dapp for Space Fund",
   "dependencies": {
     "@ant-design/charts": "^1.4.2",
     "@chakra-ui/icons": "^2.0.4",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build"
   },
@@ -40,9 +40,6 @@
     "extends": [
       "react-app"
     ]
-  },
-  "engines": {
-    "node": "16.18.1"
   },
   "browserslist": {
     "production": [
