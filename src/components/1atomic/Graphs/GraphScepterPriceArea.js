@@ -63,9 +63,9 @@ const GraphScepterPriceArea = () => {
       },
     },
     yAxis: {
-      maxLimit:0.9655,
-      // min: 0,
-      minLimit: 0.8255,
+      maxLimit: 1,
+      //   min: 0,
+      minLimit: 0.56,
       // tickInterval: 0.01
     },
     legend: {
