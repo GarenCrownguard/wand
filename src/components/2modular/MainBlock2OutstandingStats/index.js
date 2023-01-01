@@ -93,7 +93,9 @@ const MainBlock2OutstandingStats = (props) => {
 
   useEffect(() => {
     const getOutstandingStats = async () => {
-      const stats = await getOutstandingStatsFromContract(localwalletstats.walletAddress)
+      const stats = await getOutstandingStatsFromContract(
+        localwalletstats.walletAddress
+      )
       setTimeleft(calculateTimeLeft(stats.outstandingTime * 1000))
     }
 
@@ -196,6 +198,9 @@ const MainBlock2OutstandingStats = (props) => {
         <MainBlock2StatsText
           title="Amount locked (USD) if not claimed"
           value={prettifytolocalstring(localwalletstats.amountOfSptrSwapped)}
+          tooltipLabel={
+            'This amount is subject to 5% tax used to fund dev wallet. Check docs for more info.'
+          }
         />
         <Flex flexGrow={0.5} justifyContent="space-around">
           <Button
