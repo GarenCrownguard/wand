@@ -10,12 +10,12 @@ const links = {
   lending: '/lending',
   treasuries: '/treasuries',
   governance: '/governance',
-  vote: 'https://vote.wandinvestments.com/',
-  docs: 'https://wand-investments.gitbook.io/wand-investments/',
+  vote: 'https://vote.spacedefi.tech/',
+  docs: 'https://docs.spacedefi.tech/',
   spacebots: 'https://www.spacedefi.tech/bots',
 
   /* External */
-  disclaimerSPTRSell: 'https://wand-investments.gitbook.io/wand-investments/',
+  disclaimerSPTRSell: 'https://docs.spacedefi.tech/',
 
   /* wand-investments */
   homepage: '/dashboard',
@@ -30,23 +30,24 @@ const links = {
   /*** docs use the above link ***/
 
   /** About **/
-  scepter_token: 'https://wand-investments.gitbook.io/wand-investments/',
-  baton_token: 'https://wand-investments.gitbook.io/wand-investments/',
-  wand_token: 'https://wand-investments.gitbook.io/wand-investments/',
-  team: 'https://wand-investments.gitbook.io/wand-investments/',
+  scepter_token: 'https://docs.spacedefi.tech/spacefund/tokens/scepter-token',
+  baton_token: 'https://docs.spacedefi.tech/spacefund/tokens/baton-token',
+  wand_token: 'https://docs.spacedefi.tech/spacefund/tokens/wand-token',
+  team: 'https://docs.spacedefi.tech/team',
 
   /** Help **/
-  faq: '',
-  contact_us: '',
+  faq: 'https://docs.spacedefi.tech/',
+  contact_us: 'https://docs.spacedefi.tech/team',
   job_offer: '',
 
   /* Socials */
-  medium: 'https://medium.com/@WAND-Investments',
+  medium: 'https://medium.com/@SpaceDEFI_x',
   twitter: 'https://twitter.com/Spacedex_x',
-  discord: 'https://discord.gg/wand',
+  discord: 'https://discord.gg/spacedefi',
   youtube:
     'https://www.youtube.com/channel/UC26jsp29LKvF2KpY6dXW6Zw?sub_confirmation=1',
   telegram: '',
+  linktree: 'https://linktr.ee/spacedefi',
 }
 
 export default links;
