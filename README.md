@@ -10,9 +10,10 @@ git config --global user.email "0xgaren@protonmail.com"
 # Release ChangeLog
 
 ## Version 6 - 31.12.2022 - TBD
-1. Replacing the WAND logo by the SpaceFUND logo.
-2. Changing the chart on the Dashboard.
+1. Replacing the WAND logo by the SpaceFUND logo -> merged the header and sidebar logo into one.
+2. Changing the chart on the Dashboard -> different backingPrice on the graph and overview. Y-axis fix. Donut size fix.
 3. Remove Bridge and Lending and add Bots instead, to link towards SpaceBOTS.
+4. Wallet error handling when opening the dapp without a wallet.
 
 ## Version 5 - 13.10.2022
 1. Removed BATONAirdrops post API call and endpoint.
