@@ -82,7 +82,7 @@ const GraphTreasuryAllocationDonut = () => {
         <Box h="220px" w="100%" alignSelf="center">
           <ResponsivePie
             data={data}
-            margin={{ top: 20, bottom: 20}}
+            margin={{ top: 30, bottom: 30, left: -20}}
             innerRadius={0.45}
             padAngle={2}
             cornerRadius={7}

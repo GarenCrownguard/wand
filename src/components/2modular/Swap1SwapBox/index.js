@@ -15,7 +15,7 @@ import {
   useToast,
   Alert,
   AlertIcon,
-  AlertTitle
+  AlertTitle,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { ActualToBigNumber, GenerateTransactionLink } from 'resources/utilities'
@@ -108,111 +108,114 @@ const Swap1SwapBox = (props) => {
 
   const checkAllowance = async (fromtoken) => {
     setApproving(true)
+    try {
+      const accounts = await ethereum.request({
+        method: 'eth_requestAccounts',
+      })
 
-    const accounts = await ethereum.request({
-      method: 'eth_requestAccounts',
-    })
+      if (accounts.length !== 0) {
+        account = accounts[0]
 
-    if (accounts.length !== 0) {
-      account = accounts[0]
+        wandAllowanceSPTR =
+          contracts.SPTRContract?.allowance(account, contractAddresses.wand) ??
+          ethers.BigNumber.from(0)
+        wandAllowanceBATON =
+          contracts.BATONContract?.allowance(account, contractAddresses.wand) ??
+          ethers.BigNumber.from(0)
 
-      wandAllowanceSPTR =
-        contracts.SPTRContract?.allowance(account, contractAddresses.wand) ??
-        ethers.BigNumber.from(0)
-      wandAllowanceBATON =
-        contracts.BATONContract?.allowance(account, contractAddresses.wand) ??
-        ethers.BigNumber.from(0)
+        wandAllowanceUSDC =
+          contracts.USDCContract?.allowance(account, contractAddresses.wand) ??
+          ethers.BigNumber.from(0)
+        wandAllowanceBUSD =
+          contracts.BUSDContract?.allowance(account, contractAddresses.wand) ??
+          ethers.BigNumber.from(0)
 
-      wandAllowanceUSDC =
-        contracts.USDCContract?.allowance(account, contractAddresses.wand) ??
-        ethers.BigNumber.from(0)
-      wandAllowanceBUSD =
-        contracts.BUSDContract?.allowance(account, contractAddresses.wand) ??
-        ethers.BigNumber.from(0)
+        wandAllowanceDAI =
+          contracts.DAIContract?.allowance(account, contractAddresses.wand) ??
+          ethers.BigNumber.from(0)
 
-      wandAllowanceDAI =
-        contracts.DAIContract?.allowance(account, contractAddresses.wand) ??
-        ethers.BigNumber.from(0)
-
-      try {
-        const AllAllowance = await Promise.all([
-          wandAllowanceSPTR,
-          wandAllowanceBATON,
-          wandAllowanceUSDC,
-          wandAllowanceBUSD,
-          wandAllowanceDAI,
-        ])
-        switch (fromtoken) {
-          case 'SPTR':
-            setapproved(
-              AllAllowance[0]?.gt(
-                ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
-              ) ?? false
-            )
-            setApproving(false)
-            break
-          case 'BATON':
-            setapproved(
-              AllAllowance[1]?.gt(
-                ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
-              ) ?? false
-            )
-            setApproving(false)
-            break
-          case 'USDC':
-            setapproved(
-              AllAllowance[2]?.gt(
-                ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
-              ) ?? false
-            )
-            setApproving(false)
-            break
-          case 'BUSD':
-            setapproved(
-              AllAllowance[3]?.gt(
-                ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
-              ) ?? false
-            )
-            setApproving(false)
-            break
-          case 'DAI':
-            setapproved(
-              AllAllowance[4]?.gt(
-                ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
-              ) ?? false
-            )
-            setApproving(false)
-            break
-          default:
-            // console.log('Cannot get the Allowance of the wallet')
-            toast({
-              title: 'Cannot get the Allowance of the wallet',
-              status: 'error',
-              duration: 1000,
-              position: 'bottom-right',
-              containerStyle: {
-                width: '100%',
-              },
-            })
-            setapproved(false)
-            setApproving(true)
-            break
+        try {
+          const AllAllowance = await Promise.all([
+            wandAllowanceSPTR,
+            wandAllowanceBATON,
+            wandAllowanceUSDC,
+            wandAllowanceBUSD,
+            wandAllowanceDAI,
+          ])
+          switch (fromtoken) {
+            case 'SPTR':
+              setapproved(
+                AllAllowance[0]?.gt(
+                  ActualToBigNumber(localwalletstats.sceptertoken, 'SPTR') ?? 0
+                ) ?? false
+              )
+              setApproving(false)
+              break
+            case 'BATON':
+              setapproved(
+                AllAllowance[1]?.gt(
+                  ActualToBigNumber(localwalletstats.batontoken, 'BATON') ?? 0
+                ) ?? false
+              )
+              setApproving(false)
+              break
+            case 'USDC':
+              setapproved(
+                AllAllowance[2]?.gt(
+                  ActualToBigNumber(localwalletstats.usdctoken, 'USDC') ?? 0
+                ) ?? false
+              )
+              setApproving(false)
+              break
+            case 'BUSD':
+              setapproved(
+                AllAllowance[3]?.gt(
+                  ActualToBigNumber(localwalletstats.busdtoken, 'BUSD') ?? 0
+                ) ?? false
+              )
+              setApproving(false)
+              break
+            case 'DAI':
+              setapproved(
+                AllAllowance[4]?.gt(
+                  ActualToBigNumber(localwalletstats.daitoken, 'DAI') ?? 0
+                ) ?? false
+              )
+              setApproving(false)
+              break
+            default:
+              // console.log('Cannot get the Allowance of the wallet')
+              toast({
+                title: 'Cannot get the Allowance of the wallet',
+                status: 'error',
+                duration: 1000,
+                position: 'bottom-right',
+                containerStyle: {
+                  width: '100%',
+                },
+              })
+              setapproved(false)
+              setApproving(true)
+              break
+          }
+        } catch (error) {
+          // console.log('Error getting allowance')
+          console.log(error.reason)
+          toast({
+            title: 'Error getting allowance.',
+            status: 'error',
+            duration: 1000,
+            position: 'bottom-right',
+            containerStyle: {
+              width: '100%',
+            },
+          })
         }
-      } catch (error) {
-        // console.log('Error getting allowance')
-        console.log(error.reason)
-        toast({
-          title: 'Error getting allowance.',
-          status: 'error',
-          duration: 1000,
-          position: 'bottom-right',
-          containerStyle: {
-            width: '100%',
-          },
-        })
+      } else {
+        console.log('getting address failed in SwapBox')
       }
-    } else {
-      console.log('getting address failed in SwapBox')
+    } catch (error) {
+      console.log('check allowance failed - maybe due to no wallet')
     }
   }
 
@@ -599,11 +602,7 @@ const Swap1SwapBox = (props) => {
               setTaxSliderValue={setTaxSliderValue}
             />
           </Box>
-          <Alert
-            status="warning"
-            variant="left-accent"
-            borderRadius={5}
-          >
+          <Alert status="warning" variant="left-accent" borderRadius={5}>
             <AlertIcon />
             <AlertTitle fontSize="15px" color="black">
               This will extend the unlock time if you have unclaimed amount!

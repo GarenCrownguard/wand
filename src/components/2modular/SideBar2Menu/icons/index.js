@@ -7,6 +7,7 @@ import icon6treasuries from "./icon-6treasuries";
 import icon7governance from "./icon-7governance";
 import icon8vote from "./icon-8vote";
 import icon9docs from "./icon-9docs";
+import icon10bots from './icon-10bots'
 
 export {
   icon1dashboard as Icon1dashboard,
@@ -18,4 +19,5 @@ export {
   icon7governance as Icon7governance,
   icon8vote as Icon8vote,
   icon9docs as Icon9docs,
-};
+  icon10bots as Icon10bots,
+}
