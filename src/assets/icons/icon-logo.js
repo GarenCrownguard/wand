@@ -1,6 +1,7 @@
 import React from 'react'
 // w=114 h=26 -> header
 // w=172.57 h=39.61 -> Sidebar
+// eslint-disable-next-line
 const IconLogoWandOld = ({ width, height }) => (
   <svg
     width={width}
