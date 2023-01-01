@@ -12,6 +12,7 @@ const links = {
   governance: '/governance',
   vote: 'https://vote.wandinvestments.com/',
   docs: 'https://wand-investments.gitbook.io/wand-investments/',
+  spacebots: 'https://www.spacedefi.tech/bots',
 
   /* External */
   disclaimerSPTRSell: 'https://wand-investments.gitbook.io/wand-investments/',

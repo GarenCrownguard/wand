@@ -9,12 +9,13 @@ import {
   Icon1dashboard,
   Icon2account,
   Icon3swap,
-  Icon4bridge,
-  Icon5lending,
+//   Icon4bridge,
+//   Icon5lending,
   Icon6treasuries,
   Icon7governance,
   Icon8vote,
   Icon9docs,
+  Icon10bots
 } from "./icons";
 
 const SideBar2Menu = (props) => {
@@ -47,7 +48,7 @@ const isconnected = props.localwalletstats.isconnected;
           href={links.swap}
           closeSidebar={props.onCloseSideBar}
         />
-        <SideBar2MenuItem
+        {/* <SideBar2MenuItem
           id={links.bridge}
           title="Bridge"
           icon={Icon4bridge}
@@ -61,6 +62,14 @@ const isconnected = props.localwalletstats.isconnected;
           icon={Icon5lending}
           href={links.lending}
           soon
+          closeSidebar={props.onCloseSideBar}
+        /> */}
+        <SideBar2MenuItem
+          id={links.spacebots}
+          title="Bots"
+          icon={Icon10bots}
+          href={links.spacebots}
+          isexternal
           closeSidebar={props.onCloseSideBar}
         />
         <Divider borderColor={'#6f6c99'} />
