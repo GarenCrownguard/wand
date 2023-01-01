@@ -138,16 +138,20 @@ const ConnectButton = (props) => {
   }
 
   const ischainIDcheck = async () => {
-    const currentConnectedChainId = await ethereum.request({
-      method: 'eth_chainId',
-    })
-    if (
-      currentConnectedChainId ===
-      (process.env.REACT_APP_DEV ? chainIdTestnet : chainIdMainnet)
-    ) {
-      setIsChainIdCorrect(true)
-    } else {
-      setIsChainIdCorrect(false)
+    try {
+      const currentConnectedChainId = await ethereum.request({
+        method: 'eth_chainId',
+      })
+      if (
+        currentConnectedChainId ===
+        (process.env.REACT_APP_DEV ? chainIdTestnet : chainIdMainnet)
+      ) {
+        setIsChainIdCorrect(true)
+      } else {
+        setIsChainIdCorrect(false)
+      }
+    } catch (error) {
+      console.log('ischainID connectButton Failed')
     }
   }
 
