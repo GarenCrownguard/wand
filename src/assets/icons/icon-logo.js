@@ -66,27 +66,27 @@ const IconLogo = ({ width, height }) => (
     <path
       d="M76.069 19.1408C75.2552 19.1408 74.6444 19.3706 74.2384 19.8321C73.8306 20.2935 73.6276 20.8817 73.6276 21.5946C73.6276 22.219 73.771 22.7401 74.0578 23.1564C74.3427 23.5726 74.8045 23.8404 75.4377 23.9598V25.4111C74.9703 25.4111 74.5289 25.3062 74.1155 25.0981C73.7002 24.89 73.3352 24.6149 73.0186 24.2729C72.7021 23.9309 72.4525 23.5291 72.2719 23.0677C72.0912 22.6062 72 22.1158 72 21.5946C72 21.0138 72.0912 20.4872 72.2719 20.0094C72.4525 19.5335 72.7021 19.1281 73.0186 18.7933C73.3352 18.4586 73.704 18.1998 74.1267 18.0134C74.5494 17.827 75.0001 17.7347 75.4843 17.7347H84.1902V19.1408H76.069ZM72.2253 30.2537H80.3428C81.1566 30.2537 81.7675 30.0239 82.1734 29.5624C82.5813 29.101 82.7843 28.5128 82.7843 27.7999C82.7843 27.1755 82.6409 26.658 82.3541 26.249C82.0673 25.84 81.6073 25.5758 80.9741 25.4564V23.9834C81.4416 23.9834 81.8829 24.0883 82.2963 24.2964C82.7098 24.5045 83.0766 24.7796 83.3932 25.1216C83.7098 25.4636 83.9575 25.869 84.14 26.3377C84.3206 26.8064 84.4119 27.2932 84.4119 27.7999C84.4119 28.3807 84.3169 28.9092 84.1288 29.3851C83.9388 29.861 83.6874 30.2664 83.3709 30.6012C83.0543 30.9359 82.6856 31.1965 82.2628 31.3829C81.8401 31.5693 81.395 31.6616 80.9295 31.6616H72.2253V30.2537Z"
       stroke="#E6E6E6"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <path
       d="M92.1458 31.6598V17.7365H101.077C101.544 17.7365 101.99 17.8451 102.41 18.0604C102.833 18.2758 103.202 18.5671 103.518 18.9309C103.835 19.2946 104.086 19.7307 104.276 20.2356C104.464 20.7423 104.559 21.2852 104.559 21.8643C104.559 22.3855 104.468 22.8795 104.288 23.3482C104.107 23.8169 103.857 24.2331 103.541 24.5968C103.224 24.9624 102.859 25.2519 102.444 25.4672C102.029 25.6826 101.587 25.7912 101.122 25.7912H98.7474V24.3851H100.85C101.211 24.3851 101.52 24.3037 101.777 24.139C102.032 23.9761 102.248 23.768 102.422 23.5147C102.595 23.2613 102.72 22.9862 102.794 22.6895C102.87 22.3927 102.908 22.1086 102.908 21.8426C102.908 21.5458 102.859 21.2363 102.761 20.916C102.662 20.5957 102.524 20.3062 102.342 20.0456C102.161 19.785 101.937 19.5697 101.675 19.3996C101.412 19.2277 101.114 19.1426 100.781 19.1426H93.7268V31.6598H92.1439H92.1458Z"
       stroke="#E6E6E6"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <path
       d="M122.037 31.6598L116.338 20.346L111.431 30.2537H118.079L119.051 31.6598H108.945L116.34 17L123.802 31.6598H122.037Z"
       stroke="#E6E6E6"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <path
       d="M129.093 24.6982C129.093 23.7318 129.281 22.8198 129.659 21.9656C130.035 21.1097 130.543 20.3677 131.186 19.7343C131.826 19.1028 132.584 18.5997 133.458 18.2287C134.331 17.8578 135.268 17.6714 136.262 17.6714C136.985 17.6714 137.679 17.7709 138.342 17.9718C139.005 18.1726 139.616 18.4586 140.175 18.8313C140.732 19.2041 141.235 19.6421 141.678 20.1488C142.123 20.6554 142.488 21.2056 142.775 21.8009L141.508 22.6044C141.281 22.114 140.992 21.6598 140.637 21.2436C140.281 20.8274 139.879 20.4618 139.426 20.1506C138.974 19.8393 138.48 19.5968 137.946 19.4249C137.409 19.2548 136.856 19.1679 136.283 19.1679C135.514 19.1679 134.784 19.3199 134.089 19.6258C133.396 19.9298 132.791 20.337 132.279 20.8418C131.767 21.3485 131.359 21.9385 131.057 22.6153C130.756 23.2921 130.605 23.996 130.605 24.7235C130.605 25.451 130.756 26.1712 131.057 26.8335C131.359 27.4958 131.765 28.0803 132.279 28.5852C132.791 29.0919 133.391 29.4937 134.076 29.7904C134.761 30.089 135.489 30.2374 136.259 30.2374C136.786 30.2374 137.3 30.1668 137.797 30.0257C138.294 29.8845 138.758 29.6873 139.188 29.4339C139.618 29.1806 140.009 28.8802 140.363 28.5291C140.717 28.1799 141.015 27.789 141.257 27.3583L142.343 28.4513C141.709 29.4339 140.87 30.2248 139.821 30.8274C138.773 31.43 137.586 31.7304 136.26 31.7304C135.266 31.7304 134.331 31.544 133.456 31.173C132.583 30.802 131.825 30.2989 131.184 29.6674C130.543 29.0358 130.035 28.2921 129.657 27.4361C129.279 26.5802 129.091 25.6699 129.091 24.7018L129.093 24.6982Z"
       stroke="#E6E6E6"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <path
       d="M150.505 17.7365H161.244V19.1426H152.088V30.2555H161.244V31.6616H150.505V17.7365ZM161.064 25.793H154.302V24.3869H161.064V25.793Z"
       stroke="#E6E6E6"
-      stroke-width="0.5"
+      strokeWidth="0.5"
     />
     <path
       d="M170.181 31.7763V17H181.484V19.2439H173.377V23.2554H180.708V25.4993H173.377V31.7763H170.181Z"
@@ -143,11 +143,11 @@ const IconLogo = ({ width, height }) => (
         y2="28.5625"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#D991C6" />
-        <stop offset="0.14" stop-color="#C699C5" />
-        <stop offset="0.43" stop-color="#95AFC2" />
-        <stop offset="0.83" stop-color="#47D1BF" />
-        <stop offset="1" stop-color="#26E1BE" />
+        <stop stopColor="#D991C6" />
+        <stop offset="0.14" stopColor="#C699C5" />
+        <stop offset="0.43" stopColor="#95AFC2" />
+        <stop offset="0.83" stopColor="#47D1BF" />
+        <stop offset="1" stopColor="#26E1BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_0_1"
@@ -157,17 +157,17 @@ const IconLogo = ({ width, height }) => (
         y2="9.39463"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4F5E9C" />
-        <stop offset="0.16" stop-color="#457BA3" />
-        <stop offset="0.5" stop-color="#2EC4B6" />
-        <stop offset="0.62" stop-color="#26E1BE" />
-        <stop offset="0.67" stop-color="#58E8CD" />
-        <stop offset="0.73" stop-color="#8AEEDC" />
-        <stop offset="0.79" stop-color="#B4F4E8" />
-        <stop offset="0.84" stop-color="#D5F9F2" />
-        <stop offset="0.89" stop-color="#ECFCF9" />
-        <stop offset="0.94" stop-color="#FAFEFD" />
-        <stop offset="0.99" stop-color="white" />
+        <stop stopColor="#4F5E9C" />
+        <stop offset="0.16" stopColor="#457BA3" />
+        <stop offset="0.5" stopColor="#2EC4B6" />
+        <stop offset="0.62" stopColor="#26E1BE" />
+        <stop offset="0.67" stopColor="#58E8CD" />
+        <stop offset="0.73" stopColor="#8AEEDC" />
+        <stop offset="0.79" stopColor="#B4F4E8" />
+        <stop offset="0.84" stopColor="#D5F9F2" />
+        <stop offset="0.89" stopColor="#ECFCF9" />
+        <stop offset="0.94" stopColor="#FAFEFD" />
+        <stop offset="0.99" stopColor="white" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_0_1"
@@ -177,8 +177,8 @@ const IconLogo = ({ width, height }) => (
         y2="4.27451"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#26E1BE" />
-        <stop offset="1" stop-color="#3B5FA8" />
+        <stop stopColor="#26E1BE" />
+        <stop offset="1" stopColor="#3B5FA8" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_0_1"
@@ -188,17 +188,17 @@ const IconLogo = ({ width, height }) => (
         y2="37.0543"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FDFDFE" stop-opacity="0" />
-        <stop offset="0.01" stop-color="#FDFDFE" stop-opacity="0.04" />
-        <stop offset="0.09" stop-color="#FDFDFE" stop-opacity="0.24" />
-        <stop offset="0.17" stop-color="#FDFDFE" stop-opacity="0.42" />
-        <stop offset="0.25" stop-color="#FDFDFE" stop-opacity="0.57" />
-        <stop offset="0.34" stop-color="#FDFDFE" stop-opacity="0.71" />
-        <stop offset="0.44" stop-color="#FDFDFE" stop-opacity="0.81" />
-        <stop offset="0.54" stop-color="#FDFDFE" stop-opacity="0.9" />
-        <stop offset="0.66" stop-color="#FDFDFE" stop-opacity="0.96" />
-        <stop offset="0.79" stop-color="#FDFDFE" stop-opacity="0.99" />
-        <stop offset="1" stop-color="#FDFDFE" />
+        <stop stopColor="#FDFDFE" stopOpacity="0" />
+        <stop offset="0.01" stopColor="#FDFDFE" stopOpacity="0.04" />
+        <stop offset="0.09" stopColor="#FDFDFE" stopOpacity="0.24" />
+        <stop offset="0.17" stopColor="#FDFDFE" stopOpacity="0.42" />
+        <stop offset="0.25" stopColor="#FDFDFE" stopOpacity="0.57" />
+        <stop offset="0.34" stopColor="#FDFDFE" stopOpacity="0.71" />
+        <stop offset="0.44" stopColor="#FDFDFE" stopOpacity="0.81" />
+        <stop offset="0.54" stopColor="#FDFDFE" stopOpacity="0.9" />
+        <stop offset="0.66" stopColor="#FDFDFE" stopOpacity="0.96" />
+        <stop offset="0.79" stopColor="#FDFDFE" stopOpacity="0.99" />
+        <stop offset="1" stopColor="#FDFDFE" />
       </linearGradient>
       <linearGradient
         id="paint4_linear_0_1"
@@ -208,16 +208,16 @@ const IconLogo = ({ width, height }) => (
         y2="25.9133"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FDFDFE" stop-opacity="0" />
-        <stop offset="0.08" stop-color="#FDFDFE" stop-opacity="0.2" />
-        <stop offset="0.17" stop-color="#FDFDFE" stop-opacity="0.38" />
-        <stop offset="0.26" stop-color="#FDFDFE" stop-opacity="0.55" />
-        <stop offset="0.36" stop-color="#FDFDFE" stop-opacity="0.69" />
-        <stop offset="0.46" stop-color="#FDFDFE" stop-opacity="0.8" />
-        <stop offset="0.57" stop-color="#FDFDFE" stop-opacity="0.89" />
-        <stop offset="0.68" stop-color="#FDFDFE" stop-opacity="0.95" />
-        <stop offset="0.82" stop-color="#FDFDFE" stop-opacity="0.99" />
-        <stop offset="1" stop-color="#FDFDFE" />
+        <stop stopColor="#FDFDFE" stopOpacity="0" />
+        <stop offset="0.08" stopColor="#FDFDFE" stopOpacity="0.2" />
+        <stop offset="0.17" stopColor="#FDFDFE" stopOpacity="0.38" />
+        <stop offset="0.26" stopColor="#FDFDFE" stopOpacity="0.55" />
+        <stop offset="0.36" stopColor="#FDFDFE" stopOpacity="0.69" />
+        <stop offset="0.46" stopColor="#FDFDFE" stopOpacity="0.8" />
+        <stop offset="0.57" stopColor="#FDFDFE" stopOpacity="0.89" />
+        <stop offset="0.68" stopColor="#FDFDFE" stopOpacity="0.95" />
+        <stop offset="0.82" stopColor="#FDFDFE" stopOpacity="0.99" />
+        <stop offset="1" stopColor="#FDFDFE" />
       </linearGradient>
       <linearGradient
         id="paint5_linear_0_1"
@@ -227,8 +227,8 @@ const IconLogo = ({ width, height }) => (
         y2="12.4875"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#26E1BE" />
-        <stop offset="1" stop-color="#3B5FA8" />
+        <stop stopColor="#26E1BE" />
+        <stop offset="1" stopColor="#3B5FA8" />
       </linearGradient>
     </defs>
   </svg>
