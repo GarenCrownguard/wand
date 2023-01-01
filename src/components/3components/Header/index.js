@@ -5,7 +5,7 @@ import { useDisclosure, Flex, Box, IconButton } from "@chakra-ui/react";
 import ConnectButton from "components/2modular/Header1Wallet/ConnectButton";
 import AccountModal from "components/2modular/Header1Wallet/AccountModal";
 
-import IconLogo from "./icon/icon-logo";
+import IconLogo from "assets/icons/icon-logo";
 import IconBurger from "./icon/icon-burger";
 
 const Header = ({ isMobile, onBurgerButtonClick }) => {
@@ -13,14 +13,14 @@ const Header = ({ isMobile, onBurgerButtonClick }) => {
   // console.log(isSidebarOpen);
   return (
     <Flex
-      h={isMobile ? "30px" : "96px"}
+      h={isMobile ? '30px' : '96px'}
       flexDirection="row"
       alignContent="flex-start"
       alignItems="center"
       justifyContent="flex-end"
     >
       <Box ml={0} mr="auto">
-        <IconLogo />
+        <IconLogo width="144" height="36" />
       </Box>
       <ConnectButton handleOpenModal={onOpen} isMobile={isMobile} />
       <AccountModal isOpen={isOpen} onClose={onClose} isMobile={isMobile} />
@@ -33,7 +33,7 @@ const Header = ({ isMobile, onBurgerButtonClick }) => {
         />
       )}
     </Flex>
-  );
+  )
 };
 
 export default Header;
